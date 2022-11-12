@@ -1,3 +1,5 @@
+@import 'theme';
+
 html,
 body {
   padding: 0;
@@ -15,12 +17,31 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: light) {
+/* Used to make the page the maximum viewport height and width
+and center Elements withing the page in the middle of the viewport.
+wrap arround all contents of a page (except footer) with
+<div className="wrapper" */
+.wrapper{
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  min-width: 100%;
+  min-width: 100vw;
+
+  /* Used to compensate the wrapper not accounting for the footer */
+  padding-bottom: $footer-height;
+
+  display: flex;
+  align-items: center;
+}
+
+/* disabled bcs im developing for light scheme rn
+@media (prefers-color-scheme: dark) {
   html {
-    color-scheme: light;
+    color-scheme: dark;
   }
   body {
     color: white;
     background: black;
   }
 }
+*/
