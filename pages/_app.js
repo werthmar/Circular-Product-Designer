@@ -4,16 +4,16 @@ import '../styles/globals.scss';
 import '../styles/footer.scss';
 import '../styles/index.scss';
 import '../styles/mainMenuButton.scss';
+import '../styles/homeButton.scss'
 
 // Base Layout containing standard header...
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <Layout pageTitle="Landing Page Nextjs">
-      <Component {...pageProps} />
-    </Layout>
-  )
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || ((page) => page)
+
+  return getLayout(<Component {...pageProps} />)
 }
 
 export default MyApp

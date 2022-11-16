@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import {
   Navbar,
-  Button,
-  NavLink,
 } from 'reactstrap';
-import { BsHouse } from 'react-icons/bs';
+import HomeButton from './HomeButton';
+
 
 function Footer(args) {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,11 +14,7 @@ function Footer(args) {
     <div className='footer nav justify-content-end'>
       <Navbar {...args}>
             {/* Home Button */}   
-            <NavLink href='/'>
-                <Button className='homeButton'>
-                    <BsHouse size={30} />
-                </Button>
-            </NavLink>
+            <HomeButton size="small" />
       </Navbar>
     </div>
   );

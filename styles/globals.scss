@@ -27,11 +27,14 @@ wrap arround all contents of a page (except footer) with
   min-width: 100%;
   min-width: 100vw;
 
-  /* Used to compensate the wrapper not accounting for the footer */
-  padding-bottom: $footer-height;
-
   display: flex;
   align-items: center;
+}
+
+/* Used to compensate the wrapper not accounting for the footer.
+only used on layouts with footer */
+.hasFooter{
+  padding-bottom: $footer-height;
 }
 
 /* disabled bcs im developing for light scheme rn

@@ -3,10 +3,12 @@
  * input:
  * string text -> the text which is displayed beneath the icon on the button.
  * string icon -> 1,2,3,4 used to decide which icon should be displayed.
+ * string link -> e.g. /process the page the buttonpress will lead to.
  *  icons have to be imported and added in the icon function
  */
 
 import { Button, Col } from "reactstrap";
+import Link from 'next/link';
 import { AiFillBook } from 'react-icons/ai';
 import { GiBookshelf } from 'react-icons/gi';
 import { FiSettings } from 'react-icons/fi';
@@ -30,12 +32,14 @@ import { HiDocumentText } from 'react-icons/hi';
 
     return(
         <Button className="MainMenuButton">
-            <Col className="icon">
-                <Icon icon={props.icon} />
-            </Col>
-            <Col className="text">
-                {props.text}
-            </Col>
+            <Link href={props.link}>
+                <Col className="icon">
+                    <Icon icon={props.icon} />
+                </Col>
+                <Col className="text">
+                    {props.text}
+                </Col>
+            </Link>
         </Button>
     )
  }
