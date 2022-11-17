@@ -19,4 +19,20 @@
     -moz-border-radius-topright: 50px;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
+
+    .footerButton{
+        background: $color-primary;
+        border-color: $color-secondary;
+        border-width: 2px;
+        border-radius: 50px;
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+    }
+    .footerButton:hover{
+        background: $color-secondary;
+    }
+    .footerButtonActive{
+        background: $color-secondary;
+    }
 }

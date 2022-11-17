@@ -14,7 +14,7 @@ export default function IndexPage() {
         <HomeButton size="big" />
       </Col>
       <Col>
-        <Row xxl="4" xl="2" xs="1">
+        <Row xxl="4" md="2" xs="1">
           <Col align="center">            
             <MainMenuButton text="New Project" icon="1" link="/process" />
           </Col>

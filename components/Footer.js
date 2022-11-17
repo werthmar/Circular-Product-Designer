@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
 import {
+  Nav,
   Navbar,
+  Button,
 } from 'reactstrap';
 import HomeButton from './HomeButton';
 
 
 function Footer(args) {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  function FooterButton({ active }) {
+    return(
+      <Button className={"footerButton " + active} />
+    )
+  }
 
   return (
-    <div className='footer nav justify-content-end'>
-      <Navbar {...args}>
-            {/* Home Button */}   
-            <HomeButton size="small" />
+      <Navbar className='footer'> {/*justify-content-center*/}
+          <Nav className='mx-auto'>
+            <FooterButton active="footerButtonActive" />
+            <FooterButton />
+            <FooterButton />
+            <FooterButton />
+          </Nav>
+          <Nav className='ml-auto'>
+            <HomeButton className="nav-item" size="small" />
+          </Nav>
       </Navbar>
-    </div>
   );
 }
 

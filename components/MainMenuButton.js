@@ -31,16 +31,16 @@ import { HiDocumentText } from 'react-icons/hi';
     }
 
     return(
-        <Button className="MainMenuButton">
-            <Link href={props.link}>
-                <Col className="icon">
-                    <Icon icon={props.icon} />
-                </Col>
-                <Col className="text">
-                    {props.text}
-                </Col>
-            </Link>
-        </Button>
+        <Link href={props.link}>
+            <Button className="standardButton mainMenuButton">
+                    <Col className="icon">
+                        <Icon icon={props.icon} />
+                    </Col>
+                    <Col className="text">
+                        {props.text}
+                    </Col>
+            </Button>
+        </Link>
     )
  }
 

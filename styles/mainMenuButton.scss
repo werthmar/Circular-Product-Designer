@@ -1,15 +1,6 @@
 @import 'theme';
 
-.MainMenuButton{
-    background: $accent-color;
-    color: white;
-    border: none;
-    font-size: 20px;
-    max-width: 300px;
-    width: 100%;
-    border-radius: 25px;
-    margin: 10px;
-
+.mainMenuButton{
     .icon{
         margin: 30px 30px 10px 30px;
     }
