@@ -21,8 +21,11 @@
         padding: 0;
     }
 
-    .selectionButton{
+    .standardButton{
         height: 250px;
         margin: 20px;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center; 
     }
 }

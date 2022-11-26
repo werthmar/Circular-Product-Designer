@@ -1,0 +1,35 @@
+@import 'theme';
+
+.advisorPage{
+    width: 100%;
+    padding: 20px;
+
+    .titleCol{
+        position: absolute;
+        top: 0;
+
+        h1{
+            color: $color-secondary;
+            text-decoration: underline;
+            text-decoration-thickness: 8px;
+        }
+    }
+    
+    .mainCol{
+        background: $color-secondary-light;
+        border-radius: 50px;
+        border-color: $accent-color;
+        border-width: 3px;
+        border-style: solid;
+        margin-top: 55px;
+        padding: 20px;
+
+        .standardButton{
+            margin: 0;
+            width: 100px;
+            height: 100px;
+        }
+
+    }
+
+}

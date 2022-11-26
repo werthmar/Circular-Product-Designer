@@ -7,19 +7,20 @@
 
 $color-primary: #ffffff;
 $color-secondary: #424b5a83;
+$color-secondary-light: #424b5a2b;
 $accent-color: #97d3f0bc;
 
 $footer-height: 100px;
 
 .standardButton{
     background: $accent-color;
-          color: white;
-          border: none;
-          font-size: 20px;
-          max-width: 300px;
-          width: 100%;
-          border-radius: 25px;
-          margin: 10px;
+    color: white;
+    border: none;
+    font-size: 20px;
+    max-width: 300px;
+    width: 100%;
+    border-radius: 25px;
+    margin: 10px;
   }
   .standardButton:hover{
     background: $color-secondary;

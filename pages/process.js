@@ -5,9 +5,8 @@
  * entire page.
  */
 
- import { Button, Col, Row } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
 import LayoutFooterExtended from "../components/LayoutFooterExtended";
-import MainMenuButton from "../components/MainMenuButton";
 
 export default function ProcessPage() {
     return(
@@ -22,14 +21,14 @@ export default function ProcessPage() {
             </Col>
             <Col>
                 <Row className="buttonRow justify-content-center" md="2" xs="1">
-                        <Button className="standardButton selectionButton">
+                    <Button href="/advisor/circular" className="standardButton">
                             START <br /> 
                             CIRCULAR BUSINESS MODEL
-                        </Button>
-                        <Button className="standardButton selectionButton">
+                    </Button>
+                    <Button href="advisor/product" className="standardButton">
                             START <br />
                             PRODUCT
-                        </Button>
+                    </Button>
                 </Row>
             </Col>
         </div>

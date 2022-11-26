@@ -4,9 +4,10 @@
     background: $color-primary;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 98%;
     max-height: $footer-height;
     height: 100%;
+    margin-left: 1%;
 
     /* Border Settings */
     border-top: 3px outset $color-secondary;
@@ -35,4 +36,5 @@
     .footerButtonActive{
         background: $color-secondary;
     }
+
 }

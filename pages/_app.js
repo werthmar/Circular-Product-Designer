@@ -4,8 +4,9 @@ import '../styles/globals.scss';
 import '../styles/footer.scss';
 import '../styles/index.scss';
 import '../styles/mainMenuButton.scss';
-import '../styles/homeButton.scss'
-import '../styles/process.scss'
+import '../styles/homeButton.scss';
+import '../styles/process.scss';
+import '../styles/advisor.scss';
 
 // Base Layout containing standard header...
 import Layout from '../components/Layout';
