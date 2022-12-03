@@ -21,6 +21,11 @@
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
 
+    .backButton{
+        background: transparent;
+        border: none;
+    }
+
     .footerButton{
         background: $color-primary;
         border-color: $color-secondary;
@@ -34,7 +39,7 @@
         background: $color-secondary;
     }
     .footerButtonActive{
-        background: $color-secondary;
+        background: $accent-color;
     }
 
 }

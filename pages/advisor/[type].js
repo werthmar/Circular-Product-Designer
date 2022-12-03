@@ -3,29 +3,36 @@
  *  from a specific csv file and displayed.
  */
 
-import { Button, Col, Row } from "reactstrap";
+import { Button, Col, Container, Row } from "reactstrap";
 import LayoutFooterExtended from "../../components/LayoutFooterExtended";
 import { ImCheckmark2 } from 'react-icons/im';
+import { BsArrowRightCircle } from 'react-icons/bs';
+import { useRouter } from 'next/router'
+import useSessionStorage from '../../hooks/useSessionStorage';
 
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
     return {
-        paths: [{ params: { type: 'circular' } }, { params: { type: 'product' } }],
+        paths: [
+            { params: { type: 'circular' } },
+            { params: { type: 'product' } },
+            { params: { type: 'ecodesign' } },
+            { params: { type: 'technical' } },
+        ],
         fallback: false, // can also be true or 'blocking'
     }
 }
 
 // This function gets called at build time
 export async function getStaticProps(context) {
-    // TODO: Load the xml data here, example is with api request
+    // TODO: Load the csv data here, example is with api request
     // const res = await fetch('https://.../posts')
     // const posts = await res.json()
-    
+
     // Get the request params
     const type = context.params.type;
-    console.log(context.params.type);
-    
     var title;
+
     switch (type) {
         case "circular":
             title = "Circular Business Models";
@@ -33,17 +40,45 @@ export async function getStaticProps(context) {
         case "product":
             title = "Lifecycle Phase Intensity"
             break;
+        case "ecodesign":
+            title = "Ecodesign Approaches"
+            break;
+        case "technical":
+            title = "Technical Design Principles"
+            break;
     }
 
     return {
         props: {
-            title: title
+            title: title,
         },
     }
 }
 
 // The actual page content
 export default function AdvisorPage({ title }) {
+    const router = useRouter();
+    const prevPath = useSessionStorage('prevPath');
+    const currentPath = useSessionStorage('currentPath');
+
+    // Decide which page to display next based on the current and previous page.
+    function loadNextPage() {
+        var nextPage;
+        switch(currentPath) {
+            case "/advisor/circular":
+                prevPath == "/advisor/product" ? nextPage = "ecodesign" : nextPage = "product";
+                break;
+            case "/advisor/product":
+                prevPath == "/advisor/circular" ? nextPage = "ecodesign" : nextPage = "circular";
+                break;
+            case "/advisor/ecodesign":
+                nextPage = 'technical';
+        }
+
+        var result = `/advisor/${nextPage}`;
+        return result;
+    }
+
     function ChoosableElement() {
         return(
             <Row xs="2">
@@ -81,12 +116,21 @@ export default function AdvisorPage({ title }) {
                 <ChoosableElement />
                 <ChoosableElement />
             </Col>
+            <Col className="d-flex justify-content-center buttonCol">
+                <Button href={loadNextPage()} className="standardButton nextButton">
+                    Continue
+                    <BsArrowRightCircle className="icon" size={30}/>
+                </Button>      
+            </Col>
         </div>
     );
   }
   
 AdvisorPage.getLayout = function getLayout(page) {
+    const router = useRouter();
+    var pageHistory = router.query;
+
     return (
-        <LayoutFooterExtended pageTitle="Advisor">{page}</LayoutFooterExtended>
+        <LayoutFooterExtended metas={page.props} pageTitle="Advisor">{page}</LayoutFooterExtended>
     )
   }
