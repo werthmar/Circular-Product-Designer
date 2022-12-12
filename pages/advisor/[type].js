@@ -9,6 +9,8 @@ import { ImCheckmark2 } from 'react-icons/im';
 import { BsArrowRightCircle } from 'react-icons/bs';
 import { useRouter } from 'next/router'
 import useSessionStorage from '../../hooks/useSessionStorage';
+import { useState } from "react";
+import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
 
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
@@ -79,11 +81,52 @@ export default function AdvisorPage({ title }) {
         return result;
     }
 
-    function ChoosableElement() {
+    // The clickable element displaying text aswell as the onClick function which saves data to a cookie
+    function ChoosableElement(id) {
+        const [clicked, setClicked] = useState(false);
+
         return(
             <Row xs="2">
                 <Col xs="auto" md="auto">
-                    <Button className="standardButton">
+                    {/* Save selected elements in a cookie and change color of button */}
+                    <Button onClick={ () => {
+
+                        if( !clicked ) {
+                            
+                            // Check if cookie has already been created if yes append data, otherwise create a new
+                            if ( hasCookie('selected') ) {
+                                let data = getCookie('selected');
+                                data = JSON.parse(data);
+
+                                data.push(id);
+                                setCookie('selected', data, { sameSite: true });
+                            } else {
+                                setCookie('selected', [id], { sameSite: true });
+                            }
+
+                            setClicked(true);
+                        }
+                        else {
+                            // For some random reaseon the variable gets changed to data1 internaly so i have to change it here to idk why
+                            let data1 = getCookie('selected');
+                            data1 = JSON.parse(data1);
+
+                            // Delete deselected item from the data and update the cookie
+                            data1.forEach( x => {
+                                x["id"] == id["id"] ? data1.splice(data1.indexOf(x), 1) : ''; // Remove the x element and only do it once
+                            });
+
+                            if ( data1.length != 0 ) {
+                                setCookie('selected', data1, { sameSite: true });
+                            }else {
+                                deleteCookie('selected'); // Remove the empty cookie
+                            }
+
+                            setClicked(false);
+                        }
+
+                    } } 
+                    className={clicked ? "standardButton clicked" : "standardButton"}>
                         <ImCheckmark2 size={50} />
                     </Button>
                 </Col>
@@ -110,11 +153,11 @@ export default function AdvisorPage({ title }) {
                 <h1>{title}</h1>
             </Col>
             <Col className="mainCol">
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
+                <ChoosableElement id='1' />
+                <ChoosableElement id='2' />
+                <ChoosableElement id='3' />
+                <ChoosableElement id='4' />
+                <ChoosableElement id='5' />
             </Col>
             <Col className="d-flex justify-content-center buttonCol">
                 <Button href={loadNextPage()} className="standardButton nextButton">
