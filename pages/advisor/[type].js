@@ -12,6 +12,8 @@ import useSessionStorage from '../../hooks/useSessionStorage';
 import { useState } from "react";
 import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
 
+import * as model from "../../prisma/model";
+
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
     return {
@@ -30,35 +32,44 @@ export async function getStaticProps(context) {
     // TODO: Load the csv data here, example is with api request
     // const res = await fetch('https://.../posts')
     // const posts = await res.json()
-
-    // Get the request params
-    const type = context.params.type;
+    //getDescriptions();
+    
+    // Get the request params, type gets overwritten with the code CBM / LCP / ED which can be used in the database
+    var type = context.params.type;
     var title;
-
+    
     switch (type) {
         case "circular":
             title = "Circular Business Models";
+            type = "CBM";
             break;
         case "product":
-            title = "Lifecycle Phase Intensity"
+            title = "Lifecycle Phase Intensity";
+            type = "LCP";
             break;
         case "ecodesign":
-            title = "Ecodesign Approaches"
+            title = "Ecodesign Approaches";
+            type = "ED";
             break;
         case "technical":
-            title = "Technical Design Principles"
+            title = "Technical Design Principles";
             break;
     }
 
+    var data = await model.getDescriptions(type);
+    console.log(data);
+
+    // Hand data over to frontend.
     return {
         props: {
             title: title,
+            data: data,
         },
     }
 }
 
 // The actual page content
-export default function AdvisorPage({ title }) {
+export default function AdvisorPage({ title,  data }) {
     const router = useRouter();
     const prevPath = useSessionStorage('prevPath');
     const currentPath = useSessionStorage('currentPath');
@@ -153,11 +164,9 @@ export default function AdvisorPage({ title }) {
                 <h1>{title}</h1>
             </Col>
             <Col className="mainCol">
-                <ChoosableElement id='1' />
-                <ChoosableElement id='2' />
-                <ChoosableElement id='3' />
-                <ChoosableElement id='4' />
+                
                 <ChoosableElement id='5' />
+
             </Col>
             <Col className="d-flex justify-content-center buttonCol">
                 <Button href={loadNextPage()} className="standardButton nextButton">
