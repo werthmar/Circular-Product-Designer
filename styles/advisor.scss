@@ -24,10 +24,14 @@
         margin-top: 55px;
         padding: 20px;
 
-        .standardButton{
-            margin: 0;
-            width: 100px;
-            height: 100px;
+        .row{
+            margin-bottom: 30px;
+            
+            .standardButton{
+                margin: 0;
+                width: 100px;
+                height: 100px;
+            }
         }
 
     }
