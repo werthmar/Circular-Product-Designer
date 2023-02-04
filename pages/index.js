@@ -4,12 +4,13 @@ import {
   Col,
   Container,
   Row, 
+  Alert,
 } from "reactstrap";
 import HomeButton from "../components/HomeButton";
 
 export default function IndexPage() {
   return (
-    <Container className="buttonContainer">
+    <Container className="indexPage">
       <Col className="homeButtonCol" align="center">
         <HomeButton size="big" />
       </Col>
@@ -29,6 +30,14 @@ export default function IndexPage() {
           </Col>
         </Row>
       </Col>
+
+      {/* Information Banner for cookie useage */}
+      <Alert className="cookieWarning">
+        This website uses essential cookies to ensure a seamless and secure experience for our users. These cookies are necessary for
+        the basic functionality of the website and cannot be disabled. By using this website, you consent to the use of these
+        essential cookies.
+      </Alert>
+
     </Container>
   )
 }

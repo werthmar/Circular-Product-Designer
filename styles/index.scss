@@ -1,5 +1,16 @@
 @import 'theme';
 
-.homeButtonCol{
-    margin-bottom: 30px;
+.indexPage{
+    
+    .homeButtonCol{
+        margin-bottom: 30px;
+    }
+
+    .cookieWarning{
+        z-index: 99;
+        margin: auto;
+        max-width: 800px;
+        margin-top: 50px;
+    }
 }
+
