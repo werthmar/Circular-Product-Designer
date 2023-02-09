@@ -4,16 +4,7 @@
     width: 100%;
     padding: 20px;
 
-    .titleCol{
-        position: absolute;
-        top: 0;
 
-        h1{
-            color: $color-secondary;
-            text-decoration: underline;
-            text-decoration-thickness: 8px;
-        }
-    }
     
     .mainCol{
         background: $color-secondary-light;
@@ -23,7 +14,14 @@
         border-style: solid;
         margin-top: 55px;
         padding: 20px;
-
+        
+        h1{
+            color: $color-secondary;
+            text-align: center;
+            font-size: 50px;
+            margin-bottom: 25px;
+        }
+            
         .row{
             margin-bottom: 30px;
             
