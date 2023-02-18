@@ -41,13 +41,6 @@ export async function getStaticProps(context) {
             title = "Lifecycle Phase Intensity";
             type = "LCP";
             break;
-        case "ecodesign":
-            title = "Ecodesign Approaches";
-            type = "ED";
-            break;
-        case "technical":
-            title = "Technical Design Principles";
-            break;
     }
 
     var data = await model.getDescriptions(type);
@@ -67,10 +60,17 @@ export async function getStaticProps(context) {
 export default function AdvisorPage({ initialTitle, initialData, initialType }) {
     const prevPath = useSessionStorage('prevPath');
     const currentPath = useSessionStorage('currentPath');
-    const [title, setTitle] = useState(initialTitle);
+    const [title, setTitle] = useState( initialTitle );
     const [bodyContent, setBodyContent] = useState( InitBody() );
+
+    // type is the current type or the type which is supposed to be loaded. oldType is used while loading a new type
+    // in order to define from which table the relations are drawn. So when i switch from LCP to CBM i have CBM as type
+    // and LCP as oldType so i know that i need to take relations from LCPxCBM.
+    //var type = initialType;
+    //var oldType; // I can not set this with state, if i do the values dont get updated. i think its because there would be to many rerenders but im not sure.
     const [type, setType] = useState( initialType );
-    
+    const [oldType, setOldType] = useState( initialType );
+
     // When the page is opend the first time the data is passed from the backend in during getStaticProps.
     // Why? Faster through Static generation, we always display all data in the begining so it doenst have to be dynamic
     // annnnd.... it just dosnt work otherwise, i cant find a way to initialize my body through client side request.
@@ -96,8 +96,10 @@ export default function AdvisorPage({ initialTitle, initialData, initialType }) 
     // Decide which page to display next based on the current and previous page.
     function loadNextPage() {
         setBodyContent( LoadingNotificaiton() );
+        setOldType( type );
 
-        switch(type) {
+        // Tricker useEffect on setType completion
+        switch( type ) {
 
             case "CBM":
                 // The user started with CBM and is currently on the CBM page so the next page has to be LCP
@@ -128,25 +130,30 @@ export default function AdvisorPage({ initialTitle, initialData, initialType }) 
 
         }
 
-        fetchData();
     }
-    
-    // https://nextjs.org/docs/basic-features/data-fetching/client-side
-    function fetchData() {
+
+    // State dosnt get updated immidiatly so i instead run this function everytime the state of type actually changes.
+    useEffect( () => {
         
-        fetch(`/api/descriptions/${type}`)
+        var types = [ oldType, type ]
+        var selectedItems = getCookie( 'selected' );
+        
+        // API request for data retrival, selectedItems is not required / can be undefined.
+        // https://nextjs.org/docs/basic-features/data-fetching/client-side
+        fetch(`/api/descriptions/${types}?items=${selectedItems}`)
         .then((res) => res.json())
         .then((data) => {
             
             setBodyContent(
                 data['descriptions'].map(( item, index ) => (
                     <ChoosableElement key={index} id={item.id} description={item.description} name={item.name} />
-                ))
-            );
+                    ))
+                    );
                     
-        });
+            });
 
-    }
+    }, [type] );
+
     
     // JSX body
     return(

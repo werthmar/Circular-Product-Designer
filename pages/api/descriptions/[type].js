@@ -10,10 +10,30 @@
 import * as model from "../../../prisma/model";
 
 export default async function handler(req, res) {
-    const { type } = req.query
+    const { type } = req.query;
+    const { items } = req.query;
+    var selectedItems;
     console.log(req.query);
 
-    const descriptions = await model.getDescriptions( type );
+    // Transform the String from the API request into an Array of Strings
+    if( items != 'undefined' ) {
+      selectedItems = JSON.parse( "[" + items + "]" )[0];
+    }
+    
+    // Split type
+    let typeArr = type.split(",");
+    var oldType = typeArr[0];
+    var nextType = typeArr[1];
+
+    const matchingIds = await model.getMatchingIds(oldType, nextType, selectedItems);
+
+
+    //var types = type.map(); //Position 0 = oldType, Position 1 = Type we want to load.
+
+    //var selectedItems = items.substring( 1, items.length -1 ).split(",");
+
+
+    const descriptions = await model.getDescriptions( nextType, matchingIds );
 
     res.status(200).send({ descriptions });
   }
