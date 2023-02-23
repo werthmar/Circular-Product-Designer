@@ -64,6 +64,7 @@ export async function getStaticProps(context) {
 export default function AdvisorPage({ initialTitle, initialType }) {
     const prevPath = useSessionStorage('prevPath');
     const currentPath = useSessionStorage('currentPath');
+    const router = useRouter();
     const [title, setTitle] = useState( initialTitle );
     const [bodyContent, setBodyContent] = useState();
 
@@ -134,7 +135,6 @@ export default function AdvisorPage({ initialTitle, initialType }) {
             case "ED":
                 setTitle("Technical Design Principles");
                 return; // TDP dosnt exit yet on the database.
-
         }
 
     }
@@ -179,6 +179,9 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                 );
                     
             });
+
+            // Shallow Routing
+            router.push(`/advisor/${type}`, undefined, { shallow: true })
 
     }, [type] );
 
