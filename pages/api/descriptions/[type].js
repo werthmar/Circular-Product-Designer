@@ -24,14 +24,13 @@ export default async function handler(req, res) {
     let typeArr = type.split(",");
     var oldType = typeArr[0];
     var nextType = typeArr[1];
+    var matchingIds;
 
-    const matchingIds = await model.getMatchingIds(oldType, nextType, selectedItems);
-
-
-    //var types = type.map(); //Position 0 = oldType, Position 1 = Type we want to load.
-
-    //var selectedItems = items.substring( 1, items.length -1 ).split(",");
-
+    // = call of the initial page, no matching required
+    if ( oldType != nextType )
+    {
+      matchingIds = await model.getMatchingIds(oldType, nextType, selectedItems);
+    }
 
     const descriptions = await model.getDescriptions( nextType, matchingIds );
 

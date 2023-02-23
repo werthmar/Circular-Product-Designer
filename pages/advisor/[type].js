@@ -75,11 +75,16 @@ export default function AdvisorPage({ initialTitle, initialData, initialType }) 
     // Why? Faster through Static generation, we always display all data in the begining so it doenst have to be dynamic
     // annnnd.... it just dosnt work otherwise, i cant find a way to initialize my body through client side request.
     function InitBody() {
+
+        () => setOldType('CBM');
+        () => setType('CBM');
+        /*
         return(
             initialData.map(( item, index ) => (
                 <ChoosableElement key={index} id={item.id} description={item.description} name={item.name} />
             ))
         );
+        */
     }
 
     // to be displayed during fetch requests
