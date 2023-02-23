@@ -12,56 +12,60 @@ import { getCookie, hasCookie, getCookies } from 'cookies-next';
 import ChoosableElement from "../../components/ChoosableElement";
 import { useState, useEffect } from 'react'
 
-import * as model from "../../prisma/model";
-
-// --- This function is called during build and sets the available routes. ---------------------------------------
+// This function is called during build and sets the available routes.
 export async function getStaticPaths() {
     return {
         paths: [
-            { params: { type: 'circular' } },
-            { params: { type: 'product' } },
+            { params: { type: 'CBM' } },
+            { params: { type: 'LCP' } },
+            { params: { type: 'ED' } },
+            { params: { type: 'TC' } },
         ],
         fallback: false, // can also be true or 'blocking'
     }
 }
 
-// --- This function gets called at build time, Server-Side --------------------------------------------------
+// This function gets called at build time
 export async function getStaticProps(context) {
-    
-    // Get the request params, type gets overwritten with the code CBM / LCP / ED which can be used in the database
-    var type = context.params.type;
+    // TODO: Load the csv data here, example is with api request
+    // const res = await fetch('https://.../posts')
+    // const posts = await res.json()
+
+    // Get the request params
+    const type = context.params.type;
     var title;
-    
+
     switch (type) {
-        case "circular":
+        case "CBM":
             title = "Circular Business Models";
-            type = "CBM";
             break;
-        case "product":
-            title = "Lifecycle Phase Intensity";
-            type = "LCP";
+        case "LCP":
+            title = "Lifecycle Phase Intensity"
+            break;
+        case "ED":
+            title = "Ecodesign Approaches"
+            break;
+        case "TC":
+            title = "Technical Design Principles"
             break;
     }
 
-    var data = await model.getDescriptions(type);
-    console.log(data);
-
-    // Hand data over to view.
     return {
         props: {
             initialTitle: title,
-            initialData: data,
             initialType: type,
         },
     }
 }
 
+
+
 // --- The actual page content -------------------------------------------------------------------------
-export default function AdvisorPage({ initialTitle, initialData, initialType }) {
+export default function AdvisorPage({ initialTitle, initialType }) {
     const prevPath = useSessionStorage('prevPath');
     const currentPath = useSessionStorage('currentPath');
     const [title, setTitle] = useState( initialTitle );
-    const [bodyContent, setBodyContent] = useState( InitBody() );
+    const [bodyContent, setBodyContent] = useState();
 
     // type is the current type or the type which is supposed to be loaded. oldType is used while loading a new type
     // in order to define from which table the relations are drawn. So when i switch from LCP to CBM i have CBM as type
@@ -76,15 +80,13 @@ export default function AdvisorPage({ initialTitle, initialData, initialType }) 
     // annnnd.... it just dosnt work otherwise, i cant find a way to initialize my body through client side request.
     function InitBody() {
 
-        () => setOldType('CBM');
-        () => setType('CBM');
-        /*
-        return(
-            initialData.map(( item, index ) => (
-                <ChoosableElement key={index} id={item.id} description={item.description} name={item.name} />
-            ))
-        );
-        */
+        // Cut out the /advisor/ to get the request type
+        console.log(currentPath);
+        var initialType = currentPath.substring( 9 );
+
+
+        () => setOldType( initialType );
+        () => setType( initialType );
     }
 
     // to be displayed during fetch requests
@@ -108,7 +110,7 @@ export default function AdvisorPage({ initialTitle, initialData, initialType }) 
 
             case "CBM":
                 // The user started with CBM and is currently on the CBM page so the next page has to be LCP
-                if( currentPath == "/advisor/circular") {
+                if( currentPath == "/advisor/CBM") {
                     setTitle("Lifecycle Phase Intensity");
                     setType("LCP");
                     break;
@@ -119,7 +121,7 @@ export default function AdvisorPage({ initialTitle, initialData, initialType }) 
                 }
 
             case "LCP":
-                if( currentPath == "/advisor/product") {
+                if( currentPath == "/advisor/LCP") {
                     setTitle("Circular Business Models");
                     setType("CBM");
                     break;
