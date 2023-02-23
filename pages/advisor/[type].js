@@ -143,12 +143,33 @@ export default function AdvisorPage({ initialTitle, initialData, initialType }) 
         fetch(`/api/descriptions/${types}?items=${selectedItems}`)
         .then((res) => res.json())
         .then((data) => {
-            
+
+            if( selectedItems )
+            {
+                selectedItems = JSON.parse( "[" + selectedItems + "]" )[0];
+    
+                data.descriptions.forEach(element => {
+                    element.active = selectedItems.includes( element.id );
+                });
+            }
+            else
+            {
+                data.descriptions.forEach(element => {
+                    element.active = false;
+                });
+            }
+
             setBodyContent(
                 data['descriptions'].map(( item, index ) => (
-                    <ChoosableElement key={index} id={item.id} description={item.description} name={item.name} />
+                    <ChoosableElement 
+                        key={index}
+                        id={item.id}
+                        description={item.description}
+                        name={item.name}
+                        active={item.active}
+                    />
                     ))
-                    );
+                );
                     
             });
 

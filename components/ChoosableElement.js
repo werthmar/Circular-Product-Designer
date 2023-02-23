@@ -6,7 +6,7 @@ import { ImCheckmark2 } from 'react-icons/im';
 
 export default function ChoosableElement(props) {
 
-    const [clicked, setClicked] = useState(false);
+    const [clicked, setClicked] = useState( props.active );
     const id = props.id;
     const description = props.description;
     const name = props.name;
