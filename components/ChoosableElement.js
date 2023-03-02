@@ -39,7 +39,9 @@ export default function ChoosableElement(props) {
 
                         // Delete deselected item from the data and update the cookie
                         data1.forEach( x => {
-                            x["id"] == id["id"] ? data1.splice(data1.indexOf(x), 1) : ''; // Remove the x element and only do it once
+                            if( x  == id ) {
+                                data1.splice(data1.indexOf(x), 1) // Remove the x element and only do it once
+                            } 
                         });
 
                         if ( data1.length != 0 ) {
