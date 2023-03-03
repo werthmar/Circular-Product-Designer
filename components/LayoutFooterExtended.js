@@ -5,7 +5,6 @@ Navbar ist referenced as Footer because it is at the bottom of the page.
 
 import React from 'react';
 import Head from 'next/head';
-import Footer from "./Footer";
 
 const LayoutFooterExtended = (props) => {
   return (
@@ -18,7 +17,6 @@ const LayoutFooterExtended = (props) => {
       </Head>
       <div className="wrapper hasFooter">     
         {props.children}
-        <Footer/>
       </div>
     </div>
   )

@@ -1,8 +1,6 @@
 @import 'theme';
 
 .advisorPage{
-    width: 100%;
-    padding: 20px;
 
     .loadingNotification{
         text-align: center;
@@ -22,6 +20,7 @@
         border-style: solid;
         margin-top: 55px;
         padding: 20px;
+        margin: 20px;
         
         h1{
             color: $color-secondary;

@@ -3,9 +3,11 @@
  *  from a specific csv file and displayed.
  */
 
-import { Button, Col, Container, Row } from "reactstrap";
+import { Button, Col, Nav, Navbar } from "reactstrap";
 import LayoutFooterExtended from "../../components/LayoutFooterExtended";
 import { BsArrowRightCircle } from 'react-icons/bs';
+import { RiArrowGoBackLine } from 'react-icons/ri';
+import HomeButton from '../../components/HomeButton';
 import { useRouter } from 'next/router'
 import useSessionStorage from '../../hooks/useSessionStorage';
 import { getCookie, hasCookie, getCookies } from 'cookies-next';
@@ -76,6 +78,16 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     const [type, setType] = useState( initialType );
     const [oldType, setOldType] = useState( initialType );
 
+    // For footer
+    const [button1, setButton1] = useState( false );
+    const [button2, setButton2] = useState( true );
+    const [button3, setButton3] = useState( true );
+    const [button4, setButton4] = useState( true );
+    const [button1Active, setButton1Active] = useState();
+    const [button2Active, setButton2Active] = useState();
+    const [button3Active, setButton3Active] = useState();
+    const [button4Active, setButton4Active] = useState();
+
     // When the page is opend the first time the data is passed from the backend in during getStaticProps.
     // Why? Faster through Static generation, we always display all data in the begining so it doenst have to be dynamic
     // annnnd.... it just dosnt work otherwise, i cant find a way to initialize my body through client side request.
@@ -139,12 +151,25 @@ export default function AdvisorPage({ initialTitle, initialType }) {
 
     }
 
+    
+
     // State dosnt get updated immidiatly so i instead run this function everytime the state of type actually changes.
     useEffect( () => {
         
         var types = [ oldType, type ]
         var selectedItems = getCookie( 'selected' );
         
+        setFooterButtons();
+
+        // If you go back with the footer buttons set oldtype = type in order to load the complete page instead of filtered result
+        if (
+            oldType == "ED" && type == "CBM" ||
+            oldType == "ED" && type == "LCP" 
+            // oldType == "TC" && type == "ED" ||
+        ) {
+            setOldType(type);
+        }
+
         // API request for data retrival, selectedItems is not required / can be undefined.
         // https://nextjs.org/docs/basic-features/data-fetching/client-side
         fetch(`/api/descriptions/${types}?items=${selectedItems}`)
@@ -180,11 +205,119 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                     
             });
 
+            
+
             // Shallow Routing
             router.push(`/advisor/${type}`, undefined, { shallow: true })
 
     }, [type] );
 
+    function setFooterButtons()
+    {
+        // Set the footer buttons, true = disabled, footerButtonActive = current page marked in blue
+        if( type == "CBM" && oldType == "CBM" || type == "LCP" && oldType == "LCP" ) {
+            setButton1( false );
+            setButton2( true );
+            setButton3( true );
+            setButton4( true );
+            setButton1Active( "footerButtonActive" );
+            setButton2Active();
+            setButton3Active();
+            setButton4Active();
+        // = page 2
+        } else if(
+            type == "CBM" && oldType == "LCP" ||
+            type == "LCP" && oldType == "CBM" ||
+            type == "LCP" && oldType == "ED" ||
+            type == "CBM" && oldType == "ED"
+            ) {
+            setButton1( false );
+            setButton2( false );
+            setButton3( true );
+            setButton4( true );
+            setButton1Active();
+            setButton2Active( "footerButtonActive" );
+            setButton3Active();
+            setButton4Active();
+        }
+        else if( type == "ED" ) { 
+            setButton1( false );
+            setButton2( false );
+            setButton3( false );
+            setButton4( true );
+            setButton1Active();
+            setButton2Active();
+            setButton3Active( "footerButtonActive" );
+            setButton4Active();
+        } else {
+            setButton1( false );
+            setButton2( false );
+            setButton3( false );
+            setButton4( false );
+            setButton1Active();
+            setButton2Active();
+            setButton3Active();
+            setButton4Active( "footerButtonActive" );
+        }
+    }
+
+    function footerNavigation( page )
+    {
+        // done bcs the second link depents on start page
+        if( page == "decide" && initialType == "CBM") {
+            page = "LCP"
+        } else if( page == "decide" && initialType == "LCP") {
+            page = "CBM"
+        }
+
+        // Tricker useEffect on setType completion
+        switch( page )
+        {
+            case "CBM":
+                setTitle("Circular Business Models");
+                setType("CBM");
+                break;
+            case "LCP":
+                setTitle("Lifecycle Phase Intensity");
+                setType("LCP");
+                break;
+            case "ED":
+                setTitle("Ecodesign Approaches");
+                setType("ED");
+                break;
+            case "TC":
+                setTitle("Technical Design Principles");
+                return; // TDP dosnt exit yet on the database.
+        }
+    }
+
+    function Footer()
+    {
+        return(
+            <div>
+
+            <Navbar className='footer'> {/*justify-content-center*/}
+                <Nav>
+                <Button onClick={ () => router.back() } className="backButton">
+                    <RiArrowGoBackLine size={45} color="grey" />
+                </Button>
+                </Nav>
+
+                <Nav className='mx-auto'>
+                    <Button onClick={ () => router.push("/process") } className="footerButton" />
+                    <Button onClick={ () => footerNavigation( initialType ) } className={"footerButton " + button1Active} disabled={button1} />
+                    <Button onClick={ () => footerNavigation( "decide" ) } className={"footerButton " + button2Active} disabled={button2} />
+                    <Button onClick={ () => footerNavigation( "ED" ) } className={"footerButton " + button3Active} disabled={button3} />
+                    <Button onClick={ () => footerNavigation( "LC" ) } className={"footerButton " + button4Active} disabled={button4} />
+                </Nav>
+
+                <Nav className='ml-auto'>
+                <HomeButton className="nav-item" size="small" />
+                </Nav>
+            </Navbar>
+            </div>
+        );
+    }
     
     // JSX body
     return(
@@ -202,6 +335,9 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                     <BsArrowRightCircle className="icon" size={30}/>
                 </Button>      
             </Col>
+
+            <Footer />
+
         </div>
     );
   }
