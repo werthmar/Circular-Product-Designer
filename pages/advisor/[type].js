@@ -47,7 +47,7 @@ export async function getStaticProps(context) {
         case "ED":
             title = "Ecodesign Approaches"
             break;
-        case "TC":
+        case "TDP":
             title = "Technical Design Principles"
             break;
     }
@@ -88,19 +88,8 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     const [button3Active, setButton3Active] = useState();
     const [button4Active, setButton4Active] = useState();
 
-    // When the page is opend the first time the data is passed from the backend in during getStaticProps.
-    // Why? Faster through Static generation, we always display all data in the begining so it doenst have to be dynamic
-    // annnnd.... it just dosnt work otherwise, i cant find a way to initialize my body through client side request.
-    function InitBody() {
-
-        // Cut out the /advisor/ to get the request type
-        console.log(currentPath);
-        var initialType = currentPath.substring( 9 );
-
-
-        () => setOldType( initialType );
-        () => setType( initialType );
-    }
+    // Idea: keeps track of the routes visited before and allows to go back with footer
+    const [history, setHistory] = useState([]);
 
     // to be displayed during fetch requests
     function LoadingNotificaiton() {
@@ -116,6 +105,10 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     // Decide which page to display next based on the current and previous page.
     function loadNextPage() {
         setBodyContent( LoadingNotificaiton() );
+        
+        // Update history
+        history.push( type );
+
         setOldType( type );
 
         // Tricker useEffect on setType completion
@@ -146,6 +139,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
 
             case "ED":
                 setTitle("Technical Design Principles");
+                setType("TDP");
                 return; // TDP dosnt exit yet on the database.
         }
 
@@ -158,7 +152,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
         
         var types = [ oldType, type ]
         var selectedItems = getCookie( 'selected' );
-        
+
         setFooterButtons();
 
         // If you go back with the footer buttons set oldtype = type in order to load the complete page instead of filtered result
@@ -167,7 +161,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
             oldType == "ED" && type == "LCP" 
             // oldType == "TC" && type == "ED" ||
         ) {
-            setOldType(type);
+            types = [ type, type ];
         }
 
         // API request for data retrival, selectedItems is not required / can be undefined.
@@ -205,8 +199,6 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                     
             });
 
-            
-
             // Shallow Routing
             router.push(`/advisor/${type}`, undefined, { shallow: true })
 
@@ -215,7 +207,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     function setFooterButtons()
     {
         // Set the footer buttons, true = disabled, footerButtonActive = current page marked in blue
-        if( type == "CBM" && oldType == "CBM" || type == "LCP" && oldType == "LCP" ) {
+        if( history.length == 0 ) { // = first page
             setButton1( false );
             setButton2( true );
             setButton3( true );
@@ -225,12 +217,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
             setButton3Active();
             setButton4Active();
         // = page 2
-        } else if(
-            type == "CBM" && oldType == "LCP" ||
-            type == "LCP" && oldType == "CBM" ||
-            type == "LCP" && oldType == "ED" ||
-            type == "CBM" && oldType == "ED"
-            ) {
+        } else if( history.length == 1 ) {
             setButton1( false );
             setButton2( false );
             setButton3( true );
@@ -240,7 +227,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
             setButton3Active();
             setButton4Active();
         }
-        else if( type == "ED" ) { 
+        else if( history.length == 2 ) { 
             setButton1( false );
             setButton2( false );
             setButton3( false );
@@ -261,15 +248,21 @@ export default function AdvisorPage({ initialTitle, initialType }) {
         }
     }
 
-    function footerNavigation( page )
+    // The index defined in the footer buttons stands for the index in the history array to which the user wants to jump to
+    function footerNavigation( index )
     {
-        // done bcs the second link depents on start page
-        if( page == "decide" && initialType == "CBM") {
-            page = "LCP"
-        } else if( page == "decide" && initialType == "LCP") {
-            page = "CBM"
+        // History only gets set when you exit the first page, if its not set do nothing
+        if( history.length == 0 ) {
+            return;
         }
 
+        var page = history[index];
+        // Delete the history elements which came after the selected footer button history element
+        for ( var i = index; i <= history.length; i++ )
+        {
+            history.splice(i);
+        }
+        
         // Tricker useEffect on setType completion
         switch( page )
         {
@@ -285,9 +278,10 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                 setTitle("Ecodesign Approaches");
                 setType("ED");
                 break;
-            case "TC":
+            case "TDP":
                 setTitle("Technical Design Principles");
-                return; // TDP dosnt exit yet on the database.
+                setType("TDP");
+                break; // TDP dosnt exit yet on the database.
         }
     }
 
@@ -305,10 +299,10 @@ export default function AdvisorPage({ initialTitle, initialType }) {
 
                 <Nav className='mx-auto'>
                     <Button onClick={ () => router.push("/process") } className="footerButton" />
-                    <Button onClick={ () => footerNavigation( initialType ) } className={"footerButton " + button1Active} disabled={button1} />
-                    <Button onClick={ () => footerNavigation( "decide" ) } className={"footerButton " + button2Active} disabled={button2} />
-                    <Button onClick={ () => footerNavigation( "ED" ) } className={"footerButton " + button3Active} disabled={button3} />
-                    <Button onClick={ () => footerNavigation( "LC" ) } className={"footerButton " + button4Active} disabled={button4} />
+                    <Button onClick={ () => footerNavigation( 0 ) } className={"footerButton " + button1Active} disabled={button1} />
+                    <Button onClick={ () => footerNavigation( 1 ) } className={"footerButton " + button2Active} disabled={button2} />
+                    <Button onClick={ () => footerNavigation( 2 ) } className={"footerButton " + button3Active} disabled={button3} />
+                    <Button onClick={ () => footerNavigation( 3 ) } className={"footerButton " + button4Active} disabled={button4} />
                 </Nav>
 
                 <Nav className='ml-auto'>
