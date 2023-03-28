@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
     // Transform the String from the API request into an Array of Strings
     if( items != 'undefined' ) {
-      selectedItems = JSON.parse( "[" + items + "]" )[0];
+      selectedItems = JSON.parse(items);
     }
     
     // Split type

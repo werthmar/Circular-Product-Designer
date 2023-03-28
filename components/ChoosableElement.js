@@ -1,5 +1,5 @@
 // The clickable element displaying text aswell as the onClick function which saves data to a cookie
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
 import { Button, Col, Row } from "reactstrap";
 import { ImCheckmark2 } from 'react-icons/im';
@@ -10,6 +10,7 @@ export default function ChoosableElement(props) {
     const id = props.id;
     const description = props.description;
     const name = props.name;
+    const type = props.type;
 
     return(
         <Row xs="2">
@@ -24,10 +25,10 @@ export default function ChoosableElement(props) {
                             let data = getCookie('selected');
                             data = JSON.parse(data);
 
-                            data.push(id);
+                            data.push( [id, type] );
                             setCookie('selected', data, { sameSite: true });
                         } else {
-                            setCookie('selected', [id], { sameSite: true });
+                            setCookie('selected', [ [id, type] ], { sameSite: true });
                         }
 
                         setClicked(true);
@@ -39,7 +40,7 @@ export default function ChoosableElement(props) {
 
                         // Delete deselected item from the data and update the cookie
                         data1.forEach( x => {
-                            if( x  == id ) {
+                            if( x[0]  == id ) {
                                 data1.splice(data1.indexOf(x), 1) // Remove the x element and only do it once
                             } 
                         });

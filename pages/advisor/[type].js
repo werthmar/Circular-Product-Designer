@@ -3,7 +3,7 @@
  *  from a specific csv file and displayed.
  */
 
-import { Button, Col, Nav, Navbar } from "reactstrap";
+import { Button, Col, Nav, Navbar, Alert } from "reactstrap";
 import LayoutFooterExtended from "../../components/LayoutFooterExtended";
 import { BsArrowRightCircle } from 'react-icons/bs';
 import { RiArrowGoBackLine } from 'react-icons/ri';
@@ -13,6 +13,7 @@ import useSessionStorage from '../../hooks/useSessionStorage';
 import { getCookie, hasCookie, getCookies } from 'cookies-next';
 import ChoosableElement from "../../components/ChoosableElement";
 import { useState, useEffect } from 'react'
+import { Value } from "sass";
 
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
@@ -69,6 +70,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     const router = useRouter();
     const [title, setTitle] = useState( initialTitle );
     const [bodyContent, setBodyContent] = useState();
+    const [showWarning, setShowWarning] = useState( false );
 
     // type is the current type or the type which is supposed to be loaded. oldType is used while loading a new type
     // in order to define from which table the relations are drawn. So when i switch from LCP to CBM i have CBM as type
@@ -104,8 +106,30 @@ export default function AdvisorPage({ initialTitle, initialType }) {
 
     // Decide which page to display next based on the current and previous page.
     function loadNextPage() {
-        setBodyContent( LoadingNotificaiton() );
         
+        var cookie = getCookie( 'selected' );
+        var itemSelected = false;
+        
+        // check if user selected at least one item from the list, if not display massage
+        if( cookie )
+        {
+            cookie = JSON.parse(cookie);
+            cookie.forEach( item => {
+                // Check if user has selected at least one item from current type
+                if( item[1] == type ) {
+                    itemSelected = true;
+                }
+            });
+        }
+        if( itemSelected != true ) {
+            setShowWarning( true );
+            return;
+        }
+
+        // All clear, user selected an item, disable showWarning in case it was shown before
+        setShowWarning( false );
+        setBodyContent( LoadingNotificaiton() );
+
         // Update history
         history.push( type );
 
@@ -151,8 +175,20 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     useEffect( () => {
         
         var types = [ oldType, type ]
-        var selectedItems = getCookie( 'selected' );
 
+        // var selectedItems = getCookie('selected');
+        
+        // Filter the selected items by id, type is only used when checking if an item has been selected on this page
+        var selectedItems = [];
+        var cookie = getCookie( 'selected' );
+        if( cookie )
+        {
+            cookie = JSON.parse(cookie);
+            cookie.forEach( item => {
+                selectedItems.push( item[0] );
+            });
+        }
+        
         setFooterButtons();
 
         // If you go back with the footer buttons set oldtype = type in order to load the complete page instead of filtered result
@@ -166,13 +202,13 @@ export default function AdvisorPage({ initialTitle, initialType }) {
 
         // API request for data retrival, selectedItems is not required / can be undefined.
         // https://nextjs.org/docs/basic-features/data-fetching/client-side
-        fetch(`/api/descriptions/${types}?items=${selectedItems}`)
+        fetch(`/api/descriptions/${types}?items=${ '[' + selectedItems + ']' }`)
         .then((res) => res.json())
         .then((data) => {
 
-            if( selectedItems )
+            if( selectedItems.length != 0 )
             {
-                selectedItems = JSON.parse( "[" + selectedItems + "]" )[0];
+                //selectedItems = JSON.parse( "[" + selectedItems + "]" )[0];
     
                 data.descriptions.forEach(element => {
                     element.active = selectedItems.includes( element.id );
@@ -185,6 +221,8 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                 });
             }
 
+            // #TODO: wenn man durch den footer zurück geht werden aktivierte elemente nicht wieder markiert, abwohl active auf true gesetzt wird.
+            // Bei refresh funkt es aber...
             setBodyContent(
                 data['descriptions'].map(( item, index ) => (
                     <ChoosableElement 
@@ -193,6 +231,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                         description={item.description}
                         name={item.name}
                         active={item.active}
+                        type={type}
                     />
                     ))
                 );
@@ -255,6 +294,9 @@ export default function AdvisorPage({ initialTitle, initialType }) {
         if( history.length == 0 ) {
             return;
         }
+
+        // Set the old type to the old type from the history
+        //setOldType( index > 0 ? history[index-1] : history[index] );
 
         var page = history[index];
         // Delete the history elements which came after the selected footer button history element
@@ -319,6 +361,10 @@ export default function AdvisorPage({ initialTitle, initialType }) {
             <Col className="mainCol">
                 
             <h1>{title}</h1>
+
+            <Alert color="warning" style={{visibility: showWarning ? 'visible' : 'hidden' }}>
+                You must select at least 1 item from the list.
+            </Alert>
             
             <div>{bodyContent}</div>
 
