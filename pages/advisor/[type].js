@@ -226,7 +226,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
             setBodyContent(
                 data['descriptions'].map(( item, index ) => (
                     <ChoosableElement 
-                        key={index}
+                        //key={index}
                         id={item.id}
                         description={item.description}
                         name={item.name}
@@ -295,6 +295,8 @@ export default function AdvisorPage({ initialTitle, initialType }) {
             return;
         }
 
+        setBodyContent( LoadingNotificaiton() );
+
         // Set the old type to the old type from the history
         //setOldType( index > 0 ? history[index-1] : history[index] );
 
@@ -325,6 +327,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                 setType("TDP");
                 break; // TDP dosnt exit yet on the database.
         }
+
     }
 
     function Footer()
