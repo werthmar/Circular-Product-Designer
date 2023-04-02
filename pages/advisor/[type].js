@@ -290,8 +290,8 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     // The index defined in the footer buttons stands for the index in the history array to which the user wants to jump to
     function footerNavigation( index )
     {
-        // History only gets set when you exit the first page, if its not set do nothing
-        if( history.length == 0 ) {
+        // History only gets set when you exit the first page, if its not set do nothing / clicked on same button as your already on
+        if( history.length == 0 || index > history.length - 1 ) {
             return;
         }
 
@@ -301,7 +301,10 @@ export default function AdvisorPage({ initialTitle, initialType }) {
         //setOldType( index > 0 ? history[index-1] : history[index] );
 
         var page = history[index];
-        // Delete the history elements which came after the selected footer button history element
+        // make sure you have the same selection if you go back, e.g. so that u only get shown the same 3 options as before.
+        index > 0 ? setOldType( history[index -1] ): setOldType( history[index] );
+
+        // Delete the history elements which came after the selected footer button history element.
         for ( var i = index; i <= history.length; i++ )
         {
             history.splice(i);
