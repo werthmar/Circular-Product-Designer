@@ -10,7 +10,7 @@ import { RiArrowGoBackLine } from 'react-icons/ri';
 import HomeButton from '../../components/HomeButton';
 import { useRouter } from 'next/router'
 import useSessionStorage from '../../hooks/useSessionStorage';
-import { getCookie, hasCookie, getCookies } from 'cookies-next';
+import { getCookie, hasCookie, getCookies, setCookie } from 'cookies-next';
 import ChoosableElement from "../../components/ChoosableElement";
 import { useState, useEffect } from 'react'
 import { Value } from "sass";
@@ -305,10 +305,26 @@ export default function AdvisorPage({ initialTitle, initialType }) {
         index > 0 ? setOldType( history[index -1] ): setOldType( history[index] );
 
         // Delete the history elements which came after the selected footer button history element.
-        for ( var i = index; i <= history.length; i++ )
+        var historyLength = history.length;
+        
+        for ( var i = index; i <= historyLength; i++ )
         {
             history.splice(i);
         }
+
+        // And also delete the selected values from the cookie.
+        var selectedItems = getCookie('selected');
+        selectedItems = JSON.parse(selectedItems);
+        
+        // Delete selected items if they are not in the history anymore or are not on the same page which we want to go to in order for user selections to get reset to the point the user jumps to.
+        selectedItems.forEach( item => {
+            if( !history.includes( item[1] ) && item[1] != page ) {
+                selectedItems.splice( selectedItems.indexOf( item ) );
+            }
+        });
+        
+        setCookie('selected', selectedItems, { sameSite: true });
+        
         
         // Tricker useEffect on setType completion
         switch( page )
