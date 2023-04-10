@@ -11,11 +11,6 @@ export async function getDescriptions(type, items) {
 
     // Results can either be filtered by selected items or not
     if(items) {
-
-        // If there are selections get the corresponding descriptions out of the CBMxLCP etc. tables
-        
-
-
         descriptions = await prisma.descriptions.findMany({
             where: {
                 //type: type,

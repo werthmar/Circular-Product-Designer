@@ -8,8 +8,23 @@
 import Link from "next/link";
 import { Button, Col, Row } from "reactstrap";
 import LayoutFooterExtended from "../components/LayoutFooterExtended";
+import { hasCookie, deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/router'
 
-export default function ProcessPage() {
+export default function ProcessPage()
+{
+    const router = useRouter();
+
+    function nextPage( page )
+    {
+        if( hasCookie('selected' ) )
+        {
+            deleteCookie('selected');
+        }
+
+        router.push( page );
+    }
+
     return(
         <div className="processPage">
             <Col className="text">
@@ -22,11 +37,11 @@ export default function ProcessPage() {
             </Col>
             <Col>
                 <Row className="buttonRow justify-content-center" md="2" xs="1">
-                    <Button href="/advisor/CBM" className="standardButton">
+                    <Button onClick={ () => nextPage( "/advisor/CBM" ) } className="standardButton">
                         START <br /> 
                         CIRCULAR BUSINESS MODEL
                     </Button>
-                    <Button href="advisor/LCP" className="standardButton">
+                    <Button onClick={ () => nextPage( "advisor/LCP" ) } className="standardButton">
                         START <br />
                         PRODUCT
                     </Button>
