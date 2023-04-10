@@ -333,6 +333,22 @@ export default function AdvisorPage({ initialTitle, initialType }) {
 
     }
 
+    function backButton()
+    {
+        if( button4Active == 'footerButtonActive' ) {
+            footerNavigation(2);
+        }
+        else if( button3Active == 'footerButtonActive' ) {
+            footerNavigation(1);
+        }
+        else if( button2Active == 'footerButtonActive' ) {
+            footerNavigation(0);
+        }
+        else if( button1Active == 'footerButtonActive' ) {
+            router.push("/process");
+        }
+    }
+
     function Footer()
     {
         return(
@@ -340,7 +356,7 @@ export default function AdvisorPage({ initialTitle, initialType }) {
 
             <Navbar className='footer'> {/*justify-content-center*/}
                 <Nav>
-                <Button onClick={ () => router.back() } className="backButton">
+                <Button onClick={ () => backButton() } className="backButton">
                     <RiArrowGoBackLine size={45} color="grey" />
                 </Button>
                 </Nav>
