@@ -1,12 +1,14 @@
 // page for testing out new design
 import { Button, Col, Container, List, Nav, Navbar, Alert, Row } from "reactstrap";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Playground()
 {
 
     function ChoosableElement() {
         const [descriptionVisible, setDescriptionVisible] = useState(false);
+
         const handleClick = () => {
             console.log(`CLICK!!`);
             setDescriptionVisible(!descriptionVisible);
@@ -18,9 +20,23 @@ export default function Playground()
                 <Container fluid>
                     <Row>
                         
-                        {/* Rotatet Title */}
-                        <Col className={descriptionVisible ? "col-2" : ""} onClick={() => handleClick()}>
-                            <h1>Column1</h1>
+                        {/* Bar */}
+                        <Col className={descriptionVisible ? "col-4" : ""} onClick={() => handleClick()}>
+
+                                    <Col>
+                                        <h1>CHOOSE</h1>
+                                    </Col>
+
+                                    {/* Checkmark Button */}
+                                    <Col className="buttonCol">
+                                        <Image src="/checkbox_unmarked.png" width={100} height={65} />
+                                    </Col>
+
+                                    {/* Rotatet Title */}
+                                    <Col>
+                                        <p className="rotated-text">Column1</p>
+                                    </Col>
+                            
                         </Col>
 
                         {/* Description which can be opened on click */}

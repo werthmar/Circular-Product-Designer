@@ -8,6 +8,7 @@ import '../styles/homeButton.scss';
 import '../styles/process.scss';
 import '../styles/advisor.scss';
 import '../styles/playground.scss';
+import '../styles/fonts.scss';
 
 import { useRouter } from "next/router";
 import { useEffect } from "react";
