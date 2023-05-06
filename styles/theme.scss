@@ -6,11 +6,13 @@
 */
 
 $color-primary: #ffffff;
-$color-secondary: #424b5a83;
-$color-secondary-light: #424b5a2b;
-$accent-color: #97d3f0bc;
-
 $footer-height: 100px;
+
+// New Design
+$background-color: rgb(230, 230, 230);
+$color-secondary: rgb(179,179,179);
+$color-secondary-light: rgb(204,204,204);
+$accent-color: rgb(237,191,98);
 
 .standardButton{
     background: $accent-color;

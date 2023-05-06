@@ -2,10 +2,12 @@
 import { Button, Col, Container, List, Nav, Navbar, Alert, Row } from "reactstrap";
 import { useState } from "react";
 import Image from "next/image";
+import CustomNavbar from "../components/Navbar";
 
 export default function Playground()
 {
 
+    // Exchange with current choosabel element.js
     function ChoosableElement() {
         const [descriptionVisible, setDescriptionVisible] = useState(false);
 
@@ -15,7 +17,6 @@ export default function Playground()
         }
 
         return(
-
             <Col className="element">
                 <Container fluid>
                     <Row>
@@ -29,7 +30,7 @@ export default function Playground()
 
                                     {/* Checkmark Button */}
                                     <Col className="buttonCol">
-                                        <Image src="/checkbox_unmarked.png" width={100} height={65} />
+                                        <Image src="/icons/checkbox_unmarked.png" width={100} height={65} />
                                     </Col>
 
                                     {/* Rotatet Title */}
@@ -63,6 +64,10 @@ export default function Playground()
         <Container className="playground" fluid>
 
             <Row xs="8">
+
+                <Col className="col-6" style={{padding: 0}}>
+                    <CustomNavbar />
+                </Col>
 
                 <ChoosableElement />
                 <ChoosableElement />
