@@ -10,6 +10,7 @@ import '../styles/advisor.scss';
 import '../styles/playground.scss';
 import '../styles/fonts.scss';
 import '../styles/navbar.scss';
+import '../styles/choosableElement.scss';
 
 
 import { useRouter } from "next/router";

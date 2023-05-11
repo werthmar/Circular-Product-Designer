@@ -2,6 +2,8 @@
 
 .advisorPage{
 
+    width: fit-content;
+
     .loadingNotification{
         text-align: center;
 
@@ -12,35 +14,6 @@
         }
     }
     
-    .mainCol{
-        background: $color-secondary-light;
-        border-radius: 50px;
-        border-color: $accent-color;
-        border-width: 3px;
-        border-style: solid;
-        margin-top: 55px;
-        padding: 20px;
-        margin: 20px;
-        
-        h1{
-            color: $color-secondary;
-            text-align: center;
-            font-size: 50px;
-            margin-bottom: 25px;
-        }
-            
-        .row{
-            margin-bottom: 30px;
-            
-            .standardButton{
-                margin: 0;
-                width: 100px;
-                height: 100px;
-            }
-        }
-
-    }
-
     .buttonCol{
 
         .nextButton{
@@ -52,10 +25,5 @@
             }
         }
     }
-
-    .standardButton.clicked {
-        background-color: green;
-    }
-
 
 }

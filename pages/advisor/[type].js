@@ -3,7 +3,7 @@
  *  from a specific csv file and displayed.
  */
 
-import { Button, Col, Nav, Navbar, Alert } from "reactstrap";
+import { Button, Col, Nav, Navbar, Alert, Container, Row } from "reactstrap";
 import LayoutFooterExtended from "../../components/LayoutFooterExtended";
 import { BsArrowRightCircle } from 'react-icons/bs';
 import { RiArrowGoBackLine } from 'react-icons/ri';
@@ -396,17 +396,21 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     // JSX body
     return(
         <div className="advisorPage">
-            <Col className="mainCol">
-                
-            <h1>{title}</h1>
 
             <Alert color="warning" style={{visibility: showWarning ? 'visible' : 'hidden' }}>
                 You must select at least 1 item from the list.
             </Alert>
             
-            <div>{bodyContent}</div>
+            <Container className="playground" fluid>
+                <Row>
 
-            </Col>
+                    {bodyContent}
+
+                </Row>
+            </Container>
+
+
+        
             <Col className="d-flex justify-content-center buttonCol">
                 <Button onClick={() => loadNextPage()} className="standardButton nextButton">
                     Continue
