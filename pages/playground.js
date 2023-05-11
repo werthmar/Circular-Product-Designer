@@ -1,4 +1,5 @@
 // page for testing out new design
+import React from "react";
 import { Button, Col, Container, List, Nav, Navbar, Alert, Row } from "reactstrap";
 import { useState } from "react";
 import Image from "next/image";
@@ -6,6 +7,11 @@ import CustomNavbar from "../components/Navbar";
 
 export default function Playground()
 {
+    var navbar = React.createRef();
+
+    function toggleNavbar() {
+        navbar.current.setExpanded();
+    }
 
     // Exchange with current choosabel element.js
     function ChoosableElement() {
@@ -14,10 +20,11 @@ export default function Playground()
         const handleClick = () => {
             console.log(`CLICK!!`);
             setDescriptionVisible(!descriptionVisible);
+            toggleNavbar();
         }
 
         return(
-            <Col className="element">
+            <Col className="choosableElement">
                 <Container fluid>
                     <Row>
                         
@@ -30,7 +37,7 @@ export default function Playground()
 
                                     {/* Checkmark Button */}
                                     <Col className="buttonCol">
-                                        <Image src="/icons/checkbox_unmarked.png" width={100} height={65} />
+                                        <Image src="/icons/checkbox_unmarked.png" alt="checkbox" width={100} height={65} />
                                     </Col>
 
                                     {/* Rotatet Title */}
@@ -65,9 +72,7 @@ export default function Playground()
 
             <Row xs="8">
 
-                <Col className="col-6" style={{padding: 0}}>
-                    <CustomNavbar />
-                </Col>
+                <CustomNavbar ref={navbar} />
 
                 <ChoosableElement />
                 <ChoosableElement />
