@@ -5,6 +5,10 @@
     border: 2px black solid;
     padding: 0;
 
+    //! width and height!
+    min-height: 100vh;
+    max-width: 100vw;
+
     h1{
         font-family: 'Barlow-Bold';
         font-size: 34px;

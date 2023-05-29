@@ -2,7 +2,7 @@
  *  This page can be loaded with different arguments. based on the argument data is loaded
  *  from a specific csv file and displayed.
  */
-
+import React from "react";
 import { Button, Col, Nav, Navbar, Alert, Container, Row } from "reactstrap";
 import LayoutFooterExtended from "../../components/LayoutFooterExtended";
 import { BsArrowRightCircle } from 'react-icons/bs';
@@ -14,6 +14,7 @@ import { getCookie, hasCookie, getCookies, setCookie } from 'cookies-next';
 import ChoosableElement from "../../components/ChoosableElement";
 import { useState, useEffect } from 'react'
 import { Value } from "sass";
+import CustomNavbar from "../../components/Navbar";
 
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
@@ -93,9 +94,11 @@ export default function AdvisorPage({ initialTitle, initialType }) {
     // Idea: keeps track of the routes visited before and allows to go back with footer
     const [history, setHistory] = useState([]);
 
+    // Reference to the Navbar
+    var navbar = React.createRef();
+
     // to be displayed during fetch requests
     function LoadingNotificaiton() {
-        
         return(
             <div className="loadingNotification">
                 <div className="loader" />
@@ -401,8 +404,10 @@ export default function AdvisorPage({ initialTitle, initialType }) {
                 You must select at least 1 item from the list.
             </Alert>
             
-            <Container className="playground" fluid>
+            <Container fluid>
                 <Row>
+
+                    <CustomNavbar ref={navbar} />
 
                     {bodyContent}
 

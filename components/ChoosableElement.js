@@ -1,4 +1,5 @@
 // The clickable element displaying text aswell as the onClick function which saves data to a cookie
+import React from "react";
 import { useState, useEffect } from "react";
 import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
 import { ImCheckmark2 } from 'react-icons/im';
@@ -56,10 +57,10 @@ export default function ChoosableElement(props) {
     // Display the item description
     const [descriptionVisible, setDescriptionVisible] = useState(false);
 
-        const handleClick = () => {
-            console.log(`CLICK!!`);
-            setDescriptionVisible(!descriptionVisible);
-        }
+    function handleClick () {
+        console.log(`CLICK!!`);
+        setDescriptionVisible(!descriptionVisible);
+    }
 
     return(
         <Col className={"choosableElement"} 
