@@ -8,10 +8,21 @@ import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
 
 class CustomNavbar extends React.Component
 {
-
-    constructor() {
+    constructor()
+    {
         super();
-        this.state = {expanded: true};
+        this.state = {
+            expanded: true,
+            // Just placeholder for the map to work, the array length is all that counts
+            pageButtons: [
+                'navbarButton',
+                'navbarButton',
+                'navbarButton',
+                'navbarButton',
+                'navbarButton',
+            ],
+            pageIndex: 1
+        };
     }
 
     backButton() {
@@ -20,13 +31,31 @@ class CustomNavbar extends React.Component
     }
 
     setExpanded() {
-        this.setState({ expanded: !this.state.expanded })
+        this.setState({ expanded: !this.state.expanded });
         console.log(this.state.expanded);
     }
 
-    pageButtons() {
+    setPageIndex( index ) {
+        this.setState({ pageIndex: index });
+    }
+
+    // Dynamicly create the page navigation buttons based on the current index/page the user is on
+    getPageButtons()
+    {
         return(
-            test
+            this.state.pageButtons.map(( item, index ) => (
+                <Col>
+                    <Button className={
+                        // Set the current page active
+                        index == this.state.pageIndex ? 'navbarButton navbarButtonActive' : 'navbarButton'  
+                    }
+                    disabled={
+                        //  Disable all pages after the current page 
+                        index > this.state.pageIndex ? true : false
+                    }
+                    />
+                </Col>
+            ))
         );
     }
 
@@ -55,21 +84,7 @@ class CustomNavbar extends React.Component
 
                                     {/* Page Buttons */}
                                     <Col>
-                                        <Col>
-                                            <Button className='navbarButton' />
-                                        </Col>
-                                        <Col>
-                                            <Button className='navbarButton navbarButtonActive' />
-                                        </Col>
-                                        <Col>
-                                            <Button className='navbarButton' />
-                                        </Col>
-                                        <Col>
-                                            <Button className='navbarButton' />
-                                        </Col>
-                                        <Col>
-                                            <Button className='navbarButton' />
-                                        </Col>
+                                        { this.getPageButtons() }
                                     </Col>
 
                                     {/* Back Buttons */}
