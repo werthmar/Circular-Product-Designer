@@ -72,7 +72,7 @@ export default class AdvisorPage extends React.Component
         super(props);
         //document.title = "Advisor";
         console.log(`props`);
-        this.navbarRef = React.createRef();
+        this.Navbar = React.createRef();
         this.state = {
             data: null,
             loading: true,
@@ -137,6 +137,11 @@ export default class AdvisorPage extends React.Component
 
     }
 
+    // --- Page Navigation ----------------------------------------------------------------------
+    nextPage = () => {
+        console.log(`NEXT PAGE§§§!!!`);
+    }
+
     // --- Render -------------------------------------------------------------------------------
     render()
     {
@@ -148,7 +153,7 @@ export default class AdvisorPage extends React.Component
                     <Container fluid>
                         <Row>
 
-                            <CustomNavbar ref={ this.navbarRef } />
+                            <CustomNavbar AdvisorPage={ this } />
                     
                             <Col className="loadingNotification">
                                     <div className="loader" />
@@ -171,7 +176,7 @@ export default class AdvisorPage extends React.Component
                 <Container fluid>
                     <Row>
 
-                        <CustomNavbar ref={ this.navbarRef } />
+                        <CustomNavbar ref={ this.Navbar } nextPage={ this.nextPage } />
 
                         {/*bodyContent*/}
                         {

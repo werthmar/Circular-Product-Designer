@@ -6,7 +6,7 @@ import Image from "next/image";
 import { RiArrowGoBackLine } from 'react-icons/ri';
 import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
 
-class CustomNavbar extends React.Component
+export default class CustomNavbar extends React.Component
 {
     constructor()
     {
@@ -21,7 +21,7 @@ class CustomNavbar extends React.Component
                 'navbarButton',
                 'navbarButton',
             ],
-            pageIndex: 1
+            pageIndex: 1,
         };
     }
 
@@ -59,17 +59,20 @@ class CustomNavbar extends React.Component
         );
     }
 
-    render() {
+    render()
+    {
+        const { expanded, advisorPageRef } = this.state;
+
         return(
-            <Col className={ this.state.expanded ? 'CustomNavbar col-6' : 'CustomNavbar' }>
+            <Col className={ expanded ? 'CustomNavbar col-6' : 'CustomNavbar' }>
                 <Container  fluid>
-                    <Row xs="2" noGutters>
+                    <Row xs="2">
 
                         {/* --- Main Navbar with page buttons ------------------------------------------------ */}
                         <Col className='buttonCol col-4'>
                                     
                                     {/* Expand navbar button only visible when not expanded */}
-                                    <Col className='expandButton' style={{ display: this.state.expanded ? 'none' : 'inline-block' }}>
+                                    <Col className='expandButton' style={{ display: expanded ? 'none' : 'inline-block' }}>
                                         <BsArrowBarRight size={45} color='grey' onClick={ () => this.setExpanded() } />
                                     </Col>
 
@@ -96,7 +99,7 @@ class CustomNavbar extends React.Component
                         </Col>
 
                         {/* --- Initial description which can be hidden ------------------------------------- */}
-                        <Col className='descriptionCol' style={{ display: this.state.expanded ? 'inline-block' : 'none' }}>
+                        <Col className='descriptionCol' style={{ display: expanded ? 'inline-block' : 'none' }}>
 
                             <Container fluid>
                                 <Row>
@@ -120,7 +123,8 @@ class CustomNavbar extends React.Component
                                     </Col>
 
                                     <Col xs="12">
-                                        <Button>GO ON</Button>
+                                        {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
+                                        <Button onClick={ () => this.props.nextPage() }>GO ON</Button>
                                     </Col>
 
 
@@ -132,5 +136,3 @@ class CustomNavbar extends React.Component
         );
     }
 }
-
-export default CustomNavbar;

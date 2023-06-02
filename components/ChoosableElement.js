@@ -79,7 +79,7 @@ export default function ChoosableElement(props) {
 
                                 {/* Checkmark Button */}
                                 <Col className="buttonCol" onClick={ () => selectItem() }>
-                                    <Image src="/icons/checkbox_unmarked.png" width={100} height={65} />
+                                    <Image src="/icons/checkbox_unmarked.png" width={100} height={65} alt="checkbox_unchecked" />
                                 </Col>
 
                                 {/* Rotatet Title */}
