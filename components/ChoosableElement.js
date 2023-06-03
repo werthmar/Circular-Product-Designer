@@ -13,6 +13,8 @@ export default function ChoosableElement(props) {
     const description = props.description;
     const name = props.name;
     const type = props.type;
+    // Display the item description
+    const [descriptionVisible, setDescriptionVisible] = useState(false);
 
     // Save selected item in cookie or delete it out of the cookie
     function selectItem() {
@@ -54,8 +56,6 @@ export default function ChoosableElement(props) {
 
     } 
     
-    // Display the item description
-    const [descriptionVisible, setDescriptionVisible] = useState(false);
 
     function handleClick () {
         console.log(`CLICK!!`);
@@ -66,27 +66,33 @@ export default function ChoosableElement(props) {
         <Col className={"choosableElement"} 
             xs={descriptionVisible ? "8" : "3"} 
             md={descriptionVisible ? "5" : "2"} 
-            xxl={descriptionVisible ? "4" : "1"}>
+            xxl={descriptionVisible ? "4" : "1"}
+            onClick={() => handleClick()}>
             <Container fluid>
                 <Row>
                     
                     {/* Bar */}
-                    <Col className={descriptionVisible ? "col-4" : ""} onClick={() => handleClick()}>
+                    <Col className={descriptionVisible ? "col-4" : ""} >
 
-                                <Col>
-                                    <h1>CHOOSE</h1>
-                                </Col>
+                        <Col>
+                            <h1>CHOOSE</h1>
+                        </Col>
 
-                                {/* Checkmark Button */}
-                                <Col className="buttonCol" onClick={ () => selectItem() }>
-                                    <Image src="/icons/checkbox_unmarked.png" width={100} height={65} alt="checkbox_unchecked" />
-                                </Col>
+                        {/* Checkmark Button */}
+                        <Col className="buttonCol" onClick={ () => selectItem() }>
+                            <Image src="/icons/checkbox_unmarked.png" width={100} height={65} alt="checkbox_unchecked" />
+                        </Col>
 
-                                {/* Rotatet Title */}
-                                <Col>
-                                    <p className="rotated-text">{name}</p>
-                                </Col>
-                        
+                        {/* Rotatet Title */}
+                        <Col>
+                            <p className="rotated-text">{name}</p>
+                        </Col>
+                
+                        {/* Expanded indicator */}
+                        <Col className="arrowIcon">
+                            <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={80} height={45} />
+                        </Col>
+
                     </Col>
 
                     {/* Description which can be opened on click */}

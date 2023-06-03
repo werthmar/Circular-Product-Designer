@@ -8,9 +8,9 @@ import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
 
 export default class CustomNavbar extends React.Component
 {
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
         this.state = {
             expanded: true,
             // Just placeholder for the map to work, the array length is all that counts
@@ -21,7 +21,8 @@ export default class CustomNavbar extends React.Component
                 'navbarButton',
                 'navbarButton',
             ],
-            pageIndex: 1,
+            pageIndex: props.pageIndex,
+            title: props.title
         };
     }
 
@@ -61,7 +62,7 @@ export default class CustomNavbar extends React.Component
 
     render()
     {
-        const { expanded, advisorPageRef } = this.state;
+        const { expanded, title } = this.state;
 
         return(
             <Col className={ expanded ? 'CustomNavbar col-6' : 'CustomNavbar' }>
@@ -105,7 +106,7 @@ export default class CustomNavbar extends React.Component
                                 <Row>
                                     <Col xs="10" style={{ marginBottom: 30 }}>
                                         <h1>
-                                            LIFECYCLE PHASE INTENSITY
+                                            { title != undefined ? title.toUpperCase() : "Loading ..." }
                                         </h1>
                                     </Col>
                                     <Col xs="2">

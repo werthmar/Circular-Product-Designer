@@ -81,7 +81,7 @@ export default class AdvisorPage extends React.Component
             title: props.initialTitle,
             type: props.initialType,
             oldType: props.initialType,
-            history: [ props.initialType ]
+            history: []
           };
 
         // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
@@ -142,8 +142,24 @@ export default class AdvisorPage extends React.Component
                 });
             }
 
+            // Decide the next Title
+            var newTitle;
+            switch( this.state.type ) {
+                case "CBM":
+                    newTitle = "Circular Business Models";
+                    break;
+                case "LCP":
+                    newTitle = "Lifecycle Phase Intensity"
+                    break;
+                case "ED":
+                    newTitle = "Ecodesign Approaches"
+                    break;
+                case "TDP":
+                    newTitle = "Technical Design Principles"
+            }
+
             // Update the component State with the fetched data
-            this.setState({ data: data, loading: false });
+            this.setState({ data: data, loading: false, warning: false, title: newTitle });
 
             console.log(this.state.data);
         
@@ -195,7 +211,7 @@ export default class AdvisorPage extends React.Component
     // --- Render -------------------------------------------------------------------------------
     render()
     {
-        const { data, loading, error, warning, type } = this.state;
+        const { data, loading, error, warning, type, title } = this.state;
 
         if (loading) {
             return(
@@ -203,7 +219,7 @@ export default class AdvisorPage extends React.Component
                     <Container fluid>
                         <Row>
 
-                            <CustomNavbar AdvisorPage={ this } />
+                            <CustomNavbar />
                     
                             <Col className="loadingNotification">
                                     <div className="loader" />
@@ -231,7 +247,7 @@ export default class AdvisorPage extends React.Component
                 <Container fluid>
                     <Row>
 
-                        <CustomNavbar ref={ this.Navbar } nextPage={ this.nextPage } />
+                        <CustomNavbar ref={ this.Navbar } nextPage={ this.nextPage } title={ title } pageIndex={ this.pageOrder.indexOf( type ) +1 } />
 
                         {/*bodyContent*/}
                         {
