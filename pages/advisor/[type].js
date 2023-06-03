@@ -77,13 +77,29 @@ export default class AdvisorPage extends React.Component
             data: null,
             loading: true,
             error: null,
+            warning: false,
+            title: props.initialTitle,
             type: props.initialType,
-            oldType: props.initialType
+            oldType: props.initialType,
+            history: [ props.initialType ]
           };
+
+        // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
+        if( props.initialType == "CBM" ) {
+            this.pageOrder = [ "CBM", "LCP", "ED", "TDP" ];
+        } else {
+            this.pageOrder = [ "LCP", "CBM", "ED", "TDP" ];
+        }
+
     }
 
     // --- Data load ------------------------------------------------------------------------------- 
     componentDidMount()
+    {
+        this.loadData();
+    }
+
+    loadData()
     {
         // Prepare selected items from cookie to be used during fetch to remark items as checked when going back
         var selectedItems = [];
@@ -97,6 +113,7 @@ export default class AdvisorPage extends React.Component
         }
 
         // If you go back with the footer buttons set oldtype = type in order to load the complete page instead of filtered result
+        // Everytime oldType does not match type the result is filtered based on the selection inside the cookie
         var types = [ this.state.oldType, this.state.type ]
         if (
             this.state.oldType == "ED" && this.state.type == "CBM" ||
@@ -134,18 +151,51 @@ export default class AdvisorPage extends React.Component
             // Handle any errors that occurred during fetching
             this.setState({ error, loading: false });
         });
-
     }
 
     // --- Page Navigation ----------------------------------------------------------------------
-    nextPage = () => {
-        console.log(`NEXT PAGE§§§!!!`);
+    nextPage = () =>
+    {
+        const { type } = this.state;
+
+        // check if user selected at least one item from the list, if not display massage
+        var cookie = getCookie( 'selected' );
+        var itemSelected = false;
+        
+        if( cookie )
+        {
+            cookie = JSON.parse(cookie);
+            cookie.forEach( item => {
+                // Check if user has selected at least one item from current type
+                if( item[1] == type ) {
+                    itemSelected = true;
+                }
+            });
+        }
+        if( itemSelected != true ) {
+            this.setState({ warning: true });
+            return;
+        }
+
+        // Check pased, at least 1 item has been selected, proceed with data load
+        this.setState({ loading: true })
+        
+        // Calculate the next page based on the pageOrder defined in the constructor by finding the corresponding index of the next page in the array
+        var nextPageIndex = this.pageOrder.indexOf( type ) + 1;
+
+        this.setState({
+            oldType: type,
+            type: this.pageOrder[ nextPageIndex ]
+        },
+            // setState callback, otherwise function gets called before state is updated
+            this.loadData 
+        );
     }
 
     // --- Render -------------------------------------------------------------------------------
     render()
     {
-        const { data, loading, error, type } = this.state;
+        const { data, loading, error, warning, type } = this.state;
 
         if (loading) {
             return(
@@ -173,6 +223,11 @@ export default class AdvisorPage extends React.Component
         return(
 
             <div className="advisorPage">
+
+                <Alert color="danger" className="warningMessage" onClick={() => this.setState({ warning: false })}  style={{display: warning ? 'inline-block' : 'none' }}>
+                    You must select at least 1 item from the list.
+                </Alert>
+
                 <Container fluid>
                     <Row>
 
