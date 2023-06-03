@@ -8,7 +8,7 @@ import LayoutFooterExtended from "../../components/LayoutFooterExtended";
 import { BsArrowRightCircle } from 'react-icons/bs';
 import { RiArrowGoBackLine } from 'react-icons/ri';
 import HomeButton from '../../components/HomeButton';
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 import useSessionStorage from '../../hooks/useSessionStorage';
 import { getCookie, hasCookie, getCookies, setCookie } from 'cookies-next';
 import ChoosableElement from "../../components/ChoosableElement";
@@ -67,6 +67,7 @@ export async function getStaticProps(context) {
 // --- The actual page content -------------------------------------------------------------------------
 export default class AdvisorPage extends React.Component
 {
+    
     constructor(props)
     {
         super(props);
@@ -81,7 +82,6 @@ export default class AdvisorPage extends React.Component
             title: props.initialTitle,
             type: props.initialType,
             oldType: props.initialType,
-            history: []
           };
 
         // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
@@ -101,6 +101,8 @@ export default class AdvisorPage extends React.Component
 
     loadData()
     {
+        this.setState({ loading: true })
+
         // Prepare selected items from cookie to be used during fetch to remark items as checked when going back
         var selectedItems = [];
         var cookie = getCookie( 'selected' );
@@ -194,8 +196,6 @@ export default class AdvisorPage extends React.Component
         }
 
         // Check pased, at least 1 item has been selected, proceed with data load
-        this.setState({ loading: true })
-        
         // Calculate the next page based on the pageOrder defined in the constructor by finding the corresponding index of the next page in the array
         var nextPageIndex = this.pageOrder.indexOf( type ) + 1;
 
@@ -208,6 +208,51 @@ export default class AdvisorPage extends React.Component
         );
     }
 
+    // Called when the round buttons in the navbar are clicked
+    goToPage = ( page ) =>
+    {
+        var goToIndex = this.pageOrder.indexOf( page );
+
+        if( page == "start" )
+        {
+            Router.push( "/process" );
+        }
+        // Set type and old type the same because its the first page of advisor and results should not be filtered
+        else if (goToIndex == 0)
+        {
+            this.setState({
+                oldType: this.pageOrder[ goToIndex ],
+                type: this.pageOrder[ goToIndex ],
+            },
+                this.loadData
+            );
+        }
+        else
+        {
+            this.setState({
+                oldType: this.pageOrder[ goToIndex - 1 ],
+                type: this.pageOrder[ goToIndex ],
+            },
+                this.loadData
+            );
+        }
+    }
+
+    // Go back one page and if you are at the first page return to the /process selection page
+    back = () =>
+    {
+        var goToIndex = this.pageOrder.indexOf( this.state.type );
+
+        switch( goToIndex ) {
+            case 0:
+                this.goToPage( "start" );
+                break;
+            default:
+                this.goToPage( this.pageOrder[ goToIndex - 1 ] );
+        }
+    }
+    
+
     // --- Render -------------------------------------------------------------------------------
     render()
     {
@@ -219,7 +264,7 @@ export default class AdvisorPage extends React.Component
                     <Container fluid>
                         <Row>
 
-                            <CustomNavbar />
+                            <CustomNavbar pageOrder={ this.pageOrder } />
                     
                             <Col className="loadingNotification">
                                     <div className="loader" />
@@ -247,7 +292,15 @@ export default class AdvisorPage extends React.Component
                 <Container fluid>
                     <Row>
 
-                        <CustomNavbar ref={ this.Navbar } nextPage={ this.nextPage } title={ title } pageIndex={ this.pageOrder.indexOf( type ) +1 } />
+                        <CustomNavbar
+                            ref={ this.Navbar }
+                            nextPage={ this.nextPage }
+                            title={ this.state.title }
+                            pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                            pageOrder={ this.pageOrder }
+                            goToPage={ this.goToPage }
+                            back={ this.back } >    
+                        </CustomNavbar>
 
                         {/*bodyContent*/}
                         {

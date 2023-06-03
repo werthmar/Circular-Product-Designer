@@ -13,22 +13,17 @@ export default class CustomNavbar extends React.Component
         super(props);
         this.state = {
             expanded: true,
-            // Just placeholder for the map to work, the array length is all that counts
+            // contains the page the button will point too, buttons are generatet based on this array
             pageButtons: [
-                'navbarButton',
-                'navbarButton',
-                'navbarButton',
-                'navbarButton',
-                'navbarButton',
+                'start',
+                props.pageOrder[0],
+                props.pageOrder[1],
+                props.pageOrder[2],
+                props.pageOrder[3],
             ],
             pageIndex: props.pageIndex,
             title: props.title
         };
-    }
-
-    backButton() {
-        console.log(`back`);
-        //todo implement back mechanic
     }
 
     setExpanded() {
@@ -44,7 +39,7 @@ export default class CustomNavbar extends React.Component
     getPageButtons()
     {
         return(
-            this.state.pageButtons.map(( item, index ) => (
+            this.state.pageButtons.map(( page, index ) => (
                 <Col>
                     <Button className={
                         // Set the current page active
@@ -54,6 +49,7 @@ export default class CustomNavbar extends React.Component
                         //  Disable all pages after the current page 
                         index > this.state.pageIndex ? true : false
                     }
+                    onClick={ () => this.props.goToPage( page ) }
                     />
                 </Col>
             ))
@@ -92,7 +88,7 @@ export default class CustomNavbar extends React.Component
                                     </Col>
 
                                     {/* Back Buttons */}
-                                    <Button onClick={ this.backButton } className="backButton">
+                                    <Button onClick={ () => this.props.back() } className="backButton">
                                         <RiArrowGoBackLine size={45} color="grey" />
                                     </Button>
 
