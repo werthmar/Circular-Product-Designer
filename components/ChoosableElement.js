@@ -13,6 +13,7 @@ export default function ChoosableElement(props) {
     const description = props.description;
     const name = props.name;
     const type = props.type;
+    const color = props.color;
     // Display the item description
     const [descriptionVisible, setDescriptionVisible] = useState(false);
 
@@ -67,7 +68,9 @@ export default function ChoosableElement(props) {
             xs={descriptionVisible ? "8" : "3"} 
             md={descriptionVisible ? "5" : "2"} 
             xxl={descriptionVisible ? "4" : "1"}
-            onClick={() => handleClick()}>
+            onClick={() => handleClick()}
+            style={{ backgroundColor: color }}
+            >
             <Container fluid>
                 <Row>
                     

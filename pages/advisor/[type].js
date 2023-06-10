@@ -130,7 +130,7 @@ export default class AdvisorPage extends React.Component
         .then((res) => res.json())
         .then((data) =>
         {
-            // Mark items which were selected before wiht the element.active tag
+            // Mark items which were selected before with the element.active tag
             if( selectedItems.length != 0 )
             {
                 data.descriptions.forEach(element => {
@@ -143,6 +143,23 @@ export default class AdvisorPage extends React.Component
                     element.active = false;
                 });
             }
+
+            // Set the background color of the coosable elements because its dependent on how many elements there are
+            var r = 250, g = 236, b = 208; // Starting colours
+            var _r = 237, _g = 191, _b = 98; // ending colours, all other colours inbetween
+            // interpolation of colours
+            var diff_r = _r - r, diff_g = _g - g, diff_b = _b -b; // calc diffrenrez of start/end colours
+            diff_r /= data.descriptions.length;
+            diff_g /= data.descriptions.length;
+            diff_b /= data.descriptions.length;
+            // Asign the colour values
+            data.descriptions.forEach( function( element, index )
+            {
+                element.color = `rgb(
+                    ${ r + diff_r * index + 1 },
+                    ${ g + diff_g * index + 1 },
+                    ${ b + diff_b * index + 1 })`;
+            });
 
             // Decide the next Title
             var newTitle;
@@ -312,6 +329,7 @@ export default class AdvisorPage extends React.Component
                                 name={item.name}
                                 active={item.active}
                                 type={type}
+                                color={item.color}
                                 />
                             ))
                         }
