@@ -290,7 +290,7 @@ export default class AdvisorPage extends React.Component
                 </Alert>
 
                 <Container fluid>
-                    <Row>
+                    <Row className="flex-nowrap overflow-auto"> {/* Achieves vertical scroll */}
 
                         <CustomNavbar
                             ref={ this.Navbar }

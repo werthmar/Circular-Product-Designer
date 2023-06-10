@@ -44,7 +44,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
             where: { 
                 CBM_id: { in: ids }, 
                 Priority: { 
-                    gt: 1
+                    gt: 2
                 }
             },
             distinct: [ matchingIdType ],
@@ -60,7 +60,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
             where: { 
                 LCP_id: { in: ids }, 
                 Priority: { 
-                    gt: 1
+                    gt: 2
                 }
             },
             distinct: [ matchingIdType ],
@@ -76,7 +76,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
             where: { 
                 LCP_id: { in: ids }, 
                 Priority: { 
-                    gt: 1
+                    gt: 2
                 }
             },
             distinct: [ matchingIdType ],
@@ -92,7 +92,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
             where: { 
                 CBM_id: { in: ids }, 
                 Priority: { 
-                    gt: 1
+                    gt: 2
                 }
             },
             distinct: [ matchingIdType ],

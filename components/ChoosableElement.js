@@ -80,7 +80,11 @@ export default function ChoosableElement(props) {
 
                         {/* Checkmark Button */}
                         <Col className="buttonCol" onClick={ () => selectItem() }>
-                            <Image src="/icons/checkbox_unmarked.png" width={100} height={65} alt="checkbox_unchecked" />
+                            <Image src={ clicked ?  "/icons/checkbox_checked.png" : "/icons/checkbox_unmarked.png" }
+                            width={100}
+                            height={65}
+                            alt="checkbox_unchecked"
+                            />
                         </Col>
 
                         {/* Rotatet Title */}
@@ -92,7 +96,7 @@ export default function ChoosableElement(props) {
                         <Col className="arrowIcon">
                             <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={80} height={45} />
                         </Col>
-
+                        
                     </Col>
 
                     {/* Description which can be opened on click */}
