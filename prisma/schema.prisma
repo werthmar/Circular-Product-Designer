@@ -7,33 +7,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model CBMxED {
+model cbmxed {
+  id       Int  @unique(map: "id_UNIQUE") @default(autoincrement())
   CBM_id   Int
   ED_id    Int
   Priority Int?
-
-  @@id([CBM_id, ED_id])
 }
 
-model Descriptions {
-  id          Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  type        String? @db.VarChar(45)
-  name        String? @db.VarChar(200)
-  description String? @db.VarChar(9999)
+model cdp_definitions {
+  id                    Int     @id @default(autoincrement())
+  gestaltungsprinzipien String? @db.VarChar(400)
+  definitionen          String? @db.VarChar(9999)
 }
 
-model LCPxCBM {
-  LCP_id   Int
-  CBM_id   Int
+model descriptions {
+  id          Int     @id
+  type        String? @db.Text
+  name        String? @db.Text
+  description String? @db.Text
+}
+
+model edxcdp {
+  id     Int  @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  ed_id  Int?
+  cdp_id Int?
+}
+
+model lcpxcbm {
+  id       Int  @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  LCP_id   Int?
+  CBM_id   Int?
   Priority Int?
-
-  @@id([LCP_id, CBM_id])
 }
 
-model LCPxED {
-  LCP_id   Int
-  ED_id    Int
+model lcpxed {
+  id       Int  @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  LCP_id   Int?
+  ED_id    Int?
   Priority Int?
-
-  @@id([LCP_id, ED_id])
 }

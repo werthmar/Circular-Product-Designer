@@ -39,7 +39,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
     if( oldType == "CBM" && nextType == "LCP" ) {
 
         matchingIdType = 'LCP_id';
-        result =  await prisma.lCPxCBM.findMany({
+        result =  await prisma.lcpxcbm.findMany({
             select: { LCP_id: true },
             where: { 
                 CBM_id: { in: ids }, 
@@ -55,7 +55,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
     else if( oldType == "LCP" && nextType == "CBM" ) {
 
         matchingIdType = 'CBM_id';
-        result =  await prisma.lCPxCBM.findMany({
+        result =  await prisma.lcpxcbm.findMany({
             select: { CBM_id: true },
             where: { 
                 LCP_id: { in: ids }, 
@@ -71,7 +71,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
     else if( oldType == "LCP" && nextType == "ED" ) {
 
         matchingIdType = 'ED_id';
-        result =  await prisma.lCPxED.findMany({
+        result =  await prisma.lcpxed.findMany({
             select: { ED_id: true },
             where: { 
                 LCP_id: { in: ids }, 
@@ -87,7 +87,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
     else if( oldType == "CBM" && nextType == "ED" ) {
 
         matchingIdType = 'ED_id';
-        result =  await prisma.cBMxED.findMany({
+        result =  await prisma.cbmxed.findMany({
             select: { ED_id: true },
             where: { 
                 CBM_id: { in: ids }, 
@@ -97,6 +97,18 @@ export async function getMatchingIds(oldType, nextType, ids) {
             },
             distinct: [ matchingIdType ],
             orderBy: { Priority: 'desc' }
+        })     
+    }
+    // ED -> TDP
+    else if( oldType == "ED" && nextType == "CDP" ) {
+
+        matchingIdType = 'cdp_id';
+        result =  await prisma.edxcdp.findMany({
+            select: { cdp_id: true },
+            where: { 
+                ed_id: { in: ids }, 
+            },
+            distinct: [ matchingIdType ]
         })     
     }
 

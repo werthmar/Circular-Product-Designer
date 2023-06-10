@@ -23,7 +23,7 @@ export async function getStaticPaths() {
             { params: { type: 'CBM' } },
             { params: { type: 'LCP' } },
             { params: { type: 'ED' } },
-            { params: { type: 'TC' } },
+            { params: { type: 'CDP' } },
         ],
         fallback: false, // can also be true or 'blocking'
     }
@@ -49,8 +49,8 @@ export async function getStaticProps(context) {
         case "ED":
             title = "Ecodesign Approaches"
             break;
-        case "TDP":
-            title = "Technical Design Principles"
+        case "CDP":
+            title = "Circular Design Principles"
             break;
     }
 
@@ -86,9 +86,9 @@ export default class AdvisorPage extends React.Component
 
         // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
         if( props.initialType == "CBM" ) {
-            this.pageOrder = [ "CBM", "LCP", "ED", "TDP" ];
+            this.pageOrder = [ "CBM", "LCP", "ED", "CDP" ];
         } else {
-            this.pageOrder = [ "LCP", "CBM", "ED", "TDP" ];
+            this.pageOrder = [ "LCP", "CBM", "ED", "CDP" ];
         }
 
     }
@@ -148,7 +148,7 @@ export default class AdvisorPage extends React.Component
             var r = 250, g = 236, b = 208; // Starting colours
             var _r = 237, _g = 191, _b = 98; // ending colours, all other colours inbetween
             // interpolation of colours
-            var diff_r = _r - r, diff_g = _g - g, diff_b = _b -b; // calc diffrenrez of start/end colours
+            var diff_r = _r - r, diff_g = _g - g, diff_b = _b - b; // calc diffrenrez of start/end colours
             diff_r /= data.descriptions.length;
             diff_g /= data.descriptions.length;
             diff_b /= data.descriptions.length;
@@ -173,8 +173,8 @@ export default class AdvisorPage extends React.Component
                 case "ED":
                     newTitle = "Ecodesign Approaches"
                     break;
-                case "TDP":
-                    newTitle = "Technical Design Principles"
+                case "CDP":
+                    newTitle = "Circular Design Principles"
             }
 
             // Update the component State with the fetched data
