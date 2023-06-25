@@ -24,7 +24,7 @@ export default class CustomNavbar extends React.Component
             ],
             pageIndex: props.pageIndex,
             title: props.title,
-            nextPageButtonActive: false
+            nextPageButtonActive: props.nextPageButtonActive
         };
     }
 

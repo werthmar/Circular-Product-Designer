@@ -14,6 +14,7 @@ export default function ChoosableElement(props) {
     const name = props.name;
     const type = props.type;
     const color = props.color;
+    const enableNextPageButton = props.enableNextPageButton;
     // Display the item description
     const [descriptionVisible, setDescriptionVisible] = useState(false);
 
@@ -33,33 +34,34 @@ export default function ChoosableElement(props) {
             }
 
             setClicked(true);
+            enableNextPageButton(); // callback to advisor page, advisor counts if at least one item is selected and the sets the go on button to active
         }
         else {
             // For some random reaseon the variable gets changed to data1 internaly so i have to change it here to idk why
             let data1 = getCookie('selected');
             data1 = JSON.parse(data1);
-
+            
             // Delete deselected item from the data and update the cookie
             data1.forEach( x => {
                 if( x[0]  == id ) {
                     data1.splice(data1.indexOf(x), 1) // Remove the x element and only do it once
                 } 
             });
-
+            
             if ( data1.length != 0 ) {
                 setCookie('selected', data1, { sameSite: true });
             }else {
                 deleteCookie('selected'); // Remove the empty cookie
             }
-
+            
             setClicked(false);
+            enableNextPageButton();
         }
 
     } 
     
 
     function handleClick () {
-        console.log(`CLICK!!`);
         setDescriptionVisible(!descriptionVisible);
     }
 

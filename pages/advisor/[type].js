@@ -78,7 +78,6 @@ export default class AdvisorPage extends React.Component
             data: null,
             loading: true,
             error: null,
-            warning: false,
             title: props.initialTitle,
             type: props.initialType,
             oldType: props.initialType,
@@ -180,9 +179,12 @@ export default class AdvisorPage extends React.Component
             // Update the component State with the fetched data
             this.setState({ data: data, loading: false, warning: false, title: newTitle });
 
+            
+
             console.log(this.state.data);
         
-        }).catch(error => {
+        })
+        .catch(error => {
             // Handle any errors that occurred during fetching
             this.setState({ error, loading: false });
         });
@@ -193,26 +195,6 @@ export default class AdvisorPage extends React.Component
     {
         const { type } = this.state;
 
-        // check if user selected at least one item from the list, if not display massage
-        var cookie = getCookie( 'selected' );
-        var itemSelected = false;
-        
-        if( cookie )
-        {
-            cookie = JSON.parse(cookie);
-            cookie.forEach( item => {
-                // Check if user has selected at least one item from current type
-                if( item[1] == type ) {
-                    itemSelected = true;
-                }
-            });
-        }
-        if( itemSelected != true ) {
-            this.setState({ warning: true });
-            return;
-        }
-
-        // Check pased, at least 1 item has been selected, proceed with data load
         // Calculate the next page based on the pageOrder defined in the constructor by finding the corresponding index of the next page in the array
         var nextPageIndex = this.pageOrder.indexOf( type ) + 1;
 
@@ -241,16 +223,16 @@ export default class AdvisorPage extends React.Component
                 oldType: this.pageOrder[ goToIndex ],
                 type: this.pageOrder[ goToIndex ],
             },
-                this.loadData
-            );
-        }
-        else
-        {
-            this.setState({
-                oldType: this.pageOrder[ goToIndex - 1 ],
-                type: this.pageOrder[ goToIndex ],
-            },
-                this.loadData
+                this.loadData,
+                );
+            }
+            else
+            {
+                this.setState({
+                    oldType: this.pageOrder[ goToIndex - 1 ],
+                    type: this.pageOrder[ goToIndex ],
+                },
+                this.loadData,
             );
         }
     }
@@ -269,6 +251,34 @@ export default class AdvisorPage extends React.Component
         }
     }
     
+    // --- Page control -------------------------------------------------------------------------
+    areItemsSelected() {
+        const { type } = this.state;
+        var itemsSelected = false;
+        
+        // check if user selected at least one item from the list, if not display massage
+        var cookie = getCookie( 'selected' );
+        
+        if( cookie )
+        {
+            cookie = JSON.parse(cookie);
+            cookie.forEach( item => {
+                // Check if user has selected at least one item from current type if yes enable next page button
+                if( item[1] == type ) {
+                    itemsSelected = true;
+                }
+            });
+        }
+        return itemsSelected;
+    }
+
+    enableNextPageButton = () => 
+    {
+        const { Navbar } = this;
+        var itemsSelected = this.areItemsSelected();    
+        Navbar.current.setNextPageButtonActive( itemsSelected );
+    }
+
 
     // --- Render -------------------------------------------------------------------------------
     render()
@@ -302,10 +312,6 @@ export default class AdvisorPage extends React.Component
 
             <div className="advisorPage">
 
-                <Alert color="danger" className="warningMessage" onClick={() => this.setState({ warning: false })}  style={{display: warning ? 'inline-block' : 'none' }}>
-                    You must select at least 1 item from the list.
-                </Alert>
-
                 <Container fluid>
                     <Row className="flex-nowrap overflow-auto"> {/* Achieves vertical scroll */}
 
@@ -316,7 +322,8 @@ export default class AdvisorPage extends React.Component
                             pageIndex={ this.pageOrder.indexOf( type ) +1 }
                             pageOrder={ this.pageOrder }
                             goToPage={ this.goToPage }
-                            back={ this.back } >    
+                            back={ this.back }   
+                            nextPageButtonActive={ this.areItemsSelected() } >
                         </CustomNavbar>
 
                         {/*bodyContent*/}
@@ -330,6 +337,7 @@ export default class AdvisorPage extends React.Component
                                 active={item.active}
                                 type={type}
                                 color={item.color}
+                                enableNextPageButton={this.enableNextPageButton}
                                 />
                             ))
                         }
