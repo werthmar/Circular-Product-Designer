@@ -15,6 +15,7 @@ export default function ChoosableElement(props) {
     const type = props.type;
     const color = props.color;
     const enableNextPageButton = props.enableNextPageButton;
+    const toggleNavbar = props.toggleNavbar;
     // Display the item description
     const [descriptionVisible, setDescriptionVisible] = useState(false);
 
@@ -62,7 +63,12 @@ export default function ChoosableElement(props) {
     
 
     function handleClick () {
-        setDescriptionVisible(!descriptionVisible);
+        toggleNavbar( !descriptionVisible, toggleDescription );
+        setDescriptionVisible( !descriptionVisible );
+    }
+    
+    function toggleDescription() {
+        setDescriptionVisible( false );
     }
 
     return(

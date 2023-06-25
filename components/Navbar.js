@@ -81,7 +81,7 @@ export default class CustomNavbar extends React.Component
 
                                     {/* Home button */}
                                     <Col>
-                                        <Tooltip arrow title="home">
+                                        <Tooltip arrow title="Home">
                                             <Link href="/">
                                                 <Button className='homeButton'>
                                                     <Image src="/icons/Menü_Haus.png" width={120} height={65} alt='HomeButton' />
@@ -96,7 +96,7 @@ export default class CustomNavbar extends React.Component
                                     </Col>
 
                                     {/* Back Buttons */}
-                                    <Tooltip arrow title="back">
+                                    <Tooltip arrow title="Back">
                                         <div>
                                             <Button onClick={ () => this.props.back() } className="backButton">
                                                 <RiArrowGoBackLine size={45} color="grey" />
@@ -123,27 +123,26 @@ export default class CustomNavbar extends React.Component
                                 </Row>
                             </Container>
 
-                                    <Col xs="12" style={{ marginBottom: 50 }}>
-                                        <p>
-                                            Visualieren, testen und validieren Sie Ihre Ideen dynamisch mit verschiedensten Wireframes und Detailmodellen.
-                                            <br /><br />
-                                            Während Sie Ihr Konzept kontinuierlich weiterentwicklen, iterieren Sie konse- quent, machen den Schritt von Low zu High Fidelity absolut nahtlos. quent, machen den Schritt von Low zu.
-                                        </p>
-                                    </Col>
+                                <Col xs="12" style={{ marginBottom: 50 }}>
+                                    <p>
+                                        Visualieren, testen und validieren Sie Ihre Ideen dynamisch mit verschiedensten Wireframes und Detailmodellen.
+                                        <br /><br />
+                                        Während Sie Ihr Konzept kontinuierlich weiterentwicklen, iterieren Sie konse- quent, machen den Schritt von Low zu High Fidelity absolut nahtlos. quent, machen den Schritt von Low zu.
+                                    </p>
+                                </Col>
 
-                                    <Col xs="12">
-                                        <Tooltip arrow title="Please select at least 1 item from the list in order to proceed.">
-                                            <div>
-                                                {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
-                                                <Button
-                                                    className={ this.state.nextPageButtonActive ? "" : "disabled" }
-                                                    onClick={ () => this.props.nextPage() }>
-                                                    GO ON
-                                                </Button>
-                                            </div>
-                                        </Tooltip>
-                                    </Col>
-
+                                <Col xs="12">
+                                    <Tooltip arrow title="Please select at least 1 item from the list in order to proceed.">
+                                        <div>
+                                            {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
+                                            <Button
+                                                className={ this.state.nextPageButtonActive ? "" : "disabled" }
+                                                onClick={ () => this.props.nextPage() }>
+                                                GO ON
+                                            </Button>
+                                        </div>
+                                    </Tooltip>
+                                </Col>
 
                         </Col>
 

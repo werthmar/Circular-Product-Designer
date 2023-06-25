@@ -74,6 +74,7 @@ export default class AdvisorPage extends React.Component
         //document.title = "Advisor";
         console.log(`props`);
         this.Navbar = React.createRef();
+        this.ActiveElement = React.createRef(); // Reference to the open element
         this.state = {
             data: null,
             loading: true,
@@ -81,7 +82,9 @@ export default class AdvisorPage extends React.Component
             title: props.initialTitle,
             type: props.initialType,
             oldType: props.initialType,
-          };
+            elementOpen: false, //only 1 element can be opend at a time, when an element is opend the navbar collapses
+            closeElementCallback: null,
+        };
 
         // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
         if( props.initialType == "CBM" ) {
@@ -252,6 +255,7 @@ export default class AdvisorPage extends React.Component
     }
     
     // --- Page control -------------------------------------------------------------------------
+    // In seperate function bcs its also used to initialise the navbar in case the user goes back to a page where an item has already been selected
     areItemsSelected() {
         const { type } = this.state;
         var itemsSelected = false;
@@ -272,13 +276,39 @@ export default class AdvisorPage extends React.Component
         return itemsSelected;
     }
 
+    // Controlls the Navbar NextPage Button based on if at least 1 item has been selected on this page
     enableNextPageButton = () => 
     {
         const { Navbar } = this;
         var itemsSelected = this.areItemsSelected();    
         Navbar.current.setNextPageButtonActive( itemsSelected );
     }
+    
+    // Collapse and expand the navbar, there can only be either the Navbar or 1 element open at one time
+    toggleNavbar = ( bool, callback ) =>
+    {
+        const { Navbar } = this;
+        const { elementOpen, closeElementCallback } = this.state;
 
+        // No element is currently open (=Navbar expanded) and now an element has been opened
+        if( !elementOpen && bool == true )
+        {
+            this.setState({ elementOpen: true });
+            Navbar.current.setExpanded();
+        } 
+        // User closes the open element
+        else if( elementOpen && bool == false ) {
+            this.setState({ elementOpen: false });
+            Navbar.current.setExpanded();
+        }
+        // There is already a item open and the user opens another one
+        else {
+            closeElementCallback();
+        }
+
+        // Save the callback because we will be using the callback of the previous item when a new item is selected
+        this.setState({ closeElementCallback: callback });
+    }
 
     // --- Render -------------------------------------------------------------------------------
     render()
@@ -323,7 +353,8 @@ export default class AdvisorPage extends React.Component
                             pageOrder={ this.pageOrder }
                             goToPage={ this.goToPage }
                             back={ this.back }   
-                            nextPageButtonActive={ this.areItemsSelected() } >
+                            nextPageButtonActive={ this.areItemsSelected() }
+                            >
                         </CustomNavbar>
 
                         {/*bodyContent*/}
@@ -338,6 +369,7 @@ export default class AdvisorPage extends React.Component
                                 type={type}
                                 color={item.color}
                                 enableNextPageButton={this.enableNextPageButton}
+                                toggleNavbar={ this.toggleNavbar } 
                                 />
                             ))
                         }
