@@ -67,24 +67,19 @@ export default class CustomNavbar extends React.Component
         const { expanded, title } = this.state;
 
         return(
-            <Col className={ expanded ? 'CustomNavbar col-6' : 'CustomNavbar' }>
+            <Col className={ expanded ? 'CustomNavbar col-5' : 'CustomNavbar col-1' }>
                 <Container  fluid>
                     <Row xs="2">
 
                         {/* --- Main Navbar with page buttons ------------------------------------------------ */}
-                        <Col className='buttonCol col-4'>
+                        <Col className={ expanded ? 'buttonCol col-3' : 'buttonCol col-12' }>
                                     
-                                    {/* Expand navbar button only visible when not expanded */}
-                                    <Col className='expandButton' style={{ display: expanded ? 'none' : 'inline-block' }}>
-                                        <BsArrowBarRight size={45} color='grey' onClick={ () => this.setExpanded() } />
-                                    </Col>
-
                                     {/* Home button */}
                                     <Col>
                                         <Tooltip arrow title="Home">
                                             <Link href="/">
                                                 <Button className='homeButton'>
-                                                    <Image src="/icons/Menü_Haus.png" width={120} height={65} alt='HomeButton' />
+                                                    <Image src="/icons/Menü_Haus.png" width={65} height={55} alt='HomeButton' />
                                                 </Button>
                                             </Link>
                                         </Tooltip>
@@ -108,42 +103,39 @@ export default class CustomNavbar extends React.Component
                         </Col>
 
                         {/* --- Initial description which can be hidden ------------------------------------- */}
-                        <Col className='descriptionCol' style={{ display: expanded ? 'inline-block' : 'none' }}>
-
+                        <Col className='descriptionCol col-9' style={{ display: expanded ? 'inline-block' : 'none' }}>
                             <Container fluid>
-                                <Row>
-                                    <Col xs="10" style={{ marginBottom: 30 }}>
+                                <Row xs={1}>
+
+                                    <Col style={{ marginBottom: 30 }}>
                                         <h1>
                                             { title != undefined ? title.toUpperCase() : "Loading ..." }
                                         </h1>
                                     </Col>
-                                    <Col xs="2">
-                                        <BsArrowBarLeft size={50} textAnchor='test' onClick={ () => this.setExpanded() }/>
+
+                                    <Col style={{ marginBottom: 50 }}>
+                                        <p>
+                                            Visualieren, testen und validieren Sie Ihre Ideen dynamisch mit verschiedensten Wireframes und Detailmodellen.
+                                            <br /><br />
+                                            Während Sie Ihr Konzept kontinuierlich weiterentwicklen, iterieren Sie konse- quent, machen den Schritt von Low zu High Fidelity absolut nahtlos. quent, machen den Schritt von Low zu.
+                                        </p>
                                     </Col>
+
+                                    <Col>
+                                        <Tooltip arrow title="Please select at least 1 item from the list in order to proceed.">
+                                            <div>
+                                                {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
+                                                <Button
+                                                    className={ this.state.nextPageButtonActive ? "" : "disabled" }
+                                                    onClick={ () => this.props.nextPage() }>
+                                                    GO ON
+                                                </Button>
+                                            </div>
+                                        </Tooltip>
+                                    </Col>
+
                                 </Row>
                             </Container>
-
-                                <Col xs="12" style={{ marginBottom: 50 }}>
-                                    <p>
-                                        Visualieren, testen und validieren Sie Ihre Ideen dynamisch mit verschiedensten Wireframes und Detailmodellen.
-                                        <br /><br />
-                                        Während Sie Ihr Konzept kontinuierlich weiterentwicklen, iterieren Sie konse- quent, machen den Schritt von Low zu High Fidelity absolut nahtlos. quent, machen den Schritt von Low zu.
-                                    </p>
-                                </Col>
-
-                                <Col xs="12">
-                                    <Tooltip arrow title="Please select at least 1 item from the list in order to proceed.">
-                                        <div>
-                                            {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
-                                            <Button
-                                                className={ this.state.nextPageButtonActive ? "" : "disabled" }
-                                                onClick={ () => this.props.nextPage() }>
-                                                GO ON
-                                            </Button>
-                                        </div>
-                                    </Tooltip>
-                                </Col>
-
                         </Col>
 
                     </Row>

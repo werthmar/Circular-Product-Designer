@@ -72,10 +72,10 @@ export default function ChoosableElement(props) {
     }
 
     return(
-        <Col className={"choosableElement"} 
-            xs={descriptionVisible ? "8" : "3"} 
-            md={descriptionVisible ? "5" : "2"} 
-            xxl={descriptionVisible ? "4" : "1"}
+        <Col className="choosableElement" 
+            //xs={descriptionVisible ? "8" : "3"} 
+            //md={descriptionVisible ? "5" : "2"} 
+            //xxl={descriptionVisible ? "4" : "1"}
             onClick={() => handleClick()}
             style={{ backgroundColor: color }}
             >
@@ -83,37 +83,46 @@ export default function ChoosableElement(props) {
                 <Row>
                     
                     {/* Bar */}
-                    <Col className={descriptionVisible ? "col-4" : ""} >
+                    <Col className={descriptionVisible ? "col-3" : ""} >
 
-                        <Col>
-                            <h1>CHOOSE</h1>
-                        </Col>
-
-                        {/* Checkmark Button */}
-                        <Col className="buttonCol" onClick={ () => selectItem() }>
-                            <Image src={ clicked ?  "/icons/checkbox_checked.png" : "/icons/checkbox_unmarked.png" }
-                            width={100}
-                            height={65}
-                            alt="checkbox_unchecked"
-                            />
-                        </Col>
-
-                        {/* Rotatet Title */}
-                        <Col>
-                            <p className="rotated-text">{name}</p>
-                        </Col>
-                
-                        {/* Expanded indicator */}
-                        <Col className="arrowIcon">
-                            <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={80} height={45} />
-                        </Col>
+                        <Container fluid>
+                            <Row xs={1}>
                         
+                                <Col>
+                                    <h1>CHOOSE</h1>
+                                </Col>
+
+                                {/* Checkmark Button */}
+                                <Col className="buttonCol" onClick={ () => selectItem() }>
+                                    <Image src={ clicked ?  "/icons/checkbox_checked.png" : "/icons/checkbox_unmarked.png" }
+                                    width={100}
+                                    height={65}
+                                    alt="checkbox_unchecked"
+                                    />
+                                </Col>
+
+                                {/* Rotatet Title */}
+                                <Col>
+                                    <p className="rotated-text">{name}</p>
+                                </Col>
+                        
+                                {/* Expanded indicator */}
+                                <div className="arrowIcon">
+                                    <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={60} height={35} />
+                                </div>
+
+                            </Row>
+                        </Container>
+
+
+
                     </Col>
 
                     {/* Description which can be opened on click */}
                     <Col className="description" style={{display: descriptionVisible ? 'inline-block' : 'none' }}>
 
-                        <h2>{name}</h2>
+                        <h2>{name.toUpperCase()}</h2>
+                        <br/>
                         <p>{description}</p>
         
                     </Col>
