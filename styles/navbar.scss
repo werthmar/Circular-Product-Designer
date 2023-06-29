@@ -5,6 +5,7 @@
     margin: 0;
     background-color: $background-color;
     min-height: 100vh ;
+    position: relative;
 
     .buttonCol{
         text-align: center;
@@ -34,11 +35,18 @@
             background: $accent-color;
         }
 
-        .backButton{
-            margin-top: 40px;
-            background-color: transparent;
-            border: none;
+        .backButtonCol{
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            margin-bottom: 20px;
+            
+            .backButton{
+                background-color: transparent;
+                border: none;
+            }
         }
+
     }
 
     .descriptionCol {

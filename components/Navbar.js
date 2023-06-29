@@ -91,13 +91,15 @@ export default class CustomNavbar extends React.Component
                                     </Col>
 
                                     {/* Back Buttons */}
-                                    <Tooltip arrow title="Back">
-                                        <div>
-                                            <Button onClick={ () => this.props.back() } className="backButton">
-                                                <RiArrowGoBackLine size={45} color="grey" />
-                                            </Button>
-                                        </div>
-                                    </Tooltip>
+                                    <Col className='backButtonCol'>
+                                        <Tooltip arrow title="Back">
+                                            <div>
+                                                <Button onClick={ () => this.props.back() } className="backButton">
+                                                    <RiArrowGoBackLine size={45} color="grey" />
+                                                </Button>
+                                            </div>
+                                        </Tooltip>
+                                    </Col>
 
 
                         </Col>
