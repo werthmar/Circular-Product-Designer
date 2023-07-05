@@ -5,7 +5,6 @@
     margin: 0;
     background-color: $background-color;
     min-height: 100vh ;
-    position: relative;
 
     .buttonCol{
         text-align: center;
@@ -31,20 +30,11 @@
         .navbarButton:hover{
             background: $color-secondary;
         }
-        .navbarButtonActive{
-            background: $accent-color;
-        }
 
-        .backButtonCol{
-            position: absolute;
-            bottom: 0;
-            left: 10px;
-            margin-bottom: 20px;
-            
-            .backButton{
-                background-color: transparent;
-                border: none;
-            }
+        .backButton{
+            margin-top: 30px;
+            background-color: transparent;
+            border: none;
         }
 
     }
@@ -72,7 +62,6 @@
             border-radius: 0;
             border-width: 2px;
             background-color: $color-secondary-light;
-            border-color: $accent-color;
         }
         Button:hover{
             background-color: $color-secondary;

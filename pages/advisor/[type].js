@@ -104,6 +104,7 @@ export default class AdvisorPage extends React.Component
     loadData()
     {
         this.setState({ loading: true })
+        const { type, oldType } = this.state;
 
         // Prepare selected items from cookie to be used during fetch to remark items as checked when going back
         var selectedItems = [];
@@ -118,12 +119,12 @@ export default class AdvisorPage extends React.Component
 
         // If you go back with the footer buttons set oldtype = type in order to load the complete page instead of filtered result
         // Everytime oldType does not match type the result is filtered based on the selection inside the cookie
-        var types = [ this.state.oldType, this.state.type ]
+        var types = [ oldType, type ]
         if (
-            this.state.oldType == "ED" && this.state.type == "CBM" ||
-            this.state.oldType == "ED" && this.state.type == "LCP" 
+            oldType == "ED" && type == "CBM" ||
+            oldType == "ED" && type == "LCP" 
         ) {
-            types = [ this.state.type, this.state.type ];
+            types = [ type, type ];
         }
     
         // API request for data retrival, selectedItems is not required / can be undefined.
@@ -147,8 +148,21 @@ export default class AdvisorPage extends React.Component
             }
 
             // Set the background color of the coosable elements because its dependent on how many elements there are
-            var r = 250, g = 236, b = 208; // Starting colours
-            var _r = 237, _g = 191, _b = 98; // ending colours, all other colours inbetween
+            // Color is different based on page
+            if( type == 'CBM' ) {
+                var r = 209, g = 180, b = 165; // Starting colours
+                var _r = 171, _g = 118, _b = 92; // ending colours, all other colours inbetween
+            } else if ( type == 'LCP' ) {
+                var r = 250, g = 236, b = 208; 
+                var _r = 237, _g = 191, _b = 98;
+            } else if ( type == 'ED' ) {
+                var r = 164, g = 171, b = 159; 
+                var _r = 89, _g = 99, _b = 80;
+            } else {
+                var r = 250, g = 236, b = 208; 
+                var _r = 237, _g = 191, _b = 98;
+            }
+            
             // interpolation of colours
             var diff_r = _r - r, diff_g = _g - g, diff_b = _b - b; // calc diffrenrez of start/end colours
             diff_r /= data.descriptions.length;
@@ -182,10 +196,7 @@ export default class AdvisorPage extends React.Component
             // Update the component State with the fetched data
             this.setState({ data: data, loading: false, warning: false, title: newTitle });
 
-            
-
             console.log(this.state.data);
-        
         })
         .catch(error => {
             // Handle any errors that occurred during fetching

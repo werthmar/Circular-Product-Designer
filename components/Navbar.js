@@ -41,15 +41,32 @@ export default class CustomNavbar extends React.Component
         this.setState({ nextPageButtonActive: bool });
     }
 
+    // Color of go on button and navigation buttons changes based on current page
+    decideButtonColor()
+    {
+        switch( this.props.pageOrder[ this.state.pageIndex - 1 ] )
+        {
+            case 'CBM':
+                return 'rgb(171, 118, 92)';
+            case 'LCP':
+                return 'rgb(237, 191, 98)';
+            case 'ED':
+                return 'rgb(89, 99, 80)';
+            default:
+                return 'black';
+        }
+    }
+
     // Dynamicly create the page navigation buttons based on the current index/page the user is on
     getPageButtons()
     {
         return(
             this.state.pageButtons.map(( page, index ) => (
                 <Col>
-                    <Button className={
+                    <Button className='navbarButton'
+                    style={
                         // Set the current page active
-                        index == this.state.pageIndex ? 'navbarButton navbarButtonActive' : 'navbarButton'  
+                        index == this.state.pageIndex ? { backgroundColor: this.decideButtonColor() } : {}   
                     }
                     disabled={
                         //  Disable all pages after the current page 
@@ -91,7 +108,7 @@ export default class CustomNavbar extends React.Component
                                     </Col>
 
                                     {/* Back Buttons */}
-                                    <Col className='backButtonCol'>
+                                    <Col>
                                         <Tooltip arrow title="Back">
                                             <div>
                                                 <Button onClick={ () => this.props.back() } className="backButton">
@@ -129,6 +146,7 @@ export default class CustomNavbar extends React.Component
                                                 {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
                                                 <Button
                                                     className={ this.state.nextPageButtonActive ? "" : "disabled" }
+                                                    style={{ borderColor: this.decideButtonColor() }}
                                                     onClick={ () => this.props.nextPage() }>
                                                     GO ON
                                                 </Button>

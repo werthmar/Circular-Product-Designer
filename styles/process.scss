@@ -1,31 +1,116 @@
 @import 'theme';
 
 .processPage{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background-color: $background-color;
 
-    .text{
-        font-size: 18px;
-        padding-top: 30px;
-        padding-left: 30px;
-        padding-right: 30%;
-        padding-bottom: 50px;
-        color: $color-secondary;
-        
-        @media (max-width: 768px) {
-            padding-right: 30px;
-        }
+    .container-fluid{
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
     }
     
-    .buttonRow{
-        max-width: 100%;
+    .row{
         margin: 0;
         padding: 0;
     }
 
-    .standardButton{
-        height: 250px;
-        margin: 20px;
-        display: flex;
-        justify-content: center; /* align horizontal */
-        align-items: center; 
+    .col{
+        padding: 0;
     }
+
+    .title{
+
+        h1{
+            position: absolute;
+            bottom: 0;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            margin-bottom: 90px;
+            font-size: 110px;
+            font-weight: 700;
+        }
+    }
+    
+    .buttonCol{
+        text-align: end;
+        margin-top: 30px;
+
+        .button{
+            text-align: start;
+            margin: 0;
+            margin-left: 30px;
+            padding: 0;
+            height: 90%;
+            width: 95%;
+            color: black;
+            padding-right: 0;
+            border-radius: 0%;
+            border: none;
+
+            p{
+                padding-left: 100px;
+                font-size: 50px;
+                font-weight: 300;
+                margin-bottom: 30px;
+            }
+        }
+        
+        .cbm{
+            background-color: lightgray;
+
+            .backgroundImage{
+                display: flex;
+                align-items: center;
+                text-align: center;
+                min-height: 100px;
+                height: 30%;
+                background-image: url("/images/Umrandung_CBM.png");
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                
+                h2{
+                    margin: auto;
+                    font-size: 50px;
+                    font-weight: 600;
+                }
+            }
+        }
+        .cbm:hover{
+            background-color: $color-secondary;
+        }
+        
+        .lci{
+            background-color: rgb(186, 186, 186);
+
+            .backgroundImage{
+                display: flex;
+                align-items: center;
+                text-align: center;
+                min-height: 100px;
+                height: 30%;
+                background-image: url("/images/Umrandung_LCI.png");
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                
+                h2{
+                    margin: auto;
+                    font-size: 50px;
+                    font-weight: 600;
+                }
+            }
+        }
+        .lci:hover{
+            background-color: rgb(158, 158, 158);
+        }
+
+    }
+
 }
