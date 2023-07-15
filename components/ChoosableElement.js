@@ -76,7 +76,6 @@ export default function ChoosableElement(props) {
             //xs={descriptionVisible ? "8" : "3"} 
             //md={descriptionVisible ? "5" : "2"} 
             //xxl={descriptionVisible ? "4" : "1"}
-            onClick={() => handleClick()}
             style={{ backgroundColor: color }}
             >
             <Container fluid>
@@ -88,7 +87,7 @@ export default function ChoosableElement(props) {
                         <Container fluid>
                             <Row xs={1}>
                         
-                                <Col>
+                                <Col onClick={() => handleClick()}>
                                     <h1>CHOOSE</h1>
                                 </Col>
 
@@ -102,12 +101,12 @@ export default function ChoosableElement(props) {
                                 </Col>
 
                                 {/* Rotatet Title */}
-                                <Col>
+                                <Col onClick={() => handleClick()}>
                                     <p className="rotated-text">{name.toUpperCase()}</p>
                                 </Col>
                         
                                 {/* Expanded indicator */}
-                                <div className="arrowIcon">
+                                <div className="arrowIcon" onClick={() => handleClick()}>
                                     <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={60} height={35} />
                                 </div>
 
@@ -119,7 +118,7 @@ export default function ChoosableElement(props) {
                     </Col>
 
                     {/* Description which can be opened on click */}
-                    <Col className="description" style={{display: descriptionVisible ? 'inline-block' : 'none' }}>
+                    <Col className="description" style={{display: descriptionVisible ? 'inline-block' : 'none' }} onClick={() => handleClick()}>
 
                         <h2>{name.toUpperCase()}</h2>
                         <br/>

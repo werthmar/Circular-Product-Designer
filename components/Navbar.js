@@ -84,7 +84,7 @@ export default class CustomNavbar extends React.Component
         const { expanded, title } = this.state;
 
         return(
-            <Col className={ expanded ? 'CustomNavbar col-5' : 'CustomNavbar col-1' }>
+            <Col className='CustomNavbar col-5' style={{ display: expanded ? 'inline-block' : 'none' }}>
                 <Container  fluid>
                     <Row xs="2">
 
@@ -122,7 +122,7 @@ export default class CustomNavbar extends React.Component
                         </Col>
 
                         {/* --- Initial description which can be hidden ------------------------------------- */}
-                        <Col className='descriptionCol col-9' style={{ display: expanded ? 'inline-block' : 'none' }}>
+                        <Col className='descriptionCol col-9'>
                             <Container fluid>
                                 <Row xs={1}>
 
