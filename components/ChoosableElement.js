@@ -103,7 +103,7 @@ export default function ChoosableElement(props) {
 
                                 {/* Rotatet Title */}
                                 <Col>
-                                    <p className="rotated-text">{name}</p>
+                                    <p className="rotated-text">{name.toUpperCase()}</p>
                                 </Col>
                         
                                 {/* Expanded indicator */}

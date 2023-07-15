@@ -345,50 +345,59 @@ export default class AdvisorPage extends React.Component
             );
         }
 
-        if (error) {
+        else if (error) {
             return <div>Error: {error.message}</div>;
         }
 
-        return(
+        // Show choosable elements in 2 rows because there are too many for 1 row 
+        else{
+            return(
 
-            <div className="advisorPage">
+                <div className="advisorPage">
 
-                <Container fluid>
-                    <Row className="flex-nowrap overflow-auto"> {/* Achieves vertical scroll */}
+                    <Container fluid>
+                        <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
-                        <CustomNavbar
-                            ref={ this.Navbar }
-                            nextPage={ this.nextPage }
-                            title={ this.state.title }
-                            pageIndex={ this.pageOrder.indexOf( type ) +1 }
-                            pageOrder={ this.pageOrder }
-                            goToPage={ this.goToPage }
-                            back={ this.back }   
-                            nextPageButtonActive={ this.areItemsSelected() }
-                            >
-                        </CustomNavbar>
+                            <CustomNavbar
+                                ref={ this.Navbar }
+                                nextPage={ this.nextPage }
+                                title={ this.state.title }
+                                pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                                pageOrder={ this.pageOrder }
+                                goToPage={ this.goToPage }
+                                back={ this.back }   
+                                nextPageButtonActive={ this.areItemsSelected() }
+                                >
+                            </CustomNavbar>
 
-                        {/*bodyContent*/}
-                        {
-                            data['descriptions'].map(( item, index ) => (
-                                <ChoosableElement 
-                                key={index}
-                                id={item.id}
-                                description={item.description}
-                                name={item.name}
-                                active={item.active}
-                                type={type}
-                                color={item.color}
-                                enableNextPageButton={this.enableNextPageButton}
-                                toggleNavbar={ this.toggleNavbar } 
-                                />
-                            ))
-                        }
+                            {/*bodyContent*/}
+                            <Row className={ data['descriptions'].length <= 7 ?  "col-7" : "col-7 multipleRows" } xs={ data['descriptions'].length <= 7 ? "" : "6" }>
+                            {
+                                data['descriptions'].map(( item, index ) => (
+                                    <ChoosableElement 
+                                    key={index}
+                                    id={item.id}
+                                    description={item.description}
+                                    name={item.name}
+                                    active={item.active}
+                                    type={type}
+                                    color={item.color}
+                                    enableNextPageButton={this.enableNextPageButton}
+                                    toggleNavbar={ this.toggleNavbar } 
+                                    />
+                                ))
+                            }
+                            </Row>
 
-                    </Row>
-                </Container>
-            </div>
-            
-        );
+                        </Row>
+                    </Container>
+                </div>
+
+            );
+        }
+
+
+
+
     }
 }

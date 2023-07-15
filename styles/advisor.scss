@@ -12,17 +12,16 @@
             color: $color-secondary;
         }
     }
-    
-    .buttonCol{
 
-        .nextButton{
-            font-size: 28px;
-            
-            .icon{
-                margin-left: 10px;
-                padding-bottom: 4px;
-            }
-        }
+    .mainRow{
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    .multipleRows{
+        height: 50%;
+        padding: 0;
+        margin: 0;
     }
 
 }
