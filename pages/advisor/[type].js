@@ -12,6 +12,7 @@ import Router from 'next/router'
 import useSessionStorage from '../../hooks/useSessionStorage';
 import { getCookie, hasCookie, getCookies, setCookie } from 'cookies-next';
 import ChoosableElement from "../../components/ChoosableElement";
+import ChoosableElement2Rows from "../../components/ChoosableElement2Rows";
 import { useState, useEffect } from 'react'
 import { Value } from "sass";
 import CustomNavbar from "../../components/Navbar";
@@ -349,6 +350,41 @@ export default class AdvisorPage extends React.Component
 
     }
 
+    // Split up the data and join it so that the element of the forst row and the corresponding element directly underneath it
+    // are in the same data subset so that it can then be pushed into the choosable element version with 2 rows 
+    createMultipleRows( data ) {
+        var rearangedData = [];
+        var median = data.length / 2;
+
+        for( var i=0; i<median; i++ )
+        {
+            rearangedData.push( [] );
+            rearangedData[i].push( data[i] );
+            rearangedData[i].push( data[ median + i ] );
+        }
+
+        return ( 
+            rearangedData.map(( item, index ) => (
+                <ChoosableElement2Rows 
+                key={index}
+                id={item[0].id}
+                id2={item[1].id}
+                description={item[0].description}
+                description2={item[1].description}
+                name={item[0].name}
+                name2={item[1].name}
+                active={item[0].active}
+                active2={item[1].active}
+                type={this.state.type}
+                color={item[0].color}
+                color2={item[1].color}
+                enableNextPageButton={this.enableNextPageButton}
+                toggleNavbar={ this.toggleNavbar } 
+                />
+            ))    
+        );
+    }
+
 
     render()
     {
@@ -401,19 +437,25 @@ export default class AdvisorPage extends React.Component
                             {/*bodyContent*/}
                             <Row className={ this.getRowClassname( data ) } xs={ data['descriptions'].length <= 7 ? "" : "6" /* limit the amount of items in a row only when 2 rows are needed */ }>
                             {
-                                data['descriptions'].map(( item, index ) => (
-                                    <ChoosableElement 
-                                    key={index}
-                                    id={item.id}
-                                    description={item.description}
-                                    name={item.name}
-                                    active={item.active}
-                                    type={type}
-                                    color={item.color}
-                                    enableNextPageButton={this.enableNextPageButton}
-                                    toggleNavbar={ this.toggleNavbar } 
-                                    />
-                                ))
+                                // Single Row
+                                data['descriptions'].length <= 7 ?
+                                    data['descriptions'].map(( item, index ) => (
+                                        <ChoosableElement 
+                                        key={index}
+                                        id={item.id}
+                                        description={item.description}
+                                        name={item.name}
+                                        active={item.active}
+                                        type={type}
+                                        color={item.color}
+                                        enableNextPageButton={this.enableNextPageButton}
+                                        toggleNavbar={ this.toggleNavbar } 
+                                        />
+                                    )) :
+
+                                // Multiple Rows
+                                this.createMultipleRows( data['descriptions'] )
+
                             }
                             </Row>
 

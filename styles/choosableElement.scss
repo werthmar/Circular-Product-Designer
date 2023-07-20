@@ -1,5 +1,17 @@
 @import 'theme';
 
+.descriptionRow{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.twoElementRow{
+    height: 50%;
+    padding: 0;
+    margin: 0;
+}
+
 .choosableElement{
     padding: 0;
     position: relative;
@@ -28,7 +40,7 @@
     .description{
         margin: 63px 20px;
         padding: 60px 20px 0px 0px;
-        width: 600px;
+        height: 100%;
 
         h2{
             font-size: 40px;
