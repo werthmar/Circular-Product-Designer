@@ -330,19 +330,19 @@ export default class AdvisorPage extends React.Component
         // Second decission, is a element expanded or not?
         if( data['descriptions'].length <= 7 && !this.state.elementOpen )
         {
-            classname = "col-7";
+            classname = "elementRow col-7";
         }
         else if( data['descriptions'].length <= 7 && this.state.elementOpen )
         {
-            classname = "";
+            classname = "elementRow";
         }
         else if ( !this.state.elementOpen ) // 1 row, nabar visible/no element opened
         {
-            classname = "col-7 multipleRows"
+            classname = "elementRow col-7 multipleRows"
         }
         else
         {
-            classname = "multipleRows";
+            classname = "elementRow multipleRows";
         }
 
         return classname;
