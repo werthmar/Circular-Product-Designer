@@ -5,45 +5,54 @@ import {
   Container,
   Row, 
   Alert,
+  Button,
 } from "reactstrap";
-import HomeButton from "../components/HomeButton";
+import { useRouter } from 'next/router'
 
-export default function IndexPage() {
+export default function IndexPage()
+{
+  const router = useRouter()
+
   return (
-    <Container className="indexPage">
-      <Col className="homeButtonCol" align="center">
-        <HomeButton size="big" />
-      </Col>
-      <Col>
-        <Row xxl="4" md="2" xs="1">
-          <Col align="center">            
-            <MainMenuButton text="New Project" icon="1" link="/process" />
-          </Col>
-          <Col align="center">
-            <MainMenuButton text="Resume Project" icon="2" link="/process" />
-          </Col>
-          <Col align="center">
-            <MainMenuButton text="Library" icon="3" link="/process" />
-          </Col>
-          <Col align="center">
-            <MainMenuButton text="Settings" icon="4" link="/process" />
-          </Col>
-        </Row>
-      </Col>
 
-      {/* Information Banner for cookie useage */}
-      <Alert className="cookieWarning">
-        This website uses essential cookies to ensure a seamless and secure experience for our users. These cookies are necessary for
-        the basic functionality of the website and cannot be disabled. By using this website, you consent to the use of these
-        essential cookies.
-      </Alert>
+    <Container className="indexPage" fluid>
+      <Row>
+        
+        <Col xs="3" className="buttonCol">
+          <Row xs={1} style={{margin: 0}}> 
+            <Col style={{paddingBottom: "10px"}}>
+              <Button className="navigationButton roadmap">
+                Roadmap
+              </Button>
+            </Col>
+    
+            <Col style={{paddingTop: "10px"}}>
+              <Button className="navigationButton">
+                <div className="whiteBlock">
+                  test
+                </div>
+              </Button>
+            </Col>
+          </Row>
+        </Col>
 
+        <Col xs="6" className="buttonCol">
+          <Button className="navigationButton" onClick={ () => router.push("/process") } >
+            <div className="whiteBlock">
+              New Project
+            </div>
+          </Button>
+        </Col>
+
+        <Col xs="3" className="buttonCol">
+          <Button className="navigationButton">
+          test
+          </Button>
+        </Col>
+
+      </Row>
     </Container>
-  )
-}
 
-IndexPage.getLayout = function getLayout(page) {
-  return (
-      <Layout pageTitle="Improvement Advisor Home">{page}</Layout>
+
   )
 }
