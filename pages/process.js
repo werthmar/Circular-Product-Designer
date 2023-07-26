@@ -12,13 +12,16 @@ import { hasCookie, deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import CustomNavbarButtonsOnly from "../components/NavbarButtonsOnly";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function ProcessPage()
 {
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
     function nextPage( page )
     {
+        setLoading(true);
         if( hasCookie('selected' ) )
         {
             deleteCookie('selected');
@@ -29,44 +32,58 @@ export default function ProcessPage()
 
     function back()
     {
+        setLoading(true);
         router.push('/');
     }
 
-    return(
-        <div className="processPage">
-            <Container fluid>
-                <Row xs="2">
-
-                    <CustomNavbarButtonsOnly back={ back } />
-
-                    <Col className="title" xs="2">
-                        <h1>
-                            DO YOU HAVE
-                        </h1>
-                    </Col>
-
-
-                    <Row className="col-9" xs="1">
-                        <Col className="buttonCol">
-                            <Button onClick={ () => nextPage( "/advisor/CBM" ) } className="button cbm">
-                                <p>... a circular business strategy you would like to follow?</p>
-                                <div className="backgroundImage">
-                                    <h2>CIRCULAR BUSINESS MODEL</h2>  
-                                </div>
-                            </Button>
-                        </Col>
-                        <Col className="buttonCol">
-                            <Button onClick={ () => nextPage( "advisor/LCP" ) } className="button lci">
-                                <p>... a product that you would like to make circular?</p>
-                                <div className="backgroundImage">
-                                    <h2>LIFECYCLE PHASE INTENSITY</h2>  
-                                </div>
-                            </Button>
-                        </Col>
-                    </Row>
-                
-                </Row>
-            </Container>
+    if(loading) {
+        return(
+            <div className="processPage">
+            <div className="loadingNotification">
+                    <div className="loader" />
+                    <p>loading...</p>
+            </div>
         </div>
-    )
+        );
+    }
+    else {
+        return(
+            <div className="processPage">
+                <Container fluid>
+                    <Row xs="2">
+
+                        <CustomNavbarButtonsOnly back={ back } />
+
+                        <Col className="title" xs="2">
+                            <h1>
+                                DO YOU HAVE
+                            </h1>
+                        </Col>
+
+
+                        <Row className="col-9" xs="1">
+                            <Col className="buttonCol">
+                                <Button onClick={ () => nextPage( "/advisor/CBM" ) } className="button cbm">
+                                    <p>... a circular business strategy you would like to follow?</p>
+                                    <div className="backgroundImage">
+                                        <h2>CIRCULAR BUSINESS MODEL</h2>  
+                                    </div>
+                                </Button>
+                            </Col>
+                            <Col className="buttonCol">
+                                <Button onClick={ () => nextPage( "advisor/LCP" ) } className="button lci">
+                                    <p>... a product that you would like to make circular?</p>
+                                    <div className="backgroundImage">
+                                        <h2>LIFECYCLE PHASE INTENSITY</h2>  
+                                    </div>
+                                </Button>
+                            </Col>
+                        </Row>
+                    
+                    </Row>
+                </Container>
+            </div>
+        )
+    }
+
 }
