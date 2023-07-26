@@ -23,27 +23,53 @@
         }
     }
     
-
     .navigationButton{
         width: 100%;
         height: 100%;
         border-radius: 0;
-        font-size: 30px;
-        text-decoration: underline;
-        background-color: gray;
-        padding: 40px;
-
-        .whiteBlock{
-            padding: 30px;
-            width: 100%;
+        border: solid grey 2px;
+        padding: 0;
+        margin: 0;
+        
+        .backgroundImage{
+            display: flex;
+            align-items: center;
+            text-align: center;
+            min-height: 100px;
             height: 100%;
-            border: solid;
-            border-color: white;
-            border-width: 5px;
+            width: 100%;
+            background-size: cover;
+            background-position: 50% 0;
+            background-repeat: no-repeat;
+        }
+        
+        .roadmap{
+            background-image: url("/images/Foto_Roadmap.jpg");
+        }        
+        .library{
+            background-image: url("/images/Foto_Bibliothek.jpg");
+        }
+        .newProject{
+            background-image: url("/images/Foto_NeuesProjekt.jpg");
+        }
+        .archive{
+            background-image: url("/images/Foto_Archiv.jpg");
         }
 
-        .roadmap{
+        img{
+            margin: auto;
         }
+
+        p{
+            font-size: 30px;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 15px;
+            margin: auto;
+        }
+    }
+    .navigationButton:hover{
+        opacity: 0.6;
     }
 
 
