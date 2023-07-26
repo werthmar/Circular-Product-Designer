@@ -72,7 +72,7 @@ export default function ChoosableElement(props) {
     }
 
     return(
-        <Col className="choosableElement" 
+        <Col className={ descriptionVisible ? "choosableElement col-7" : "choosableElement"} 
             //xs={descriptionVisible ? "8" : "3"} 
             //md={descriptionVisible ? "5" : "2"} 
             //xxl={descriptionVisible ? "4" : "1"}

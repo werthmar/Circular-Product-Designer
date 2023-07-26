@@ -323,32 +323,6 @@ export default class AdvisorPage extends React.Component
     }
 
     // --- Render -------------------------------------------------------------------------------
-    // Assemble the classnames required for the chossableElementRow
-    getRowClassname( data ) {
-        var classname;
-
-        // First class decision, do we have 1 or 2 rows to diplay the elements (depends on number of elements)
-        // Second decission, is a element expanded or not?
-        if( data['descriptions'].length <= 7 && !this.state.elementOpen )
-        {
-            classname = "elementRow col-7";
-        }
-        else if( data['descriptions'].length <= 7 && this.state.elementOpen )
-        {
-            classname = "elementRow";
-        }
-        else if ( !this.state.elementOpen ) // 1 row, nabar visible/no element opened
-        {
-            classname = "elementRow col-7 multipleRows"
-        }
-        else
-        {
-            classname = "elementRow multipleRows";
-        }
-
-        return classname;
-
-    }
 
     // Split up the data and join it so that the element of the forst row and the corresponding element directly underneath it
     // are in the same data subset so that it can then be pushed into the choosable element version with 2 rows 
@@ -435,7 +409,7 @@ export default class AdvisorPage extends React.Component
                             </CustomNavbar>
 
                             {/*bodyContent*/}
-                            <Row className={ this.getRowClassname( data ) } xs={ data['descriptions'].length <= 7 ? "" : "6" /* limit the amount of items in a row only when 2 rows are needed */ }>
+                            <Row className={ this.state.elementOpen ? "elementRow" : "elementRow col-7" } > {/* xs={ data['descriptions'].length <= 7 ? "" : "6" /* limit the amount of items in a row only when 2 rows are needed */ }
                             {
                                 // Single Row
                                 data['descriptions'].length <= 7 ?

@@ -114,11 +114,11 @@ export default function ChoosableElement2Rows(props) {
     
     return(
 
-            <Row className={ descriptionVisible || descriptionVisible2 ? "descriptionRow col-6" : "descriptionRow" }>
+            <Row className={ descriptionVisible || descriptionVisible2 ? "descriptionRow col-7" : "descriptionRow col d-flex" }>
 
                 <Row className={ descriptionVisible || descriptionVisible2 ? "twoElementRow col-3" : "twoElementRow" }>
 
-                    {/* Lower Choosable Element */}
+                    {/* Upper Choosable Element */}
                     <Col className="choosableElement col-12" 
                         //xs={descriptionVisible ? "8" : "3"} 
                         //md={descriptionVisible ? "5" : "2"} 
@@ -129,7 +129,7 @@ export default function ChoosableElement2Rows(props) {
                             <Row>
                                 
                                 {/* Bar */}
-                                <Col className={descriptionVisible ? "col-3" : ""} >
+                                <Col>
 
                                     <Container fluid>
                                         <Row xs={1}>
@@ -177,7 +177,7 @@ export default function ChoosableElement2Rows(props) {
                             <Row>
                                 
                                 {/* Bar */}
-                                <Col className={descriptionVisible2 ? "col-3" : ""} >
+                                <Col>
 
                                     <Container fluid>
                                         <Row xs={1}>
