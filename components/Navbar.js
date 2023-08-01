@@ -53,7 +53,21 @@ export default class CustomNavbar extends React.Component
             case 'ED':
                 return 'rgb(89, 99, 80)';
             default:
-                return 'black';
+                return 'grey';
+        }
+    }
+
+    decideDescription()
+    {
+        if (this.state.title == 'Circular Design Principles') {
+            return <p>The Circular Design Principles (CDP) provide specific guidelines for implementing circular measures at the constructive level for optimization. Concrete solution proposals for the design are included in each of the CDPs, which can be supplemented with internal knowledge and specifications. The CDPs are grouped into different areas of action.'</p>
+        } else {
+            return <p>
+                Visualieren, testen und validieren Sie Ihre Ideen dynamisch mit verschiedensten Wireframes und Detailmodellen.
+                <br /><br />
+                Während Sie Ihr Konzept kontinuierlich weiterentwicklen, iterieren Sie konse- quent, machen den Schritt von Low zu High Fidelity absolut nahtlos. quent, machen den Schritt von Low zu.
+            </p>
+            
         }
     }
 
@@ -133,11 +147,7 @@ export default class CustomNavbar extends React.Component
                                     </Col>
 
                                     <Col style={{ marginBottom: 50 }}>
-                                        <p>
-                                            Visualieren, testen und validieren Sie Ihre Ideen dynamisch mit verschiedensten Wireframes und Detailmodellen.
-                                            <br /><br />
-                                            Während Sie Ihr Konzept kontinuierlich weiterentwicklen, iterieren Sie konse- quent, machen den Schritt von Low zu High Fidelity absolut nahtlos. quent, machen den Schritt von Low zu.
-                                        </p>
+                                            { this.decideDescription() }
                                     </Col>
 
                                     <Col>
@@ -148,7 +158,7 @@ export default class CustomNavbar extends React.Component
                                                     className={ this.state.nextPageButtonActive ? "" : "disabled" }
                                                     style={{ borderColor: this.decideButtonColor() }}
                                                     onClick={ () => this.props.nextPage() }>
-                                                    GO ON
+                                                    { title == 'Circular Design Principles' ? 'CHOOSE' : 'GO ON' }
                                                 </Button>
                                             </div>
                                         </Tooltip>

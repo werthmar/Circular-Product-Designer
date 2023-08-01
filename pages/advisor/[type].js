@@ -16,6 +16,8 @@ import ChoosableElement2Rows from "../../components/ChoosableElement2Rows";
 import { useState, useEffect } from 'react'
 import { Value } from "sass";
 import CustomNavbar from "../../components/Navbar";
+import PieChart from "../../components/PieChart";
+import { Pie } from "react-chartjs-2";
 
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
@@ -385,6 +387,38 @@ export default class AdvisorPage extends React.Component
 
         else if (error) {
             return <div>Error: {error.message}</div>;
+        }
+
+        // Display a pie chart display for the last page / Circular Design Principles
+        else if ( type == "CDP" )
+        {
+            return(
+                <div className="advisorPage">
+
+                    <Container fluid>
+                        <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
+
+                            <CustomNavbar
+                                ref={ this.Navbar }
+                                nextPage={ this.nextPage }
+                                title={ this.state.title }
+                                pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                                pageOrder={ this.pageOrder }
+                                goToPage={ this.goToPage }
+                                back={ this.back }   
+                                nextPageButtonActive={ this.areItemsSelected() }
+                                >
+                            </CustomNavbar>
+
+                            <Col className="pieChartCol">
+                                <PieChart />
+                            </Col>
+
+                            </Row>
+                    </Container>
+
+                </div>
+            );
         }
 
         // Show choosable elements in 2 rows because there are too many for 1 row 
