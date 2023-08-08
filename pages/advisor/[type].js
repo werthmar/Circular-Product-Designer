@@ -411,7 +411,7 @@ export default class AdvisorPage extends React.Component
                             </CustomNavbar>
 
                             <Col className="pieChartCol">
-                                <PieChart />
+                                <PieChart data={ data } />
                             </Col>
 
                             </Row>

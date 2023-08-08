@@ -17,28 +17,66 @@ ChartJS.register(
 );
 
 
-export default function PieChart()
+export default function PieChart( props )
 {
     const chartRef = useRef();
+
+    // Rearrange data from database
+    var _data = props.data.descriptions;
+    var outerChart = [];
+    var outerChartLength = []
+    var innerChart = ['DOWNLOAD LIST OF SOLUTIONS']
+    console.log(_data);
+
+    // Make the description names unique
+    var lastName;
+    _data.forEach( (item, index) => {
+        if ( lastName != item.name )
+        {
+            lastName = item.name;
+            outerChart.push( item.name.toUpperCase() );
+            outerChartLength.push( 1 );
+        }
+    });
+
+
+
     const data = {
         datasets:[
             // Outer Circle
             {
-                labels: [ 'x', 'y', 'z' ],
-                data: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-                backgroundColor: [ 'rgb(146, 154, 158)' ],
+                labels: outerChart,
+                data: outerChartLength,
+                backgroundColor: [ 'rgb(94, 103, 110)' ],
+                borderWidth: 10,
+                borderColor: 'rgb(232, 232, 232)', 
                 datalabels: {
-                    color: 'black',
+                    // achieves text rotation, taken from: https://stackoverflow.com/questions/68030418/how-to-rotate-the-label-text-in-doughnut-chart-slice-vertically-in-chart-js-canv
+                    anchor: "center", //start, center, end
+                    font: {
+                        size: 12,
+                        weight: 600
+                    },
+                    rotation: function(ctx) {
+                        const valuesBefore = ctx.dataset.data.slice(0, ctx.dataIndex).reduce((a, b) => a + b, 0);
+                        const sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                        const rotation = ((valuesBefore + ctx.dataset.data[ctx.dataIndex] /2) /sum *360);
+                        return rotation < 180 ? rotation-90 : rotation+90;
+                    },
                     formatter: (val, ctx) => (ctx.chart.data.datasets[0].labels[ctx.dataIndex])
                 }
             },
             // Inner Circle
             {
-                labels: [ 'one', 'two', 'three' ],
-                data: [ 1, 1, 1, 1, 1, 1 ],
-                backgroundColor: [ 'rgb(94, 103, 110)' ],
+                labels: innerChart,
+                data: [ 1, ],
+                backgroundColor: [ 'rgb(47, 52, 55)' ],
+                borderColor: 'transparent',
                 datalabels: {
-                    color: 'white',
+                    anchor: "start", //start, center, end
+                    font: {
+                        size: 30,
+                    },
                     formatter: (val, ctx) => (ctx.chart.data.datasets[1].labels[ctx.dataIndex])
                 }
             }
@@ -55,14 +93,7 @@ export default function PieChart()
                     enabled: false
                 },
                 datalabels: {
-                    // achieves text rotation, taken from: https://stackoverflow.com/questions/68030418/how-to-rotate-the-label-text-in-doughnut-chart-slice-vertically-in-chart-js-canv
-                    anchor: "center", //start, center, end
-                    rotation: function(ctx) {
-                        const valuesBefore = ctx.dataset.data.slice(0, ctx.dataIndex).reduce((a, b) => a + b, 0);
-                        const sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                        const rotation = ((valuesBefore + ctx.dataset.data[ctx.dataIndex] /2) /sum *360);
-                        return rotation < 180 ? rotation-90 : rotation+90;
-                    },
+                    color: 'white',
                 }
             }        
     };

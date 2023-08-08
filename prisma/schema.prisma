@@ -25,6 +25,7 @@ model descriptions {
   type        String? @db.Text
   name        String? @db.Text
   description String? @db.Text
+  cdp_title   String? @db.VarChar(300)
 }
 
 model edxcdp {

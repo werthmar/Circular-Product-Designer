@@ -27,6 +27,8 @@
 
     .pieChartCol{
         background-color: $background-color;
+        max-width: 100vw;
+        max-height: 100vh;
     }
 
 }

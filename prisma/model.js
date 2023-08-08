@@ -99,7 +99,7 @@ export async function getMatchingIds(oldType, nextType, ids) {
             orderBy: { Priority: 'desc' }
         })     
     }
-    // ED -> TDP
+    // ED -> CDP
     else if( oldType == "ED" && nextType == "CDP" ) {
 
         matchingIdType = 'cdp_id';
