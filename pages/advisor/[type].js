@@ -324,6 +324,12 @@ export default class AdvisorPage extends React.Component
         this.setState({ closeElementCallback: callback });
     }
 
+    // just opens and closes the description, used in the pie chart so cb is not needed
+    toggleNavbarNoCallback = () => {
+        const { Navbar } = this;
+        Navbar.current.setExpandedButtons();
+    }
+
     // --- Render -------------------------------------------------------------------------------
 
     // Split up the data and join it so that the element of the forst row and the corresponding element directly underneath it
@@ -411,7 +417,7 @@ export default class AdvisorPage extends React.Component
                             </CustomNavbar>
 
                             <Col className="pieChartCol">
-                                <PieChart data={ data } />
+                                <PieChart data={ data } toggleDescription={ this.toggleNavbarNoCallback } />
                             </Col>
 
                             </Row>

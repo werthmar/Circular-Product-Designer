@@ -14,6 +14,7 @@ export default class CustomNavbar extends React.Component
         super(props);
         this.state = {
             expanded: true,
+            expandedButtons: true, //if you only want to hide the description but keep the buttons
             // contains the page the button will point too, buttons are generatet based on this array
             pageButtons: [
                 'start',
@@ -31,6 +32,10 @@ export default class CustomNavbar extends React.Component
     setExpanded() {
         this.setState({ expanded: !this.state.expanded });
         console.log(this.state.expanded);
+    }
+    
+    setExpandedButtons() {
+        this.setState({ expandedButtons: !this.state.expanded });
     }
 
     setPageIndex( index ) {
@@ -95,15 +100,15 @@ export default class CustomNavbar extends React.Component
 
     render()
     {
-        const { expanded, title } = this.state;
+        const { expanded, expandedButtons, title } = this.state;
 
         return(
-            <Col className='CustomNavbar col-5' style={{ display: expanded ? 'inline-block' : 'none' }}>
+            <Col className={ expandedButtons ? 'CustomNavbar col-5' : 'CustomNavbar col-1' } style={{ display: expanded ? 'inline-block' : 'none' }}>
                 <Container  fluid>
                     <Row xs="2">
 
                         {/* --- Main Navbar with page buttons ------------------------------------------------ */}
-                        <Col className={ expanded ? 'buttonCol col-3' : 'buttonCol col-12' }>
+                        <Col className={ expandedButtons ? 'buttonCol col-3' : 'buttonCol col-12' }>
                                     
                                     {/* Home button */}
                                     <Col>
@@ -136,7 +141,7 @@ export default class CustomNavbar extends React.Component
                         </Col>
 
                         {/* --- Initial description which can be hidden ------------------------------------- */}
-                        <Col className='descriptionCol col-9'>
+                        <Col className='descriptionCol col-9' style={{ display: expandedButtons ? 'inline-block' : 'none' }}>
                             <Container fluid>
                                 <Row xs={1}>
 
