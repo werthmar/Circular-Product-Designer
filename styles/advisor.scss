@@ -34,6 +34,7 @@ body{
         max-width: 100vw;
         max-height: 100vh;
         padding: 50px;
+        position: relative;
         
         .textDisplay{
             z-index: 1;
@@ -47,6 +48,14 @@ body{
             p{
                 padding: 50px;
                 color: white;
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
             }
         }
 

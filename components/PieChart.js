@@ -7,7 +7,7 @@ import{
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Button, Col, Nav, Navbar, Alert, Container, Row } from "reactstrap";
-
+import { RiArrowGoBackLine } from 'react-icons/ri';
 import { Pie, getElementAtEvent } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -195,6 +195,13 @@ export default function PieChart( props )
             setText( category[ element[0].index - 1 ].description );
     }
 
+    // Function that lets you go back to the first pie chart from the second pie chart
+    function back()
+    {
+        toggleDescription();
+        setSelectedCategory( undefined );
+    } 
+
 
     // No category has been selected yet, display pieChart 1
     if( selectedCategory == undefined )
@@ -312,7 +319,6 @@ export default function PieChart( props )
         };
 
 
-
         return(
             <Row style={{ width: '100%', height: '100%' }} >
             
@@ -321,6 +327,11 @@ export default function PieChart( props )
                     <div className="textDisplay">
                         <h1>{ title }</h1>
                         <p>{ text }</p>
+
+                        <Button onClick={ () => back() } className="backButton">
+                            <RiArrowGoBackLine size={45} color="white" />
+                        </Button>
+
                     </div>
                 </Col>
 

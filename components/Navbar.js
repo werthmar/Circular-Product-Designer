@@ -35,7 +35,7 @@ export default class CustomNavbar extends React.Component
     }
     
     setExpandedButtons() {
-        this.setState({ expandedButtons: !this.state.expanded });
+        this.setState({ expandedButtons: !this.state.expandedButtons });
     }
 
     setPageIndex( index ) {

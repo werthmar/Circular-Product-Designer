@@ -342,7 +342,13 @@ export default class AdvisorPage extends React.Component
         {
             rearangedData.push( [] );
             rearangedData[i].push( data[i] );
-            rearangedData[i].push( data[ median + i ] );
+            
+            // Fix for an uneven number of elements
+            if( data[ median + i ] ) {
+                rearangedData[i].push( data[ median + i ] );
+            } else { // Just add the same item twice, easiest solution
+                rearangedData[i].push( data[i] );
+            }
         }
 
         return ( 
