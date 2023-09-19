@@ -41,7 +41,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 This Project requires Node.js (latest LTS version). You can download the Node.js installer here: [NodeJS Installer](https://nodejs.org/en/download/). Download and open the installer and follow the instructions until completion.
 
-![Download]https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/4f05499821eff5b878b2c5e154609a2c/Screenshot_2023-01-10_at_14.00.54.png
+![Download](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/4f05499821eff5b878b2c5e154609a2c/Screenshot_2023-01-10_at_14.00.54.png)
 
 The next step is to setup the MySql database. Download the newest version of the [MySql Workbench](https://dev.mysql.com/downloads/workbench/) and install it. Now create a new connection. Set the password of the connection to password123. You can choose a diffrent password but remember to change it in your .env later on. If you need help follow this short [Tutorial](https://docs.bitnami.com/aws/apps/civicrm/configuration/configure-workbench/). Open the connection and select server -> data import.
 
