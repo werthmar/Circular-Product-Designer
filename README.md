@@ -45,28 +45,28 @@ This Project requires Node.js (latest LTS version). You can download the Node.js
 
 The next step is to setup the MySql database. Download the newest version of the [MySql Workbench](https://dev.mysql.com/downloads/workbench/) and install it. Now create a new connection. Set the password of the connection to password123. You can choose a diffrent password but remember to change it in your .env later on. If you need help follow this short [Tutorial](https://docs.bitnami.com/aws/apps/civicrm/configuration/configure-workbench/). Open the connection and select server -> data import.
 
-![grafik](uploads/fa9e1c43da812dd85af6bede72e773f7/grafik.png)
+![grafik](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/fa9e1c43da812dd85af6bede72e773f7/grafik.png)
 
 Download this sql file and place it in a convinient location:[Dump20230914.sql](uploads/0858e87300d0f18a578f69f219c6c356/Dump20230914.sql).
 In the MySql Workbench select `Import from Self-Contrained File` and choose the location of the database.sql file that you downloaded. Then select `Start import`.
 
-![grafik](uploads/2a663770607581c91395a42ce4702f85/grafik.png)
+![grafik](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/2a663770607581c91395a42ce4702f85/grafik.png)
 
 Once Node.js is installed on your machine and your database is set up correctly you can open the project folder (Aprovement_Advisor) in the terminal. On windows open the project folder in the explorer and press alt+d to focus the adress bar. then type in `cmd` and press `enter` in order to open the folder in the terminal.
 
-![WindowsCMD_1](uploads/a9b84d1f7bcdee3352fce9f2e2eac31f/WindowsCMD_1.PNG) ![WindowsCMD_2](uploads/7eb3da7c8dfb18967570a7b9058a4324/WindowsCMD_2.PNG)
+![WindowsCMD_1](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/a9b84d1f7bcdee3352fce9f2e2eac31f/WindowsCMD_1.PNG) ![WindowsCMD_2](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/7eb3da7c8dfb18967570a7b9058a4324/WindowsCMD_2.PNG)
 
 On Mac rightclick the folder in the finder and select `new terminal at folder`.
 
-![Screenshot_2023-01-10_at_14.13.02](uploads/59908167df01de9cb5c3035262284706/Screenshot_2023-01-10_at_14.13.02.png)
+![Screenshot_2023-01-10_at_14.13.02](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/59908167df01de9cb5c3035262284706/Screenshot_2023-01-10_at_14.13.02.png)
 
 A terminal should open at the project location.
 
-![Screenshot_2023-01-10_at_14.28.43](uploads/13350f8028b4ee78758be10a9810cc73/Screenshot_2023-01-10_at_14.28.43.png)
+![Screenshot_2023-01-10_at_14.28.43](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/13350f8028b4ee78758be10a9810cc73/Screenshot_2023-01-10_at_14.28.43.png)
 
 Now we need to create a .env file which contains the credentials for our database. On Windows in the explorer in the project folder rightcklick and select `new` -> `text file` and name it `.env`. Open the file you just created.
 
-![grafik](uploads/aaa678a92d8162a16126266eb7ba4bc7/grafik.png)
+![grafik](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/aaa678a92d8162a16126266eb7ba4bc7/grafik.png)
 
 On Mac or Linux type `nano .env` into the console to create the env file.
 
@@ -79,11 +79,11 @@ DATABASE_URL="mysql://root:password123@127.0.0.1:3306/improvement_advisor"
 On Windows press `CTRL + S` to save the file.
 On Mac/Linux `CTRL + X`and then type `Y` and press `enter` to save the file.
 
-![grafik](uploads/c1d90b742c88ece2a7336690c1f5df11/grafik.png)
+![grafik](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/c1d90b742c88ece2a7336690c1f5df11/grafik.png)
 
 Now in your terminal which is opend at the project location type `npm install` into the terminal and press `enter`.
 
-![Screenshot_2023-01-10_at_14.29.01](uploads/dec22540156dbb587e391f258b583d27/Screenshot_2023-01-10_at_14.29.01.png)
+![Screenshot_2023-01-10_at_14.29.01](https://git.ni.dfki.de/mwerth/dfki-pforzheim-webprojekt/-/wikis/uploads/dec22540156dbb587e391f258b583d27/Screenshot_2023-01-10_at_14.29.01.png)
 
 If a prompt askes you for permission type in `y` and press `enter`. After the installation is completed type `npm run dev` into the terminal and press `enter` in order to start the webserver. Your terminal should display something like this:
 
