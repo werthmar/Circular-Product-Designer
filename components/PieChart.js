@@ -159,6 +159,11 @@ export default function PieChart( props )
         let element = getElementAtEvent(chartRef2.current, event);
         var category;
 
+        // Check if the inner circle was clicked and if yes do nothing, only outer circle matters here
+        if ( element[0].datasetIndex == 1 ) return;
+        // Check if the user clicked on the empty halfe of the pie chart
+        if ( element[0].index == 0 ) return;
+
         switch(selectedCategory)
         {
             case 'FUNCTIONALITY':
@@ -288,12 +293,12 @@ export default function PieChart( props )
                 },
                 // Inner Circle
                 {
-                    labels: [ selectedCategory ],
-                    data: [ 1, ],
+                    labels: [ '', selectedCategory ],
+                    data: [ 1, 1 ],
                     backgroundColor: [ 'rgb(47, 52, 55)' ],
                     borderColor: 'transparent',
                     datalabels: {
-                        anchor: "start", //start, center, end
+                        anchor: "center", //start, center, end
                         color: 'white',
                         font: {
                             size: 30,
@@ -316,8 +321,12 @@ export default function PieChart( props )
                     datalabels: {
                     },
                 },        
+                animation: false,
+                responsive:true,
+                maintainAspectRatio:false
         };
 
+        
 
         return(
             <Row style={{ width: '100%', height: '100%' }} >
@@ -335,7 +344,7 @@ export default function PieChart( props )
                     </div>
                 </Col>
 
-                {/** make the text display here, make inside new bootstrap row */}
+                {/** Half pie chart */}
                 <Col xs="5">
 
                 <Pie className="halfPieChart"

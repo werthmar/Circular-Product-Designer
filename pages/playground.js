@@ -20,7 +20,7 @@ export default function Playground()
             <div className="bigBallContainer">
                 <Image 
                     src={"/images/Kugel.png"}
-                    width={1400}
+                    width={700}
                     height={700}
                 />
             </div>
