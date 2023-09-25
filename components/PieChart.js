@@ -159,6 +159,8 @@ export default function PieChart( props )
         let element = getElementAtEvent(chartRef2.current, event);
         var category;
 
+        // Check if the user clicked on the pieChart or on empty space (for some reason this function triggers even on empty space around the pie chart which leads to an error)
+        if ( !element[0] ) return;
         // Check if the inner circle was clicked and if yes do nothing, only outer circle matters here
         if ( element[0].datasetIndex == 1 ) return;
         // Check if the user clicked on the empty halfe of the pie chart
@@ -279,7 +281,7 @@ export default function PieChart( props )
                         anchor: "center", //start, center, end
                         color: 'black',
                         font: {
-                            size: 16,
+                            size: 12,
                             weight: 600,
                         },
                         rotation: function(ctx) {
@@ -301,7 +303,7 @@ export default function PieChart( props )
                         anchor: "center", //start, center, end
                         color: 'white',
                         font: {
-                            size: 30,
+                            size: 15,
                         },
                         formatter: (val, ctx) => (ctx.chart.data.datasets[1].labels[ctx.dataIndex])
                     }
@@ -326,10 +328,8 @@ export default function PieChart( props )
                 maintainAspectRatio:false
         };
 
-        
-
         return(
-            <Row style={{ width: '100%', height: '100%' }} >
+            <Row style={{ width: '131%', height: '100%' }} >
             
                 { /** Text Display*/ }
                 <Col xs="7">
@@ -347,12 +347,12 @@ export default function PieChart( props )
                 {/** Half pie chart */}
                 <Col xs="5">
 
-                <Pie className="halfPieChart"
+                 <Pie className="halfPieChart"
                     data={data2}
                     options={options2}
                     ref={chartRef2}
-                    onClick={onClick2}
-                />
+                    onClick={onClick2}/>
+
                 </Col>
             </Row>
         );
