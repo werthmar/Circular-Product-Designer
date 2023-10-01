@@ -18,6 +18,7 @@ import { Value } from "sass";
 import CustomNavbar from "../../components/Navbar";
 import PieChart from "../../components/PieChart";
 import { Pie } from "react-chartjs-2";
+import SolutionOverview from "../../components/SolutionOverview";
 
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
@@ -91,9 +92,9 @@ export default class AdvisorPage extends React.Component
 
         // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
         if( props.initialType == "CBM" ) {
-            this.pageOrder = [ "CBM", "LCP", "ED", "CDP" ];
+            this.pageOrder = [ "CBM", "LCP", "ED", "CDP", "Solution-Overview" ];
         } else {
-            this.pageOrder = [ "LCP", "CBM", "ED", "CDP" ];
+            this.pageOrder = [ "LCP", "CBM", "ED", "CDP", "Solution-Overview" ];
         }
 
     }
@@ -130,6 +131,16 @@ export default class AdvisorPage extends React.Component
             types = [ type, type ];
         }
     
+        // If the user is on the last page there is no need to load new data, bcs the last page is mainly a summary of the previous page.
+        // the data from this page is reused if the user decides to go back with the back button
+        if ( type == 'Solution-Overview' )
+        {
+            // Disable Navbar description
+            this.toggleNavbarNoCallback();
+            this.setState({ data: this.state.data, loading: false, warning: false, title: 'Solution Overview' });
+            return;
+        }
+
         // API request for data retrival, selectedItems is not required / can be undefined.
         // https://nextjs.org/docs/basic-features/data-fetching/client-side
         fetch(`/api/descriptions/${types}?items=${ '[' + selectedItems + ']' }`)
@@ -418,12 +429,44 @@ export default class AdvisorPage extends React.Component
                                 pageOrder={ this.pageOrder }
                                 goToPage={ this.goToPage }
                                 back={ this.back }   
-                                nextPageButtonActive={ this.areItemsSelected() }
+                                nextPageButtonActive={ () => { return true; } /** this.areItemsSelected() --commented out because i dont know how items are supposed to be selected yet */ }
                                 >
                             </CustomNavbar>
 
                             <Col className="pieChartCol">
                                 <PieChart data={ data } toggleDescription={ this.toggleNavbarNoCallback } />
+                            </Col>
+
+                            </Row>
+                    </Container>
+
+                </div>
+            );
+        }
+
+        // Display the result page
+        else if ( type == "Solution-Overview" )
+        {
+            return(
+                <div className="advisorPage">
+
+                    <Container fluid>
+                        <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
+
+                            <CustomNavbar
+                                ref={ this.Navbar }
+                                nextPage={ this.nextPage }
+                                title={ this.state.title }
+                                pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                                pageOrder={ this.pageOrder }
+                                goToPage={ this.goToPage }
+                                back={ this.back }   
+                                nextPageButtonActive={ this.areItemsSelected() }
+                                >
+                            </CustomNavbar>
+
+                            <Col className="solutionOverview">
+                                <SolutionOverview initialType={ this.props.initialType }  />
                             </Col>
 
                             </Row>

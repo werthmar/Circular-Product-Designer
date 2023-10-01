@@ -11,6 +11,7 @@ import '../styles/playground.scss';
 import '../styles/fonts.scss';
 import '../styles/navbar.scss';
 import '../styles/choosableElement.scss';
+import '../styles/solutionOverview.scss';
 
 
 import { useRouter } from "next/router";
