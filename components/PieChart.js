@@ -45,6 +45,7 @@ export default function PieChart( props )
     var productLabeling = [];
     var transportability = [];
 
+    // Save the items in the right categories for easy access
     _data.forEach( (item, index) => {
         if (item.id >= 46 && item.id <= 58) functionality.push(item);
         if (item.id >= 59 && item.id <= 76) materialSuitability.push(item);
@@ -334,7 +335,7 @@ export default function PieChart( props )
                 { /** Text Display*/ }
                 <Col xs="7">
                     <div className="textDisplay">
-                        <h1>{ title }</h1>
+                        <h1>{ title.toUpperCase() }</h1>
                         <p>{ text }</p>
 
                         <Button onClick={ () => back() } className="backButton">

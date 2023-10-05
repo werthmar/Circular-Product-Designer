@@ -453,6 +453,8 @@ export default class AdvisorPage extends React.Component
                     <Container fluid>
                         <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
+                            <div>{/** Used to force rerender */}</div>
+
                             <CustomNavbar
                                 ref={ this.Navbar }
                                 nextPage={ this.nextPage }
@@ -466,7 +468,7 @@ export default class AdvisorPage extends React.Component
                             </CustomNavbar>
 
                             <Col className="solutionOverview">
-                                <SolutionOverview initialType={ this.props.initialType }  />
+                                <SolutionOverview initialType={ this.props.initialType } cdpCount={ data.descriptions.length } />
                             </Col>
 
                             </Row>

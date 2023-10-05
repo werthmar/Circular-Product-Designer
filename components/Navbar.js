@@ -50,7 +50,7 @@ export default class CustomNavbar extends React.Component
     // Color of go on button and navigation buttons changes based on current page
     decideButtonColor()
     {
-        
+        console.log(this.state.pageIndex, this.props.pageOrder);
         switch( this.props.pageOrder[ this.state.pageIndex - 1 ] )
         {
             case 'CBM':

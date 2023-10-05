@@ -6,6 +6,7 @@ export default function SolutionOverview( props )
     var cbmCount = 0;
     var lcpCount = 0;
     var edCount = 0;
+    var cdpCount = props.cdpCount;
 
     // count the amount of selected items in each category
     var cookie = getCookie( 'selected' );
@@ -37,8 +38,8 @@ export default function SolutionOverview( props )
                     <p>
                         {
                             props.initialType == "CBM" ?
-                            "Circular business models enable closed loops and re- source-efficient production and consumption systems." :
-                            "Life cycyle intensities define product classifica- tions based on environ- mental hotspots, following the product life cycle."
+                            "Circular business models enable closed loops and resource-efficient production and consumption systems." :
+                            "Life cycyle intensities define product classifications based on environmental hotspots, following the product life cycle."
                         }
                     </p>
                     <h2 className="subtitle">{ props.initialType == "CBM" ? "Circular Business Models" : "Life Cycle Intesity" }</h2>
@@ -49,8 +50,8 @@ export default function SolutionOverview( props )
                     <p>
                         {
                             props.initialType != "CBM" ?
-                            "Circular business models enable closed loops and re- source-efficient production and consumption systems." :
-                            "Life cycyle intensities define product classifica- tions based on environ- mental hotspots, following the product life cycle."
+                            "Circular business models enable closed loops and resource-efficient production and consumption systems." :
+                            "Life cycyle intensities define product classifications based on environmental hotspots, following the product life cycle."
                         }
                     </p>
                     <h2 className="subtitle">{ props.initialType != "CBM" ? "Circular Business Models" : "Life Cycle Intesity" }</h2>
@@ -59,15 +60,15 @@ export default function SolutionOverview( props )
                 <div className="textBox box3">
                     <h2 className="number">{ edCount }</h2>
                     <p>
-                        Ecodesign principles serve as a guide to optimi- ze environmental-related product improvements that are in line with the circular economy at the operational level.
+                        Ecodesign principles serve as a guide to optimize environmental-related product improvements that are in line with the circular economy at the operational level.
                     </p>
                     <h2 className="subtitle">ECODESIGN PRINCIPLES</h2>
                 </div>
                
                 <div className="textBox box4">
-                    <h2 className="number">?</h2>
+                    <h2 className="number">{ cdpCount }</h2>
                     <p>
-                        The Circular Design Principles provide spe- cific guidelines for im- plementing circular measures at the const- ructive level for optimi- zation. These principles are grouped into diffe- rent areas of action.
+                        The Circular Design Principles provide specific guidelines for implementing circular measures at the constructive level for optimization. These principles are grouped into different areas of action.
                     </p>
                     <h2 className="subtitle">CIRCULAR DESIGN PRINCIPLES</h2>
                 </div>
