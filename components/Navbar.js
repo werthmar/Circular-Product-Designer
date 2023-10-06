@@ -117,7 +117,7 @@ export default class CustomNavbar extends React.Component
                                     {/* Home button */}
                                     <Col>
                                         <Tooltip arrow title="Home">
-                                            <Link href="/">
+                                            <Link href="/home">
                                                 <Button className='homeButton'>
                                                     <Image src="/icons/Menü_Haus.png" width={65} height={55} alt='HomeButton' />
                                                 </Button>

@@ -1,0 +1,96 @@
+@import 'theme';
+
+.homePage{    
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+
+    .colorBackground{
+        position: relative;
+        background-image: url("/images/Farbkachel.png");
+
+        h1{
+            position: absolute;
+            bottom: 30%;
+            font-size: 80px;
+            font-weight: bold;
+        }
+
+        p{
+            position: absolute;
+            bottom: 10px;
+        }
+    }
+
+    .row{
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .buttonCol{
+        margin: 0;
+        padding: 0;
+        
+        .col{
+            margin: 0;
+            padding: 0;
+        }
+    }
+    
+    .navigationButton{
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        border: none;
+        padding: 0;
+        margin: 0;
+        
+        .backgroundImage{
+            display: flex;
+            align-items: center;
+            text-align: center;
+            min-height: 100px;
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-position: 50% 0;
+            background-repeat: no-repeat;
+        }
+        
+        .roadmap{
+            background-image: url("/images/Kachel Roadmap.png");
+        }        
+        .library{
+            background-image: url("/images/Kachel Bibliothek.png");
+        }
+        .newProject{
+            background-image: url("/images/Kachel Neues Projekt.png");
+            background-size: cover;
+            
+        }
+        .archive{
+            background-image: url("/images/Kachel Archiv.png");
+        }
+
+        img{
+            padding: 0;
+            
+            margin: auto;
+        }
+
+        p{
+            font-size: 40px;
+            margin: auto;
+        }
+    }
+    .navigationButton:hover{
+        background-image: none;
+        background-color: gray;
+    }
+
+
+}
+
