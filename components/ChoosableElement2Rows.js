@@ -111,7 +111,7 @@ export default function ChoosableElement2Rows(props) {
     function toggleDescription2() {
         setDescriptionVisible2( false );
     }
-    
+    //name = name.replace(/(.{8})/g, "$1\n");
     return(
 
             <Row className={ descriptionVisible || descriptionVisible2 ? "descriptionRow col-7" : "descriptionRow col d-flex" }>
@@ -119,7 +119,7 @@ export default function ChoosableElement2Rows(props) {
                 <Row className={ descriptionVisible || descriptionVisible2 ? "twoElementRow col-3" : "twoElementRow" }>
 
                     {/* Upper Choosable Element */}
-                    <Col className="choosableElement col-12" 
+                    <Col className="choosableElement2Row col-12" 
                         //xs={descriptionVisible ? "8" : "3"} 
                         //md={descriptionVisible ? "5" : "2"} 
                         //xxl={descriptionVisible ? "4" : "1"}
@@ -167,7 +167,7 @@ export default function ChoosableElement2Rows(props) {
                     </Col>
                     
                     {/* Lower Choosable Element */}
-                    <Col className="choosableElement col-12" 
+                    <Col className="choosableElement2Row col-12" 
                         //xs={descriptionVisible ? "8" : "3"} 
                         //md={descriptionVisible ? "5" : "2"} 
                         //xxl={descriptionVisible ? "4" : "1"}
@@ -217,7 +217,7 @@ export default function ChoosableElement2Rows(props) {
                 </Row>
 
                 {/* Description which can be opened on click */}
-                <Col className={"description col-9"} style={{display: descriptionVisible ? 'inline-block' : 'none', backgroundColor: color }} onClick={() => handleClick(1)}>
+                <Col className={"description"} style={{display: descriptionVisible ? 'inline-block' : 'none', backgroundColor: color, backgroundImage: "/images/Kugel.png"}} onClick={() => handleClick(1)}>
                     <h2>{name.toUpperCase()}</h2>
                     <br/>
                     <p>{description}</p>

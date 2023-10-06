@@ -341,6 +341,30 @@ export default class AdvisorPage extends React.Component
         Navbar.current.setExpandedButtons();
     }
 
+    schoeneZeilenumbrueche = (text, zeilenlaenge) => {
+        let woerter = text.split(' ');
+        let aktuelleZeile = woerter[0];
+        let aktuelleLaenge = woerter[0].length
+
+        for (let i = 1; i < woerter.length; i++) {
+            let wort = woerter[i];
+            if (wort.length > zeilenlaenge) {
+                // Wenn das Wort länger als die maximale Zeilenlänge ist, unterstreiche es
+                aktuelleZeile += '\n' + wort;
+                aktuelleLaenge = wort.length
+            } else if (aktuelleLaenge + 1 + wort.length <= zeilenlaenge) {
+                aktuelleZeile += ' ' + wort;
+                aktuelleLaenge += wort.length + 1
+            } else {
+                aktuelleZeile += '\n' + wort;
+                aktuelleLaenge = wort.length
+            }
+        }
+
+        return aktuelleZeile; 
+
+    }
+
     // --- Render -------------------------------------------------------------------------------
 
     // Split up the data and join it so that the element of the forst row and the corresponding element directly underneath it
@@ -368,10 +392,10 @@ export default class AdvisorPage extends React.Component
                 key={index}
                 id={item[0].id}
                 id2={item[1].id}
-                description={item[0].description}
-                description2={item[1].description}
-                name={item[0].name}
-                name2={item[1].name}
+                description={this.schoeneZeilenumbrueche(item[0].description,64)}
+                description2={this.schoeneZeilenumbrueche(item[1].description,64)}
+                name={this.schoeneZeilenumbrueche(item[0].name, 12)}//{item[0].name.replace(/(.{11})/g, "$1\n")}//{item[0].name}
+                name2={this.schoeneZeilenumbrueche(item[1].name, 12)}
                 active={item[0].active}
                 active2={item[1].active}
                 type={this.state.type}
