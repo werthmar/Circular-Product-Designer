@@ -13,7 +13,7 @@ import '../styles/navbar.scss';
 import '../styles/choosableElement.scss';
 import '../styles/solutionOverview.scss';
 import '../styles/home.scss';
-
+import '../styles/roadmap.scss'
 
 import { useRouter } from "next/router";
 import { useEffect } from "react";

@@ -90,7 +90,7 @@ export default function HomePage()
               { /** Roadmap Button */}
               <Col>
                 <div onMouseEnter={onHoverRoadmap} onMouseLeave={onLeaveRoadmap} style={{ height: "100%" }} >
-                  <Button className="navigationButton">
+                  <Button className="navigationButton" onClick={ () => router.push("/roadmap") }>
                     <div className={ roadmap == true ? "" : "backgroundImage roadmap" } >
                       {
                         roadmap == true ?

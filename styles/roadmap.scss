@@ -1,0 +1,54 @@
+.Roadmap{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    .row{
+        height: 100%;
+        width: 100%;
+        padding: 0;
+    }
+
+    .navbarCol{
+        padding: 20px;
+        margin: 0;
+
+        .homeButton{
+            border: none;
+            background-color: transparent;
+        }
+
+        h1{
+            padding: 30px;
+            padding-top: 60px;
+            font-size: 30px;
+        }
+
+        p{
+            padding: 30px;
+            font-size: 15px;
+        }
+    }
+
+    .roadmapCol{
+        width: 100%;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        background-color: lightgray;
+
+        .roadmapImage{
+            display: flex;
+            align-items: center;
+            text-align: center;
+            min-height: 100px;
+            height: 100%;
+            width: 100%;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url("/images/Roadmap_ohne Text.png");
+        }
+    }
+}
