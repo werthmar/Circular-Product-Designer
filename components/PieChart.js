@@ -20,6 +20,10 @@ ChartJS.register(
 
 export default function PieChart( props )
 {
+
+    var width = screen.width;
+    var height = screen.height;
+
     const toggleDescription = props.toggleDescription;
     const chartRef = useRef();
     const chartRef2 = useRef();
@@ -31,7 +35,7 @@ export default function PieChart( props )
     var _data = props.data.descriptions;
     var outerChart = [];
     var outerChartLength = [];
-    var innerChart = ['DOWNLOAD LIST OF SOLUTIONS']
+    var innerChart = ['DOWNLOAD LIST\n OF SOLUTIONS']
     console.log(_data);
 
     // Order data into Areas of Solution categories
@@ -45,6 +49,7 @@ export default function PieChart( props )
     var productLabeling = [];
     var transportability = [];
 
+    // Save the items in the right categories for easy access
     _data.forEach( (item, index) => {
         if (item.id >= 46 && item.id <= 58) functionality.push(item);
         if (item.id >= 59 && item.id <= 76) materialSuitability.push(item);
@@ -61,7 +66,7 @@ export default function PieChart( props )
     if (functionality.length != 0) outerChart.push('FUNCTIONALITY');
     if (materialSuitability.length != 0) outerChart.push('MATERIAL SUITABILITY');
     if (manufacturability.length != 0) outerChart.push('MANUFACTURABILITY');
-    if (assemblabilityAndDisassemblability.length != 0) outerChart.push('ASSEMBLABILITY AND DISASSEMBLABILITY');
+    if (assemblabilityAndDisassemblability.length != 0) outerChart.push('ASSEMBLABILITY AND\n DISASSEMBLABILITY');
     if (userFriendliness.length != 0) outerChart.push('USER FRIENDLINESS'); 
     if (maintainability.length != 0) outerChart.push('MAINAINABILITY');
     if (recyclability.length != 0) outerChart.push('RECYCLABILITY'); 
@@ -71,6 +76,32 @@ export default function PieChart( props )
     for (var i = 0; i< outerChart.length; i++) {
         outerChartLength.push(1); // all have the same size
     }
+
+    // Vordefinierte Werte für verschiedene Auflösungen
+    const resolutions = [
+        { width: 4096, height: 2060, fontSize1: 40, fontSize2: 60 },
+        { width: 1916, height: 1030, fontSize1: 18, fontSize2: 50 },
+        { width: 1366, height: 1024, fontSize1: 14, fontSize2: 35 },
+        { width: 844, height: 390, fontSize1: 5, fontSize2: 15 }
+        // Füge hier weitere Auflösungen hinzu, falls erforderlich
+    ];
+
+    // Finde die am nächsten liegende Auflösung
+    const closestResolution = resolutions.reduce((prev, curr) => {
+        const prevDiff = Math.abs(prev.width - width) + Math.abs(prev.height - height);
+        const currDiff = Math.abs(curr.width - width) + Math.abs(curr.height - height);
+        return currDiff < prevDiff ? curr : prev;
+    });
+
+    // Setze die Schriftgröße im Body-Element
+    var string_size_outer = `${closestResolution.fontSize1}px`;
+
+    var string_size_inner = `${closestResolution.fontSize2}px`;
+
+    // 4096 x 2060 = 40 - 60
+    // 1916 x 1030 = 18 - 50
+    // 1366 x 1024 = 14 - 35
+    // 844 x 390 = 5 - 15
 
     // --- Pie Chart 1 with category selection ----------------------------
     const data = {
@@ -86,7 +117,7 @@ export default function PieChart( props )
                     // achieves text rotation, taken from: https://stackoverflow.com/questions/68030418/how-to-rotate-the-label-text-in-doughnut-chart-slice-vertically-in-chart-js-canv
                     anchor: "center", //start, center, end
                     font: {
-                        size: 12,
+                        size: string_size_outer,
                         weight: 600
                     },
                     rotation: function(ctx) {
@@ -107,7 +138,7 @@ export default function PieChart( props )
                 datalabels: {
                     anchor: "start", //start, center, end
                     font: {
-                        size: 30,
+                        size: string_size_inner,
                     },
                     formatter: (val, ctx) => (ctx.chart.data.datasets[1].labels[ctx.dataIndex])
                 }
@@ -158,6 +189,13 @@ export default function PieChart( props )
         // Determine which category the user clicked on
         let element = getElementAtEvent(chartRef2.current, event);
         var category;
+
+        // Check if the user clicked on the pieChart or on empty space (for some reason this function triggers even on empty space around the pie chart which leads to an error)
+        if ( !element[0] ) return;
+        // Check if the inner circle was clicked and if yes do nothing, only outer circle matters here
+        if ( element[0].datasetIndex == 1 ) return;
+        // Check if the user clicked on the empty halfe of the pie chart
+        if ( element[0].index == 0 ) return;
 
         switch(selectedCategory)
         {
@@ -274,7 +312,7 @@ export default function PieChart( props )
                         anchor: "center", //start, center, end
                         color: 'black',
                         font: {
-                            size: 16,
+                            size: 12,
                             weight: 600,
                         },
                         rotation: function(ctx) {
@@ -288,15 +326,15 @@ export default function PieChart( props )
                 },
                 // Inner Circle
                 {
-                    labels: [ selectedCategory ],
-                    data: [ 1, ],
+                    labels: [ '', selectedCategory ],
+                    data: [ 1, 1 ],
                     backgroundColor: [ 'rgb(47, 52, 55)' ],
                     borderColor: 'transparent',
                     datalabels: {
-                        anchor: "start", //start, center, end
+                        anchor: "center", //start, center, end
                         color: 'white',
                         font: {
-                            size: 30,
+                            size: 15,
                         },
                         formatter: (val, ctx) => (ctx.chart.data.datasets[1].labels[ctx.dataIndex])
                     }
@@ -316,16 +354,18 @@ export default function PieChart( props )
                     datalabels: {
                     },
                 },        
+                animation: false,
+                responsive:true,
+                maintainAspectRatio:false
         };
 
-
         return(
-            <Row style={{ width: '100%', height: '100%' }} >
+            <Row style={{ width: '131%', height: '100%' }} >
             
                 { /** Text Display*/ }
                 <Col xs="7">
                     <div className="textDisplay">
-                        <h1>{ title }</h1>
+                        <h1>{ title.toUpperCase() }</h1>
                         <p>{ text }</p>
 
                         <Button onClick={ () => back() } className="backButton">
@@ -335,15 +375,15 @@ export default function PieChart( props )
                     </div>
                 </Col>
 
-                {/** make the text display here, make inside new bootstrap row */}
+                {/** Half pie chart */}
                 <Col xs="5">
 
-                <Pie className="halfPieChart"
+                 <Pie className="halfPieChart"
                     data={data2}
                     options={options2}
                     ref={chartRef2}
-                    onClick={onClick2}
-                />
+                    onClick={onClick2}/>
+
                 </Col>
             </Row>
         );

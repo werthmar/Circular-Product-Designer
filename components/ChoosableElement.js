@@ -122,8 +122,9 @@ export default function ChoosableElement(props) {
 
                         <h2>{name.toUpperCase()}</h2>
                         <br/>
-                        <p>{description}</p>
-        
+                        
+                        <p><centre>{description}</centre></p>
+                        
                     </Col>
 
                 </Row>

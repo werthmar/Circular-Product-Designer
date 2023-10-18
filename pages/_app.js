@@ -11,8 +11,11 @@ import '../styles/playground.scss';
 import '../styles/fonts.scss';
 import '../styles/navbar.scss';
 import '../styles/choosableElement.scss';
+import '../styles/solutionOverview.scss';
+import '../styles/home.scss';
+import '../styles/roadmap.scss'
 
-
+import React from 'react';
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -34,8 +37,18 @@ function MyApp({ Component, pageProps }) {
     storage.setItem("currentPath", globalThis.location.pathname);
   }
 
-
   return getLayout(<Component {...pageProps} />)
+}
+
+// Only used for Website activation as long as there is no impresum
+export function checkPassword( userInput ) {
+  const password = "circular33!";
+
+  if( userInput == password ) {
+      return true;
+  } else {
+      return false;
+  }
 }
 
 export default MyApp

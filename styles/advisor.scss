@@ -1,7 +1,7 @@
 @import 'theme';
 
 body{
-    //overflow: hidden;
+    overflow: hidden;
 }
 
 .advisorPage{
@@ -45,7 +45,12 @@ body{
             border-radius: 35px;
             color: white;
 
+            h1{
+                font-size: 60px;
+            }
+
             p{
+                font-size: 40px;
                 padding: 50px;
                 color: white;
             }
@@ -61,16 +66,13 @@ body{
 
             
             .halfPieChart{
-                //position: absolute;
-                //right: -20%;
+                position: absolute;
+                //right: -200px;
                 //left: calc(-50vw + 50%);
                 z-index: 2;
             }
         
         
     }
-
-
-
 
 }

@@ -4,90 +4,52 @@ import { Button, Col, Container, List, Nav, Navbar, Alert, Row } from "reactstra
 import { useState } from "react";
 import Image from "next/image";
 import CustomNavbar from "../components/Navbar";
+import { BsArrowRight } from 'react-icons/bs';
 
 export default function Playground()
 {
-    var navbar = React.createRef();
-
-    function toggleNavbar() {
-        navbar.current.setExpanded();
-    }
-
-    // Exchange with current choosabel element.js
-    function ChoosableElement() {
-        const [descriptionVisible, setDescriptionVisible] = useState(false);
-
-        const handleClick = () => {
-            console.log(`CLICK!!`);
-            setDescriptionVisible(!descriptionVisible);
-            toggleNavbar();
-        }
-
-        return(
-            <Col className="choosableElement">
-                <Container fluid>
-                    <Row>
-                        
-                        {/* Bar */}
-                        <Col className={descriptionVisible ? "col-4" : ""} onClick={() => handleClick()}>
-
-                                    <Col>
-                                        <h1>CHOOSE</h1>
-                                    </Col>
-
-                                    {/* Checkmark Button */}
-                                    <Col className="buttonCol">
-                                        <Image src="/icons/checkbox_unmarked.png" alt="checkbox" width={100} height={65} />
-                                    </Col>
-
-                                    {/* Rotatet Title */}
-                                    <Col>
-                                        <p className="rotated-text">Column1</p>
-                                    </Col>
-                            
-                        </Col>
-
-                        {/* Description which can be opened on click */}
-                        <Col className="description" style={{display: descriptionVisible ? 'inline-block' : 'none' }}>
-
-                            <h2>test</h2>
-                            <p>
-                                Tempor ea veniam anim duis deserunt ut duis. Et culpa aute nulla nisi ipsum nisi nostrud ex anim quis eu ut aute dolore. Mollit nostrud voluptate pariatur ut reprehenderit sit pariatur consectetur consectetur ex veniam ut amet. Veniam duis esse amet in qui aute esse aute laborum culpa qui. Duis qui cupidatat aliqua amet incididunt excepteur cillum.
-                                <br/><br/>
-                                Quis esse nisi non nisi elit consequat. Et amet proident dolor laborum. Sunt officia adipisicing ad quis qui velit qui ea occaecat nulla ad ut ad officia. Laboris cupidatat aliquip dolore enim fugiat dolore sunt labore exercitation minim occaecat proident duis.
-                                <br/><br/>
-                                Reprehenderit esse quis eiusmod et commodo aute Lorem. Velit et incididunt excepteur laboris aliquip laboris et. Ea adipisicing eiusmod esse sunt ut ea esse ad sint incididunt incididunt.
-                            </p>
-            
-                        </Col>
-
-                    </Row>
-                </Container>    
-            </Col>
-        );
-    }
+   
 
     return(
-        <Container className="playground" fluid>
+        <div className="playground">
 
-            <Row xs="8">
+            <div className="greyBox">
+                <p>Decission <br/> Support <br/> Tool</p>
+            </div>
 
-                <CustomNavbar ref={navbar} />
+            <div className="bigBallContainer">
+                <Image 
+                    src={"/images/Kugel.png"}
+                    width={700}
+                    height={700}
+                />
+            </div>
 
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
-                <ChoosableElement />
+            <div className="logoContainer">
+                <Image 
+                    src={"/images/Logo.png"}
+                    width={280}
+                    height={150}
+                />
+            </div>
 
-            </Row>
+            <Button className="loginButton" disabled>
+                Login
+            </Button>
 
-      
+            <div className="startButtonContainer">
+                <h2>Start now</h2>
+                <Button className="button">
+                    <BsArrowRight size={30} color="white" />
+                </Button>
+            </div>
 
-        </Container>
+            <div className="flyingText">
+                <p>
+                    Navigate yourself <br/> through the <br/> world of circular <br/> product design.
+                </p>
+            </div>
+
+        </div>
     );
 }
-  

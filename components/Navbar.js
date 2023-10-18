@@ -22,6 +22,7 @@ export default class CustomNavbar extends React.Component
                 props.pageOrder[1],
                 props.pageOrder[2],
                 props.pageOrder[3],
+                props.pageOrder[4],
             ],
             pageIndex: props.pageIndex,
             title: props.title,
@@ -49,6 +50,7 @@ export default class CustomNavbar extends React.Component
     // Color of go on button and navigation buttons changes based on current page
     decideButtonColor()
     {
+        console.log(this.state.pageIndex, this.props.pageOrder);
         switch( this.props.pageOrder[ this.state.pageIndex - 1 ] )
         {
             case 'CBM':
@@ -57,6 +59,8 @@ export default class CustomNavbar extends React.Component
                 return 'rgb(237, 191, 98)';
             case 'ED':
                 return 'rgb(89, 99, 80)';
+            case 'Solution-Overview':
+                return 'rgb(0, 0, 0)';
             default:
                 return 'grey';
         }
@@ -84,7 +88,7 @@ export default class CustomNavbar extends React.Component
                 <Col>
                     <Button className='navbarButton'
                     style={
-                        // Set the current page active
+                        // Set the current page active / or set all buttons active with color, if your on the last page
                         index == this.state.pageIndex ? { backgroundColor: this.decideButtonColor() } : {}   
                     }
                     disabled={
@@ -113,7 +117,7 @@ export default class CustomNavbar extends React.Component
                                     {/* Home button */}
                                     <Col>
                                         <Tooltip arrow title="Home">
-                                            <Link href="/">
+                                            <Link href="/home">
                                                 <Button className='homeButton'>
                                                     <Image src="/icons/Menü_Haus.png" width={65} height={55} alt='HomeButton' />
                                                 </Button>

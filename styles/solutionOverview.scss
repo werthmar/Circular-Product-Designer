@@ -1,0 +1,115 @@
+.solutionOverview {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .cbm-background{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        background-image: url("/images/solution_cbm.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    .lcp-background{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        background-image: url("/images/solution_lcp.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    h1{
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        font-weight: bold;
+    }
+
+    .textBox{
+        position: absolute;
+        top: 8%;
+        max-width: 230px;
+        text-align: end;
+        font-size: 18px;
+
+        .number{
+            font-size: 45px;
+            font-size: bold;
+        }
+        .subtitle{
+            font-size: 25px;
+        }
+    }
+    
+    // First textBox
+    .box1{
+        left: 25%;
+        
+        .subtitle{
+            padding-top: 10%;
+        }
+    }
+    
+    .box2{
+        left: 44%;
+
+        .subtitle{
+            padding-top: 38%;
+        }
+    }
+    
+    .box3{
+        left: 64%;
+
+        .subtitle{
+            padding-top: 35%;
+        }
+    }
+
+    .box4{
+        left: 85%;
+
+        .subtitle{
+            padding-top: 35%;
+        }
+    }
+
+    .link{
+        position: absolute;
+        align-items: center;
+        text-align: start;
+        background-image: url("/images/arrow_underline.png");
+        background-size: contain;
+        background-position: bottom;
+        background-repeat: no-repeat;
+
+        p{
+            padding-right: 30px;
+            font-size: 25px;
+        }
+    }
+
+    .link1{
+        right: 5%;
+        bottom: 25%;
+    }
+    .link2{
+        right: 5%;
+        bottom: 18%;
+    }
+    .link3{
+        right: 5%;
+        bottom: 10%;
+        padding-bottom: 10px;
+    }
+
+}

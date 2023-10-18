@@ -1,77 +1,74 @@
 @import 'theme';
 
-.indexPage{    
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    padding: 100px 0px 100px 0px;
-
-    .row{
-        width: 100%;
-        height: 100%;
-        margin: 0;
-    }
-
-    .buttonCol{
-        margin: 0;
-        padding: 30px;
-        
-        .col{
-            margin: 0;
-            padding: 0;
-        }
-    }
+.indexPage{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: black;
     
-    .navigationButton{
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        border: solid grey 2px;
-        padding: 0;
-        margin: 0;
-        
-        .backgroundImage{
-            display: flex;
-            align-items: center;
-            text-align: center;
-            min-height: 100px;
-            height: 100%;
-            width: 100%;
-            background-size: cover;
-            background-position: 50% 0;
-            background-repeat: no-repeat;
-        }
-        
-        .roadmap{
-            background-image: url("/images/Foto_Roadmap.jpg");
-        }        
-        .library{
-            background-image: url("/images/Foto_Bibliothek.jpg");
-        }
-        .newProject{
-            background-image: url("/images/Foto_NeuesProjekt.jpg");
-        }
-        .archive{
-            background-image: url("/images/Foto_Archiv.jpg");
-        }
-
-        img{
-            margin: auto;
-        }
+    .greyBox{
+        position: absolute;
+        width: 600px;
+        height: 700px;
+        z-index: 0;
+        top: 0;
+        left: 400px;
+        background-color: rgb(94, 103, 110);
 
         p{
-            font-size: 30px;
-            text-decoration: underline;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 15px;
-            margin: auto;
+            position: absolute;
+            bottom: 50px;
+            left: 10px;
         }
     }
-    .navigationButton:hover{
-        opacity: 0.6;
+
+    .bigBallContainer{
+        position: absolute;
+        right: 30%;
+        bottom: 0;
+        z-index: 1;
+        width: 30%;
+        height: 30%;
     }
 
+    .logoContainer{
+        position: absolute;
+        bottom: -650px;
+        left: 300px;
+        z-index: 1;
+        width: 30%;
+        height: 30%;
+    }
+
+    .loginButton{
+        position: absolute;
+        top: 100px;
+        right: 100px;
+        border-radius: 0;
+        color: white;
+        background-color: black;
+        width: 150px;
+    }
+
+    .startButtonContainer{
+        position: absolute;
+        bottom: -800px;
+        right: 200px;
+
+        .button{
+            padding-left: 130px;
+            background-color: rgb(196, 132, 104);
+            border-radius: 0;
+            border: 0;
+        }
+    }
+
+    .flyingText{
+        position: absolute;
+        top: 200px;
+        right: 250px;
+        z-index: 2;
+        font-size: 20px;
+    }
 
 }
-
