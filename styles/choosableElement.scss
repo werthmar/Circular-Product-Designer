@@ -27,14 +27,10 @@
     .rotated-text{
         padding-top: 20px;
         margin: auto;
-        text-align: center;
-        writing-mode: vertical-rl; //works better than rotate
-        //transform: rotate(90deg);
+        writing-mode: vertical-lr; //works better than rotate
         font-size: 35px;
         font-family: 'Barlow-Light';
-        white-space: nowrap;
-        //margin-left: -50%;
-        //transform-origin: 0 0; /* #TODO: check how to properly asign origin */
+        //white-space: nowrap;
     }
 
     .description{
@@ -46,11 +42,13 @@
         h2{
             font-size: 40px;
             font-weight: 600;
+            padding-top: 30px;
+            padding-left: 10px;
         }
 
         p{
-            position: absolute;
-            top: 40%;
+            position: relative;
+            margin: 30px 40px 0px 40px;
             font-size: 20px;
         }
     }
@@ -84,13 +82,15 @@
 
     
     h2{
+        padding-top: 30px;
+        padding-left: 10px;
         font-size: 40px;
         font-weight: 600;
     }
 
     p{
-        position: absolute;
-        top: 40%;
+        position: relative;
+        margin: 30px 40px 0px 40px;
         font-size: 20px;
         
         writing-mode: horizontal-tb;
@@ -133,13 +133,15 @@
 
         
         h2{
+            padding-top: 30px;
+            padding-left: 10px;
             font-size: 40px;
             font-weight: 600;
         }
 
         p{
-            position: absolute;
-            top: 40%;
+            position: relative;
+            margin: 30px 40px 0px 40px;
             font-size: 20px;
         }
     }
