@@ -50,17 +50,23 @@ export default function PieChart( props )
     var transportability = [];
 
     // Save the items in the right categories for easy access
-    _data.forEach( (item, index) => {
-        if (item.id >= 46 && item.id <= 58) functionality.push(item);
-        if (item.id >= 59 && item.id <= 76) materialSuitability.push(item);
-        if (item.id >= 77 && item.id <= 93) manufacturability.push(item);
-        if (item.id >= 94 && item.id <= 109) assemblabilityAndDisassemblability.push(item);
-        if (item.id >= 110 && item.id <= 121) userFriendliness.push(item);
-        if (item.id >= 122 && item.id <= 132) maintainability.push(item);
-        if (item.id >= 133 && item.id <= 145) recyclability.push(item);
-        if (item.id >= 146 && item.id <= 153) productLabeling.push(item);
-        if (item.id >= 154 && item.id <= 163) transportability.push(item);
+    var lastItemName;
+    _data.forEach( (item, index) => {           
+        // Only show one item of each cdp, change bcs of only cdp display, not title of solution
+        if ( item.name != lastItemName ) {   
+            if (item.id >= 46 && item.id <= 58) functionality.push(item);
+            if (item.id >= 59 && item.id <= 76) materialSuitability.push(item);
+            if (item.id >= 77 && item.id <= 93) manufacturability.push(item);
+            if (item.id >= 94 && item.id <= 109) assemblabilityAndDisassemblability.push(item);
+            if (item.id >= 110 && item.id <= 121) userFriendliness.push(item);
+            if (item.id >= 122 && item.id <= 132) maintainability.push(item);
+            if (item.id >= 133 && item.id <= 145) recyclability.push(item);
+            if (item.id >= 146 && item.id <= 153) productLabeling.push(item);
+            if (item.id >= 154 && item.id <= 163) transportability.push(item);
+            lastItemName = item.name;
+        }
     });
+
 
     // Only display the Solution categories which have apllieable sulotions for the user made selection
     if (functionality.length != 0) outerChart.push('FUNCTIONALITY');
@@ -171,17 +177,52 @@ export default function PieChart( props )
         // Display the new data
             // the array which saves the subelements of the category
             setTitle( category );
-            setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt tempus nisi, dictum dignissim enim faucibus vitae. Aenean egestas nunc commodo erat feugiat elementum. In hac habitasse platea dictumst. Proin ornare dignissim justo, sit amet tincidunt erat lobortis nec. Sed pulvinar condimentum dolor vitae consequat. Nunc pretium aliquet purus, et commodo felis lobortis nec. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed libero at lectus semper imperdiet vel nec dolor. Cras et pretium lectus. Nulla et est ornare, ultrices magna vel, facilisis justo. ");
             setSelectedCategory( category );
+            setCategoryText( category );
     }
 
     function getCdpTitles( category )
     {
         var result = [''];
         category.forEach( (item, index ) => {
-            result.push(item.cdp_title);
+            result.push(item.name);
         });
         return result;
+    }
+    
+    function setCategoryText( category ) {
+
+        switch(category)
+        {
+            case 'FUNCTIONALITY':
+                setText("Functionality includes CDPs that improve the functionality of products to minimize design flaws that impact how the product is used. In addition, they enable an extension of functions in the form of upgrades or updates.");
+                break;
+            case 'MATERIAL SUITABILITY':
+                setText("Material suitability describes CDPs that relate to the use of materials. Various material properties play a role here, as does the selection of suitable resources. Materials are increasingly diverse these days, having individual properties, applications, advantages and disadvantages. A clear understanding of the functional requirements of the products is necessary to make the selection of materials. To ensure their economical recycling and consistently high quality, material compatibility and combination should be checked directly at the design stage .");
+                break;
+            case 'MANUFACTURABILITY':
+                setText("Manufacturability includes CDPs that prioritize simple and efficient production of the product. The design will be optimized to fit the manufacturing steps.");
+                break;
+            case 'ASSEMBLABILITY AND DISASSEMBLABILITY':
+                setText("Included CDPs enable easy assembly of a product and efficient disassembly without causing great damage.");
+                break;
+            case 'USER FRIENDLINESS':
+                setText("User friendliness describes principles that improve the user experience with the product. This can intensify and prolong the use of the product.");
+                break;
+            case 'MAINAINABILITY':
+                setText("Maintainability describes a set of CDPs ensuring components are replaceable and maintenance actions can be carried out, as well as those enable checking the product’s condition.");
+                break;
+            case 'RECYCLABILITY':
+                setText("The CDPs outline strategies for facilitating the recyclability of a product, focusing on the ease of separating its components and identifying the materials they are made of.");
+                break;
+            case 'PRODUCT LABELING':
+                setText("Detailed product labeling is crucial for the proper usage of the product, as well as for maintenance, repair, and end-of-life treatment.");
+                break;
+            case 'TRANSPORTABILITY':
+                setText("The transportability describes all measures concerning the transport and packaging of the product. This is also relevant for internal logistics and reserve logistics.");    
+                break;
+        }                
+
     }
 
     // OnClick function for the second, more detailed pie chart
@@ -229,7 +270,7 @@ export default function PieChart( props )
             }   
 
             // Update Text and Title
-            setTitle( category[ element[0].index - 1 ].cdp_title );
+            setTitle( category[ element[0].index - 1 ].name );
             setText( category[ element[0].index - 1 ].description );
     }
 
@@ -291,12 +332,12 @@ export default function PieChart( props )
                 outerChart2 = getCdpTitles(transportability);
                 break;
         }                
-
+        
         var outerChart2Length = [outerChart2.length - 1 ]; // to make only the left half have the items
         for (var i = 0; i< outerChart2.length - 1; i++) { // -1 bcs of the blank left side added
             outerChart2Length.push(1); // all have the same size
         }
-
+        
         const data2 = {
             datasets:[
                 // Outer Circle
@@ -341,24 +382,24 @@ export default function PieChart( props )
                 }
             ]
         };
-
+        
         const options2 = {
             plugins: 
-                {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    datalabels: {
-                    },
-                },        
-                animation: false,
-                responsive:true,
-                maintainAspectRatio:false
+            {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+                datalabels: {
+                },
+            },        
+            animation: false,
+            responsive:true,
+            maintainAspectRatio:false
         };
-
+        
         return(
             <Row style={{ width: '131%', height: '100%' }} >
             
@@ -388,5 +429,5 @@ export default function PieChart( props )
             </Row>
         );
     }
-
+    
 }
