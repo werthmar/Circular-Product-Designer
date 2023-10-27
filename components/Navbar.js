@@ -170,7 +170,7 @@ export default class CustomNavbar extends React.Component
                                                     className={ this.state.nextPageButtonActive ? "" : "disabled" }
                                                     style={{ borderColor: this.decideButtonColor() }}
                                                     onClick={ () => this.props.nextPage() }>
-                                                    { title == 'Circular Design Principles' ? 'CHOOSE' : 'GO ON' }
+                                                    { title == 'Circular Design Principles' ? 'CONTINUE' : 'GO ON' }
                                                 </Button>
                                             </div>
                                         </Tooltip>
