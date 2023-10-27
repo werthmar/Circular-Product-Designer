@@ -30,6 +30,8 @@ export default function PieChart( props )
     const [selectedCategory, setSelectedCategory] = useState();
     const [title, setTitle] = useState();
     const [text, setText] = useState();
+    const [subcategoryOpen, setSubcategoryOpen] = useState(false);
+
 
     // Rearrange data from database
     var _data = props.data.descriptions;
@@ -74,7 +76,7 @@ export default function PieChart( props )
     if (manufacturability.length != 0) outerChart.push('MANUFACTURABILITY');
     if (assemblabilityAndDisassemblability.length != 0) outerChart.push('ASSEMBLABILITY AND\n DISASSEMBLABILITY');
     if (userFriendliness.length != 0) outerChart.push('USER FRIENDLINESS'); 
-    if (maintainability.length != 0) outerChart.push('MAINAINABILITY');
+    if (maintainability.length != 0) outerChart.push('MAINTAINABILITY');
     if (recyclability.length != 0) outerChart.push('RECYCLABILITY'); 
     if (productLabeling.length != 0) outerChart.push('PRODUCT LABELING'); 
     if (transportability.length != 0) outerChart.push('TRANSPORTABILITY'); 
@@ -209,7 +211,7 @@ export default function PieChart( props )
             case 'USER FRIENDLINESS':
                 setText("User friendliness describes principles that improve the user experience with the product. This can intensify and prolong the use of the product.");
                 break;
-            case 'MAINAINABILITY':
+            case 'MAINTAINABILITY':
                 setText("Maintainability describes a set of CDPs ensuring components are replaceable and maintenance actions can be carried out, as well as those enable checking the product’s condition.");
                 break;
             case 'RECYCLABILITY':
@@ -255,7 +257,7 @@ export default function PieChart( props )
             case 'USER FRIENDLINESS':
                 category = userFriendliness;
                 break;
-            case 'MAINAINABILITY':
+            case 'MAINTAINABILITY':
                 category = maintainability;
                 break;
             case 'RECYCLABILITY':
@@ -272,13 +274,24 @@ export default function PieChart( props )
             // Update Text and Title
             setTitle( category[ element[0].index - 1 ].name );
             setText( category[ element[0].index - 1 ].description );
+            setSubcategoryOpen(true);
     }
 
     // Function that lets you go back to the first pie chart from the second pie chart
     function back()
     {
-        toggleDescription();
-        setSelectedCategory( undefined );
+        var category = selectedCategory; 
+        // Go back to first Pie Chart
+        if(!subcategoryOpen) {
+            toggleDescription();
+            setSelectedCategory( undefined );
+        }
+        // Go only 1 step back
+        else {
+            setTitle(category);
+            setCategoryText(category);
+            setSubcategoryOpen(false);
+        }
     } 
 
 
@@ -319,7 +332,7 @@ export default function PieChart( props )
             case 'USER FRIENDLINESS':
                 outerChart2 = getCdpTitles(userFriendliness);
                 break;
-            case 'MAINAINABILITY':
+            case 'MAINTAINABILITY':
                 outerChart2 = getCdpTitles(maintainability);
                 break;
             case 'RECYCLABILITY':
