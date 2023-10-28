@@ -1,0 +1,477 @@
+.description_Recycling{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    //max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+    overflow-y: auto;
+    background-image: url("../public/images/CBM/CBM_Icons_Recycling.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+.description_circular_supplies{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-circular_supplies.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+.description_sharing{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    //max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+    overflow-y: auto;
+    background-image: url("../public/images/CBM/CBM_Icons-sharing.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+
+.description_Industrial_Symbiosis{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-Industrial_symbiosis.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+.description_Gap_Exploiter{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-Gap_Exploiter.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+.description_Digitalization{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-digitalization.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+
+.description_LLPD{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-long_lasting_product_design.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+.description_PSS{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-PSS.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+.description_Remanufacturing{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-remanufacturing.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+
+.description_Industrial_Repair{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-repair.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+.description_Reuse{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    //max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+    overflow-y: auto;
+    background-image: url("../public/images/CBM/CBM_Icons-reuse.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}
+
+.description_Upgrading{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../public/images/CBM/CBM_Icons-upgrading.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    //background-color: #cccccc;
+
+    
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+
+    
+    h2{
+        padding-top: 30px;
+        padding-left: 10px;
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 2em;
+        
+        writing-mode: horizontal-tb;
+        white-space: pre-wrap;
+        font-family: 'BarlowCondensed-light' !important;
+    }
+}

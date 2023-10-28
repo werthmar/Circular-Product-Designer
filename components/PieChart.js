@@ -36,6 +36,7 @@ export default function PieChart( props )
     // Rearrange data from database
     var _data = props.data.descriptions;
     var outerChart = [];
+    var outerChartHelp = [];
     var outerChartLength = [];
     var innerChart = ['DOWNLOAD LIST\n OF SOLUTIONS']
     console.log(_data);
@@ -74,7 +75,7 @@ export default function PieChart( props )
     if (functionality.length != 0) outerChart.push('FUNCTIONALITY');
     if (materialSuitability.length != 0) outerChart.push('MATERIAL SUITABILITY');
     if (manufacturability.length != 0) outerChart.push('MANUFACTURABILITY');
-    if (assemblabilityAndDisassemblability.length != 0) outerChart.push('ASSEMBLABILITY AND\n DISASSEMBLABILITY');
+    if (assemblabilityAndDisassemblability.length != 0) outerChart.push('ASSEMBLABILITY AND DISASSEMBLABILITY');
     if (userFriendliness.length != 0) outerChart.push('USER FRIENDLINESS'); 
     if (maintainability.length != 0) outerChart.push('MAINTAINABILITY');
     if (recyclability.length != 0) outerChart.push('RECYCLABILITY'); 
@@ -83,14 +84,15 @@ export default function PieChart( props )
     
     for (var i = 0; i< outerChart.length; i++) {
         outerChartLength.push(1); // all have the same size
+        outerChartHelp.push((outerChart.at(i)).replace(" ","\n").replace(" ","\n"))
     }
 
     // Vordefinierte Werte für verschiedene Auflösungen
     const resolutions = [
-        { width: 4096, height: 2060, fontSize1: 40, fontSize2: 60 },
-        { width: 1916, height: 1030, fontSize1: 18, fontSize2: 50 },
-        { width: 1366, height: 1024, fontSize1: 14, fontSize2: 35 },
-        { width: 844, height: 390, fontSize1: 5, fontSize2: 15 }
+        { width: 4096, height: 2060, fontSize1: 40, fontSize2: 60, fontSize3: 40, fontSize4: 30, zeilenlaenge: 20 },
+        { width: 1916, height: 1030, fontSize1: 18, fontSize2: 50, fontSize3: 18, fontSize4: 22, zeilenlaenge: 15 },
+        { width: 1366, height: 1024, fontSize1: 14, fontSize2: 35, fontSize3: 14, fontSize4: 14, zeilenlaenge: 15  },
+        { width: 844, height: 390, fontSize1: 5, fontSize2: 15, fontSize3: 5, fontSize4: 8, zeilenlaenge: 5 }
         // Füge hier weitere Auflösungen hinzu, falls erforderlich
     ];
 
@@ -106,17 +108,26 @@ export default function PieChart( props )
 
     var string_size_inner = `${closestResolution.fontSize2}px`;
 
+
+    var string_size_outer_half = `${closestResolution.fontSize3}px`;
+
+    var string_size_inner_half = `${closestResolution.fontSize4}px`;
+
+    var zeilenlaenge = closestResolution.zeilenlaenge
+
+
     // 4096 x 2060 = 40 - 60
     // 1916 x 1030 = 18 - 50
     // 1366 x 1024 = 14 - 35
     // 844 x 390 = 5 - 15
+
 
     // --- Pie Chart 1 with category selection ----------------------------
     const data = {
         datasets:[
             // Outer Circle
             {
-                labels: outerChart,
+                labels: outerChartHelp,
                 data: outerChartLength,
                 backgroundColor: [ 'rgb(94, 103, 110)' ],
                 borderWidth: 10,
@@ -183,11 +194,47 @@ export default function PieChart( props )
             setCategoryText( category );
     }
 
-    function getCdpTitles( category )
+    
+    
+
+    
+
+
+
+
+    function getCdpTitles( category , zeilenlaenge)
     {
         var result = [''];
         category.forEach( (item, index ) => {
-            result.push(item.name);
+            const name = item.name;
+            let woerter = name.split(' ');
+            let aufgeteilteTeile = [];
+
+            for (let i = 0; i < woerter.length; i++) {
+                aufgeteilteTeile = aufgeteilteTeile.concat(woerter[i].split('-')); // Aufteilen nach '-'
+            }
+
+            woerter = aufgeteilteTeile
+            
+            let aktuelleZeile = woerter[0];
+            let aktuelleLaenge = woerter[0].length
+
+            for (let i = 1; i < woerter.length; i++) {
+                let wort = woerter[i];
+                if (wort.length > zeilenlaenge) {
+                    // Wenn das Wort länger als die maximale Zeilenlänge ist, unterstreiche es
+                    aktuelleZeile += '\n' + wort;
+                    aktuelleLaenge = wort.length
+                } else if (aktuelleLaenge + 1 + wort.length <= zeilenlaenge) {
+                    aktuelleZeile += ' ' + wort;
+                    aktuelleLaenge += wort.length + 1
+                } else {
+                    aktuelleZeile += '\n' + wort;
+                    aktuelleLaenge = wort.length
+                }
+            }
+
+            result.push(aktuelleZeile);
         });
         return result;
     }
@@ -295,6 +342,14 @@ export default function PieChart( props )
     } 
 
 
+    // TODO:
+    function whiteElement(label)
+    {
+        if (label == title.toUpperCase()) return "white";
+        return "black";
+    }
+
+
     // No category has been selected yet, display pieChart 1
     if( selectedCategory == undefined )
     {
@@ -318,31 +373,31 @@ export default function PieChart( props )
         switch(selectedCategory)
         {
             case 'FUNCTIONALITY':
-                outerChart2 = getCdpTitles(functionality);
+                outerChart2 = getCdpTitles(functionality, zeilenlaenge);
                 break;
             case 'MATERIAL SUITABILITY':
-                outerChart2 = getCdpTitles(materialSuitability);
+                outerChart2 = getCdpTitles(materialSuitability, zeilenlaenge);
                 break;
             case 'MANUFACTURABILITY':
-                outerChart2 = getCdpTitles(manufacturability);
+                outerChart2 = getCdpTitles(manufacturability, zeilenlaenge);
                 break;
             case 'ASSEMBLABILITY AND DISASSEMBLABILITY':
-                outerChart2 = getCdpTitles(assemblabilityAndDisassemblability);
+                outerChart2 = getCdpTitles(assemblabilityAndDisassemblability, zeilenlaenge);
                 break;
             case 'USER FRIENDLINESS':
-                outerChart2 = getCdpTitles(userFriendliness);
+                outerChart2 = getCdpTitles(userFriendliness, zeilenlaenge);
                 break;
             case 'MAINTAINABILITY':
-                outerChart2 = getCdpTitles(maintainability);
+                outerChart2 = getCdpTitles(maintainability, zeilenlaenge);
                 break;
             case 'RECYCLABILITY':
-                outerChart2 = getCdpTitles(recyclability);
+                outerChart2 = getCdpTitles(recyclability, zeilenlaenge);
                 break;
             case 'PRODUCT LABELING':
-                outerChart2 = getCdpTitles(productLabeling);
+                outerChart2 = getCdpTitles(productLabeling, zeilenlaenge);
                 break;
             case 'TRANSPORTABILITY':
-                outerChart2 = getCdpTitles(transportability);
+                outerChart2 = getCdpTitles(transportability, zeilenlaenge);
                 break;
         }                
         
@@ -351,6 +406,10 @@ export default function PieChart( props )
             outerChart2Length.push(1); // all have the same size
         }
         
+        let selectedCategoryHelp = selectedCategory.replace(" ","\n").replace(" ","\n");
+
+        
+
         const data2 = {
             datasets:[
                 // Outer Circle
@@ -364,9 +423,9 @@ export default function PieChart( props )
                     datalabels: {
                         // achieves text rotation, taken from: https://stackoverflow.com/questions/68030418/how-to-rotate-the-label-text-in-doughnut-chart-slice-vertically-in-chart-js-canv
                         anchor: "center", //start, center, end
-                        color: 'black',
+                        color: whiteElement(),
                         font: {
-                            size: 12,
+                            size: string_size_outer_half,
                             weight: 600,
                         },
                         rotation: function(ctx) {
@@ -380,7 +439,7 @@ export default function PieChart( props )
                 },
                 // Inner Circle
                 {
-                    labels: [ '', selectedCategory ],
+                    labels: [ '', selectedCategoryHelp ],
                     data: [ 1, 1 ],
                     backgroundColor: [ 'rgb(47, 52, 55)' ],
                     borderColor: 'transparent',
@@ -388,7 +447,7 @@ export default function PieChart( props )
                         anchor: "center", //start, center, end
                         color: 'white',
                         font: {
-                            size: 15,
+                            size: string_size_inner_half,
                         },
                         formatter: (val, ctx) => (ctx.chart.data.datasets[1].labels[ctx.dataIndex])
                     }
@@ -412,13 +471,43 @@ export default function PieChart( props )
             responsive:true,
             maintainAspectRatio:false
         };
+
+
+        const setBackgroundBasedOnH1 = (h1Text) => {
+            // Je nach Text des h1-Elements das entsprechende Hintergrundbild auswählen
+            if (h1Text === "MAINAINABILITY") {
+                return "textDisplay_Maintainability";
+            } else if (h1Text === "MATERIAL SUITABILITY") {
+                return "textDisplay_Material";
+            } else if (h1Text === "MANUFACTURABILITY") {
+                return "textDisplay_Manufacture";
+            } else if (h1Text === "PRODUCT LABELING") {
+                return "textDisplay_Product";
+            } else if (h1Text === "USER FRIENDLINESS") {
+                return "textDisplay_User";
+            } else if (h1Text === "TRANSPORTABILITY") {
+                return "textDisplay_Transportability";
+            } else if (h1Text === "RECYCLABILITY") {
+                return "textDisplay_Recycle";
+            } else if (h1Text === "FUNCTIONALITY") {
+                return "textDisplay_Functionality";
+            } else if (h1Text === "ASSEMBLABILITY AND DISASSEMBLABILITY") {
+                return "textDisplay_Assem";
+            }
+            // Fügen Sie hier weitere Bedingungen für die anderen Bilder hinzu
+            else {
+                return "textDisplay_Maintainability"; // Wenn kein passender Text gefunden wurde, kein Hintergrundbild anzeigen
+            }
+        };
+
         
         return(
             <Row style={{ width: '131%', height: '100%' }} >
             
                 { /** Text Display*/ }
                 <Col xs="7">
-                    <div className="textDisplay">
+                    <div className={setBackgroundBasedOnH1(title.toUpperCase())}>
+                        <container/>
                         <h1>{ title.toUpperCase() }</h1>
                         <p>{ text }</p>
 

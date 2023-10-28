@@ -392,8 +392,8 @@ export default class AdvisorPage extends React.Component
                 key={index}
                 id={item[0].id}
                 id2={item[1].id}
-                description={this.schoeneZeilenumbrueche(item[0].description,64)}
-                description2={this.schoeneZeilenumbrueche(item[1].description,64)}
+                description={this.schoeneZeilenumbrueche(item[0].description,111164)}
+                description2={this.schoeneZeilenumbrueche(item[1].description,111164)}
                 name={this.schoeneZeilenumbrueche(item[0].name, 12)}//{item[0].name.replace(/(.{11})/g, "$1\n")}//{item[0].name}
                 name2={this.schoeneZeilenumbrueche(item[1].name, 12)}
                 active={item[0].active}

@@ -18,6 +18,7 @@ export default function ProcessPage()
 {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    let isDeactive = false;
 
     function nextPage( page )
     {
@@ -26,7 +27,8 @@ export default function ProcessPage()
         {
             deleteCookie('selected');
         }
-
+        
+        if (isDeactive && page == "/advisor/CBM") return
         router.push( page );
     }
 
