@@ -147,6 +147,7 @@ export default class AdvisorPage extends React.Component
         .then((res) => res.json())
         .then((data) =>
         {
+            
             // Mark items which were selected before with the element.active tag
             if( selectedItems.length != 0 )
             {
@@ -161,6 +162,16 @@ export default class AdvisorPage extends React.Component
                 });
             }
 
+            // All EDs are selected by default.
+            if( type == "ED" ) {
+                data.descriptions.forEach(element => {
+                    selectedItems.push( [element.id, type] );
+                    cookie.push( [element.id, type] );
+                    element.active = true;
+                });
+                setCookie('selected', cookie, { sameSite: true })
+            }
+                    
             // Set the background color of the coosable elements because its dependent on how many elements there are
             // Color is different based on page
             if( type == 'CBM' ) {
