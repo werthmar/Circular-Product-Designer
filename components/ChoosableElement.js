@@ -71,6 +71,59 @@ export default function ChoosableElement(props) {
         setDescriptionVisible( false );
     }
 
+
+
+    const setBackgroundBasedOnH1 = (h1Text) => {
+
+        console.log(h1Text);
+
+        let help = h1Text;
+        help = help.split(" ")
+
+        console.log(help);
+        
+        // Je nach Text des h1-Elements das entsprechende Hintergrundbild auswählen
+        if (h1Text === "RAW MATERIAL INTENSIVE PRODUCT") {
+            return "description_raw_material";
+        } else if (h1Text === "MANUFACTURING INTENSIVE PRODUCTS") {
+            return "description_manufacturing";
+        } else if (h1Text === "DISTRIBUTION INTENSIVE PRODUCTS") {
+            return "description_distribution";
+        } else if (h1Text === "USE INTENSIVE PRODUCTS") {
+            return "description_use";
+        } else if (h1Text === "DISPOSAL INTENSIVE PRODUCTS") {
+            return "description_disposal";
+        } else if (h1Text === "REUSE & REDESTRIBUTION") {
+            return "description_reuse";
+        } else if (h1Text === "REMANUFACTURING & REFURBISH") {
+            return "description_remanufacturing";
+        } else if (h1Text === "RECYCLING, UPCYCLING") {
+            return "description_recycling";
+        } else if (h1Text === "INDUSTRIAL SYMBIOSIS") {
+            return "description_symbiosis";
+        } else if (h1Text === "CIRCULAR SUPPLIES") {
+            return "description_circular";
+        } else if (h1Text === "DIGITALISATION") {
+            return "description_digitalization";
+        } else if (h1Text === "SHARING, P2P") {
+            return "description_sharing";
+        } else if (h1Text === "PSS") {
+            return "description_pss";
+        } else if (h1Text === "REPAIR & MAINTANANCE") {
+            return "description_repair";
+        } else if (h1Text === "GAP EXPLOITER") {
+            return "description_gap";
+        } else if (h1Text === "UPGRADING") {
+            return "description_upgrading";
+        }
+        // Fügen Sie hier weitere Bedingungen für die anderen Bilder hinzu
+        else {
+            return "description_raw_material"; // Wenn kein passender Text gefunden wurde, kein Hintergrundbild anzeigen
+        }
+    };
+
+
+
     return(
         <Col className={ descriptionVisible ? "choosableElement col-7" : "choosableElement"} 
             //xs={descriptionVisible ? "8" : "3"} 
@@ -120,11 +173,10 @@ export default function ChoosableElement(props) {
                     </Col>
 
                     {/* Description which can be opened on click */}
-                    <Col className="description" style={{display: descriptionVisible ? 'inline-block' : 'none' }} onClick={() => handleClick()}>
+                    <Col className={setBackgroundBasedOnH1(name.toUpperCase())} style={{display: descriptionVisible ? 'inline-block' : 'none' }} onClick={() => handleClick()}>
                         <container/>
                         <h2>{name.toUpperCase()}</h2>
                         <br/>
-                        
                         <p>{description}</p>
                         
                     </Col>

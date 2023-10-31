@@ -1,5 +1,6 @@
 @import 'theme';
 @import 'CBM_descriptions';
+@import 'LCI_descriptions';
 
 .descriptionRow{
     height: 100%;
@@ -47,7 +48,22 @@
         margin: 63px 20px;
         padding: 60px 20px 0px 0px;
         height: 100%;
+        min-height: 99vh;
+        max-height: 99vh; 
+        background-image: url("../public/images/LCI/Icon_raw_material_intensive.png");
+        background-position: center;
+        background-size: 150%;
+        background-repeat: no-repeat;
 
+
+        container{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 18vh;
+            //background-color: rgb(113, 125, 133);
+            overflow: hidden;
+        }
         
         h2{
             font-size: 40px;
@@ -82,9 +98,6 @@
     }
 }   
 
-:root {
-    --custom-background-image: url("../public/images/CBM/CBM_Icons-sharing.png");
-  }
 
 
 
