@@ -1,0 +1,578 @@
+.description_raw_material{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/LCI/Icon_raw_material_intensive.png");
+    background-position: center;
+    background-size: 150%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+.description_manufacturing{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/LCI/Icon_manufacturing_intensive.png");
+    background-position: center;
+    background-size: 150%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_distribution{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/LCI/Icon_distribution_intensive.png");
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_disposal{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/LCI/Icon_disposal_intensive.png");
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_use{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/LCI/Icon_use_intensive.png");
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+// CBMs:
+.description_digitalization{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-digitalization.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_sharing{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-sharing.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_pss{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-PSS.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+
+.description_repair{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-repair.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+
+.description_gap{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-Gap_Exploiter.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_upgrading{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-upgrading.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+
+.description_reuse{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-reuse.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_remanufacturing{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-remanufacturing.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_recycling{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons_Recycling.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+.description_symbiosis{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-Industrial_symbiosis.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
+
+
+
+.description_circular{
+    margin: 63px 20px;
+    padding: 60px 20px 0px 0px;
+    height: 100%;
+    min-height: 99vh;
+    max-height: 99vh; 
+    background-image: url("../public/images/CBM/CBM_Icons-circular_supplies.png");
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+
+
+    container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 18vh;
+        //background-color: rgb(113, 125, 133);
+        overflow: hidden;
+    }
+    
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+    }
+}
