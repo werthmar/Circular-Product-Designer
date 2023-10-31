@@ -64,6 +64,462 @@ body{
             }
         }
 
+
+        .textDisplay_Assem{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/Assemblability_and_disassemblability_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+
+
+        .textDisplay_Functionality{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/Functionality_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+        
+        .textDisplay_Maintainability{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/Maintainability_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+        .textDisplay_Manufacture{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/Manufacturability_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+
+        .textDisplay_Material{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/Material_suitability_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+        .textDisplay_Product{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/Product_labeling_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+        .textDisplay_Recycle{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/Recyclability_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+        .textDisplay_Transportability{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/Transportability_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+        .textDisplay_User{
+            z-index: 1;
+            width: 100%;
+            padding: 50px;
+            height: 100%;
+            background-color: rgb(113, 125, 133);
+            border-radius: 35px;
+            color: white;
+            max-height: 80vh; /* Begrenzen Sie die maximale Höhe auf 80% der Bildschirmhöhe */
+            overflow-y: auto;
+            background-image: url("../public/images/User_friendliness_1.png");
+            background-position: center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            
+
+            container{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 13vh;
+                //background-color: rgb(113, 125, 133);
+                overflow: hidden;
+            }
+
+
+            h1{
+                font-size: 60px;
+                
+            }
+
+            p{
+                font-size: 1.5em;
+                font-weight: 100;
+                //width: 0%;
+                padding-top: 50px;
+                color: white;
+                
+            }
+
+            .backButton{
+                position: absolute;
+                bottom: 100px;
+                left: 100px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+
+
+
             
             .halfPieChart{
                 position: absolute;

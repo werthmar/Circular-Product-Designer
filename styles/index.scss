@@ -9,32 +9,33 @@
     .greyBox{
         position: absolute;
         width: 600px;
-        height: 700px;
+        height: 702px;
         z-index: 0;
         top: 0;
-        left: 400px;
+        left: 200px;
         background-color: rgb(94, 103, 110);
 
         p{
             position: absolute;
-            bottom: 50px;
+            bottom: 90px;
             left: 10px;
+            font-size: 20px;
         }
     }
 
     .bigBallContainer{
         position: absolute;
-        right: 30%;
-        bottom: 0;
+        right: 50%;
+        top: 170px;
         z-index: 1;
-        width: 30%;
-        height: 30%;
+        width: 20%;
+        height: 20%;
     }
 
     .logoContainer{
         position: absolute;
-        bottom: -650px;
-        left: 300px;
+        bottom: -630px;
+        left: 167px;
         z-index: 1;
         width: 30%;
         height: 30%;
@@ -52,11 +53,11 @@
 
     .startButtonContainer{
         position: absolute;
-        bottom: -800px;
-        right: 200px;
+        bottom: -950px;
+        right: 100px;
 
         .button{
-            padding-left: 130px;
+            padding-left: 200px;
             background-color: rgb(196, 132, 104);
             border-radius: 0;
             border: 0;
@@ -65,8 +66,8 @@
 
     .flyingText{
         position: absolute;
-        top: 200px;
-        right: 250px;
+        top: 300px;
+        right: 150px;
         z-index: 2;
         font-size: 20px;
     }

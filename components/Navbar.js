@@ -68,15 +68,18 @@ export default class CustomNavbar extends React.Component
 
     decideDescription()
     {
-        if (this.state.title == 'Circular Design Principles') {
-            return <p>The Circular Design Principles (CDP) provide specific guidelines for implementing circular measures at the constructive level for optimization. Concrete solution proposals for the design are included in each of the CDPs, which can be supplemented with internal knowledge and specifications. The CDPs are grouped into different areas of action.'</p>
-        } else {
-            return <p>
-                Visualieren, testen und validieren Sie Ihre Ideen dynamisch mit verschiedensten Wireframes und Detailmodellen.
-                <br /><br />
-                Während Sie Ihr Konzept kontinuierlich weiterentwicklen, iterieren Sie konse- quent, machen den Schritt von Low zu High Fidelity absolut nahtlos. quent, machen den Schritt von Low zu.
-            </p>
-            
+        let title = this.state.title;
+        if ( title == 'Circular Business Models' ) {
+            return <p>Circular business models (CBMs) are essential in the transition towards a circular economy by facilitating closed loops and resource-efficient production and consumption systems. All of these business models can be divided into four circular business model strategies. In Contrast, Sustainable Business Models (SBM) includes principals of sustainability and involves the generation of non-monetary value. Although there is a significant overlap between sustainable business models and circular business models, it is important to note that not all CBMs qualify as SBMs. ​(Centobelli et al. 2020; Geissdoerfer et al. 2020; Hansen et al. 2020)​</p>
+        }
+         else if ( title == 'Lifecycle Phase Intensity') {
+            return <p>Environmental impacts caused by products are typically concentrated in one or a few phases of their life cycle. The product life cycle phases commonly used in life cycle assessment (LCA), including raw material extraction, production, logistics, use, and disposal, provide guidance for this clustering. A hotspot analysis based on LCA can be employed to pinpoint the life cycle phase with the most significant environmental impacts. Based on that, measures and solutions relevant to that phase can be prioritized holding the highest potential for improvement. ​(Hauschild et al. 2018; Herrmann 2010)​</p>
+        }
+         else if ( title == 'Ecodesign Approaches') {
+            return <p>Ecodesign principles serve as a guide to optimize environmental-related product improvements that are in line with the circular economy at the operational level. Implementing these principles is crucial for the success of the CE. The European Commission provides a common definition of ecodesign principles.</p>
+        }
+        else if ( title == 'Circular Design Principles') {
+            return <p>The Circular Design Principles (CDP) provide specific guidelines for implementing circular measures at the constructive level for optimization. Concrete solution proposals for the design are included in each of the CDPs, which can be supplemented with internal knowledge and specifications. The CDPs are grouped into different areas of action.</p>
         }
     }
 
@@ -167,7 +170,7 @@ export default class CustomNavbar extends React.Component
                                                     className={ this.state.nextPageButtonActive ? "" : "disabled" }
                                                     style={{ borderColor: this.decideButtonColor() }}
                                                     onClick={ () => this.props.nextPage() }>
-                                                    { title == 'Circular Design Principles' ? 'CHOOSE' : 'GO ON' }
+                                                    { title == 'Circular Design Principles' ? 'CONTINUE' : 'GO ON' }
                                                 </Button>
                                             </div>
                                         </Tooltip>

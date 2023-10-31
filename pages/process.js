@@ -18,6 +18,7 @@ export default function ProcessPage()
 {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    let isDeactive = false;
 
     function nextPage( page )
     {
@@ -26,7 +27,8 @@ export default function ProcessPage()
         {
             deleteCookie('selected');
         }
-
+        
+        if (isDeactive && page == "/advisor/CBM") return
         router.push( page );
     }
 
@@ -63,7 +65,7 @@ export default function ProcessPage()
 
                         <Row className="col-9" xs="1">
                             <Col className="buttonCol">
-                                <Button onClick={ () => nextPage( "/advisor/CBM" ) } className="button cbm">
+                                <Button disabled onClick={ () => nextPage( "/advisor/CBM" ) } className="button cbm">
                                     <p>... a circular business strategy you would like to follow?</p>
                                     <div className="backgroundImage">
                                         <h2>CIRCULAR BUSINESS MODEL</h2>  

@@ -111,7 +111,42 @@ export default function ChoosableElement2Rows(props) {
     function toggleDescription2() {
         setDescriptionVisible2( false );
     }
+
+    const setBackgroundBasedOnH1 = (h1Text) => {
+
+        console.log(h1Text);
+
+        let help = h1Text;
+        help = help.split(" ")
+
+        console.log(help);
+        
+        // Je nach Text des h1-Elements das entsprechende Hintergrundbild auswählen
+        if (h1Text === "GAP\nEXPLOITER") {
+            if (descriptionVisible2 == true) return "description_Industrial_Symbiosis";
+            return "description_Gap_Exploiter";
+        } else if (h1Text === "LONG LASTING\nPRODUCT\nDESIGN") {
+            if (descriptionVisible2 == true) return "description_circular_supplies";
+            return "description_LLPD";
+        } else if (h1Text === "PSS") {
+            if (descriptionVisible2 == true) return "description_Remanufacturing" 
+            return "description_PSS";
+        } else if (h1Text === "REPAIR &\nMAINTANANCE") {
+            if (descriptionVisible2 == true) return "description_Recycling";
+            return "description_Industrial_Repair";
+        } else if (h1Text === "SHARING, P2P") {
+            if (descriptionVisible2 == true) return "description_Reuse" 
+            return "description_sharing";
+        }
+        // Fügen Sie hier weitere Bedingungen für die anderen Bilder hinzu
+        else {
+            return "description_Recycling"; // Wenn kein passender Text gefunden wurde, kein Hintergrundbild anzeigen
+        }
+    };
+
+
     //name = name.replace(/(.{8})/g, "$1\n");
+    //document.getElementsByName("descriptionRow col-7 row").backgroundImage = 'url("../public/images/CBM/CBM_Icons-sharing.png")';
     return(
 
             <Row className={ descriptionVisible || descriptionVisible2 ? "descriptionRow col-7" : "descriptionRow col d-flex" }>
@@ -133,7 +168,9 @@ export default function ChoosableElement2Rows(props) {
 
                                     <Container fluid>
                                         <Row xs={1}>
-                                    
+                                            
+                                            <container/>
+
                                             <Col onClick={() => handleClick(1)}>
                                                 <h1>CHOOSE</h1>
                                             </Col>
@@ -181,7 +218,9 @@ export default function ChoosableElement2Rows(props) {
 
                                     <Container fluid>
                                         <Row xs={1}>
-                                    
+
+                                            <container/>
+
                                             <Col onClick={() => handleClick(2)}>
                                                 <h1>CHOOSE</h1>
                                             </Col>
@@ -217,13 +256,16 @@ export default function ChoosableElement2Rows(props) {
                 </Row>
 
                 {/* Description which can be opened on click */}
-                <Col className={"description"} style={{display: descriptionVisible ? 'inline-block' : 'none', backgroundColor: color, backgroundImage: "/images/Kugel.png"}} onClick={() => handleClick(1)}>
+                <Col className={setBackgroundBasedOnH1(name.toUpperCase())} style={{display: descriptionVisible ? 'inline-block' : 'none', backgroundColor: color,'--custom-background-image': 'url("../public/images/CBM/CBM_Icons-sharing.png")',}} onClick={() => handleClick(1)}>
+                    
+                    <container/>
                     <h2>{name.toUpperCase()}</h2>
                     <br/>
                     <p>{description}</p>
                 </Col>
 
-                <Col className="description col-9" style={{display: descriptionVisible2 ? 'inline-block' : 'none', backgroundColor: color2 }} onClick={() => handleClick(2)}>
+                <Col className={setBackgroundBasedOnH1(name.toUpperCase())} style={{display: descriptionVisible2 ? 'inline-block' : 'none', backgroundColor: color2, '--custom-background-image': `url("../public/images/CBM/CBM_Icons-sharing.png")`}} onClick={() => handleClick(2)}>
+                    <container/>
                     <h2>{name2.toUpperCase()}</h2>
                     <br/>
                     <p>{description2}</p>

@@ -86,6 +86,8 @@ export default function ChoosableElement(props) {
 
                         <Container fluid>
                             <Row xs={1}>
+
+                                <container/>
                         
                                 <Col onClick={() => handleClick()}>
                                     <h1>CHOOSE</h1>
@@ -119,11 +121,11 @@ export default function ChoosableElement(props) {
 
                     {/* Description which can be opened on click */}
                     <Col className="description" style={{display: descriptionVisible ? 'inline-block' : 'none' }} onClick={() => handleClick()}>
-
+                        <container/>
                         <h2>{name.toUpperCase()}</h2>
                         <br/>
                         
-                        <p><centre>{description}</centre></p>
+                        <p>{description}</p>
                         
                     </Col>
 

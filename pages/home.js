@@ -22,36 +22,20 @@ export default function HomePage()
   const [project, setProject] = useState(false);
   const [archive, setArchive] = useState(false);
 
-  const onHoverRoadmap = () => {
-    //setHover(true);
-    setRoadmap(true);
-  };
-  const onLeaveRoadmap = () => {
-    setRoadmap(false);
+  const onClickRoadmap = () => {
+    roadmap ? router.push("/roadmap") : setRoadmap(true);
   };
 
-  const onHoverLibrary = () => {
-    //setHover(true);
+  const onClickLibrary = () => {
     setLibrary(true);
   };
-  const onLeaveLibrary = () => {
-    setLibrary(false);
-  };
   
-  const onHoverProject = () => {
-    //setHover(true);
-    setProject(true);
-  };
-  const onLeaveProject = () => {
-    setProject(false);
+  const onClickProject = () => {
+   project ? router.push("/process") : setProject(true);
   };
 
-  const onHoverArchive = () => {
-    //setHover(true);
+  const onClickArchive = () => {
     setArchive(true);
-  };
-  const onLeaveArchive = () => {
-    setArchive(false);
   };
 
   return (
@@ -70,8 +54,8 @@ export default function HomePage()
               
               { /** Library Button */}
               <Col>
-                  <div onMouseEnter={onHoverLibrary} onMouseLeave={onLeaveLibrary} style={{ height: "100%" }}>
-                    <Button className="navigationButton">
+                  <div style={{ height: "100%" }}>
+                    <Button className="navigationButton" onClick={onClickLibrary}>
                       <div className={ library == true ? "" : "backgroundImage library" } >
                       {
                         library == true ?
@@ -89,8 +73,8 @@ export default function HomePage()
 
               { /** Roadmap Button */}
               <Col>
-                <div onMouseEnter={onHoverRoadmap} onMouseLeave={onLeaveRoadmap} style={{ height: "100%" }} >
-                  <Button className="navigationButton" onClick={ () => router.push("/roadmap") }>
+                <div style={{ height: "100%" }} >
+                  <Button className="navigationButton" onClick={onClickRoadmap} >
                     <div className={ roadmap == true ? "" : "backgroundImage roadmap" } >
                       {
                         roadmap == true ?
@@ -109,8 +93,8 @@ export default function HomePage()
             </Row>
 
             { /** New Project Button */}
-            <div onMouseEnter={onHoverProject} onMouseLeave={onLeaveProject} style={{width: "100%", height: "60%" }}>
-              <Button className="navigationButton" onClick={ () => router.push("/process") } >
+            <div style={{width: "100%", height: "60%" }}>
+              <Button className="navigationButton" onClick={ onClickProject } >
                 <div className={ project == true ? "" : "backgroundImage newProject" } >
                 {
                   project == true ?
@@ -130,8 +114,8 @@ export default function HomePage()
 
         { /** Archive Button */}
         <Col xs="4" className="buttonCol">
-            <div onMouseEnter={onHoverArchive} onMouseLeave={onLeaveArchive} style={{width: "100%", height: "100%" }}>
-              <Button className="navigationButton">
+            <div style={{width: "100%", height: "100%" }}>
+              <Button className="navigationButton" onClick={onClickArchive}>
                 <div className={ archive == true ? "" : "backgroundImage archive" } >
                 {
                   archive == true ?
