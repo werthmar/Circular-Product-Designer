@@ -93,9 +93,9 @@ export default function ChoosableElement(props) {
             return "description_use";
         } else if (h1Text === "DISPOSAL INTENSIVE PRODUCTS") {
             return "description_disposal";
-        } else if (h1Text === "REUSE & REDESTRIBUTION") {
+        } else if (h1Text === "REUSE & REDESTRIBUTION" || h1Text === "REUSABILITY") {
             return "description_reuse";
-        } else if (h1Text === "REMANUFACTURING & REFURBISH") {
+        } else if (h1Text === "REMANUFACTURING & REFURBISH" || h1Text === "POSSIBILITY OF MAINTENANCE AND REFURBISHMENT") {
             return "description_remanufacturing";
         } else if (h1Text === "RECYCLING, UPCYCLING") {
             return "description_recycling";
@@ -109,7 +109,7 @@ export default function ChoosableElement(props) {
             return "description_sharing";
         } else if (h1Text === "PSS") {
             return "description_pss";
-        } else if (h1Text === "REPAIR & MAINTANANCE") {
+        } else if (h1Text === "REPAIR & MAINTANANCE" || h1Text === "REPAIRABILITY") {
             return "description_repair";
         } else if (h1Text === "GAP EXPLOITER") {
             return "description_gap";
