@@ -93,7 +93,7 @@ export default function ChoosableElement(props) {
             return "description_use";
         } else if (h1Text === "DISPOSAL INTENSIVE PRODUCTS") {
             return "description_disposal";
-        } else if (h1Text === "REUSE & REDESTRIBUTION") {
+        } else if (h1Text === "REUSE & REDESTRIBUTION" || h1Text === "REUSABILITY") {
             return "description_reuse";
         } else if (h1Text === "REMANUFACTURING & REFURBISH") {
             return "description_remanufacturing";
