@@ -75,13 +75,9 @@ export default function ChoosableElement(props) {
 
     const setBackgroundBasedOnH1 = (h1Text) => {
 
-        console.log(h1Text);
-
         let help = h1Text;
         help = help.split(" ")
 
-        console.log(help);
-        
         // Je nach Text des h1-Elements das entsprechende Hintergrundbild auswählen
         if (h1Text === "RAW MATERIAL INTENSIVE PRODUCT") {
             return "description_raw_material";

@@ -148,6 +148,8 @@ export default class AdvisorPage extends React.Component
         .then((data) =>
         {
             
+            console.log(`dATA 1` + data.descriptions);
+
             // Mark items which were selected before with the element.active tag
             if( selectedItems.length != 0 )
             {
@@ -171,6 +173,8 @@ export default class AdvisorPage extends React.Component
                 });
                 setCookie('selected', cookie, { sameSite: true })
             }
+
+            console.log(`EDDD DATAAAA!!!` + data.descriptions);
                     
             // Set the background color of the coosable elements because its dependent on how many elements there are
             // Color is different based on page
@@ -221,7 +225,6 @@ export default class AdvisorPage extends React.Component
             // Update the component State with the fetched data
             this.setState({ data: data, loading: false, warning: false, title: newTitle });
 
-            console.log(this.state.data);
         })
         .catch(error => {
             // Handle any errors that occurred during fetching
@@ -376,47 +379,112 @@ export default class AdvisorPage extends React.Component
 
     }
 
+    isEven (number) {
+        return Math.floor(number / 2) * 2 === number;
+    }
+
     // --- Render -------------------------------------------------------------------------------
 
     // Split up the data and join it so that the element of the forst row and the corresponding element directly underneath it
     // are in the same data subset so that it can then be pushed into the choosable element version with 2 rows 
     createMultipleRows( data ) {
         var rearangedData = [];
-        var median = data.length / 2;
+        var median = Math.floor( data.length / 2 );
+        var excessElement;
 
-        for( var i=0; i<median; i++ )
-        {
-            rearangedData.push( [] );
-            rearangedData[i].push( data[i] );
-            
-            // Fix for an uneven number of elements
-            if( data[ median + i ] ) {
-                rearangedData[i].push( data[ median + i ] );
-            } else { // Just add the same item twice, easiest solution
+        if ( this.isEven( data.length ) ) {
+
+            for( var i=0; i < median; i++ )
+            {
+                rearangedData.push( [] );
                 rearangedData[i].push( data[i] );
+                rearangedData[i].push( data[i + median] );
+            }
+        } else { // JUST A HOTFIX
+            for( var i=0; i <= median; i++ )
+            {
+                rearangedData.push( [] );
+                rearangedData[i].push( data[i] );
+                rearangedData[i].push( data[i + median] );
             }
         }
 
-        return ( 
-            rearangedData.map(( item, index ) => (
-                <ChoosableElement2Rows 
-                key={index}
-                id={item[0].id}
-                id2={item[1].id}
-                description={this.schoeneZeilenumbrueche(item[0].description,111164)}
-                description2={this.schoeneZeilenumbrueche(item[1].description,111164)}
-                name={this.schoeneZeilenumbrueche(item[0].name, 12)}//{item[0].name.replace(/(.{11})/g, "$1\n")}//{item[0].name}
-                name2={this.schoeneZeilenumbrueche(item[1].name, 12)}
-                active={item[0].active}
-                active2={item[1].active}
-                type={this.state.type}
-                color={item[0].color}
-                color2={item[1].color}
-                enableNextPageButton={this.enableNextPageButton}
-                toggleNavbar={ this.toggleNavbar } 
-                />
-            ))    
-        );
+        
+        // Fix if there is an uneven amount of elements, since we start at 0 we check if the length is even
+        // Not working atm, last element is left out on purpose
+        if ( !this.isEven( data.length ) ) {
+            // excessElement = data[ data.length - 1 ]; // add the last element since it has been ignored before
+        }
+
+        // Even number of data
+        if ( excessElement == undefined )
+        {
+            return ( 
+                rearangedData.map(( item, index ) => (
+                    <ChoosableElement2Rows 
+                    key={index}
+                    id={item[0].id}
+                    id2={item[1].id}
+                    description={this.schoeneZeilenumbrueche(item[0].description,111164)}
+                    description2={this.schoeneZeilenumbrueche(item[1].description,111164)}
+                    name={this.schoeneZeilenumbrueche(item[0].name, 12)}//{item[0].name.replace(/(.{11})/g, "$1\n")}//{item[0].name}
+                    name2={this.schoeneZeilenumbrueche(item[1].name, 12)}
+                    active={item[0].active}
+                    active2={item[1].active}
+                    type={this.state.type}
+                    color={item[0].color}
+                    color2={item[1].color}
+                    enableNextPageButton={this.enableNextPageButton}
+                    toggleNavbar={ this.toggleNavbar } 
+                    />
+                ))    
+            );
+        } // uneven number, extra steps necessary
+        else
+        {   // WIP
+            return(
+
+                <div>
+                <div>
+                    {// Regular 2 Row Elements
+                    rearangedData.map(( item, index ) => (
+                        <ChoosableElement2Rows 
+                        key={index}
+                        id={item[0].id}
+                        id2={item[1].id}
+                        description={this.schoeneZeilenumbrueche(item[0].description,111164)}
+                        description2={this.schoeneZeilenumbrueche(item[1].description,111164)}
+                        name={this.schoeneZeilenumbrueche(item[0].name, 12)}//{item[0].name.replace(/(.{11})/g, "$1\n")}//{item[0].name}
+                        name2={this.schoeneZeilenumbrueche(item[1].name, 12)}
+                        active={item[0].active}
+                        active2={item[1].active}
+                        type={this.state.type}
+                        color={item[0].color}
+                        color2={item[1].color}
+                        enableNextPageButton={this.enableNextPageButton}
+                        toggleNavbar={ this.toggleNavbar } 
+                        />
+                    ))}
+                </div>
+                    <div>
+                    <ChoosableElement 
+                    key={rearangedData.length}
+                    id={excessElement.id}
+                    description={excessElement.description}
+                    name={excessElement.name}
+                    active={excessElement.active}
+                    type={this.state.type}
+                    color={excessElement.color}
+                    enableNextPageButton={this.enableNextPageButton}
+                    toggleNavbar={ this.toggleNavbar } 
+                    />
+                    </div>
+                    </div>
+                    
+                    );
+                }
+
+
     }
 
 
