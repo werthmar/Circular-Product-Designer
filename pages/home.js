@@ -61,8 +61,8 @@ export default function HomePage()
                         library == true ?
                         <p>LIBRARY</p> :
                         <Image src={"/icons/Bibliothek.png" }
-                          width={130}
-                          height={130}
+                          width={70}
+                          height={70}
                           alt="Library"
                           />
                       }
@@ -80,8 +80,8 @@ export default function HomePage()
                         roadmap == true ?
                         <p>ROADMAP</p> :
                         <Image src={"/icons/Roadmap.png" }
-                          width={130}
-                          height={130}
+                          width={70}
+                          height={70}
                           alt="Roadmap"
                           />
                       }
@@ -98,12 +98,12 @@ export default function HomePage()
                 <div className={ project == true ? "" : "backgroundImage newProject" } >
                 {
                   project == true ?
-                  <p>NEW PROJECT</p> :
-                  <Image src={"/icons/NeuesProjekt.png" }
-                    width={130}
-                    height={130}
-                    alt="New Project"
-                    />
+                  <p>NEW PROJECT</p> : <div />
+                  //<Image src={"/icons/NeuesProjekt.png" }
+                  //  width={130}
+                  //  height={130}
+                  //  alt="New Project"
+                  //  />
                 }
                 </div>
               </Button>
@@ -121,8 +121,8 @@ export default function HomePage()
                   archive == true ?
                   <p>PROJECT ARCHIVE</p> :
                   <Image src={"/icons/Projektarchiv.png" }
-                    width={110}
-                    height={120}
+                    width={58}
+                    height={70}
                     alt="Project Archive"
                     />
                 }

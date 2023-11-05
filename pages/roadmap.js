@@ -13,7 +13,7 @@ import { Tooltip } from '@mui/material';
 export default function Roadmap() {
 
     return(
-        <Container className="Roadmap">
+        <Container fluid className="Roadmap">
             <Row>
 
                 {/** Left Side */}
