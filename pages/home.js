@@ -121,7 +121,7 @@ export default function HomePage()
                   archive == true ?
                   <p>PROJECT ARCHIVE</p> :
                   <Image src={"/icons/Projektarchiv.png" }
-                    width={58}
+                    width={52}
                     height={70}
                     alt="Project Archive"
                     />

@@ -50,36 +50,77 @@
         }
     }
     
-    // First textBox
-    .box1{
-        left: 24%;
+    @media (max-width: 1400px) {
+        // First textBox
+        .box1{
+            left: 24%;
+            
+            .subtitle{
+                padding-top: 5%;
+            }
+        }
         
-        .subtitle{
-            padding-top: 5%;
+        .box2{
+            left: 43%;
+
+            .subtitle{
+                padding-top: 38%;
+            }
+        }
+        
+        .box3{
+            left: 63%;
+
+            .subtitle{
+                padding-top: 35%;
+            }
+        }
+
+        .box4{
+            left: 83%;
+
+            .subtitle{
+                padding-top: 35%;
+            }
         }
     }
     
-    .box2{
-        left: 43%;
-
-        .subtitle{
-            padding-top: 38%;
+    @media (min-width: 1401px) {
+        .textBox{
+            top: 8%;
         }
-    }
-    
-    .box3{
-        left: 63%;
 
-        .subtitle{
-            padding-top: 35%;
+        // First textBox
+        .box1{
+            left: 28%;
+            
+            .subtitle{
+                padding-top: 24%;
+            }
         }
-    }
+        
+        .box2{
+            left: 47%;
 
-    .box4{
-        left: 83%;
+            .subtitle{
+                padding-top: 61%;
+            }
+        }
+        
+        .box3{
+            left: 67%;
 
-        .subtitle{
-            padding-top: 35%;
+            .subtitle{
+                padding-top: 76%;
+            }
+        }
+
+        .box4{
+            left: 88%;
+
+            .subtitle{
+                padding-top: 89%;
+            }
         }
     }
 
@@ -113,5 +154,6 @@
         bottom: 10%;
         padding-bottom: 10px;
     }
+
 
 }
