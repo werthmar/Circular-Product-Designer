@@ -298,7 +298,8 @@ export default class AdvisorPage extends React.Component
     areItemsSelected() {
         const { type } = this.state;
         var itemsSelected = false;
-        
+        var selectedItemsCount = 0;
+
         // check if user selected at least one item from the list, if not display massage
         var cookie = getCookie( 'selected' );
         
@@ -309,8 +310,13 @@ export default class AdvisorPage extends React.Component
                 // Check if user has selected at least one item from current type if yes enable next page button
                 if( item[1] == type ) {
                     itemsSelected = true;
+                    selectedItemsCount++;
                 }
             });
+            // You can only select 1 cdp, return false if more than 1 is selected
+            if( type == "CBM" && selectedItemsCount > 1 ) {
+                itemsSelected = false;
+            } 
         }
         return itemsSelected;
     }
