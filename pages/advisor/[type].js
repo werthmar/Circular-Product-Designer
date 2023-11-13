@@ -471,7 +471,7 @@ export default class AdvisorPage extends React.Component
                     key={rearangedData.length}
                     id={excessElement.id}
                     description={excessElement.description}
-                    name={excessElement.name}
+                    name={this.schoeneZeilenumbrueche(excessElement.name, 5)}
                     active={excessElement.active}
                     type={this.state.type}
                     color={excessElement.color}

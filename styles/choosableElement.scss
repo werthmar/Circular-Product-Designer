@@ -41,7 +41,10 @@
         writing-mode: vertical-lr; //works better than rotate
         font-size: 35px;
         font-family: 'Barlow-Light';
-        //white-space: nowrap;
+        white-space: pre-wrap;
+        //margin-left: -50%;
+        //transform-origin: 0 0; /* #TODO: check how to properly asign origin */
+        line-height: 35px;
     }
 
     .description{
@@ -94,7 +97,7 @@
         text-align: center;
         position: absolute;
         bottom: 0;
-        margin-bottom: 30px;
+        margin-bottom: 90px;
     }
 }   
 

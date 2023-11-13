@@ -506,7 +506,7 @@ export default function PieChart( props )
             
                 { /** Text Display*/ }
                 <Col xs="7">
-                    <div className={setBackgroundBasedOnH1(title.toUpperCase())}>
+                    <div className={setBackgroundBasedOnH1(selectedCategory.toUpperCase())}>
                         <container/>
                         <h1>{ title.toUpperCase() }</h1>
                         <p>{ text }</p>

@@ -133,6 +133,24 @@ export default function ChoosableElement2Rows(props) {
         } else if (h1Text === "SHARING, P2P") {
             if (descriptionVisible2 == true) return "description_Reuse" 
             return "description_sharing";
+        } else if (h1Text === "DURABILITY") {
+            // hier fehlen die richtigen Bilder
+            if (descriptionVisible2 == true) return "description_circular_supplies";
+            return "description_LLPD";
+        } else if (h1Text === "RELIABILITY") {
+            // hier fehlen die richtigen Bilder
+            if (descriptionVisible2 == true) return "description_Remanufacturing" 
+            return "description_PSS";
+        } else if (h1Text === "REUSABILITY") {
+            if (descriptionVisible2 == true) return "description_Recycling";
+            return "description_Reuse";
+        } else if (h1Text === "REPAIRABILITY") {
+            if (descriptionVisible2 == true) return "description_Recycling" 
+            return "description_Industrial_Repair";
+        } else if (h1Text === "POSSIBILITY\nOF\nMAINTENANCE\nAND\nREFURBISHMENT") {
+            // hier fehlen die richtigen Bilder
+            if (descriptionVisible2 == true) return "description_Reuse" 
+            return "description_sharing";
         }
         // Fügen Sie hier weitere Bedingungen für die anderen Bilder hinzu
         else {
