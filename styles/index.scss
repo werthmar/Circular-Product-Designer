@@ -34,8 +34,8 @@
 
     .logoContainer{
         position: absolute;
-        bottom: -630px;
-        left: 174px;
+        bottom: -633px;
+        left: 168px;
         z-index: 1;
         width: 30%;
         height: 30%;
@@ -51,7 +51,8 @@
         width: 150px;
     }
 
-    .startButtonContainer{
+    // TODO: Start schrift weiter runter
+    .startButtonContainer{ 
         position: fixed;
         bottom: 150px;
         right: 100px;

@@ -28,7 +28,7 @@ export default function IndexPage()
             <div className="logoContainer">
                 <Image 
                     src={"/images/Logo.png"}
-                    width={450}
+                    width={490}
                     height={200}
                 />
             </div>

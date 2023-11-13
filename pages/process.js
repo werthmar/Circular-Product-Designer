@@ -65,7 +65,7 @@ export default function ProcessPage()
 
 
                         <Row className="col-9" xs="1">
-                            <Col className="buttonCol" style={{marginBottom: "25px"}}>
+                            <Col className="buttonCol">
                                 <Button disabled onClick={ () => nextPage( "/advisor/CBM" ) } className="button cbm">
                                     <p>... a circular business strategy you would like to follow?</p>
                                     <div className="backgroundImage">
@@ -73,7 +73,7 @@ export default function ProcessPage()
                                     </div>
                                 </Button>
                             </Col>
-                            <Col className="buttonCol" style={{marginTop: "25px"}}>
+                            <Col className="buttonCol">
                                 <Button onClick={ () => nextPage( "advisor/LCP" ) } className="button lci">
                                     <p>... a product that you would like to make circular?</p>
                                     <div className="backgroundImage">
