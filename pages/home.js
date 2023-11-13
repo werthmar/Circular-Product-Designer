@@ -44,7 +44,7 @@ export default function HomePage()
       <Row>
         
         <Col xs="4" className="colorBackground">
-          <h1>RETHINK YOUR IDEAS</h1>
+          <h1>RETHINK<br/>YOUR IDEAS</h1>
           <p>a tool developed from a scientific work of the Pforzheim University of Applied Sciences, Institute for Industrial Ecology.</p>
         </Col>
 

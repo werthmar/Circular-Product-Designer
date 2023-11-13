@@ -8,18 +8,22 @@
 
     .colorBackground{
         position: relative;
-        background-image: url("/images/Farbkachel.png");
+        background-image: url("/images/Farbkachel_new.png");
 
         h1{
             position: absolute;
-            bottom: 30%;
-            font-size: 80px;
+            bottom: 35%;
+            left: 5%;
+            font-size: 90px;
             font-weight: bold;
+            font-family: 'Barlow-Bold';
         }
 
         p{
             position: absolute;
-            bottom: 10px;
+            bottom: 5%;
+            left: 5%;
+            font-family: 'Barlow-Regular';
         }
     }
 
@@ -82,8 +86,9 @@
         }
 
         p{
-            font-size: 40px;
+            font-size: 35px;
             margin: auto;
+            font-family: 'Barlow-Regular';
         }
     }
     .navigationButton:hover{

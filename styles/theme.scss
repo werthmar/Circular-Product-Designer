@@ -32,9 +32,33 @@ $accent-color: rgb(237,191,98);
   font-weight: 300;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Barlow-Regular';
+  src: url('/fonts/BarlowCondensed-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow-Bold';
+  src: url('/fonts/BarlowCondensed-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow-SemiBold';
+  src: url('/fonts/BarlowCondensed-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow-light';
+  src: url('/fonts/BarlowCondensed-Light.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
 
 h1, h2 {
-  font-family: 'BarlowCondensed' !important;
+  font-family: 'BarlowCondensed';
   font-weight: 400;
 }
 
