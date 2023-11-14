@@ -56,6 +56,12 @@ $accent-color: rgb(237,191,98);
   font-weight: 300;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Roboto-Medium';
+  src: url('/fonts/RobotoCondensed-Medium.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
 
 h1, h2 {
   font-family: 'BarlowCondensed';

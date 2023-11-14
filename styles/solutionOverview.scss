@@ -3,8 +3,10 @@
     height: 100%;
     position: relative;
     background-color: white;
+    padding: 0;
 
     .cbm-background{
+        position: relative;
         width: 100%;
         height: 100%;
         display: flex;
@@ -14,9 +16,11 @@
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+        z-index: 1;
     }
     
     .lcp-background{
+        position: relative;
         width: 100%;
         height: 100%;
         display: flex;
@@ -26,6 +30,7 @@
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+        z-index: 1;
     }
 
     h1{
@@ -50,8 +55,61 @@
             font-size: 20px;
         }
     }
+
+    .greyBackground{
+        position: absolute;
+        z-index: 0;
+        width: 77%;
+        height: 100%;
+        background-color: rgb(201, 201, 201);
+        right: 0;
+    }
     
+    // iPad pro
     @media (max-width: 1400px) {
+
+
+        // First textBox
+        .box1{
+            left: 24%;
+            
+            .subtitle{
+                padding-top: 5%;
+            }
+        }
+        
+        .box2{
+            left: 43%;
+
+            .subtitle{
+                padding-top: 38%;
+            }
+        }
+        
+        .box3{
+            left: 63%;
+
+            .subtitle{
+                padding-top: 35%;
+            }
+        }
+
+        .box4{
+            left: 83%;
+
+            .subtitle{
+                padding-top: 35%;
+            }
+        }
+    }
+
+    // Surface 7
+    @media (max-height: 1000px) {
+
+        .textBox{
+            top: 10%;
+        }
+
         // First textBox
         .box1{
             left: 24%;
@@ -86,6 +144,9 @@
         }
     }
     
+
+
+    // 24 inch pc
     @media (min-width: 1401px) {
         .textBox{
             top: 8%;
@@ -125,6 +186,8 @@
         }
     }
 
+
+
     .link{
         position: absolute;
         align-items: center;
@@ -136,7 +199,7 @@
         margin: 0;
 
         p{
-            font-family: 'Barlow-SemiBold';
+            font-family: 'Roboto-Medium';
             padding: 0;
             margin: 8px;
             padding-right: 30px;
@@ -162,6 +225,5 @@
         padding-bottom: 10px;
         background-image: url("/images/arrow_underline.png");
     }
-
 
 }

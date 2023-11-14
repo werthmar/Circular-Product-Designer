@@ -29,8 +29,10 @@ export default function SolutionOverview( props )
 
     return(
         <div className="solutionOverview">
+                <div className="greyBackground" />
             <div className={ props.initialType == "CBM" ? "cbm-background" : "lcp-background" } >
                 
+
                 <h1>SOLUTION <br/> OVERVIEW</h1>
 
                 <div className="textBox box1">

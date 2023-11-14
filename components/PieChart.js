@@ -89,10 +89,10 @@ export default function PieChart( props )
 
     // Vordefinierte Werte für verschiedene Auflösungen
     const resolutions = [
-        { width: 4096, height: 2060, fontSize1: 40, fontSize2: 60, fontSize3: 40, fontSize4: 30, zeilenlaenge: 20 },
-        { width: 1916, height: 1030, fontSize1: 18, fontSize2: 50, fontSize3: 18, fontSize4: 22, zeilenlaenge: 15 },
-        { width: 1366, height: 1024, fontSize1: 14, fontSize2: 35, fontSize3: 14, fontSize4: 14, zeilenlaenge: 15  },
-        { width: 844, height: 390, fontSize1: 5, fontSize2: 15, fontSize3: 5, fontSize4: 8, zeilenlaenge: 5 }
+        { width: 4096, height: 2060, fontSize1: 40, fontSize2: 40, fontSize3: 40, fontSize4: 30, zeilenlaenge: 20 },
+        { width: 1916, height: 1030, fontSize1: 18, fontSize2: 35, fontSize3: 18, fontSize4: 22, zeilenlaenge: 15 },
+        { width: 1366, height: 1024, fontSize1: 14, fontSize2: 25, fontSize3: 14, fontSize4: 14, zeilenlaenge: 15  },
+        { width: 844, height: 390, fontSize1: 5, fontSize2: 10, fontSize3: 5, fontSize4: 8, zeilenlaenge: 5 }
         // Füge hier weitere Auflösungen hinzu, falls erforderlich
     ];
 

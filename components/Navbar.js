@@ -163,7 +163,7 @@ export default class CustomNavbar extends React.Component
                                     </Col>
 
                                     <Col>
-                                        <Tooltip arrow title="Please select at least 1 item from the list in order to proceed.">
+                                        <Tooltip arrow title="Please select at least 1 item from the list in order to proceed. You can select a maximum of 1 Circular Business Model.">
                                             <div>
                                                 {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
                                                 <Button
