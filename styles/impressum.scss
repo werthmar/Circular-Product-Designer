@@ -1,0 +1,33 @@
+.impressum{ // Dirty Fix for overflow issues on the other pages, because here we want to scroll down
+    overflow: scroll;
+    background-color: white;
+}
+
+.impressumPage{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    
+    .textDiv{
+        margin-top: 50px;
+        padding: 30px;
+        text-align: justify;
+        text-overflow: "-";
+
+        a{
+            color: blue;
+        }
+        a:hOver{
+            color: lightblue;
+        }
+
+        ul[title]::before {
+            content: attr(title);
+            /* then add some nice styling as needed, eg: */
+            display: block;
+            font-weight: bold;
+            padding: 4px;
+        }
+    }
+}

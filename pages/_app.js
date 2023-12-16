@@ -13,7 +13,8 @@ import '../styles/navbar.scss';
 import '../styles/choosableElement.scss';
 import '../styles/solutionOverview.scss';
 import '../styles/home.scss';
-import '../styles/roadmap.scss'
+import '../styles/roadmap.scss';
+import '../styles/impressum.scss';
 
 import React from 'react';
 import { useRouter } from "next/router";
