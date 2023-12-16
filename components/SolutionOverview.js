@@ -1,5 +1,6 @@
 import React from "react";
 import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
+import Image from "next/image";
 
 export default function SolutionOverview( props )
 {
@@ -80,11 +81,13 @@ export default function SolutionOverview( props )
                     <p>
                         SAVE YOUR PROJECT!
                     </p>
+                    <Image className="arrow-image" src="/images/Pfeil_grau_kurz.png" width="311" height={132} />
                 </div>
                 <div className="link link2">
                     <p>
                         LEARN MORE ABOUT INDICATORS
                     </p>
+                    <Image className="arrow-image" src="/images/Pfeil_grau_lang.png" width="528" height="182" />
                 </div>
                 <div className="link link3">
                     <p>

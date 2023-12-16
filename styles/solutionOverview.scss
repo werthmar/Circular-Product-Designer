@@ -101,6 +101,7 @@
                 padding-top: 35%;
             }
         }
+
     }
 
     // Surface 7
@@ -142,6 +143,7 @@
                 padding-top: 35%;
             }
         }
+
     }
     
 
@@ -184,6 +186,7 @@
                 padding-top: 89%;
             }
         }
+
     }
 
 
@@ -205,19 +208,33 @@
             padding-right: 30px;
             font-size: 18px;
         }
+    
+        .arrow-image{
+            position: absolute;
+            z-index: 1;
+        }
     }
     
     .link1{
         right: 5%;
         bottom: 25%;
         color: grey;
-        background-image: url("/images/arrow_underline_grey.png");
+        //background-image: url("/images/arrow_underline_grey.png");
+        .arrow-image{
+            top: -30px;
+            left: -50px;
+        }
     }
+    
     .link2{
         right: 5%;
         bottom: 18%;
         color: grey;
-        background-image: url("/images/arrow_underline_grey.png");
+        //background-image: url("/images/arrow_underline_grey.png");
+        .arrow-image{
+            top: -55px;
+            left: -110px;
+        }
     }
     .link3{
         right: 5%;
