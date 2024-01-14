@@ -14,7 +14,7 @@ export default function Impressum()
 
             <Navbar
                 className="fixed-top"
-                color="warning"
+                color="secondary"
                 dark
             >
                 <NavbarBrand href="/">
