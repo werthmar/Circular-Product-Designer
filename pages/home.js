@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 import { useRouter } from 'next/router'
 import Image from "next/image";
-import { Tooltip } from '@mui/material';
+import Watermark from "../components/watermark";
 
 export default function HomePage()
 {
@@ -46,6 +46,11 @@ export default function HomePage()
         <Col xs="4" className="colorBackground">
           <h1>RETHINK<br/>YOUR IDEAS</h1>
           <p>a tool developed from a scientific work of the Pforzheim University of Applied Sciences, Institute for Industrial Ecology.</p>
+        
+          <div style={{ position: "fixed", top: "60px", width: "200px" }}>
+            <Watermark />
+          </div>
+
         </Col>
 
         <Col xs="4" className="buttonCol">

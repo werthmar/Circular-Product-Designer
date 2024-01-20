@@ -5,6 +5,13 @@
     width: 100%;
     height: 100%;
     color: black;
+
+    .watermark{
+        position: fixed;
+        z-index: 2;
+        bottom: 2px;
+        left: 10px;
+    }
     
     .greyBox{
         position: absolute;

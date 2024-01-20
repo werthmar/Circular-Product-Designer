@@ -19,6 +19,7 @@ import CustomNavbar from "../../components/Navbar";
 import PieChart from "../../components/PieChart";
 import { Pie } from "react-chartjs-2";
 import SolutionOverview from "../../components/SolutionOverview";
+import Watermark from "../../components/watermark";
 
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
@@ -513,6 +514,11 @@ export default class AdvisorPage extends React.Component
 
                         </Row>
                     </Container>
+
+                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                        <Watermark />
+                    </div>
+
                 </div>
             );
         }
@@ -549,6 +555,10 @@ export default class AdvisorPage extends React.Component
                             </Row>
                     </Container>
 
+                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                        <Watermark />
+                    </div>
+
                 </div>
             );
         }
@@ -582,6 +592,10 @@ export default class AdvisorPage extends React.Component
 
                             </Row>
                     </Container>
+
+                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "100px" }}>
+                        <Watermark />
+                    </div>
 
                 </div>
             );
@@ -635,6 +649,11 @@ export default class AdvisorPage extends React.Component
 
                         </Row>
                     </Container>
+
+                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                        <Watermark />
+                    </div>
+
                 </div>
 
             );

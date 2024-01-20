@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import CustomNavbarButtonsOnly from "../components/NavbarButtonsOnly";
 import Image from "next/image";
 import { useState } from "react";
+import Watermark from "../components/watermark";
 
 export default function ProcessPage()
 {
@@ -85,6 +86,11 @@ export default function ProcessPage()
                     
                     </Row>
                 </Container>
+
+                <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                    <Watermark />
+                </div>
+
             </div>
         )
     }

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import CustomNavbar from "../components/Navbar";
 import { BsArrowRight } from 'react-icons/bs';
+import Watermark from "../components/watermark";
 
 export default function IndexPage()
 {
@@ -12,6 +13,10 @@ export default function IndexPage()
 
     return(
         <div className="indexPage">
+
+            <div className="watermark">
+                <Watermark />
+            </div>
 
             <div className="greyBox">
                 <p>Decission <br/> Support <br/> Tool</p>
