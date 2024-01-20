@@ -38,7 +38,7 @@ export default class CustomNavbarButtonsOnly extends React.Component
                                     {/* Page Buttons */}
                                     <Col>
                                         <Col>
-                                            <Button className='navbarButton' style={{ backgroundColor: 'lightGrey' }} />
+                                            <Button className='navbarButton' style={{ backgroundColor: 'rgb(179,179,179)' }} />
                                         </Col>
                                         <Col>
                                             <Button className='navbarButton' disabled />

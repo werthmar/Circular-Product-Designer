@@ -180,14 +180,14 @@ export default class AdvisorPage extends React.Component
             // Set the background color of the coosable elements because its dependent on how many elements there are
             // Color is different based on page
             if( type == 'CBM' ) {
-                var r = 209, g = 180, b = 165; // Starting colours
-                var _r = 171, _g = 118, _b = 92; // ending colours, all other colours inbetween
+                var r = 213, g = 181, b = 167; // Starting colours
+                var _r = 196, _g = 132, _b = 104; // ending colours, all other colours inbetween
             } else if ( type == 'LCP' ) {
                 var r = 250, g = 236, b = 208; 
                 var _r = 237, _g = 191, _b = 98;
             } else if ( type == 'ED' ) {
-                var r = 164, g = 171, b = 159; 
-                var _r = 89, _g = 99, _b = 80;
+                var r = 176, g = 181, b = 174; 
+                var _r = 95, _g = 108, _b = 90;
             } else {
                 var r = 250, g = 236, b = 208; 
                 var _r = 237, _g = 191, _b = 98;

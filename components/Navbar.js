@@ -54,15 +54,15 @@ export default class CustomNavbar extends React.Component
         switch( this.props.pageOrder[ this.state.pageIndex - 1 ] )
         {
             case 'CBM':
-                return 'rgb(171, 118, 92)';
+                return 'rgb(196, 132, 104)';
             case 'LCP':
                 return 'rgb(237, 191, 98)';
             case 'ED':
-                return 'rgb(89, 99, 80)';
+                return 'rgb(95, 108, 90)';
             case 'Solution-Overview':
-                return 'rgb(0, 0, 0)';
+                return 'rgb(230, 230, 230)';
             default:
-                return 'grey';
+                return 'rgb(179, 179,179)';
         }
     }
 

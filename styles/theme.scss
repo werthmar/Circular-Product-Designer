@@ -9,7 +9,7 @@ $color-primary: #ffffff;
 $footer-height: 100px;
 
 // New Design
-$background-color: rgb(232, 232, 232);
+$background-color: rgb(230, 230, 230);
 $color-secondary: rgb(192, 192, 192);
 $color-secondary-light: rgb(204,204,204);
 $accent-color: rgb(237,191,98);
@@ -21,15 +21,27 @@ $accent-color: rgb(237,191,98);
   font-style: normal;
 }
 @font-face {
-  font-family: 'BarlowCondensed-light';
+  font-family: 'Barlow-Light';
   src: url('../public/fonts/BarlowCondensed-Light.ttf');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lato-light';
+  font-family: 'Lato-Light';
   src: url('../public/fonts/Lato-Light.ttf');
   font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url('../public/fonts/Lato-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato-Black';
+  src: url('../public/fonts/Lato-Black.ttf');
+  font-weight: 900;
   font-style: normal;
 }
 @font-face {
@@ -64,13 +76,13 @@ $accent-color: rgb(237,191,98);
 }
 
 h1, h2 {
-  font-family: 'BarlowCondensed';
-  font-weight: 400;
+  //font-family: 'BarlowCondensed';
+  //font-weight: 400;
 }
 
 p{
-  font-family: 'Lato-Light';
-  font-weight: 300;
+  //font-family: 'Lato-Light';
+  //font-weight: 300;
 }
 
 .standardButton{

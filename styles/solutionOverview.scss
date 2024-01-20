@@ -37,7 +37,15 @@
         position: absolute;
         left: 50px;
         top: 50px;
-        font-weight: bold;
+        font-family: "Barlow-SemiBold";
+    }
+
+    h2{
+        font-family: "Barlow-SemiBold";
+    }
+
+    p{
+        font-family: "Lato-Light";
     }
 
     .textBox{
@@ -202,7 +210,7 @@
         margin: 0;
 
         p{
-            font-family: 'Roboto-Medium';
+            font-family: 'Barlow-SemiBold';
             padding: 0;
             margin: 8px;
             padding-right: 30px;
@@ -222,7 +230,7 @@
         //background-image: url("/images/arrow_underline_grey.png");
         .arrow-image{
             top: -30px;
-            left: -50px;
+            left: -70px;
         }
     }
     
@@ -233,7 +241,7 @@
         //background-image: url("/images/arrow_underline_grey.png");
         .arrow-image{
             top: -55px;
-            left: -110px;
+            left: -150px;
         }
     }
     .link3{

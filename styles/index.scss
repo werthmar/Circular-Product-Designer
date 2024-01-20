@@ -20,6 +20,7 @@
         z-index: 0;
         top: 0;
         left: 200px;
+        font-family: "Lato-Regular";
         background-color: rgb(94, 103, 110);
 
         p{
@@ -56,10 +57,12 @@
         color: white;
         background-color: black;
         width: 150px;
+        font-family: "Lato-Regular";
     }
-
+    
     // TODO: Start schrift weiter runter
     .startButtonContainer{ 
+        font-family: "Lato-Black";
         position: fixed;
         bottom: 150px;
         right: 100px;
@@ -88,6 +91,7 @@
         right: 150px;
         z-index: 2;
         font-size: 20px;
+        font-family: 'Lato-Light';
     }
 
 }

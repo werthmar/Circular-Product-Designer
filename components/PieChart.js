@@ -169,7 +169,7 @@ export default function PieChart( props )
         plugins: 
             {
                 legend: {
-                    display: false
+                    display: false,
                 },
                 tooltip: {
                     enabled: false
