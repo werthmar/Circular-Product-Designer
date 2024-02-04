@@ -47,7 +47,7 @@ export default function HomePage()
           <h1>RETHINK<br/>YOUR IDEAS</h1>
           <p>a tool developed from a scientific work of the Pforzheim University of Applied Sciences, Institute for Industrial Ecology.</p>
         
-          <div style={{ position: "fixed", top: "60px", width: "200px" }}>
+          <div style={{ position: "fixed", bottom: "20px", width: "200px" }}>
             <Watermark />
           </div>
 

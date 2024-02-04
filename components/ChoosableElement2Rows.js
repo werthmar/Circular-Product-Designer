@@ -205,7 +205,7 @@ export default function ChoosableElement2Rows(props) {
                                     
                                             {/* Expanded indicator */}
                                             <div className="arrowIcon" onClick={() => handleClick(1)}>
-                                                <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={60} height={35} />
+                                                <Image src="/icons/arrow_black_left.png" style={{display: descriptionVisible ? 'none' : 'inline-block' }} alt="expansion indicator" width={60} height={35} />
                                             </div>
 
                                         </Row>
@@ -255,7 +255,7 @@ export default function ChoosableElement2Rows(props) {
                                     
                                             {/* Expanded indicator */}
                                             <div className="arrowIcon" onClick={() => handleClick(2)}>
-                                                <Image src={ descriptionVisible2 ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={60} height={35} />
+                                                <Image src="/icons/arrow_black_left.png" style={{display: descriptionVisible2 ? 'none' : 'inline-block' }} alt="expansion indicator" width={60} height={35} />
                                             </div>
 
                                         </Row>
@@ -276,6 +276,11 @@ export default function ChoosableElement2Rows(props) {
                     <h2>{name.toUpperCase()}</h2>
                     <br/>
                     <p>{description}</p>
+
+                    {/* Expanded indicator */}
+                    <div className="arrowIconClose" onClick={() => handleClick()}>
+                        <Image src="/icons/arrow_white_right.png" alt="expansion indicator" width={60} height={35} />
+                    </div>
                 </Col>
 
                 <Col className={setBackgroundBasedOnH1(name.toUpperCase())} style={{display: descriptionVisible2 ? 'inline-block' : 'none', backgroundColor: color2, '--custom-background-image': `url("../public/images/CBM/CBM_Icons-sharing.png")`}} onClick={() => handleClick(2)}>
@@ -284,6 +289,11 @@ export default function ChoosableElement2Rows(props) {
                     <br/>
                     <p>{description2}</p>
                 </Col>
+
+                {/* Expanded indicator */}
+                <div className="arrowIconClose" onClick={() => handleClick()}>
+                    <Image src="/icons/arrow_white_right.png" alt="expansion indicator" width={60} height={35} />
+                </div>
 
             </Row>
 

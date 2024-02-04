@@ -1,8 +1,10 @@
+@import 'theme';
+
 .solutionOverview {
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: white;
+    background-color: $background-color;
     padding: 0;
 
     .cbm-background{
@@ -80,34 +82,18 @@
         // First textBox
         .box1{
             left: 24%;
-            
-            .subtitle{
-                padding-top: 5%;
-            }
         }
         
         .box2{
             left: 43%;
-
-            .subtitle{
-                padding-top: 38%;
-            }
         }
         
         .box3{
             left: 63%;
-
-            .subtitle{
-                padding-top: 35%;
-            }
         }
 
         .box4{
             left: 83%;
-
-            .subtitle{
-                padding-top: 35%;
-            }
         }
 
     }
@@ -122,39 +108,21 @@
         // First textBox
         .box1{
             left: 24%;
-            
-            .subtitle{
-                padding-top: 5%;
-            }
         }
         
         .box2{
             left: 43%;
-
-            .subtitle{
-                padding-top: 38%;
-            }
         }
         
         .box3{
             left: 63%;
-
-            .subtitle{
-                padding-top: 35%;
-            }
         }
 
         .box4{
             left: 83%;
-
-            .subtitle{
-                padding-top: 35%;
-            }
         }
 
     }
-    
-
 
     // 24 inch pc
     @media (min-width: 1401px) {
@@ -165,34 +133,18 @@
         // First textBox
         .box1{
             left: 28%;
-            
-            .subtitle{
-                padding-top: 24%;
-            }
         }
         
         .box2{
             left: 47%;
-
-            .subtitle{
-                padding-top: 61%;
-            }
         }
         
         .box3{
             left: 67%;
-
-            .subtitle{
-                padding-top: 76%;
-            }
         }
 
         .box4{
             left: 88%;
-
-            .subtitle{
-                padding-top: 89%;
-            }
         }
 
     }
@@ -225,7 +177,7 @@
     
     .link1{
         right: 5%;
-        bottom: 25%;
+        bottom: 24%;
         color: grey;
         //background-image: url("/images/arrow_underline_grey.png");
         .arrow-image{

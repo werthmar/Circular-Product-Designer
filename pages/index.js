@@ -19,7 +19,7 @@ export default function IndexPage()
             </div>
 
             <div className="greyBox">
-                <p>Decission <br/> Support <br/> Tool</p>
+                <p>Decision <br/> Support <br/> Tool</p>
             </div>
 
             <div className="bigBallContainer">

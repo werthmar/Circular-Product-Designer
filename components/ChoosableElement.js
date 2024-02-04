@@ -159,7 +159,7 @@ export default function ChoosableElement(props) {
                         
                                 {/* Expanded indicator */}
                                 <div className="arrowIcon" onClick={() => handleClick()}>
-                                    <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={60} height={35} />
+                                    <Image src="/icons/arrow_black_left.png" style={{display: descriptionVisible ? 'none' : 'inline-block' }} alt="expansion indicator" width={60} height={35} />
                                 </div>
 
                             </Row>
@@ -176,6 +176,10 @@ export default function ChoosableElement(props) {
                         <br/>
                         <p>{description}</p>
                         
+                        {/* Expanded indicator */}
+                        <div className="arrowIconClose" onClick={() => handleClick()}>
+                            <Image src="/icons/arrow_white_right.png" alt="expansion indicator" width={60} height={35} />
+                        </div>
                     </Col>
 
                 </Row>

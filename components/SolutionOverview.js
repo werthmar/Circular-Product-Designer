@@ -38,6 +38,7 @@ export default function SolutionOverview( props )
 
                 <div className="textBox box1">
                     <h2 className="number">{ props.initialType == "CBM" ? cbmCount : lcpCount }</h2>
+                    <h2 className="subtitle">{ props.initialType == "CBM" ? "Circular Business Models" : "Life Cycle Intesity" }</h2>
                     <p>
                         {
                             props.initialType == "CBM" ?
@@ -45,11 +46,11 @@ export default function SolutionOverview( props )
                             "Life cycyle intensities define product classifications based on environmental hotspots, following the product life cycle."
                         }
                     </p>
-                    <h2 className="subtitle">{ props.initialType == "CBM" ? "Circular Business Models" : "Life Cycle Intesity" }</h2>
                 </div>
                 
                 <div className="textBox box2">
                     <h2 className="number">{ props.initialType != "CBM" ? cbmCount : lcpCount }</h2>
+                    <h2 className="subtitle">{ props.initialType != "CBM" ? "Circular Business Models" : "Life Cycle Intesity" }</h2>
                     <p>
                         {
                             props.initialType != "CBM" ?
@@ -57,23 +58,22 @@ export default function SolutionOverview( props )
                             "Life cycyle intensities define product classifications based on environmental hotspots, following the product life cycle."
                         }
                     </p>
-                    <h2 className="subtitle">{ props.initialType != "CBM" ? "Circular Business Models" : "Life Cycle Intesity" }</h2>
                 </div>
                 
                 <div className="textBox box3">
                     <h2 className="number">{ edCount }</h2>
+                    <h2 className="subtitle">ECODESIGN PRINCIPLES</h2>
                     <p>
                         Ecodesign principles serve as a guide to optimize environmental-related product improvements that are in line with the circular economy at the operational level.
                     </p>
-                    <h2 className="subtitle">ECODESIGN PRINCIPLES</h2>
                 </div>
                
                 <div className="textBox box4">
                     <h2 className="number">{ cdpCount }</h2>
+                    <h2 className="subtitle">CIRCULAR DESIGN PRINCIPLES</h2>
                     <p>
                         The Circular Design Principles provide specific guidelines for implementing circular measures at the constructive level for optimization. These principles are grouped into different areas of action.
                     </p>
-                    <h2 className="subtitle">CIRCULAR DESIGN PRINCIPLES</h2>
                 </div>
 
                 {/** Link Displays */}
