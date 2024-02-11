@@ -28,6 +28,7 @@
         overflow: hidden;
     }
 
+    // The CHOOSE
     h1{
         margin-top: 20px;
         font-family: 'Barlow-Bold';
@@ -67,21 +68,22 @@
             //background-color: rgb(113, 125, 133);
             overflow: hidden;
         }
-        
-        h2{
-            font-size: 40px;
-            font-weight: 600;
-            padding-top: 30px;
-            padding-left: 10px;
-            font-family: "Barlow-SemiBold";
-        }
+    }
+    
+    // Description text
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+        font-family: "Barlow-SemiBold";
+    }
 
-        p{
-            position: relative;
-            margin: 30px 40px 0px 40px;
-            font-size: 20px;
-            font-family: "Lato-Light";
-        }
+    p{
+        position: relative;
+        margin: 30px 40px 0px 40px;
+        font-size: 20px;
+        font-family: "Lato-Light";
     }
 
     .col{

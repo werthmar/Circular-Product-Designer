@@ -26,7 +26,7 @@ export default class CustomNavbar extends React.Component
             ],
             pageIndex: props.pageIndex,
             title: props.title,
-            nextPageButtonActive: props.nextPageButtonActive
+            nextPageButtonActive: props.nextPageButtonActive,
         };
     }
 
@@ -163,7 +163,11 @@ export default class CustomNavbar extends React.Component
                                     </Col>
 
                                     <Col>
-                                        <Tooltip arrow title="Please select at least 1 item from the list in order to proceed. You can select a maximum of 1 Circular Business Model.">
+                                        <p className='userHelp'>{ title == 'Circular Business Models' ? "Please select only one option to continue" : title == "Circular Design Principles" ? "" : "Please select at least one option to continue" }</p>
+                                    </Col>
+
+                                    <Col>
+                                        <Tooltip arrow title="Select items by clicking on the box underneath CHOOSE in the elements to the right">
                                             <div>
                                                 {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
                                                 <Button

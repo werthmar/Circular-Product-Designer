@@ -259,6 +259,10 @@ export default class AdvisorPage extends React.Component
         {
             Router.push( "/process" );
         }
+        else if( page == "Solution-Overview" )
+        {
+            return;
+        }
         // Set type and old type the same because its the first page of advisor and results should not be filtered
         else if (goToIndex == 0)
         {
@@ -543,7 +547,7 @@ export default class AdvisorPage extends React.Component
                                 pageIndex={ this.pageOrder.indexOf( type ) +1 }
                                 pageOrder={ this.pageOrder }
                                 goToPage={ this.goToPage }
-                                back={ this.back }   
+                                back={ this.back }
                                 nextPageButtonActive={ () => { return true; } /** this.areItemsSelected() --commented out because i dont know how items are supposed to be selected yet */ }
                                 >
                             </CustomNavbar>
