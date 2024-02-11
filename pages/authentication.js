@@ -4,7 +4,9 @@ import { checkPassword } from './_app';
 import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
 import Router from 'next/router';
 import Image from 'next/image';
-import banner from "../public/images/Banner_Coming_soon.png";
+import banner from "../public/images/Banner_Coming_soon.jpg";
+import LinkedInIcon from "/public/icons/LinkedInIcon.png";
+import { Link } from '@mui/material';
 
 export default function Authentication() 
 {
@@ -45,6 +47,7 @@ export default function Authentication()
                 backdropFilter: "blur(6px)"
                 }}>
 
+                {/* X Button to close the Banner */}
                 <Button
                     style={{
                         zIndex: "3",
@@ -52,7 +55,7 @@ export default function Authentication()
                         fontSize: "50px",
                         backgroundColor: "transparent",
                         border: "none",
-                        color: "black",
+                        color: "grey",
                         fontWeight: "bold",
                         right: "30px",
                     }}
@@ -61,12 +64,27 @@ export default function Authentication()
                     X
                 </Button>
                 
+                {/* Linkedin Button */}
+                <a href='https://de.linkedin.com/'>
+                    <Image
+                        style={{
+                            zIndex: "3",
+                            position: "absolute",
+                            bottom: "80px",
+                            right: "80px"
+                        }} 
+                        src={LinkedInIcon}
+                        width={80}
+                        height={80}
+                    />
+                </a>
+                
                 <Image 
                     src={banner}
                     alt='Banner WorkInProgress'
                     fill={true}
                     priority={true}
-                    objectFit='contain'
+                    objectFit='cover'
                     />
             </div>
         );
