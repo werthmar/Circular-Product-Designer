@@ -65,7 +65,7 @@ export default function Authentication()
                 </Button>
                 
                 {/* Linkedin Button */}
-                <a href='https://de.linkedin.com/'>
+                <a href='https://www.linkedin.com/company/inec-pforzheim/'>
                     <Image
                         style={{
                             zIndex: "3",
