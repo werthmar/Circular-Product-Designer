@@ -1,12 +1,13 @@
 import { InputGroup, Input, Button } from 'reactstrap';
-import { useState } from 'react';
 import { checkPassword } from './_app';
 import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
 import Router from 'next/router';
 import Image from 'next/image';
 import banner from "../public/images/Banner_Coming_soon.jpg";
+import bannerMobile from "../public/images/Banner_Smartphone.jpg";
 import LinkedInIcon from "/public/icons/LinkedInIcon.png";
 import { Link } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 
 export default function Authentication() 
 {
@@ -14,6 +15,20 @@ export default function Authentication()
     const [notification, setNotification] = useState('');
     const [bannerVisible, setBannerVisible] = useState(true);
     const router = Router;
+    const [windowWidth, setWidth] = useState(window.innerWidth);
+
+    // Detecs and updates window width, is used to display diffrent banner images depending on the device / size
+    useEffect(() => {
+        const handleResize = () => {
+          setWidth(window.innerWidth);
+        };
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
 
     const handleChange = (event) => {
         setMessage(event.target.value);
@@ -52,7 +67,7 @@ export default function Authentication()
                     style={{
                         zIndex: "3",
                         position: "absolute",
-                        fontSize: "50px",
+                        fontSize: "30px",
                         backgroundColor: "transparent",
                         border: "none",
                         color: "grey",
@@ -67,20 +82,28 @@ export default function Authentication()
                 {/* Linkedin Button */}
                 <a href='https://www.linkedin.com/company/inec-pforzheim/'>
                     <Image
-                        style={{
+                        style={ windowWidth >= 500 ? {
                             zIndex: "3",
                             position: "absolute",
                             bottom: "80px",
                             right: "80px"
-                        }} 
+                        } :
+                        {
+                            zIndex: "3",
+                            position: "absolute",
+                            margin: "auto",
+                            bottom: "45px",
+                            marginLeft: "-20px"
+                        }
+                        } 
                         src={LinkedInIcon}
-                        width={80}
-                        height={80}
+                        width={60}
+                        height={60}
                     />
                 </a>
                 
                 <Image 
-                    src={banner}
+                    src={ windowWidth <= 500 ? bannerMobile : banner}
                     alt='Banner WorkInProgress'
                     fill={true}
                     priority={true}

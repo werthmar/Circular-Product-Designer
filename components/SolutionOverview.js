@@ -38,7 +38,7 @@ export default function SolutionOverview( props )
 
                 <div className="textBox box1">
                     <h2 className="number">{ props.initialType == "CBM" ? cbmCount : lcpCount }</h2>
-                    <h2 className="subtitle">{ props.initialType == "CBM" ? "Circular Business Models" : "Life Cycle Intesity" }</h2>
+                    <h2 className="subtitle">{ props.initialType == "CBM" ? "CIRCULAR BUSINESS MODELS" : "LIFE CYCLE PHASE INTENSITY" }</h2>
                     <p>
                         {
                             props.initialType == "CBM" ?
@@ -50,7 +50,7 @@ export default function SolutionOverview( props )
                 
                 <div className="textBox box2">
                     <h2 className="number">{ props.initialType != "CBM" ? cbmCount : lcpCount }</h2>
-                    <h2 className="subtitle">{ props.initialType != "CBM" ? "Circular Business Models" : "Life Cycle Intesity" }</h2>
+                    <h2 className="subtitle">{ props.initialType != "CBM" ? "CIRCULAR BUSINESS MODELS" : "LIFE CYCLE PHASE INTENSITY" }</h2>
                     <p>
                         {
                             props.initialType != "CBM" ?
