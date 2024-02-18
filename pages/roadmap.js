@@ -14,8 +14,8 @@ import Watermark from "../components/watermark";
 export default function Roadmap() {
 
     return(
-        <Container fluid className="Roadmap">
-            <Row>
+        <Container className="Roadmap">
+            <Row flex expanded>
 
                 {/** Left Side */}
                 <Col xs={4} className="navbarCol">

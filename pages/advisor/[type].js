@@ -611,7 +611,7 @@ export default class AdvisorPage extends React.Component
 
                 <div className="advisorPage">
 
-                    <Container fluid>
+                    <Container fluid className="advisorPageContainer">
                         <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
                             <CustomNavbar
