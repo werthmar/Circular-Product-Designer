@@ -537,7 +537,7 @@ export default class AdvisorPage extends React.Component
             return(
                 <div className="advisorPage">
 
-                    <Container fluid>
+                    <Container fluid style={{ padding: 0 }} >
                         <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
                             <CustomNavbar
@@ -573,7 +573,7 @@ export default class AdvisorPage extends React.Component
             return(
                 <div className="advisorPage">
 
-                    <Container fluid>
+                    <Container fluid style={{ padding: 0 }}>
                         <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
                             <div>{/** Used to force rerender */}</div>
@@ -632,7 +632,7 @@ export default class AdvisorPage extends React.Component
                                 // Single Row
                                 data['descriptions'].length <= 7 ?
                                     data['descriptions'].map(( item, index ) => (
-                                        <ChoosableElement 
+                                        <ChoosableElement
                                         key={index}
                                         id={item.id}
                                         description={item.description}
