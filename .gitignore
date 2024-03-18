@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# images and icons, they are uploaded to the sharefile found under milestones in the gitlab in the folder assets
+/public
