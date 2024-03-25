@@ -89,6 +89,7 @@ export default class AdvisorPage extends React.Component
             oldType: props.initialType,
             elementOpen: false, //only 1 element can be opend at a time, when an element is opend the navbar collapses
             closeElementCallback: null,
+            impressumVisible: true,
         };
 
         // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
@@ -343,12 +344,19 @@ export default class AdvisorPage extends React.Component
         // No element is currently open (=Navbar expanded) and now an element has been opened
         if( !elementOpen && bool == true )
         {
-            this.setState({ elementOpen: true });
+            this.setState({
+                elementOpen: true,
+                // + Toggle the impressum watermark because it overlays the open / close buttons otherwise
+                impressumVisible: false
+            });
             Navbar.current.setExpanded();
         } 
         // User closes the open element
         else if( elementOpen && bool == false ) {
-            this.setState({ elementOpen: false });
+            this.setState({
+                elementOpen: false,
+                impressumVisible: true
+            });
             Navbar.current.setExpanded();
         }
         // There is already a item open and the user opens another one
@@ -356,14 +364,18 @@ export default class AdvisorPage extends React.Component
             closeElementCallback();
         }
 
+        
         // Save the callback because we will be using the callback of the previous item when a new item is selected
-        this.setState({ closeElementCallback: callback });
+        this.setState({
+            closeElementCallback: callback,
+        });
     }
 
     // just opens and closes the description, used in the pie chart so cb is not needed
     toggleNavbarNoCallback = () => {
         const { Navbar } = this;
         Navbar.current.setExpandedButtons();
+        this.setState({ impressumVisible: !this.state.impressumVisible })
     }
 
     schoeneZeilenumbrueche = (text, zeilenlaenge) => {
@@ -501,7 +513,7 @@ export default class AdvisorPage extends React.Component
 
     render()
     {
-        const { data, loading, error, warning, type, title } = this.state;
+        const { data, loading, error, warning, type, title, impressumVisible } = this.state;
 
         if (loading) {
             return(
@@ -520,7 +532,7 @@ export default class AdvisorPage extends React.Component
                     </Container>
 
                     <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
-                        <Watermark />
+                        <Watermark visible={ impressumVisible } />
                     </div>
 
                 </div>
@@ -560,7 +572,7 @@ export default class AdvisorPage extends React.Component
                     </Container>
 
                     <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
-                        <Watermark />
+                        <Watermark visible={ impressumVisible } />
                     </div>
 
                 </div>
@@ -598,7 +610,7 @@ export default class AdvisorPage extends React.Component
                     </Container>
 
                     <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "100px" }}>
-                        <Watermark />
+                        <Watermark visible={ impressumVisible } />
                     </div>
 
                 </div>
@@ -655,7 +667,7 @@ export default class AdvisorPage extends React.Component
                     </Container>
 
                     <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
-                        <Watermark />
+                        <Watermark visible={ impressumVisible } />
                     </div>
 
                 </div>
