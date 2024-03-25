@@ -1,6 +1,7 @@
 import React from "react";
 import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
 import Image from "next/image";
+import Router from "next/router";
 
 export default function SolutionOverview( props )
 {
@@ -89,7 +90,7 @@ export default function SolutionOverview( props )
                     </p>
                     <Image className="arrow-image" alt="arrow" src="/images/Pfeil_grau_lang.png" width="528" height="182" />
                 </div>
-                <div className="link link3">
+                <div className="link link3" onClick={ () => Router.push("/pdfDisplay") } style={{ zIndex: 2 }}>
                     <p>
                         GET YOUR LIST OF CIRCULAR DESIGN PRINCIPLES
                     </p>

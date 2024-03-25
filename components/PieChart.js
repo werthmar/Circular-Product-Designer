@@ -9,6 +9,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Button, Col, Nav, Navbar, Alert, Container, Row } from "reactstrap";
 import { RiArrowGoBackLine } from 'react-icons/ri';
 import { Pie, getElementAtEvent } from 'react-chartjs-2';
+import Router from "next/router";
 
 ChartJS.register(
     ArcElement,
@@ -30,6 +31,7 @@ export default function PieChart( props )
     const [selectedCategory, setSelectedCategory] = useState();
     const [title, setTitle] = useState();
     const [text, setText] = useState();
+    const [loading, setLoading] = useState(false);
     const [subcategoryOpen, setSubcategoryOpen] = useState(false);
 
 
@@ -187,20 +189,19 @@ export default function PieChart( props )
         
         toggleDescription();
 
+        // Determine if the user clicked on the Download list of Solutions button by examining the on clicked element and looking for the label
+        var datalabel = element[0].element.$datalabels[0].$context.dataset.labels[0];
+        if ( datalabel == "DOWNLOAD LIST\n OF SOLUTIONS" ) {
+            setLoading(true);
+            Router.push("/pdfDisplay");
+        }
+
         // Display the new data
-            // the array which saves the subelements of the category
+        // the array which saves the subelements of the category
             setTitle( category );
             setSelectedCategory( category );
             setCategoryText( category );
     }
-
-    
-    
-
-    
-
-
-
 
     function getCdpTitles( category , zeilenlaenge)
     {
@@ -351,7 +352,16 @@ export default function PieChart( props )
 
 
     // No category has been selected yet, display pieChart 1
-    if( selectedCategory == undefined )
+    if ( loading ) {
+        return(
+            <Col className="loadingNotification">
+                    <div className="loader" />
+                    <p>loading...</p>
+            </Col>
+        );
+    }
+    
+    else if( selectedCategory == undefined )
     {
         return(
             <div style={{ width: '100%', height: '100%' }} >
