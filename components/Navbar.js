@@ -48,22 +48,37 @@ export default class CustomNavbar extends React.Component
     }
 
     // Color of go on button and navigation buttons changes based on current page
-    decideButtonColor()
+    decideButtonColor( index )
     {
-        console.log(this.state.pageIndex, this.props.pageOrder);
-        switch( this.props.pageOrder[ this.state.pageIndex - 1 ] )
+        //console.log(this.state.pageIndex, this.props.pageOrder);
+        //switch( this.props.pageOrder[ this.state.pageIndex - 1 ] )
+
+        var result;
+
+        // Color each button according to the page that is connected to it.
+        // -1 because the first button is for the previous page.
+        switch( this.props.pageOrder[ index - 1 ] )
         {
             case 'CBM':
-                return 'rgb(196, 132, 104)';
+                result = 'rgb(196, 132, 104)';
+                break;
             case 'LCP':
-                return 'rgb(237, 191, 98)';
+                result ='rgb(237, 191, 98)';
+                break;
             case 'ED':
-                return 'rgb(95, 108, 90)';
+                result = 'rgb(95, 108, 90)';
+                break;
+            case 'CDP':
+                result = 'rgb(94, 101, 240)';
+                break;
             case 'Solution-Overview':
-                return 'rgb(230, 230, 230)';
+                result = 'rgb(176, 94, 240)';
+                break;
             default:
-                return 'rgb(179, 179,179)';
+                result = 'rgb(179, 179,179)';
         }
+
+        return result;
     }
 
     decideDescription()
@@ -92,7 +107,7 @@ export default class CustomNavbar extends React.Component
                     <Button className='navbarButton'
                     style={
                         // Set the current page active / or set all buttons active with color, if your on the last page
-                        index == this.state.pageIndex ? { backgroundColor: this.decideButtonColor() } : {}   
+                        index <= this.state.pageIndex ? { backgroundColor: this.decideButtonColor( index ) } : {}   
                     }
                     disabled={
                         //  Disable all pages after the current page 
