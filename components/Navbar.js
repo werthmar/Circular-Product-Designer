@@ -69,10 +69,10 @@ export default class CustomNavbar extends React.Component
                 result = 'rgb(95, 108, 90)';
                 break;
             case 'CDP':
-                result = 'rgb(94, 101, 240)';
+                result = 'rgb(94, 103, 110)';
                 break;
             case 'Solution-Overview':
-                result = 'rgb(176, 94, 240)';
+                result = 'rgb(0, 0, 0)';
                 break;
             default:
                 result = 'rgb(179, 179,179)';
