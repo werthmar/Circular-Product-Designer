@@ -65,6 +65,55 @@ export default function pdfDisplay() {
         },
       ],
     },
+    
+    { id: 2,
+      AreasOfAction: 'Funktions & Nutzergerechte Gestaltung',
+      CDP: [
+        {
+          name: "Functionsbeständigkeit",
+          solutionApproaches: [
+            {
+              title: "Verschleißzustand", 
+              description: "Machen Sie den Verschleißzustand möglichst leicht und eindeutig erkennbar, um Abnutzungsvorrat bzw. Wiederverwendbarkeit beurteilen zu können.",
+            },
+            {
+              title: "Automatische Systeme",
+              description: "Verwenden Sie automatische Systeme, die Fehlfunktionen von Produkten oder Komponenten anzeigen."
+            },
+            {
+              title: "Automatische Systeme",
+              description: "Verwenden Sie automatische Systeme, die Fehlfunktionen von Produkten oder Komponenten anzeigen."
+            },
+          ],
+        },
+        {
+          name: "Funktionserweiterung",
+          solutionApproaches: [
+            {
+              title: "title4",
+              description: "description4"
+            }
+          ],
+        },
+        {
+          name: "Ergonomische Gestaltung",
+          solutionApproaches: [
+            {
+              title: "title5", 
+              description: "description5"
+            },
+            {
+              title: "title6", 
+              description: "description6"
+            },
+            {
+              title: "title7", 
+              description: "description7"
+            },
+          ]
+        },
+      ],
+    },
 
   ];
   
@@ -182,7 +231,7 @@ export default function pdfDisplay() {
       fontWeight: 600,
       marginTop: 12,
       padding: 6,
-      marginLeft: 44
+      marginLeft: 57,
     },
     // Container including the vertical text
     cdpRow: {
@@ -192,35 +241,41 @@ export default function pdfDisplay() {
       //justifyContent: 'flex-start', // Space evenly between items
       //height: '100%', // Fill 100% of available height
       width: "100%",
+      maxWidth: "100%",
       marginTop: 15,
     },
-    // Row including everything except the vertical text
-    mainRow: {
-      flexDirection: "row",
-      marginBottom: 15,
-    },
-    columnVertical: {
+    areaOfActionCol: {
       backgroundColor: "rgb(94, 103, 110)",
-      transform: 'rotate(-90deg)', // Rotate the text 90 degrees counter-clockwise
+      width: 80,
+      height: "100%",
       textAlign: 'center',
+    },
+    areasOfAction: {
+      objectFit: "contain",
+      objectPosition: "center",
+      height: 200,
+      margin: "auto"
+    },
+    // Taken out for now because Reactpds lacks appropriate solutions for vertical text
+    verticalText: {
+      transform: 'rotate(-90deg)', // Rotate the text 90 degrees counter-clockwise
+      //height: 40,
       //width: "100%", // Adjust width as needed
       //marginTop: 'auto', // Align the text to the bottom of the container
       //marginBottom: 'auto',
-      height: 40,
       fontSize: 14,
       fontFamily: "BarlowCondensed",
       fontWeight: 600,
       padding: 0,
       margin: 0,
-
     },
     cdpCol: {
       height: "100%",
       backgroundColor: "rgb(174, 182, 184)",
       maxWidth: 130,
       width: "100%",
-      marginLeft: 20,
-      marginRight: 20,
+      marginLeft: 12,
+      marginRight: 15,
     },
     cdpText: {
       fontSize: 12,
@@ -230,7 +285,6 @@ export default function pdfDisplay() {
     },
     solutionApproachRow: {
       flexDirection: "row",
-      marginBottom: 5,
       alignContent: "center",
       alignItems: "center",
       borderBottomWidth: 1, // Set border width for the bottom side only
@@ -243,17 +297,18 @@ export default function pdfDisplay() {
       fontWeight: 600,
     },
     solutionApproachTitle: {
-      fontSize: 14,
+      fontSize: 12,
       fontFamily: "BarlowCondensed",
       fontWeight: 500,
       width: 100,
-      marginLeft: 5
+      marginLeft: 5,
+      marginRight: 4,
     },
     solutionApproachDescription: {
       fontSize: 10,
       fontFamily: "BarlowCondensed",
       fontWeight: 300,
-      width: 220
+      width: 200,
     },
     roundButton: {
       width: 14,
@@ -264,19 +319,26 @@ export default function pdfDisplay() {
       borderRadius: 50,
       alignSelf: "center",
       marginLeft: 10,
-      padding: 0
+      //padding: 0
+      //margin: "auto",
+      //position: "absolute",
+      //right: -20,
+      
     },
-
-    test: {
-      maxWidth: 40,
-      height: "100%",
-    }
 
   });
 
   // used display the increasing numbers next to the title
   var globalIndex = 0;
   
+  function getIndex() {
+    globalIndex++;
+    return globalIndex;
+  }
+
+  // Date object used to cunstruct the date inside the document
+  const currentDate = new Date();
+
   // Create Document Component
   const MyDocument = () => (
     <Document title="List of Solutions" author="Universität Pforzheim" subject="List of Solutions">
@@ -302,7 +364,14 @@ export default function pdfDisplay() {
           <View style={styles.verticalGreyBar1} />
           <View>
             <Text style={styles.infoTitle}>Date</Text>
-            <Text style={styles.infoText}>XX-XX-XXXX</Text>
+            <Text style={styles.infoText}>      
+              { 
+                String(currentDate.getDate()).padStart(2, '0') + "-"
+                // Month starts at 0
+                + String(currentDate.getMonth() + 1).padStart(2, '0') + "-"
+                + currentDate.getFullYear()
+              }
+            </Text>
           </View>
           <View style={styles.verticalGreyBar2} />
           <View>
@@ -323,15 +392,20 @@ export default function pdfDisplay() {
             <View key={item.id} style={styles.cdpRow}>
               
               {/** Areas of Action */}
-              <View style={styles.test}>
-                <Text style={styles.columnVertical}>{item.AreasOfAction}</Text>
+              <View style={styles.areaOfActionCol}>
+                {/* <Text style={styles.verticalText}>{item.AreasOfAction}</Text> */}
+                {
+                  // Reset the SolutionApproachIndex because the counter is only relative to each Area of Action
+                  globalIndex = 0
+                }
+                <Image style={styles.areasOfAction} src="/images/AreasOfActionTitles/VerticalAreaOfActionTest.png" />
               </View>
               
               {/** CDP Map */}
               <View style={styles.column}>
                 {item.CDP.map((cdp, cdpIndex) => (
 
-                  <View style={styles.mainRow}>
+                  <View style={ cdpIndex == 0 ? { flexDirection: "row", } : { flexDirection: "row", marginTop: 15 }}>
                     
                     {/** CDP Name */}
                     <View style={styles.cdpCol}>
@@ -344,10 +418,14 @@ export default function pdfDisplay() {
 
                         <View style={styles.row}>
 
-                          <View style={styles.solutionApproachRow}>
-                            <Text style={styles.titleIndex}>{index + 1}. </Text>
-                            <Text style={styles.solutionApproachTitle}>{solution.title}</Text>
-                            <Text style={styles.solutionApproachDescription}>{solution.description}</Text>
+                          <View style={ index == 0 ? "" : { marginTop: 5 } }>
+
+                            <View style={styles.solutionApproachRow}>
+                              <Text style={styles.titleIndex}>{ getIndex() }. </Text>
+                              <Text style={styles.solutionApproachTitle}>{ solution.title }</Text>
+                              <Text style={styles.solutionApproachDescription}>{ solution.description }</Text>
+                            </View>
+                          
                           </View>
 
                           {/** Round Button */}
