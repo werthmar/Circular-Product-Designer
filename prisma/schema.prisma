@@ -14,12 +14,6 @@ model cbmxed {
   Priority Int?
 }
 
-model cdp_definitions {
-  id                    Int     @id @default(autoincrement())
-  gestaltungsprinzipien String? @db.VarChar(400)
-  definitionen          String? @db.VarChar(9999)
-}
-
 model descriptions {
   id          Int     @id
   type        String? @db.Text
@@ -46,4 +40,28 @@ model lcpxed {
   LCP_id   Int?
   ED_id    Int?
   Priority Int?
+}
+
+model cdp {
+  cdp_id              Int                   @id @default(autoincrement())
+  area_of_action      String?               @db.VarChar(999)
+  cdp_title           String?               @db.VarChar(999)
+  cdp_definition      String?               @db.VarChar(999)
+  solution_approaches solution_approaches[]
+}
+
+model edxsolap {
+  id    Int  @id @default(autoincrement())
+  sl_id Int?
+  ed_id Int?
+}
+
+model solution_approaches {
+  id             Int     @id @default(autoincrement())
+  cdp_id         Int?
+  sl_title       String? @db.VarChar(999)
+  sl_description String? @db.VarChar(999)
+  cdp            cdp?    @relation(fields: [cdp_id], references: [cdp_id], onDelete: NoAction, onUpdate: NoAction, map: "cdp_id")
+
+  @@index([cdp_id], map: "cdp_id_idx")
 }

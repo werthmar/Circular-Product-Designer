@@ -394,10 +394,6 @@ export default function pdfDisplay() {
               {/** Areas of Action */}
               <View style={styles.areaOfActionCol}>
                 {/* <Text style={styles.verticalText}>{item.AreasOfAction}</Text> */}
-                {
-                  // Reset the SolutionApproachIndex because the counter is only relative to each Area of Action
-                  globalIndex = 0
-                }
                 <Image style={styles.areasOfAction} src="/images/AreasOfActionTitles/VerticalAreaOfActionTest.png" />
               </View>
               
