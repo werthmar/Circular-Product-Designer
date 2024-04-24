@@ -8,6 +8,10 @@ import { getCookie, hasCookie, getCookies, setCookie } from 'cookies-next';
 
 export default function pdfDisplay() {
   
+  const [areasOfAction, setAreasOfAction] = React.useState();
+  const [loading, setLoading] = React.useState(true);
+  const [solutionApproachCount, setSolutionApproachCount] = React.useState();
+
   // = componentDidMount
   React.useEffect(() => {
     
@@ -22,126 +26,55 @@ export default function pdfDisplay() {
             });
         }
 
-    console.log(selectedItems);  
-
     fetch(`/api/cdp?items=${ '[' + selectedItems + ']' }`)
     .then((res) => res.json())
     .then((data) =>
     {
-        console.log(data);
+        // Group CDPs by Area of Action
+        var lastCdp;
+        var areasOfAction = [];
+        var slCount = 0;
+
+        data.cdps.forEach( ( cdp, index ) =>
+        {
+          var areaOfActionFound = false;
+          slCount += cdp.solution_approaches.length
+          
+          areasOfAction.forEach( (area, index ) =>
+          {
+            if( area.title == cdp.area_of_action )
+            {
+              area.cdp.push( cdp );
+              areaOfActionFound = true;
+              return;
+            }
+          });
+          
+          // areaOfAction not already present in array, create new area as category for the cdp
+          if( areaOfActionFound == false )
+          {
+            areasOfAction.push(
+              {
+                title: cdp.area_of_action,
+                cdp: [
+                  cdp
+                ]
+              }
+            )
+          }
+          
+        });
+
+        // Save data to state
+        setAreasOfAction( areasOfAction );
+        setSolutionApproachCount( slCount );
+        setLoading(false);
+
     });
    
   }, [])
 
-  // Sample data, to be replaced by real data
-  const data = [
-    { id: 1,
-      AreasOfAction: 'Funktions & Nutzergerechte Gestaltung',
-      CDP: [
-        {
-          name: "Functionsbeständigkeit",
-          solutionApproaches: [
-            {
-              title: "Verschleißzustand", 
-              description: "Machen Sie den Verschleißzustand möglichst leicht und eindeutig erkennbar, um Abnutzungsvorrat bzw. Wiederverwendbarkeit beurteilen zu können.",
-            },
-            {
-              title: "Automatische Systeme",
-              description: "Verwenden Sie automatische Systeme, die Fehlfunktionen von Produkten oder Komponenten anzeigen."
-            },
-            {
-              title: "Begrenzter Verschleiß",
-              description: "Beschränken Sie den Verschleiß, z.B. durch das Auftragen von Hart- oder Verschlussschichten."
-            }
-          ],
-        },
-        {
-          name: "Funktionserweiterung",
-          solutionApproaches: [
-            {
-              title: "title4",
-              description: "description4"
-            }
-          ],
-        },
-        {
-          name: "Ergonomische Gestaltung",
-          solutionApproaches: [
-            {
-              title: "title5", 
-              description: "description5"
-            },
-            {
-              title: "title6", 
-              description: "description6"
-            },
-            {
-              title: "title7", 
-              description: "description7"
-            },
-            {
-              title: "title8", 
-              description: "description8"
-            },
-            {
-              title: "title9", 
-              description: "description9"
-            },
-          ]
-        },
-      ],
-    },
-    
-    { id: 2,
-      AreasOfAction: 'Funktions & Nutzergerechte Gestaltung',
-      CDP: [
-        {
-          name: "Functionsbeständigkeit",
-          solutionApproaches: [
-            {
-              title: "Verschleißzustand", 
-              description: "Machen Sie den Verschleißzustand möglichst leicht und eindeutig erkennbar, um Abnutzungsvorrat bzw. Wiederverwendbarkeit beurteilen zu können.",
-            },
-            {
-              title: "Automatische Systeme",
-              description: "Verwenden Sie automatische Systeme, die Fehlfunktionen von Produkten oder Komponenten anzeigen."
-            },
-            {
-              title: "Automatische Systeme",
-              description: "Verwenden Sie automatische Systeme, die Fehlfunktionen von Produkten oder Komponenten anzeigen."
-            },
-          ],
-        },
-        {
-          name: "Funktionserweiterung",
-          solutionApproaches: [
-            {
-              title: "title4",
-              description: "description4"
-            }
-          ],
-        },
-        {
-          name: "Ergonomische Gestaltung",
-          solutionApproaches: [
-            {
-              title: "title5", 
-              description: "description5"
-            },
-            {
-              title: "title6", 
-              description: "description6"
-            },
-            {
-              title: "title7", 
-              description: "description7"
-            },
-          ]
-        },
-      ],
-    },
-
-  ];
+  
   
   const PDFViewer = dynamic(
     () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
@@ -175,6 +108,7 @@ export default function pdfDisplay() {
     },  
     page: {
       paddingLeft: 25,
+      color: "rgb(204,0,0)",
         //backgroundColor: '#E4E4E4'
     },
     column: {
@@ -199,12 +133,13 @@ export default function pdfDisplay() {
       fontFamily: "BarlowCondensed",
       fontWeight: "600",
       fontSize: 25,
+      color: "black"
     },
     horrizontalGreyBar: {
       width: "240px",
       height: "25px",
       marginBottom: 5,
-      backgroundColor: "rgb(168, 187, 191)"
+      backgroundColor: "rgb(83, 83, 83)"
     },
     icon: {
       width: 80, // Adjust the width as needed
@@ -222,20 +157,21 @@ export default function pdfDisplay() {
       height: "50px",
       marginLeft: 20,
       marginRight: 10,
-      backgroundColor: "rgb(168, 187, 191)"
+      backgroundColor: "rrgb(83, 83, 83)"
     },
     verticalGreyBar2: {
       width: "4px",
       height: "50px",
       marginLeft: 50,
       marginRight: 10,
-      backgroundColor: "rgb(168, 187, 191)"
+      backgroundColor: "rgb(83, 83, 83)"
     },
     infoTitle: {
       paddingTop: 7,
       fontSize: 14,
       fontFamily: "BarlowCondensed",
       fontWeight: 600,
+      color: "black",
     },
     infoText: {
       fontSize: 14,
@@ -251,13 +187,14 @@ export default function pdfDisplay() {
       flexDirection: "row",
     },
     tableTitleBar: {
-      backgroundColor: "rgb(168, 187, 191)",
+      backgroundColor: "rgb(83, 83, 83)",
       fontSize: 12,
       fontFamily: "BarlowCondensed",
       fontWeight: 600,
       marginTop: 12,
       padding: 6,
-      marginLeft: 57,
+      marginLeft: 0,
+      color: "black",
     },
     // Container including the vertical text
     cdpRow: {
@@ -268,19 +205,31 @@ export default function pdfDisplay() {
       //height: '100%', // Fill 100% of available height
       width: "100%",
       maxWidth: "100%",
-      marginTop: 15,
+      paddingTop: 10,
+      borderTopWidth: 4, // Set border width for the bottom side only
+      borderTopColor: 'rgb(94, 103, 110)', // Set border color for the bottom side only
+      borderTopStyle: 'solid', 
+      borderLeftWidth: 4, // Set border width for the bottom side only
+      borderLeftColor: 'rgb(94, 103, 110)', // Set border color for the bottom side only
+      borderLeftStyle: 'solid', 
     },
     areaOfActionCol: {
-      backgroundColor: "rgb(94, 103, 110)",
-      width: 80,
-      height: "100%",
-      textAlign: 'center',
+      // backgroundColor: "rgb(94, 103, 110)",
+      width: "100%",
+      //height: 30,
+      textAlign: 'start',
+      paddingBottom: 4,
+      //borderBottomWidth: 4, // Set border width for the bottom side only
+      //borderBottomColor: 'rgb(94, 103, 110)', // Set border color for the bottom side only
+      //borderBottomStyle: 'solid', 
     },
-    areasOfAction: {
-      objectFit: "contain",
-      objectPosition: "center",
-      height: 200,
-      margin: "auto"
+    areaOfAction: {
+      paddingLeft: 15,
+      marginTop: 10,
+      fontSize: 14,
+      fontFamily: "BarlowCondensed",
+      fontWeight: 600,
+      color: "black",
     },
     // Taken out for now because Reactpds lacks appropriate solutions for vertical text
     verticalText: {
@@ -310,6 +259,7 @@ export default function pdfDisplay() {
       margin: "auto"
     },
     solutionApproachRow: {
+      position: "relative",
       flexDirection: "row",
       alignContent: "center",
       alignItems: "center",
@@ -334,7 +284,7 @@ export default function pdfDisplay() {
       fontSize: 10,
       fontFamily: "BarlowCondensed",
       fontWeight: 300,
-      width: 200,
+      width: 240,
     },
     roundButton: {
       width: 14,
@@ -344,10 +294,13 @@ export default function pdfDisplay() {
       borderStyle: 'solid',
       borderRadius: 50,
       alignSelf: "center",
-      marginLeft: 10,
-      //padding: 0
+      //marginLeft: 10,
+      //paddingLeft: 10,
       //margin: "auto",
-      //position: "absolute",
+      position: "absolute",
+      right: "-20px",
+      padding: 0,
+      margin: 0, 
       //right: -20,
       
     },
@@ -355,7 +308,7 @@ export default function pdfDisplay() {
   });
 
   // used display the increasing numbers next to the title
-  var globalIndex = 0;
+  var globalIndex =0;
   
   function getIndex() {
     globalIndex++;
@@ -402,41 +355,42 @@ export default function pdfDisplay() {
           <View style={styles.verticalGreyBar2} />
           <View>
             <Text style={styles.infoTitle}>Number of solution approaches</Text>
-            <Text style={styles.infoText}>X</Text>
+            <Text style={styles.infoText}>{solutionApproachCount}</Text>
           </View>
         </View>
 
         {/** --- CDP Table --- */}
         <View style={styles.tableTitleBar}>
-          <Text>CIRCULAR DESIGN PRINCIPLES      GENERIC SOLUTION APPROACHES</Text>
+          <Text>CIRCULAR DESIGN PRINCIPLES</Text>
         </View>
 
 
           {/* Map over data and generate elements */}
-          {data.map(item => (
+          {areasOfAction.map(item => (
 
-            <View key={item.id} style={styles.cdpRow}>
-              
-              {/** Areas of Action */}
-              <View style={styles.areaOfActionCol}>
-                {/* <Text style={styles.verticalText}>{item.AreasOfAction}</Text> */}
-                <Image style={styles.areasOfAction} src="/images/AreasOfActionTitles/VerticalAreaOfActionTest.png" />
-              </View>
+            <View style={styles.column}>
+
+            {/** Areas of Action */}
+            <View style={styles.areaOfActionCol}>
+              <Text style={styles.areaOfAction}>{item.title}</Text>
+            </View>
+
+            <View style={styles.cdpRow}>  
               
               {/** CDP Map */}
               <View style={styles.column}>
-                {item.CDP.map((cdp, cdpIndex) => (
+                {item.cdp.map((cdp, cdpIndex) => (
 
                   <View style={ cdpIndex == 0 ? { flexDirection: "row", } : { flexDirection: "row", marginTop: 15 }}>
                     
                     {/** CDP Name */}
-                    <View style={styles.cdpCol}>
-                      <Text style={styles.cdpText}>{cdp.name}</Text> 
+                    <View wrap={false} style={styles.cdpCol}>
+                      <Text style={styles.cdpText}>{cdp.cdp_title}</Text> 
                     </View>
               
                     {/** Title of Solution Approaches Map */}
                     <View style={styles.column}>
-                      {cdp.solutionApproaches.map((solution, index) => (
+                      {cdp.solution_approaches.map((solution, index) => (
 
                         <View style={styles.row}>
 
@@ -444,8 +398,8 @@ export default function pdfDisplay() {
 
                             <View style={styles.solutionApproachRow}>
                               <Text style={styles.titleIndex}>{ getIndex() }. </Text>
-                              <Text style={styles.solutionApproachTitle}>{ solution.title }</Text>
-                              <Text style={styles.solutionApproachDescription}>{ solution.description }</Text>
+                              <Text style={styles.solutionApproachTitle}>{ solution.sl_title }</Text>
+                              <Text style={styles.solutionApproachDescription}>{ solution.sl_description }</Text>
                             </View>
                           
                           </View>
@@ -466,6 +420,8 @@ export default function pdfDisplay() {
 
 
             </View>
+
+            </View>
           ))}
 
 
@@ -473,12 +429,23 @@ export default function pdfDisplay() {
     </Document>
   );
 
-  return(
-    <div style={styles.pdfViewer}>
-      <PDFViewer width="100%" height="100%" >
-        <MyDocument />
-      </PDFViewer>
-    </div>
-  );
+  if( loading ) {
+    return(
+      <div className="loadingNotification">
+        <div className="loader" />
+        <p>loading...</p>
+      </div>
+    );
+  } 
+  else
+  {
+    return(    
+      <div style={styles.pdfViewer}>
+        <PDFViewer width="100%" height="100%" >
+          <MyDocument />
+        </PDFViewer>
+      </div>
+    );
+  }
 
 }
