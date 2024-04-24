@@ -4,9 +4,35 @@ import dynamic from "next/dynamic";
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
 import { Container } from "reactstrap";
+import { getCookie, hasCookie, getCookies, setCookie } from 'cookies-next';
 
 export default function pdfDisplay() {
   
+  // = componentDidMount
+  React.useEffect(() => {
+    
+    // Get selected item ids
+    var selectedItems = [];
+        var cookie = getCookie( 'selected' );
+        if( cookie )
+        {
+            cookie = JSON.parse(cookie);
+            cookie.forEach( item => {
+                selectedItems.push( item[0] );
+            });
+        }
+
+    console.log(selectedItems);  
+
+    fetch(`/api/cdp?items=${ '[' + selectedItems + ']' }`)
+    .then((res) => res.json())
+    .then((data) =>
+    {
+        console.log(data);
+    });
+   
+  }, [])
+
   // Sample data, to be replaced by real data
   const data = [
     { id: 1,
