@@ -9,7 +9,7 @@ $color-primary: #ffffff;
 $footer-height: 100px;
 
 // New Design
-$background-color: rgb(232, 232, 232);
+$background-color: rgb(230, 230, 230);
 $color-secondary: rgb(192, 192, 192);
 $color-secondary-light: rgb(204,204,204);
 $accent-color: rgb(237,191,98);
@@ -21,26 +21,68 @@ $accent-color: rgb(237,191,98);
   font-style: normal;
 }
 @font-face {
-  font-family: 'BarlowCondensed-light';
+  font-family: 'Barlow-Light';
   src: url('../public/fonts/BarlowCondensed-Light.ttf');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Lato-light';
+  font-family: 'Lato-Light';
   src: url('../public/fonts/Lato-Light.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url('../public/fonts/Lato-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato-Black';
+  src: url('../public/fonts/Lato-Black.ttf');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow-Regular';
+  src: url('/fonts/BarlowCondensed-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow-Bold';
+  src: url('/fonts/BarlowCondensed-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow-SemiBold';
+  src: url('/fonts/BarlowCondensed-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow-light';
+  src: url('/fonts/BarlowCondensed-Light.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto-Medium';
+  src: url('/fonts/RobotoCondensed-Medium.ttf');
   font-weight: 300;
   font-style: normal;
 }
 
 h1, h2 {
-  font-family: 'BarlowCondensed' !important;
-  font-weight: 400;
+  //font-family: 'BarlowCondensed';
+  //font-weight: 400;
 }
 
 p{
-  font-family: 'Lato-Light';
-  font-weight: 300;
+  //font-family: 'Lato-Light';
+  //font-weight: 300;
 }
 
 .standardButton{

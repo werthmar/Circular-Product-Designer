@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import CustomNavbarButtonsOnly from "../components/NavbarButtonsOnly";
 import Image from "next/image";
 import { useState } from "react";
+import Watermark from "../components/watermark";
 
 export default function ProcessPage()
 {
@@ -58,14 +59,15 @@ export default function ProcessPage()
 
                         <Col className="title" xs="2">
                             <h1>
-                                DO YOU HAVE
+                                DO YOU<br/>
+                                HAVE...
                             </h1>
                         </Col>
 
 
                         <Row className="col-9" xs="1">
                             <Col className="buttonCol">
-                                <Button disabled onClick={ () => nextPage( "/advisor/CBM" ) } className="button cbm">
+                                <Button onClick={ () => nextPage( "/advisor/CBM" ) } className="button cbm">
                                     <p>... a circular business strategy you would like to follow?</p>
                                     <div className="backgroundImage">
                                         <h2>CIRCULAR BUSINESS MODEL</h2>  
@@ -84,6 +86,11 @@ export default function ProcessPage()
                     
                     </Row>
                 </Container>
+
+                <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                    <Watermark />
+                </div>
+
             </div>
         )
     }

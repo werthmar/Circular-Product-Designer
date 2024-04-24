@@ -39,18 +39,16 @@
 
         h1{
             position: absolute;
-            bottom: 0;
-            writing-mode: vertical-lr;
-            transform: rotate(180deg);
-            margin-bottom: 90px;
-            font-size: 110px;
-            font-weight: 700;
+            bottom: 13%;
+            font-size: 90px;
+            font-weight: 600;
+            font-family: 'Barlow-Bold';
         }
     }
     
     .buttonCol{
         text-align: end;
-        margin-top: 30px;
+        margin-top: 0px;
 
         .button{
             text-align: start;
@@ -66,14 +64,16 @@
 
             p{
                 padding-left: 100px;
-                font-size: 50px;
-                font-weight: 300;
+                font-size: 32px;
+                font-weight: 600;
                 margin-bottom: 30px;
+                font-family: 'Barlow-Regular';
             }
         }
         
         .cbm{
-            background-color: lightgray;
+            height: 100%;
+            background-color: rgba(213, 181, 167, 1);
 
             .backgroundImage{
                 display: flex;
@@ -85,11 +85,13 @@
                 background-size: contain;
                 background-position: center;
                 background-repeat: no-repeat;
-                
+                margin-left: 30px;
+
                 h2{
                     margin: auto;
-                    font-size: 50px;
+                    font-size: 60px;
                     font-weight: 600;
+                    font-family: 'Barlow-SemiBold';
                 }
             }
         }
@@ -98,7 +100,8 @@
         }
         
         .lci{
-            background-color: rgb(186, 186, 186);
+            background-color: rgba(232, 218, 190, 1);
+            height: 100%;
 
             .backgroundImage{
                 display: flex;
@@ -110,11 +113,13 @@
                 background-size: contain;
                 background-position: center;
                 background-repeat: no-repeat;
+                margin-left: 30px;
                 
                 h2{
                     margin: auto;
-                    font-size: 50px;
+                    font-size: 60px;
                     font-weight: 600;
+                    font-family: 'Barlow-SemiBold';
                 }
             }
         }

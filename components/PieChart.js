@@ -9,6 +9,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Button, Col, Nav, Navbar, Alert, Container, Row } from "reactstrap";
 import { RiArrowGoBackLine } from 'react-icons/ri';
 import { Pie, getElementAtEvent } from 'react-chartjs-2';
+import Router from "next/router";
 
 ChartJS.register(
     ArcElement,
@@ -30,6 +31,7 @@ export default function PieChart( props )
     const [selectedCategory, setSelectedCategory] = useState();
     const [title, setTitle] = useState();
     const [text, setText] = useState();
+    const [loading, setLoading] = useState(false);
     const [subcategoryOpen, setSubcategoryOpen] = useState(false);
 
 
@@ -89,10 +91,10 @@ export default function PieChart( props )
 
     // Vordefinierte Werte für verschiedene Auflösungen
     const resolutions = [
-        { width: 4096, height: 2060, fontSize1: 40, fontSize2: 60, fontSize3: 40, fontSize4: 30, zeilenlaenge: 20 },
-        { width: 1916, height: 1030, fontSize1: 18, fontSize2: 50, fontSize3: 18, fontSize4: 22, zeilenlaenge: 15 },
-        { width: 1366, height: 1024, fontSize1: 14, fontSize2: 35, fontSize3: 14, fontSize4: 14, zeilenlaenge: 15  },
-        { width: 844, height: 390, fontSize1: 5, fontSize2: 15, fontSize3: 5, fontSize4: 8, zeilenlaenge: 5 }
+        { width: 4096, height: 2060, fontSize1: 40, fontSize2: 40, fontSize3: 40, fontSize4: 30, zeilenlaenge: 20 },
+        { width: 1916, height: 1030, fontSize1: 18, fontSize2: 35, fontSize3: 18, fontSize4: 22, zeilenlaenge: 15 },
+        { width: 1366, height: 1024, fontSize1: 14, fontSize2: 25, fontSize3: 14, fontSize4: 14, zeilenlaenge: 15  },
+        { width: 844, height: 390, fontSize1: 5, fontSize2: 10, fontSize3: 5, fontSize4: 8, zeilenlaenge: 5 }
         // Füge hier weitere Auflösungen hinzu, falls erforderlich
     ];
 
@@ -169,7 +171,7 @@ export default function PieChart( props )
         plugins: 
             {
                 legend: {
-                    display: false
+                    display: false,
                 },
                 tooltip: {
                     enabled: false
@@ -187,20 +189,19 @@ export default function PieChart( props )
         
         toggleDescription();
 
+        // Determine if the user clicked on the Download list of Solutions button by examining the on clicked element and looking for the label
+        var datalabel = element[0].element.$datalabels[0].$context.dataset.labels[0];
+        if ( datalabel == "DOWNLOAD LIST\n OF SOLUTIONS" ) {
+            setLoading(true);
+            Router.push("/pdfDisplay");
+        }
+
         // Display the new data
-            // the array which saves the subelements of the category
+        // the array which saves the subelements of the category
             setTitle( category );
             setSelectedCategory( category );
             setCategoryText( category );
     }
-
-    
-    
-
-    
-
-
-
 
     function getCdpTitles( category , zeilenlaenge)
     {
@@ -351,7 +352,16 @@ export default function PieChart( props )
 
 
     // No category has been selected yet, display pieChart 1
-    if( selectedCategory == undefined )
+    if ( loading ) {
+        return(
+            <Col className="loadingNotification">
+                    <div className="loader" />
+                    <p>loading...</p>
+            </Col>
+        );
+    }
+    
+    else if( selectedCategory == undefined )
     {
         return(
             <div style={{ width: '100%', height: '100%' }} >
@@ -506,7 +516,7 @@ export default function PieChart( props )
             
                 { /** Text Display*/ }
                 <Col xs="7">
-                    <div className={setBackgroundBasedOnH1(title.toUpperCase())}>
+                    <div className={setBackgroundBasedOnH1(selectedCategory.toUpperCase())}>
                         <container/>
                         <h1>{ title.toUpperCase() }</h1>
                         <p>{ text }</p>

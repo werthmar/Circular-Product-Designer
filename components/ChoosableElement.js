@@ -75,13 +75,9 @@ export default function ChoosableElement(props) {
 
     const setBackgroundBasedOnH1 = (h1Text) => {
 
-        console.log(h1Text);
-
         let help = h1Text;
         help = help.split(" ")
 
-        console.log(help);
-        
         // Je nach Text des h1-Elements das entsprechende Hintergrundbild auswählen
         if (h1Text === "RAW MATERIAL INTENSIVE PRODUCT") {
             return "description_raw_material";
@@ -95,7 +91,8 @@ export default function ChoosableElement(props) {
             return "description_disposal";
         } else if (h1Text === "REUSE & REDESTRIBUTION" || h1Text === "REUSABILITY") {
             return "description_reuse";
-        } else if (h1Text === "REMANUFACTURING & REFURBISH" || h1Text === "POSSIBILITY OF MAINTENANCE AND REFURBISHMENT") {
+        } else if (h1Text === "REMANUFACTURING & REFURBISH" || h1Text === "POSSIBILITY OF MAINTENANCE AND REFURBISHMENT"
+        || h1Text === "POSSIBILITY OF MAINTENANCE" || h1Text === "MAINTENANCE / REFURBISHMENT") {
             return "description_remanufacturing";
         } else if (h1Text === "RECYCLING, UPCYCLING") {
             return "description_recycling";
@@ -125,7 +122,7 @@ export default function ChoosableElement(props) {
 
 
     return(
-        <Col className={ descriptionVisible ? "choosableElement col-7" : "choosableElement"} 
+        <Col className={ descriptionVisible ? "choosableElement col-6" : "choosableElement"} 
             //xs={descriptionVisible ? "8" : "3"} 
             //md={descriptionVisible ? "5" : "2"} 
             //xxl={descriptionVisible ? "4" : "1"}
@@ -162,7 +159,7 @@ export default function ChoosableElement(props) {
                         
                                 {/* Expanded indicator */}
                                 <div className="arrowIcon" onClick={() => handleClick()}>
-                                    <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={60} height={35} />
+                                    <Image src="/icons/arrow_black_left.png" style={{display: descriptionVisible ? 'none' : 'inline-block' }} alt="expansion indicator" width={60} height={35} />
                                 </div>
 
                             </Row>
@@ -179,6 +176,10 @@ export default function ChoosableElement(props) {
                         <br/>
                         <p>{description}</p>
                         
+                        {/* Expanded indicator */}
+                        <div className="arrowIconClose" onClick={() => handleClick()}>
+                            <Image src="/icons/arrow_white_right.png" alt="expansion indicator" width={60} height={35} />
+                        </div>
                     </Col>
 
                 </Row>

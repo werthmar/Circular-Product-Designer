@@ -112,6 +112,18 @@ export async function getMatchingIds(oldType, nextType, ids) {
             distinct: [ matchingIdType ]
         })     
     }
+    // ED -> Solution Approaches
+    else if( oldType == "ED" && nextType == "SL" ) {
+
+        matchingIdType = 'sl_id';
+        result =  await prisma.edxsolap.findMany({
+            select: { sl_id: true },
+            where: { 
+                ed_id: { in: ids }, 
+            },
+            distinct: [ matchingIdType ]
+        })     
+    }
 
 
 
@@ -121,5 +133,37 @@ export async function getMatchingIds(oldType, nextType, ids) {
     });
     
     return matchingIds
+
+}
+
+export async function getSolutionApproaches(ids)
+{
+    var result = await prisma.solution_approaches.findMany({
+        where: {
+            id: { in: ids }
+        }
+    });
+    return result;
+}
+
+// Returns the CDPs including the solution approaches for the pdf generation
+export async function getCdps( solution_approaches )
+{
+    var cdp;
+    var cdpId = [];
+    var result;
+
+    // Extract the ids for the cdp out of the solution approaches
+    solution_approaches.forEach( (sl, index ) => {
+        cdpId.push( sl.cdp_id );
+    });
+
+    var cdp = await prisma.cdp.findMany({
+        where: {
+            cdp_id: { in: cdpId }
+        }
+    });
+
+    return cdp;
 
 }

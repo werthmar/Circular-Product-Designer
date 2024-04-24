@@ -1,37 +1,55 @@
+@import 'theme';
+
 .solutionOverview {
     width: 100%;
     height: 100%;
     position: relative;
+    background-color: $background-color;
+    padding: 0;
+    overflow: hidden;
+    
 
     .cbm-background{
-        width: 100%;
+        position: relative;
+        width: 95%;
         height: 100%;
         display: flex;
         align-items: center;
         text-align: center;
-        background-image: url("/images/solution_cbm.png");
+        background-image: url("/images/Bahnen_CBM_Start_neu.png");
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+        z-index: 1;
     }
     
     .lcp-background{
-        width: 100%;
+        position: relative;
+        width: 95%;
         height: 100%;
         display: flex;
         align-items: center;
         text-align: center;
-        background-image: url("/images/solution_lcp.png");
+        background-image: url("/images/Bahnen_LCI_Start_neu.png");
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+        z-index: 1;
     }
 
     h1{
         position: absolute;
         left: 50px;
         top: 50px;
-        font-weight: bold;
+        font-family: "Barlow-SemiBold";
+    }
+
+    h2{
+        font-family: "Barlow-SemiBold";
+    }
+
+    p{
+        font-family: "Lato-Light";
     }
 
     .textBox{
@@ -46,72 +64,145 @@
             font-size: bold;
         }
         .subtitle{
+            margin-left: 30px;
             font-size: 20px;
+            width: 150px;
         }
     }
+
+    .greyBackground{
+        position: absolute;
+        z-index: 0;
+        width: 78.3%;
+        height: 100%;
+        background-color: rgb(201, 201, 201);
+        right: 0;
+    }
     
-    // First textBox
-    .box1{
-        left: 24%;
+    // iPad pro
+    @media (max-width: 1400px) {
+
+
+        // First textBox
+        .box1{
+            left: 24%;
+        }
         
-        .subtitle{
-            padding-top: 5%;
+        .box2{
+            left: 43%;
         }
-    }
-    
-    .box2{
-        left: 43%;
+        
+        .box3{
+            left: 63%;
+        }
 
-        .subtitle{
-            padding-top: 38%;
+        .box4{
+            left: 83%;
         }
-    }
-    
-    .box3{
-        left: 63%;
 
-        .subtitle{
-            padding-top: 35%;
-        }
     }
 
-    .box4{
-        left: 83%;
+    // Surface 7
+    @media (max-height: 1000px) {
 
-        .subtitle{
-            padding-top: 35%;
+        .textBox{
+            top: 10%;
         }
+
+        // First textBox
+        .box1{
+            left: 24%;
+        }
+        
+        .box2{
+            left: 43%;
+        }
+        
+        .box3{
+            left: 63%;
+        }
+
+        .box4{
+            left: 83%;
+        }
+
+    }
+
+    // 24 inch pc
+    @media (min-width: 1401px) {
+        .textBox{
+            top: 8%;
+        }
+
+        // First textBox
+        .box1{
+            left: 28%;
+        }
+        
+        .box2{
+            left: 47%;
+        }
+        
+        .box3{
+            left: 67%;
+        }
+
+        .box4{
+            left: 87%;
+        }
+
     }
 
     .link{
         position: absolute;
         align-items: center;
         text-align: start;
-        background-image: url("/images/arrow_underline.png");
         background-size: contain;
         background-position: bottom;
         background-repeat: no-repeat;
-        
+        padding: 0;
+        margin: 0;
+
         p{
+            font-family: 'Barlow-SemiBold';
+            padding: 0;
+            margin: 8px;
             padding-right: 30px;
-            font-size: 25px;
+            font-size: 18px;
+        }
+    
+        .arrow-image{
+            position: absolute;
+            z-index: 1;
         }
     }
     
     .link1{
         right: 5%;
-        bottom: 25%;
+        bottom: 24%;
         color: grey;
+        //background-image: url("/images/arrow_underline_grey.png");
+        .arrow-image{
+            top: -30px;
+            left: -70px;
+        }
     }
+    
     .link2{
         right: 5%;
         bottom: 18%;
         color: grey;
+        //background-image: url("/images/arrow_underline_grey.png");
+        .arrow-image{
+            top: -55px;
+            left: -150px;
+        }
     }
     .link3{
         right: 5%;
         bottom: 10%;
         padding-bottom: 10px;
+        background-image: url("/images/arrow_underline.png");
     }
 
 }

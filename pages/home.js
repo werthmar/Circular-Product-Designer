@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 import { useRouter } from 'next/router'
 import Image from "next/image";
-import { Tooltip } from '@mui/material';
+import Watermark from "../components/watermark";
 
 export default function HomePage()
 {
@@ -44,8 +44,13 @@ export default function HomePage()
       <Row>
         
         <Col xs="4" className="colorBackground">
-          <h1>RETHINK YOUR IDEAS</h1>
+          <h1>RETHINK<br/>YOUR IDEAS</h1>
           <p>a tool developed from a scientific work of the Pforzheim University of Applied Sciences, Institute for Industrial Ecology.</p>
+        
+          <div style={{ position: "fixed", bottom: "20px", width: "200px" }}>
+            <Watermark />
+          </div>
+
         </Col>
 
         <Col xs="4" className="buttonCol">
@@ -61,8 +66,8 @@ export default function HomePage()
                         library == true ?
                         <p>LIBRARY</p> :
                         <Image src={"/icons/Bibliothek.png" }
-                          width={130}
-                          height={130}
+                          width={70}
+                          height={70}
                           alt="Library"
                           />
                       }
@@ -80,8 +85,8 @@ export default function HomePage()
                         roadmap == true ?
                         <p>ROADMAP</p> :
                         <Image src={"/icons/Roadmap.png" }
-                          width={130}
-                          height={130}
+                          width={70}
+                          height={70}
                           alt="Roadmap"
                           />
                       }
@@ -98,12 +103,12 @@ export default function HomePage()
                 <div className={ project == true ? "" : "backgroundImage newProject" } >
                 {
                   project == true ?
-                  <p>NEW PROJECT</p> :
-                  <Image src={"/icons/NeuesProjekt.png" }
-                    width={130}
-                    height={130}
-                    alt="New Project"
-                    />
+                  <p>NEW PROJECT</p> : <div />
+                  //<Image src={"/icons/NeuesProjekt.png" }
+                  //  width={130}
+                  //  height={130}
+                  //  alt="New Project"
+                  //  />
                 }
                 </div>
               </Button>
@@ -121,8 +126,8 @@ export default function HomePage()
                   archive == true ?
                   <p>PROJECT ARCHIVE</p> :
                   <Image src={"/icons/Projektarchiv.png" }
-                    width={110}
-                    height={120}
+                    width={52}
+                    height={70}
                     alt="Project Archive"
                     />
                 }

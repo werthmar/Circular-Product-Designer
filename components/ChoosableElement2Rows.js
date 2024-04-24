@@ -114,33 +114,47 @@ export default function ChoosableElement2Rows(props) {
 
     const setBackgroundBasedOnH1 = (h1Text) => {
 
-        console.log(h1Text);
-
         let help = h1Text;
         help = help.split(" ")
-
-        console.log(help);
         
         // Je nach Text des h1-Elements das entsprechende Hintergrundbild auswählen
         if (h1Text === "GAP\nEXPLOITER") {
-            if (descriptionVisible2 == true) return "description_Industrial_Symbiosis";
-            return "description_Gap_Exploiter";
+            if (descriptionVisible2 == true) return "description2Row description_Industrial_Symbiosis";
+            return "description_Gap_Exploiter description2Row";
         } else if (h1Text === "LONG LASTING\nPRODUCT\nDESIGN") {
-            if (descriptionVisible2 == true) return "description_circular_supplies";
-            return "description_LLPD";
+            if (descriptionVisible2 == true) return "description_circular_supplies description2Row";
+            return "description_LLPD description2Row";
         } else if (h1Text === "PSS") {
-            if (descriptionVisible2 == true) return "description_Remanufacturing" 
-            return "description_PSS";
+            if (descriptionVisible2 == true) return "description_Remanufacturing description2Row" 
+            return "description_PSS description2Row";
         } else if (h1Text === "REPAIR &\nMAINTANANCE") {
-            if (descriptionVisible2 == true) return "description_Recycling";
-            return "description_Industrial_Repair";
+            if (descriptionVisible2 == true) return "description_Recycling description2Row";
+            return "description_Industrial_Repair description2Row";
         } else if (h1Text === "SHARING, P2P") {
-            if (descriptionVisible2 == true) return "description_Reuse" 
-            return "description_sharing";
+            if (descriptionVisible2 == true) return "description_Reuse description2Row" 
+            return "description_sharing description2Row";
+        } else if (h1Text === "DURABILITY") {
+            // hier fehlen die richtigen Bilder
+            if (descriptionVisible2 == true) return "description_circular_supplies description2Row";
+            return "description_LLPD description2Row";
+        } else if (h1Text === "RELIABILITY") {
+            // hier fehlen die richtigen Bilder
+            if (descriptionVisible2 == true) return "description_Remanufacturing description2Row" 
+            return "description_PSS description2Row";
+        } else if (h1Text === "REUSABILITY") {
+            if (descriptionVisible2 == true) return "description_Recycling description2Row";
+            return "description_Reuse description2Row";
+        } else if (h1Text === "REPAIRABILITY") {
+            if (descriptionVisible2 == true) return "description_Recycling description2Row" 
+            return "description_Industrial_Repair description2Row";
+        } else if (h1Text === "POSSIBILITY\nOF\nMAINTENANCE\nAND\nREFURBISHMENT") {
+            // hier fehlen die richtigen Bilder
+            if (descriptionVisible2 == true) return "description_Reuse description2Row" 
+            return "description_sharing description2Row";
         }
         // Fügen Sie hier weitere Bedingungen für die anderen Bilder hinzu
         else {
-            return "description_Recycling"; // Wenn kein passender Text gefunden wurde, kein Hintergrundbild anzeigen
+            return "description_Recycling description"; // Wenn kein passender Text gefunden wurde, kein Hintergrundbild anzeigen
         }
     };
 
@@ -191,7 +205,7 @@ export default function ChoosableElement2Rows(props) {
                                     
                                             {/* Expanded indicator */}
                                             <div className="arrowIcon" onClick={() => handleClick(1)}>
-                                                <Image src={ descriptionVisible ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={60} height={35} />
+                                                <Image src="/icons/arrow_black_left.png" style={{display: descriptionVisible ? 'none' : 'inline-block' }} alt="expansion indicator" width={60} height={35} />
                                             </div>
 
                                         </Row>
@@ -241,7 +255,7 @@ export default function ChoosableElement2Rows(props) {
                                     
                                             {/* Expanded indicator */}
                                             <div className="arrowIcon" onClick={() => handleClick(2)}>
-                                                <Image src={ descriptionVisible2 ? "/icons/arrow_white_right.png" : "/icons/arrow_black_left.png" } alt="expansion indicator" width={60} height={35} />
+                                                <Image src="/icons/arrow_black_left.png" style={{display: descriptionVisible2 ? 'none' : 'inline-block' }} alt="expansion indicator" width={60} height={35} />
                                             </div>
 
                                         </Row>
@@ -258,18 +272,30 @@ export default function ChoosableElement2Rows(props) {
                 {/* Description which can be opened on click */}
                 <Col className={setBackgroundBasedOnH1(name.toUpperCase())} style={{display: descriptionVisible ? 'inline-block' : 'none', backgroundColor: color,'--custom-background-image': 'url("../public/images/CBM/CBM_Icons-sharing.png")',}} onClick={() => handleClick(1)}>
                     
-                    <container/>
                     <h2>{name.toUpperCase()}</h2>
                     <br/>
                     <p>{description}</p>
+
+                    {/* Expanded indicator */}
+                    <div className="arrowIconClose" onClick={() => handleClick()}>
+                        <Image src="/icons/arrow_white_right.png" alt="expansion indicator" width={60} height={35} />
+                    </div>
+                
                 </Col>
 
-                <Col className={setBackgroundBasedOnH1(name.toUpperCase())} style={{display: descriptionVisible2 ? 'inline-block' : 'none', backgroundColor: color2, '--custom-background-image': `url("../public/images/CBM/CBM_Icons-sharing.png")`}} onClick={() => handleClick(2)}>
-                    <container/>
+                <Col className={ setBackgroundBasedOnH1(name.toUpperCase())} style={{display: descriptionVisible2 ? 'inline-block' : 'none', backgroundColor: color2, '--custom-background-image': `url("../public/images/CBM/CBM_Icons-sharing.png")`}} onClick={() => handleClick(2)}>
+                    
                     <h2>{name2.toUpperCase()}</h2>
                     <br/>
                     <p>{description2}</p>
+                
+                    {/* Expanded indicator */}
+                    <div className="arrowIconClose" onClick={() => handleClick()}>
+                        <Image src="/icons/arrow_white_right.png" alt="expansion indicator" width={60} height={35} />
+                    </div>
+                
                 </Col>
+
 
             </Row>
 

@@ -26,7 +26,7 @@ export default class CustomNavbar extends React.Component
             ],
             pageIndex: props.pageIndex,
             title: props.title,
-            nextPageButtonActive: props.nextPageButtonActive
+            nextPageButtonActive: props.nextPageButtonActive,
         };
     }
 
@@ -48,32 +48,47 @@ export default class CustomNavbar extends React.Component
     }
 
     // Color of go on button and navigation buttons changes based on current page
-    decideButtonColor()
+    decideButtonColor( index )
     {
-        console.log(this.state.pageIndex, this.props.pageOrder);
-        switch( this.props.pageOrder[ this.state.pageIndex - 1 ] )
+        //console.log(this.state.pageIndex, this.props.pageOrder);
+        //switch( this.props.pageOrder[ this.state.pageIndex - 1 ] )
+
+        var result;
+
+        // Color each button according to the page that is connected to it.
+        // -1 because the first button is for the previous page.
+        switch( this.props.pageOrder[ index - 1 ] )
         {
             case 'CBM':
-                return 'rgb(171, 118, 92)';
+                result = 'rgb(196, 132, 104)';
+                break;
             case 'LCP':
-                return 'rgb(237, 191, 98)';
+                result ='rgb(237, 191, 98)';
+                break;
             case 'ED':
-                return 'rgb(89, 99, 80)';
+                result = 'rgb(95, 108, 90)';
+                break;
+            case 'CDP':
+                result = 'rgb(94, 103, 110)';
+                break;
             case 'Solution-Overview':
-                return 'rgb(0, 0, 0)';
+                result = 'rgb(0, 0, 0)';
+                break;
             default:
-                return 'grey';
+                result = 'rgb(179, 179,179)';
         }
+
+        return result;
     }
 
     decideDescription()
     {
         let title = this.state.title;
         if ( title == 'Circular Business Models' ) {
-            return <p>Circular business models (CBMs) are essential in the transition towards a circular economy by facilitating closed loops and resource-efficient production and consumption systems. All of these business models can be divided into four circular business model strategies. In Contrast, Sustainable Business Models (SBM) includes principals of sustainability and involves the generation of non-monetary value. Although there is a significant overlap between sustainable business models and circular business models, it is important to note that not all CBMs qualify as SBMs. ​(Centobelli et al. 2020; Geissdoerfer et al. 2020; Hansen et al. 2020)​</p>
+            return <p>Circular business models (CBMs) are essential in the transition towards a circular economy by facilitating closed loops and resource-efficient production and consumption systems. All of these business models can be divided into four circular business model strategies. In Contrast, Sustainable Business Models (SBM) includes principals of sustainability and involves the generation of non-monetary value. Although there is a significant overlap between sustainable business models and circular business models, it is important to note that not all CBMs qualify as SBMs.</p>
         }
          else if ( title == 'Lifecycle Phase Intensity') {
-            return <p>Environmental impacts caused by products are typically concentrated in one or a few phases of their life cycle. The product life cycle phases commonly used in life cycle assessment (LCA), including raw material extraction, production, logistics, use, and disposal, provide guidance for this clustering. A hotspot analysis based on LCA can be employed to pinpoint the life cycle phase with the most significant environmental impacts. Based on that, measures and solutions relevant to that phase can be prioritized holding the highest potential for improvement. ​(Hauschild et al. 2018; Herrmann 2010)​</p>
+            return <p>Environmental impacts caused by products are typically concentrated in one or a few phases of their life cycle. The product life cycle phases commonly used in life cycle assessment (LCA), including raw material extraction, production, logistics, use, and disposal, provide guidance for this clustering. A hotspot analysis based on LCA can be employed to pinpoint the life cycle phase with the most significant environmental impacts. Based on that, measures and solutions relevant to that phase can be prioritized holding the highest potential for improvement.​</p>
         }
          else if ( title == 'Ecodesign Approaches') {
             return <p>Ecodesign principles serve as a guide to optimize environmental-related product improvements that are in line with the circular economy at the operational level. Implementing these principles is crucial for the success of the CE. The European Commission provides a common definition of ecodesign principles.</p>
@@ -92,7 +107,7 @@ export default class CustomNavbar extends React.Component
                     <Button className='navbarButton'
                     style={
                         // Set the current page active / or set all buttons active with color, if your on the last page
-                        index == this.state.pageIndex ? { backgroundColor: this.decideButtonColor() } : {}   
+                        index <= this.state.pageIndex ? { backgroundColor: this.decideButtonColor( index ) } : {}   
                     }
                     disabled={
                         //  Disable all pages after the current page 
@@ -163,7 +178,11 @@ export default class CustomNavbar extends React.Component
                                     </Col>
 
                                     <Col>
-                                        <Tooltip arrow title="Please select at least 1 item from the list in order to proceed.">
+                                        <p className='userHelp'>{ title == 'Circular Business Models' ? "Please select only one option to continue" : title == "Circular Design Principles" ? "" : "Please select at least one option to continue" }</p>
+                                    </Col>
+
+                                    <Col>
+                                        <Tooltip arrow title="Select items by clicking on the box underneath CHOOSE in the elements to the right">
                                             <div>
                                                 {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
                                                 <Button

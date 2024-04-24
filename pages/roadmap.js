@@ -9,12 +9,13 @@ import {
     Button,
   } from "reactstrap";
 import { Tooltip } from '@mui/material';
+import Watermark from "../components/watermark";
 
 export default function Roadmap() {
 
     return(
         <Container className="Roadmap">
-            <Row>
+            <Row flex expanded>
 
                 {/** Left Side */}
                 <Col xs={4} className="navbarCol">
@@ -36,6 +37,7 @@ export default function Roadmap() {
                         Entry is possible either starting from a previous product or from the strategic level of Circular Business Models. Both ways filter suitable Ecodesign Principles, followed by the assignment of specific Circular Design Principles on an operational level. Finally, technical design options serve as solution proposals, which can be specifically expanded.
                     </p>
 
+
                 </Col>
 
                 {/** Right Side */}
@@ -43,6 +45,9 @@ export default function Roadmap() {
                     <div className="roadmapImage" />
                 </Col>
 
+                <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                    <Watermark />
+                </div>
 
             </Row>
         </Container>

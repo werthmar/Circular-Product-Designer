@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.6",
     "@prisma/client": "^4.9.0",
+    "@react-pdf/renderer": "^3.4.0",
     "bootstrap": "^5.2.2",
     "chart.js": "^4.3.2",
     "chartjs-plugin-datalabels": "^2.2.0",
@@ -26,6 +27,7 @@
     "sharp": "^0.32.6"
   },
   "devDependencies": {
+    "file-loader": "^6.2.0",
     "prisma": "^4.9.0",
     "sass": "^1.56.1"
   }

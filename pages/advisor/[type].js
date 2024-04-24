@@ -19,6 +19,7 @@ import CustomNavbar from "../../components/Navbar";
 import PieChart from "../../components/PieChart";
 import { Pie } from "react-chartjs-2";
 import SolutionOverview from "../../components/SolutionOverview";
+import Watermark from "../../components/watermark";
 
 // This function is called during build and sets the available routes.
 export async function getStaticPaths() {
@@ -88,6 +89,7 @@ export default class AdvisorPage extends React.Component
             oldType: props.initialType,
             elementOpen: false, //only 1 element can be opend at a time, when an element is opend the navbar collapses
             closeElementCallback: null,
+            impressumVisible: true,
         };
 
         // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
@@ -148,6 +150,8 @@ export default class AdvisorPage extends React.Component
         .then((data) =>
         {
             
+            console.log(`dATA 1` + data.descriptions);
+
             // Mark items which were selected before with the element.active tag
             if( selectedItems.length != 0 )
             {
@@ -171,18 +175,20 @@ export default class AdvisorPage extends React.Component
                 });
                 setCookie('selected', cookie, { sameSite: true })
             }
+
+            console.log(`EDDD DATAAAA!!!` + data.descriptions);
                     
             // Set the background color of the coosable elements because its dependent on how many elements there are
             // Color is different based on page
             if( type == 'CBM' ) {
-                var r = 209, g = 180, b = 165; // Starting colours
-                var _r = 171, _g = 118, _b = 92; // ending colours, all other colours inbetween
+                var r = 213, g = 181, b = 167; // Starting colours
+                var _r = 196, _g = 132, _b = 104; // ending colours, all other colours inbetween
             } else if ( type == 'LCP' ) {
                 var r = 250, g = 236, b = 208; 
                 var _r = 237, _g = 191, _b = 98;
             } else if ( type == 'ED' ) {
-                var r = 164, g = 171, b = 159; 
-                var _r = 89, _g = 99, _b = 80;
+                var r = 176, g = 181, b = 174; 
+                var _r = 95, _g = 108, _b = 90;
             } else {
                 var r = 250, g = 236, b = 208; 
                 var _r = 237, _g = 191, _b = 98;
@@ -221,7 +227,6 @@ export default class AdvisorPage extends React.Component
             // Update the component State with the fetched data
             this.setState({ data: data, loading: false, warning: false, title: newTitle });
 
-            console.log(this.state.data);
         })
         .catch(error => {
             // Handle any errors that occurred during fetching
@@ -254,6 +259,10 @@ export default class AdvisorPage extends React.Component
         if( page == "start" )
         {
             Router.push( "/process" );
+        }
+        else if( page == "Solution-Overview" )
+        {
+            return;
         }
         // Set type and old type the same because its the first page of advisor and results should not be filtered
         else if (goToIndex == 0)
@@ -295,7 +304,8 @@ export default class AdvisorPage extends React.Component
     areItemsSelected() {
         const { type } = this.state;
         var itemsSelected = false;
-        
+        var selectedItemsCount = 0;
+
         // check if user selected at least one item from the list, if not display massage
         var cookie = getCookie( 'selected' );
         
@@ -306,8 +316,13 @@ export default class AdvisorPage extends React.Component
                 // Check if user has selected at least one item from current type if yes enable next page button
                 if( item[1] == type ) {
                     itemsSelected = true;
+                    selectedItemsCount++;
                 }
             });
+            // You can only select 1 cdp, return false if more than 1 is selected
+            if( type == "CBM" && selectedItemsCount > 1 ) {
+                itemsSelected = false;
+            } 
         }
         return itemsSelected;
     }
@@ -329,12 +344,19 @@ export default class AdvisorPage extends React.Component
         // No element is currently open (=Navbar expanded) and now an element has been opened
         if( !elementOpen && bool == true )
         {
-            this.setState({ elementOpen: true });
+            this.setState({
+                elementOpen: true,
+                // + Toggle the impressum watermark because it overlays the open / close buttons otherwise
+                impressumVisible: false
+            });
             Navbar.current.setExpanded();
         } 
         // User closes the open element
         else if( elementOpen && bool == false ) {
-            this.setState({ elementOpen: false });
+            this.setState({
+                elementOpen: false,
+                impressumVisible: true
+            });
             Navbar.current.setExpanded();
         }
         // There is already a item open and the user opens another one
@@ -342,14 +364,18 @@ export default class AdvisorPage extends React.Component
             closeElementCallback();
         }
 
+        
         // Save the callback because we will be using the callback of the previous item when a new item is selected
-        this.setState({ closeElementCallback: callback });
+        this.setState({
+            closeElementCallback: callback,
+        });
     }
 
     // just opens and closes the description, used in the pie chart so cb is not needed
     toggleNavbarNoCallback = () => {
         const { Navbar } = this;
         Navbar.current.setExpandedButtons();
+        this.setState({ impressumVisible: !this.state.impressumVisible })
     }
 
     schoeneZeilenumbrueche = (text, zeilenlaenge) => {
@@ -376,53 +402,118 @@ export default class AdvisorPage extends React.Component
 
     }
 
+    isEven (number) {
+        return Math.floor(number / 2) * 2 === number;
+    }
+
     // --- Render -------------------------------------------------------------------------------
 
     // Split up the data and join it so that the element of the forst row and the corresponding element directly underneath it
     // are in the same data subset so that it can then be pushed into the choosable element version with 2 rows 
     createMultipleRows( data ) {
         var rearangedData = [];
-        var median = data.length / 2;
+        var median = Math.floor( data.length / 2 );
+        var excessElement;
 
-        for( var i=0; i<median; i++ )
-        {
-            rearangedData.push( [] );
-            rearangedData[i].push( data[i] );
-            
-            // Fix for an uneven number of elements
-            if( data[ median + i ] ) {
-                rearangedData[i].push( data[ median + i ] );
-            } else { // Just add the same item twice, easiest solution
+        if ( this.isEven( data.length ) ) {
+
+            for( var i=0; i < median; i++ )
+            {
+                rearangedData.push( [] );
                 rearangedData[i].push( data[i] );
+                rearangedData[i].push( data[i + median] );
+            }
+        } else { // JUST A HOTFIX
+            for( var i=0; i <= median; i++ )
+            {
+                rearangedData.push( [] );
+                rearangedData[i].push( data[i] );
+                rearangedData[i].push( data[i + median] );
             }
         }
 
-        return ( 
-            rearangedData.map(( item, index ) => (
-                <ChoosableElement2Rows 
-                key={index}
-                id={item[0].id}
-                id2={item[1].id}
-                description={this.schoeneZeilenumbrueche(item[0].description,111164)}
-                description2={this.schoeneZeilenumbrueche(item[1].description,111164)}
-                name={this.schoeneZeilenumbrueche(item[0].name, 12)}//{item[0].name.replace(/(.{11})/g, "$1\n")}//{item[0].name}
-                name2={this.schoeneZeilenumbrueche(item[1].name, 12)}
-                active={item[0].active}
-                active2={item[1].active}
-                type={this.state.type}
-                color={item[0].color}
-                color2={item[1].color}
-                enableNextPageButton={this.enableNextPageButton}
-                toggleNavbar={ this.toggleNavbar } 
-                />
-            ))    
-        );
+        
+        // Fix if there is an uneven amount of elements, since we start at 0 we check if the length is even
+        // Not working atm, last element is left out on purpose
+        if ( !this.isEven( data.length ) ) {
+            // excessElement = data[ data.length - 1 ]; // add the last element since it has been ignored before
+        }
+
+        // Even number of data
+        if ( excessElement == undefined )
+        {
+            return ( 
+                rearangedData.map(( item, index ) => (
+                    <ChoosableElement2Rows 
+                    key={index}
+                    id={item[0].id}
+                    id2={item[1].id}
+                    description={this.schoeneZeilenumbrueche(item[0].description,111164)}
+                    description2={this.schoeneZeilenumbrueche(item[1].description,111164)}
+                    name={this.schoeneZeilenumbrueche(item[0].name, 12)}//{item[0].name.replace(/(.{11})/g, "$1\n")}//{item[0].name}
+                    name2={this.schoeneZeilenumbrueche(item[1].name, 12)}
+                    active={item[0].active}
+                    active2={item[1].active}
+                    type={this.state.type}
+                    color={item[0].color}
+                    color2={item[1].color}
+                    enableNextPageButton={this.enableNextPageButton}
+                    toggleNavbar={ this.toggleNavbar } 
+                    />
+                ))    
+            );
+        } // uneven number, extra steps necessary
+        else
+        {   // WIP
+            return(
+
+                <div>
+                <div>
+                    {// Regular 2 Row Elements
+                    rearangedData.map(( item, index ) => (
+                        <ChoosableElement2Rows 
+                        key={index}
+                        id={item[0].id}
+                        id2={item[1].id}
+                        description={this.schoeneZeilenumbrueche(item[0].description,111164)}
+                        description2={this.schoeneZeilenumbrueche(item[1].description,111164)}
+                        name={this.schoeneZeilenumbrueche(item[0].name, 12)}//{item[0].name.replace(/(.{11})/g, "$1\n")}//{item[0].name}
+                        name2={this.schoeneZeilenumbrueche(item[1].name, 12)}
+                        active={item[0].active}
+                        active2={item[1].active}
+                        type={this.state.type}
+                        color={item[0].color}
+                        color2={item[1].color}
+                        enableNextPageButton={this.enableNextPageButton}
+                        toggleNavbar={ this.toggleNavbar } 
+                        />
+                    ))}
+                </div>
+                    <div>
+                    <ChoosableElement 
+                    key={rearangedData.length}
+                    id={excessElement.id}
+                    description={excessElement.description}
+                    name={this.schoeneZeilenumbrueche(excessElement.name, 5)}
+                    active={excessElement.active}
+                    type={this.state.type}
+                    color={excessElement.color}
+                    enableNextPageButton={this.enableNextPageButton}
+                    toggleNavbar={ this.toggleNavbar } 
+                    />
+                    </div>
+                    </div>
+                    
+                    );
+                }
+
+
     }
 
 
     render()
     {
-        const { data, loading, error, warning, type, title } = this.state;
+        const { data, loading, error, warning, type, title, impressumVisible } = this.state;
 
         if (loading) {
             return(
@@ -439,6 +530,11 @@ export default class AdvisorPage extends React.Component
 
                         </Row>
                     </Container>
+
+                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                        <Watermark visible={ impressumVisible } />
+                    </div>
+
                 </div>
             );
         }
@@ -453,7 +549,7 @@ export default class AdvisorPage extends React.Component
             return(
                 <div className="advisorPage">
 
-                    <Container fluid>
+                    <Container fluid style={{ padding: 0 }} >
                         <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
                             <CustomNavbar
@@ -463,7 +559,7 @@ export default class AdvisorPage extends React.Component
                                 pageIndex={ this.pageOrder.indexOf( type ) +1 }
                                 pageOrder={ this.pageOrder }
                                 goToPage={ this.goToPage }
-                                back={ this.back }   
+                                back={ this.back }
                                 nextPageButtonActive={ () => { return true; } /** this.areItemsSelected() --commented out because i dont know how items are supposed to be selected yet */ }
                                 >
                             </CustomNavbar>
@@ -475,6 +571,10 @@ export default class AdvisorPage extends React.Component
                             </Row>
                     </Container>
 
+                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                        <Watermark visible={ impressumVisible } />
+                    </div>
+
                 </div>
             );
         }
@@ -485,7 +585,7 @@ export default class AdvisorPage extends React.Component
             return(
                 <div className="advisorPage">
 
-                    <Container fluid>
+                    <Container fluid style={{ padding: 0 }}>
                         <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
                             <div>{/** Used to force rerender */}</div>
@@ -509,6 +609,10 @@ export default class AdvisorPage extends React.Component
                             </Row>
                     </Container>
 
+                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "100px" }}>
+                        <Watermark visible={ impressumVisible } />
+                    </div>
+
                 </div>
             );
         }
@@ -519,7 +623,7 @@ export default class AdvisorPage extends React.Component
 
                 <div className="advisorPage">
 
-                    <Container fluid>
+                    <Container fluid className="advisorPageContainer">
                         <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
                             <CustomNavbar
@@ -540,7 +644,7 @@ export default class AdvisorPage extends React.Component
                                 // Single Row
                                 data['descriptions'].length <= 7 ?
                                     data['descriptions'].map(( item, index ) => (
-                                        <ChoosableElement 
+                                        <ChoosableElement
                                         key={index}
                                         id={item.id}
                                         description={item.description}
@@ -561,6 +665,11 @@ export default class AdvisorPage extends React.Component
 
                         </Row>
                     </Container>
+
+                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                        <Watermark visible={ impressumVisible } />
+                    </div>
+
                 </div>
 
             );

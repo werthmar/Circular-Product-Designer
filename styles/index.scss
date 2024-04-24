@@ -5,6 +5,13 @@
     width: 100%;
     height: 100%;
     color: black;
+
+    .watermark{
+        position: fixed;
+        z-index: 2;
+        bottom: 2px;
+        left: 10px;
+    }
     
     .greyBox{
         position: absolute;
@@ -13,6 +20,7 @@
         z-index: 0;
         top: 0;
         left: 200px;
+        font-family: "Lato-Regular";
         background-color: rgb(94, 103, 110);
 
         p{
@@ -34,8 +42,8 @@
 
     .logoContainer{
         position: absolute;
-        bottom: -630px;
-        left: 167px;
+        bottom: -633px;
+        left: 168px;
         z-index: 1;
         width: 30%;
         height: 30%;
@@ -49,15 +57,27 @@
         color: white;
         background-color: black;
         width: 150px;
+        font-family: "Lato-Regular";
     }
-
-    .startButtonContainer{
+    
+    // TODO: Start schrift weiter runter
+    .startButtonContainer{ 
+        font-family: "Lato-Black";
         position: fixed;
         bottom: 150px;
         right: 100px;
         z-index: 1;
+        padding: 0;
+        margin: 0;
+
+        h2{
+            margin: 0;
+            padding: 0;
+        }
 
         .button{
+            margin: 0;
+            padding-top: 0;
             padding-left: 200px;
             background-color: rgb(196, 132, 104);
             border-radius: 0;
@@ -71,6 +91,7 @@
         right: 150px;
         z-index: 2;
         font-size: 20px;
+        font-family: 'Lato-Light';
     }
 
 }
