@@ -16,31 +16,31 @@ $accent-color: rgb(237,191,98);
 
 @font-face {
   font-family: 'BarlowCondensed';
-  src: url('../public/fonts/BarlowCondensed-SemiBold.ttf');
+  src: url('/fonts/BarlowCondensed-SemiBold.ttf');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'Barlow-Light';
-  src: url('../public/fonts/BarlowCondensed-Light.ttf');
+  src: url('/fonts/BarlowCondensed-Light.ttf');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: 'Lato-Light';
-  src: url('../public/fonts/Lato-Light.ttf');
+  src: url('/fonts/Lato-Light.ttf');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: 'Lato-Regular';
-  src: url('../public/fonts/Lato-Regular.ttf');
+  src: url('/fonts/Lato-Regular.ttf');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'Lato-Black';
-  src: url('../public/fonts/Lato-Black.ttf');
+  src: url('/fonts/Lato-Black.ttf');
   font-weight: 900;
   font-style: normal;
 }
