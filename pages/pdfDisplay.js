@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, Image, Font, PDFDownloadLink } from '@react-pdf/renderer';
 import { Container } from "reactstrap";
 import { getCookie, hasCookie, getCookies, setCookie } from 'cookies-next';
 
@@ -324,7 +324,7 @@ export default function pdfDisplay() {
       title="List of Solutions"
       author="Universität Pforzheim"
       subject="List of Solutions"
-      renderMode="svg" // required for pdf gen to work on iOS
+      //renderMode="svg" // required for pdf gen to work on iOS
       >
       <Page size="A4" style={styles.page}>
 
@@ -445,11 +445,20 @@ export default function pdfDisplay() {
   else
   {
     return(    
+
+      <div style={{ margin: "auto", textAlign: "center", fontSize: "30px", marginTop: "20%", fontWeight: "bold" }}>
+        <PDFDownloadLink document={<MyDocument />} fileName="List of Solutions.pdf">
+          {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+        </PDFDownloadLink>
+      </div>
+
+      /*
       <div style={styles.pdfViewer}>
         <PDFViewer width="100%" height="100%" >
           <MyDocument />
         </PDFViewer>
       </div>
+      */
     );
   }
 
