@@ -2,13 +2,42 @@ import React from "react";
 import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
 import Image from "next/image";
 import Router from "next/router";
+import { useState, useEffect } from "react";
 
 export default function SolutionOverview( props )
 {
     var cbmCount = 0;
     var lcpCount = 0;
     var edCount = 0;
-    var cdpCount = props.cdpCount;
+    const [cdpCount, setCdpCount] = useState(0);
+
+    // fetch data
+    useEffect(() => {
+
+        // Get selected item ids
+        var selectedItems = [];
+        var cookie = getCookie( 'selected' );
+        if( cookie )
+        {
+            cookie = JSON.parse(cookie);
+            cookie.forEach( item => {
+                selectedItems.push( item[0] );
+            });
+        }
+
+        fetch(`/api/cdp?items=${ '[' + selectedItems + ']' }`)
+        .then((res) => res.json())
+        .then((data) =>
+        {
+            var sl_count = 0;
+            data.cdps.forEach( ( cdp, index ) =>
+            {
+                sl_count += cdp.solution_approaches.length;
+            });
+            setCdpCount( sl_count );
+        });
+
+    }, []);
 
     // count the amount of selected items in each category
     var cookie = getCookie( 'selected' );

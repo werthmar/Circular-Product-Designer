@@ -82,6 +82,7 @@ export default class AdvisorPage extends React.Component
         this.ActiveElement = React.createRef(); // Reference to the open element
         this.state = {
             data: null,
+            cdpData: null,
             loading: true,
             error: null,
             title: props.initialTitle,
@@ -546,9 +547,10 @@ export default class AdvisorPage extends React.Component
         // Display a pie chart display for the last page / Circular Design Principles
         else if ( type == "CDP" )
         {
+            
             return(
                 <div className="advisorPage">
-
+    
                     <Container fluid style={{ padding: 0 }} >
                         <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
 
@@ -565,7 +567,7 @@ export default class AdvisorPage extends React.Component
                             </CustomNavbar>
 
                             <Col className="pieChartCol">
-                                <PieChart data={ data } toggleDescription={ this.toggleNavbarNoCallback } />
+                                <PieChart toggleDescription={ this.toggleNavbarNoCallback } />
                             </Col>
 
                             </Row>
@@ -603,7 +605,7 @@ export default class AdvisorPage extends React.Component
                             </CustomNavbar>
 
                             <Col className="solutionOverview">
-                                <SolutionOverview initialType={ this.props.initialType } cdpCount={ data.descriptions.length } />
+                                <SolutionOverview initialType={ this.props.initialType } />
                             </Col>
 
                             </Row>
