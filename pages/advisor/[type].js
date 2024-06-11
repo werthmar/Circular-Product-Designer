@@ -610,7 +610,7 @@ export default class AdvisorPage extends React.Component
                     </Container>
 
                     <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "100px" }}>
-                        <Watermark visible={ impressumVisible } />
+                        <Watermark visible={true} />
                     </div>
 
                 </div>

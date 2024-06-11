@@ -46,7 +46,7 @@ export default function Roadmap() {
                 </Col>
 
                 <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
-                    <Watermark />
+                    <Watermark visible={true} />
                 </div>
 
             </Row>

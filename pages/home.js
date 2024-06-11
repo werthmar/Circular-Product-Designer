@@ -48,7 +48,7 @@ export default function HomePage()
           <p>a tool developed from a scientific work of the Pforzheim University of Applied Sciences, Institute for Industrial Ecology.</p>
         
           <div style={{ position: "fixed", bottom: "20px", width: "200px" }}>
-            <Watermark />
+            <Watermark visible={true} />
           </div>
 
         </Col>
