@@ -149,24 +149,66 @@ export default class CustomNavbar extends React.Component
         if(mobileLayout)
         {
             return(
-                <div className='flex pt-5 CustomNavbar items-center justify-center'>
+                <div className='CustomNavbar pb-3'>
 
-                    {/* Home button */}
-                    <div className=''>
-                        <Tooltip arrow title="Home">
-                            <Link href="/home">
-                                <Button className='homeButton'>
-                                    <Image src="/icons/Menü_Haus.png" width={65} height={55} alt='HomeButton' />
-                                </Button>
-                            </Link>
-                        </Tooltip>
+                    {/* Navbar */}
+                    <div className='flex pt-5 items-center justify-center'>
+                        {/* Home button */}
+                        <div>
+                            <Tooltip arrow title="Home">
+                                <Link href="/home">
+                                    <Button className='homeButton'>
+                                        <Image src="/icons/Menü_Haus.png" width={65} height={55} alt='HomeButton' />
+                                    </Button>
+                                </Link>
+                            </Tooltip>
+                        </div>
+                    
+                        {/* Page Buttons */}
+                        <div className='flex-grow flex justify-center space-x-2'>
+                            { this.getPageButtons() }
+                        </div>
+
+                        {/* Back Button */}
+                        <div>
+                            <Tooltip arrow title="Back">
+                                <div>
+                                    <Button onClick={ () => this.props.back() } className="backButton">
+                                        <RiArrowGoBackLine size={45} color="grey" />
+                                    </Button>
+                                </div>
+                            </Tooltip>
+                        </div>
                     </div>
-                
-                    <div className=''>test</div>
 
-                    {/* Page Buttons */}
-                    <div className='flex-grow flex justify-center space-x-2'>
-                        { this.getPageButtons() }
+                    {/* Title */}
+                    <h1 className='text-3xl mt-3 text-center font-semibold'>
+                        { title != undefined ? title.toUpperCase() : "Loading ..." }
+                    </h1>
+
+                    {/* Description */}
+                    <div className='p-4'>
+                        { this.decideDescription() }
+                    </div>
+
+                    {/* Help Text */}
+                    <div>
+                        <p className='userHelp'>{ title == 'Circular Business Models' ? "Please select only one option to continue" : title == "Circular Design Principles" ? "" : "Please select at least one option to continue" }</p>
+                    </div>
+
+                    {/* Go On button */}
+                    <div className='w-40 m-auto'>
+                        <Tooltip arrow title="Select items by clicking on the box underneath CHOOSE in the elements to the right">
+                            <div>
+                                {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
+                                <Button
+                                    className={ this.state.nextPageButtonActive ? "nextPageButton " : "nextPageButton disabled" }
+                                    style={{ borderColor: this.decideButtonColor() }}
+                                    onClick={ () => this.props.nextPage() }>
+                                    { title == 'Circular Design Principles' ? 'CONTINUE' : 'GO ON' }
+                                </Button>
+                            </div>
+                        </Tooltip>
                     </div>
 
                 </div>
@@ -209,7 +251,6 @@ export default class CustomNavbar extends React.Component
                                             </Tooltip>
                                         </Col>
 
-
                             </Col>
 
                             {/* --- Initial description which can be hidden ------------------------------------- */}
@@ -236,7 +277,7 @@ export default class CustomNavbar extends React.Component
                                                 <div>
                                                     {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
                                                     <Button
-                                                        className={ this.state.nextPageButtonActive ? "" : "disabled" }
+                                                        className={ '' + this.state.nextPageButtonActive ? "nextPageButton " : "nextPageButton disabled" }
                                                         style={{ borderColor: this.decideButtonColor() }}
                                                         onClick={ () => this.props.nextPage() }>
                                                         { title == 'Circular Design Principles' ? 'CONTINUE' : 'GO ON' }

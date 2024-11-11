@@ -640,7 +640,7 @@ export default class AdvisorPage extends React.Component
         else
         {
             // --- Mobile Design
-            if (windowWidth < 1200)
+            if (windowWidth < 900)
             {
                 return(
                     <div className="advisorPage">
