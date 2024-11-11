@@ -27,6 +27,7 @@ export default class CustomNavbar extends React.Component
             pageIndex: props.pageIndex,
             title: props.title,
             nextPageButtonActive: props.nextPageButtonActive,
+            mobileLayout: props.mobileLayout,
         };
     }
 
@@ -101,9 +102,10 @@ export default class CustomNavbar extends React.Component
     // Dynamicly create the page navigation buttons based on the current index/page the user is on
     getPageButtons()
     {
-        return(
-            this.state.pageButtons.map(( page, index ) => (
-                <Col>
+        if(this.state.mobileLayout)
+        {
+            return(
+                this.state.pageButtons.map(( page, index ) => (
                     <Button className='navbarButton'
                     style={
                         // Set the current page active / or set all buttons active with color, if your on the last page
@@ -115,93 +117,143 @@ export default class CustomNavbar extends React.Component
                     }
                     onClick={ () => this.props.goToPage( page ) }
                     />
-                </Col>
-            ))
-        );
+                ))
+            );
+        }
+        else
+        {
+            return(
+                this.state.pageButtons.map(( page, index ) => (
+                    <Col>
+                        <Button className='navbarButton'
+                        style={
+                            // Set the current page active / or set all buttons active with color, if your on the last page
+                            index <= this.state.pageIndex ? { backgroundColor: this.decideButtonColor( index ) } : {}   
+                        }
+                        disabled={
+                            //  Disable all pages after the current page 
+                            index > this.state.pageIndex ? true : false
+                        }
+                        onClick={ () => this.props.goToPage( page ) }
+                        />
+                    </Col>
+                ))
+            );
+        }
     }
 
     render()
     {
-        const { expanded, expandedButtons, title } = this.state;
+        const { expanded, expandedButtons, title, mobileLayout } = this.state;
 
-        return(
-            <Col className={ expandedButtons ? 'CustomNavbar col-5' : 'CustomNavbar col-1' } style={{ display: expanded ? 'inline-block' : 'none' }}>
-                <Container  fluid>
-                    <Row xs="2">
+        if(mobileLayout)
+        {
+            return(
+                <div className='flex pt-5 CustomNavbar items-center justify-center'>
 
-                        {/* --- Main Navbar with page buttons ------------------------------------------------ */}
-                        <Col className={ expandedButtons ? 'buttonCol col-3' : 'buttonCol col-12' }>
-                                    
-                                    {/* Home button */}
-                                    <Col>
-                                        <Tooltip arrow title="Home">
-                                            <Link href="/home">
-                                                <Button className='homeButton'>
-                                                    <Image src="/icons/Menü_Haus.png" width={65} height={55} alt='HomeButton' />
-                                                </Button>
-                                            </Link>
-                                        </Tooltip>
-                                    </Col>
+                    {/* Home button */}
+                    <div className=''>
+                        <Tooltip arrow title="Home">
+                            <Link href="/home">
+                                <Button className='homeButton'>
+                                    <Image src="/icons/Menü_Haus.png" width={65} height={55} alt='HomeButton' />
+                                </Button>
+                            </Link>
+                        </Tooltip>
+                    </div>
+                
+                    <div className=''>test</div>
 
-                                    {/* Page Buttons */}
-                                    <Col>
-                                        { this.getPageButtons() }
-                                    </Col>
+                    {/* Page Buttons */}
+                    <div className='flex-grow flex justify-center space-x-2'>
+                        { this.getPageButtons() }
+                    </div>
 
-                                    {/* Back Buttons */}
-                                    <Col>
-                                        <Tooltip arrow title="Back">
-                                            <div>
-                                                <Button onClick={ () => this.props.back() } className="backButton">
-                                                    <RiArrowGoBackLine size={45} color="grey" />
-                                                </Button>
-                                            </div>
-                                        </Tooltip>
-                                    </Col>
+                </div>
+            );
+        }
+        else
+        {
+            return(
+                <Col className={ expandedButtons ? 'CustomNavbar col-5' : 'CustomNavbar col-1' } style={{ display: expanded ? 'inline-block' : 'none' }}>
+                    <Container  fluid>
+                        <Row xs="2">
+
+                            {/* --- Main Navbar with page buttons ------------------------------------------------ */}
+                            <Col className={ expandedButtons ? 'buttonCol col-3' : 'buttonCol col-12' }>
+                                        
+                                        {/* Home button */}
+                                        <Col>
+                                            <Tooltip arrow title="Home">
+                                                <Link href="/home">
+                                                    <Button className='homeButton'>
+                                                        <Image src="/icons/Menü_Haus.png" width={65} height={55} alt='HomeButton' />
+                                                    </Button>
+                                                </Link>
+                                            </Tooltip>
+                                        </Col>
+
+                                        {/* Page Buttons */}
+                                        <Col>
+                                            { this.getPageButtons() }
+                                        </Col>
+
+                                        {/* Back Button */}
+                                        <Col>
+                                            <Tooltip arrow title="Back">
+                                                <div>
+                                                    <Button onClick={ () => this.props.back() } className="backButton">
+                                                        <RiArrowGoBackLine size={45} color="grey" />
+                                                    </Button>
+                                                </div>
+                                            </Tooltip>
+                                        </Col>
 
 
-                        </Col>
+                            </Col>
 
-                        {/* --- Initial description which can be hidden ------------------------------------- */}
-                        <Col className='descriptionCol col-9' style={{ display: expandedButtons ? 'inline-block' : 'none' }}>
-                            <Container fluid>
-                                <Row xs={1}>
+                            {/* --- Initial description which can be hidden ------------------------------------- */}
+                            <Col className='descriptionCol col-9' style={{ display: expandedButtons ? 'inline-block' : 'none' }}>
+                                <Container fluid>
+                                    <Row xs={1}>
 
-                                    <Col style={{ marginBottom: 30 }}>
-                                        <h1>
-                                            { title != undefined ? title.toUpperCase() : "Loading ..." }
-                                        </h1>
-                                    </Col>
+                                        <Col style={{ marginBottom: 30 }}>
+                                            <h1>
+                                                { title != undefined ? title.toUpperCase() : "Loading ..." }
+                                            </h1>
+                                        </Col>
 
-                                    <Col style={{ marginBottom: 50 }}>
-                                            { this.decideDescription() }
-                                    </Col>
+                                        <Col style={{ marginBottom: 50 }}>
+                                                { this.decideDescription() }
+                                        </Col>
 
-                                    <Col>
-                                        <p className='userHelp'>{ title == 'Circular Business Models' ? "Please select only one option to continue" : title == "Circular Design Principles" ? "" : "Please select at least one option to continue" }</p>
-                                    </Col>
+                                        <Col>
+                                            <p className='userHelp'>{ title == 'Circular Business Models' ? "Please select only one option to continue" : title == "Circular Design Principles" ? "" : "Please select at least one option to continue" }</p>
+                                        </Col>
 
-                                    <Col>
-                                        <Tooltip arrow title="Select items by clicking on the box underneath CHOOSE in the elements to the right">
-                                            <div>
-                                                {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
-                                                <Button
-                                                    className={ this.state.nextPageButtonActive ? "" : "disabled" }
-                                                    style={{ borderColor: this.decideButtonColor() }}
-                                                    onClick={ () => this.props.nextPage() }>
-                                                    { title == 'Circular Design Principles' ? 'CONTINUE' : 'GO ON' }
-                                                </Button>
-                                            </div>
-                                        </Tooltip>
-                                    </Col>
+                                        <Col>
+                                            <Tooltip arrow title="Select items by clicking on the box underneath CHOOSE in the elements to the right">
+                                                <div>
+                                                    {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
+                                                    <Button
+                                                        className={ this.state.nextPageButtonActive ? "" : "disabled" }
+                                                        style={{ borderColor: this.decideButtonColor() }}
+                                                        onClick={ () => this.props.nextPage() }>
+                                                        { title == 'Circular Design Principles' ? 'CONTINUE' : 'GO ON' }
+                                                    </Button>
+                                                </div>
+                                            </Tooltip>
+                                        </Col>
 
-                                </Row>
-                            </Container>
-                        </Col>
+                                    </Row>
+                                </Container>
+                            </Col>
 
-                    </Row>
-                </Container>
-            </Col>
-        );
+                        </Row>
+                    </Container>
+                </Col>
+            );
+        }
+    
     }
 }

@@ -91,7 +91,11 @@ export default class AdvisorPage extends React.Component
             elementOpen: false, //only 1 element can be opend at a time, when an element is opend the navbar collapses
             closeElementCallback: null,
             impressumVisible: true,
+            windowWidth: 0, // Gets updated to adjust for mobile design
         };
+
+        // Bind the method to the class
+        this.handleResize = this.handleResize.bind(this);
 
         // Decide in which order the pages will get displayed based on if the user selected LCP or CBM on the previous page
         if( props.initialType == "CBM" ) {
@@ -105,8 +109,21 @@ export default class AdvisorPage extends React.Component
     // --- Data load ------------------------------------------------------------------------------- 
     componentDidMount()
     {
+        // Set initial window width and set listener
+        this.handleResize();
+        window.addEventListener('resize', this.handleResize);
+        
         this.loadData();
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize);
+    }
+    
+    // Apply / unapply mobile design
+    handleResize = () => {
+        this.setState({ windowWidth: window.innerWidth });
+    };
 
     loadData()
     {
@@ -514,7 +531,7 @@ export default class AdvisorPage extends React.Component
 
     render()
     {
-        const { data, loading, error, warning, type, title, impressumVisible } = this.state;
+        const { data, loading, error, warning, type, title, impressumVisible, windowWidth } = this.state;
 
         if (loading) {
             return(
@@ -620,61 +637,91 @@ export default class AdvisorPage extends React.Component
         }
 
         // Show choosable elements in 2 rows because there are too many for 1 row 
-        else{
-            return(
+        else
+        {
+            // --- Mobile Design
+            if (windowWidth < 1200)
+            {
+                return(
+                    <div className="advisorPage">
 
-                <div className="advisorPage">
-
-                    <Container fluid className="advisorPageContainer">
-                        <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
-
+                        <div className="block w-full">
                             <CustomNavbar
-                                ref={ this.Navbar }
-                                nextPage={ this.nextPage }
-                                title={ this.state.title }
-                                pageIndex={ this.pageOrder.indexOf( type ) +1 }
-                                pageOrder={ this.pageOrder }
-                                goToPage={ this.goToPage }
-                                back={ this.back }   
-                                nextPageButtonActive={ this.areItemsSelected() }
-                                >
+                                        ref={ this.Navbar }
+                                        nextPage={ this.nextPage }
+                                        title={ this.state.title }
+                                        pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                                        pageOrder={ this.pageOrder }
+                                        goToPage={ this.goToPage }
+                                        back={ this.back }   
+                                        nextPageButtonActive={ this.areItemsSelected() }
+                                        mobileLayout={true}
+                                        >
                             </CustomNavbar>
+                        </div>
 
-                            {/*bodyContent*/}
-                            <Row className={ this.state.elementOpen ? "elementRow" : "elementRow col-7" } > {/* xs={ data['descriptions'].length <= 7 ? "" : "6" /* limit the amount of items in a row only when 2 rows are needed */ }
-                            {
-                                // Single Row
-                                data['descriptions'].length <= 7 ?
-                                    data['descriptions'].map(( item, index ) => (
-                                        <ChoosableElement
-                                        key={index}
-                                        id={item.id}
-                                        description={item.description}
-                                        name={item.name}
-                                        active={item.active}
-                                        type={type}
-                                        color={item.color}
-                                        enableNextPageButton={this.enableNextPageButton}
-                                        toggleNavbar={ this.toggleNavbar } 
-                                        />
-                                    )) :
+                    </div>
+                );
+            }
 
-                                // Multiple Rows
-                                this.createMultipleRows( data['descriptions'] )
+            // -- iPad / PC Design
+            else
+            {
+                return(
+                    <div className="advisorPage">
 
-                            }
+                        <Container fluid className="advisorPageContainer">
+                            <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
+
+                                <CustomNavbar
+                                    ref={ this.Navbar }
+                                    nextPage={ this.nextPage }
+                                    title={ this.state.title }
+                                    pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                                    pageOrder={ this.pageOrder }
+                                    goToPage={ this.goToPage }
+                                    back={ this.back }   
+                                    nextPageButtonActive={ this.areItemsSelected() }
+                                    mobileLayout={false}
+                                    >
+                                </CustomNavbar>
+
+                                {/*bodyContent*/}
+                                <Row className={ this.state.elementOpen ? "elementRow" : "elementRow col-7" } > {/* xs={ data['descriptions'].length <= 7 ? "" : "6" /* limit the amount of items in a row only when 2 rows are needed */ }
+                                {
+                                    // Single Row
+                                    data['descriptions'].length <= 7 ?
+                                        data['descriptions'].map(( item, index ) => (
+                                            <ChoosableElement
+                                            key={index}
+                                            id={item.id}
+                                            description={item.description}
+                                            name={item.name}
+                                            active={item.active}
+                                            type={type}
+                                            color={item.color}
+                                            enableNextPageButton={this.enableNextPageButton}
+                                            toggleNavbar={ this.toggleNavbar } 
+                                            />
+                                        )) :
+
+                                    // Multiple Rows
+                                    this.createMultipleRows( data['descriptions'] )
+
+                                }
+                                </Row>
+
                             </Row>
+                        </Container>
 
-                        </Row>
-                    </Container>
+                        <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                            <Watermark visible={ impressumVisible } />
+                        </div>
 
-                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
-                        <Watermark visible={ impressumVisible } />
                     </div>
 
-                </div>
-
-            );
+                );
+            }
         }
 
 
