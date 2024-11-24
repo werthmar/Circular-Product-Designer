@@ -645,20 +645,36 @@ export default class AdvisorPage extends React.Component
                 return(
                     <div className="advisorPage">
 
-                        <div className="block w-full">
-                            <CustomNavbar
-                                        ref={ this.Navbar }
-                                        nextPage={ this.nextPage }
-                                        title={ this.state.title }
-                                        pageIndex={ this.pageOrder.indexOf( type ) +1 }
-                                        pageOrder={ this.pageOrder }
-                                        goToPage={ this.goToPage }
-                                        back={ this.back }   
-                                        nextPageButtonActive={ this.areItemsSelected() }
-                                        mobileLayout={true}
-                                        >
-                            </CustomNavbar>
-                        </div>
+                        <CustomNavbar
+                                    ref={ this.Navbar }
+                                    nextPage={ this.nextPage }
+                                    title={ this.state.title }
+                                    pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                                    pageOrder={ this.pageOrder }
+                                    goToPage={ this.goToPage }
+                                    back={ this.back }   
+                                    nextPageButtonActive={ this.areItemsSelected() }
+                                    mobileLayout={true}
+                                    >
+                        </CustomNavbar>
+
+                        {/*bodyContent*/}
+                        {
+                            data['descriptions'].map(( item, index ) => (
+                                <ChoosableElement
+                                key={index}
+                                id={item.id}
+                                description={item.description}
+                                name={item.name}
+                                active={item.active}
+                                type={type}
+                                color={item.color}
+                                enableNextPageButton={this.enableNextPageButton}
+                                toggleNavbar={ this.toggleNavbar }
+                                mobileLayout={ true } 
+                                />
+                            ))
+                        }
 
                     </div>
                 );
@@ -701,7 +717,8 @@ export default class AdvisorPage extends React.Component
                                             type={type}
                                             color={item.color}
                                             enableNextPageButton={this.enableNextPageButton}
-                                            toggleNavbar={ this.toggleNavbar } 
+                                            toggleNavbar={ this.toggleNavbar }
+                                            mobileLayout={false} 
                                             />
                                         )) :
 
