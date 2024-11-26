@@ -92,6 +92,8 @@ export default class AdvisorPage extends React.Component
             closeElementCallback: null,
             impressumVisible: true,
             windowWidth: 0, // Gets updated to adjust for mobile design
+            mobileLayout: false, //dependent on window width but as bool
+            key: 0, //used to force rebuild on certain components
         };
 
         // Bind the method to the class
@@ -122,7 +124,11 @@ export default class AdvisorPage extends React.Component
     
     // Apply / unapply mobile design
     handleResize = () => {
-        this.setState({ windowWidth: window.innerWidth });
+        this.setState((prevState) => ({ 
+            windowWidth: window.innerWidth,
+            mobileLayout: window.innerWidth < 900 ? true : false,
+            key: prevState.key + 1, 
+        }));
     };
 
     loadData()
@@ -531,7 +537,7 @@ export default class AdvisorPage extends React.Component
 
     render()
     {
-        const { data, loading, error, warning, type, title, impressumVisible, windowWidth } = this.state;
+        const { data, loading, error, warning, type, title, impressumVisible, windowWidth, key, mobileLayout } = this.state;
 
         if (loading) {
             return(
@@ -564,7 +570,6 @@ export default class AdvisorPage extends React.Component
         // Display a pie chart display for the last page / Circular Design Principles
         else if ( type == "CDP" )
         {
-            
             return(
                 <div className="advisorPage">
     
@@ -579,15 +584,17 @@ export default class AdvisorPage extends React.Component
                                 pageOrder={ this.pageOrder }
                                 goToPage={ this.goToPage }
                                 back={ this.back }
+                                key= {key}
+                                mobileLayout= { mobileLayout }
                                 nextPageButtonActive={ () => { return true; } /** this.areItemsSelected() --commented out because i dont know how items are supposed to be selected yet */ }
                                 >
                             </CustomNavbar>
 
-                            <Col className="pieChartCol">
-                                <PieChart toggleDescription={ this.toggleNavbarNoCallback } />
-                            </Col>
+                                <Col className="pieChartCol">
+                                    <PieChart toggleDescription={ this.toggleNavbarNoCallback } key= {key} mobileLayout={ mobileLayout } />
+                                </Col>
 
-                            </Row>
+                        </Row>
                     </Container>
 
                     <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
@@ -640,7 +647,7 @@ export default class AdvisorPage extends React.Component
         else
         {
             // --- Mobile Design
-            if (windowWidth < 900)
+            if (mobileLayout)
             {
                 return(
                     <div className="advisorPage">
@@ -675,6 +682,10 @@ export default class AdvisorPage extends React.Component
                                 />
                             ))
                         }
+
+                        <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "250px" }}>
+                            <Watermark visible={ impressumVisible } />
+                        </div>
 
                     </div>
                 );

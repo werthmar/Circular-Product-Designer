@@ -23,6 +23,7 @@ ChartJS.register(
 export default function PieChart( props )
 {
     const [_data, setData] = useState();
+    var mobileLayout = props.mobileLayout;
 
     // fetch data
     useEffect(() => {
@@ -535,36 +536,59 @@ export default function PieChart( props )
             }
         };
 
-        
-        return(
-            <Row style={{ width: '131%', height: '100%' }} >
-            
-                { /** Text Display*/ }
-                <Col xs="7">
-                    <div className={setBackgroundBasedOnH1(selectedCategory.toUpperCase())}>
-                        <container/>
+        if(mobileLayout)
+        {
+            return(
+                <div>
+
+                    { /** Text Display*/ }
+                    <div className="flex-auto w-full pieChartMobile">
                         <h1>{ title.toUpperCase() }</h1>
                         <p>{ text }</p>
-
-                        <Button onClick={ () => back() } className="backButton">
+                    
+                    
+                        <Button onClick={ () => back() } className="backButton bg-transparent border-none pt-3">
                             <RiArrowGoBackLine size={45} color="white" />
                         </Button>
-
                     </div>
-                </Col>
+                    
 
-                {/** Half pie chart */}
-                <Col xs="5">
 
-                 <Pie className="halfPieChart"
-                    data={data2}
-                    options={options2}
-                    ref={chartRef2}
-                    onClick={onClick2}/>
+                </div>
+            );
+        }
+        else
+        {
+            return(
+                <Row style={{ width: '131%', height: '100%' }} >
+                
+                    { /** Text Display*/ }
+                    <Col xs="7">
+                        <div className={setBackgroundBasedOnH1(selectedCategory.toUpperCase())}>
+                            <container/>
+                            <h1>{ title.toUpperCase() }</h1>
+                            <p>{ text }</p>
 
-                </Col>
-            </Row>
-        );
+                            <Button onClick={ () => back() } className="backButton">
+                                <RiArrowGoBackLine size={45} color="white" />
+                            </Button>
+
+                        </div>
+                    </Col>
+
+                    {/** Half pie chart */}
+                    <Col xs="5">
+
+                        <Pie className="halfPieChart"
+                            data={data2}
+                            options={options2}
+                            ref={chartRef2}
+                            onClick={onClick2}/>
+
+                    </Col>
+                </Row>
+            );
+        }
     }
     
 }
