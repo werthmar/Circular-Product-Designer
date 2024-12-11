@@ -608,39 +608,90 @@ export default class AdvisorPage extends React.Component
         // Display the result page
         else if ( type == "Solution-Overview" )
         {
-            return(
-                <div className="advisorPage">
+            if(mobileLayout)
+            {
+                return(
+                    <div className="advisorPage bg-white">
 
-                    <Container fluid style={{ padding: 0 }}>
-                        <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
+                        <CustomNavbar
+                                    ref={ this.Navbar }
+                                    nextPage={ this.nextPage }
+                                    title={ this.state.title }
+                                    pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                                    pageOrder={ this.pageOrder }
+                                    goToPage={ this.goToPage }
+                                    back={ this.back }   
+                                    nextPageButtonActive={ this.areItemsSelected() }
+                                    mobileLayout={true}
+                                    >
+                        </CustomNavbar>
 
-                            <div>{/** Used to force rerender */}</div>
+                        <img 
+                            src="/images/SolutionPageMobile.png" 
+                            alt="Beispielbild" 
+                            className="w-full"
+                        />
 
-                            <CustomNavbar
-                                ref={ this.Navbar }
-                                nextPage={ this.nextPage }
-                                title={ this.state.title }
-                                pageIndex={ this.pageOrder.indexOf( type ) +1 }
-                                pageOrder={ this.pageOrder }
-                                goToPage={ this.goToPage }
-                                back={ this.back }   
-                                nextPageButtonActive={ this.areItemsSelected() }
-                                >
-                            </CustomNavbar>
+                        {/** Buttons */}
+                        <div className="flex pt-8 pl-12 pr-12 bg-white">
+                            <button className="flex-auto w-20 bg-[rgb(194,194,194)] rounded text-xs p-2 mr-2">
+                            LIST OF CIRCULAR<br/>
+                            DESIGN PRINCIPLES
+                            </button>
 
-                            <Col className="solutionOverview">
-                                <SolutionOverview initialType={ this.props.initialType } />
-                            </Col>
+                            <button className="flex-auto w-20 bg-[rgb(194,194,194)] rounded text-xs p-2 ml-2">
+                            LEARN MORE<br/>
+                            ABOUT INDICATORS
+                            </button>
+                        </div>
 
-                            </Row>
-                    </Container>
+                        <div className="flex pt-4 pb-10 pl-12 pr-12 bg-white">
+                            <button className="flex-auto w-20 bg-black text-white text-base rounded h-10">
+                                SAVE YOUR PROJECT!
+                            </button>
+                        </div>
 
-                    <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "100px" }}>
-                        <Watermark visible={true} />
+
+
                     </div>
+                );
+            }
+            else
+            {
+                return(
+                    <div className="advisorPage">
 
-                </div>
-            );
+                        <Container fluid style={{ padding: 0 }}>
+                            <Row className="mainRow"> {/* Achieves vertical scroll: "flex-nowrap overflow-auto" */}
+
+                                <div>{/** Used to force rerender */}</div>
+
+                                <CustomNavbar
+                                    ref={ this.Navbar }
+                                    nextPage={ this.nextPage }
+                                    title={ this.state.title }
+                                    pageIndex={ this.pageOrder.indexOf( type ) +1 }
+                                    pageOrder={ this.pageOrder }
+                                    goToPage={ this.goToPage }
+                                    back={ this.back }   
+                                    nextPageButtonActive={ this.areItemsSelected() }
+                                    >
+                                </CustomNavbar>
+
+                                <Col className="solutionOverview">
+                                    <SolutionOverview initialType={ this.props.initialType } />
+                                </Col>
+
+                                </Row>
+                        </Container>
+
+                        <div style={{ position: "fixed", bottom: "0px", left:"10px", width: "100px" }}>
+                            <Watermark visible={true} />
+                        </div>
+
+                    </div>
+                );
+            }
         }
 
         // Show choosable elements in 2 rows because there are too many for 1 row 
