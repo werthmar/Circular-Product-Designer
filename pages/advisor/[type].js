@@ -590,7 +590,7 @@ export default class AdvisorPage extends React.Component
                                 >
                             </CustomNavbar>
 
-                                <Col className="pieChartCol">
+                                <Col className={mobileLayout ? "pieChartColMobile" : "pieChartCol"}>
                                     <PieChart toggleDescription={ this.toggleNavbarNoCallback } key= {key} mobileLayout={ mobileLayout } />
                                 </Col>
 

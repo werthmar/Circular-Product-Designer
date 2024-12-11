@@ -223,7 +223,7 @@ export default function ChoosableElement(props) {
                     <h2>{name.toUpperCase()}</h2>
                     <br/>
                     */}
-                        <p class="p-8 mt-0.5 bg-no-repeat bg-cover bg-center h-full w-full" style={{ backgroundColor: color, backgroundImage: `url(${getBackgroundImage()})`}}>
+                        <p class="p-8 mt-0.5 bg-no-repeat bg-cover bg-center h-full w-full" style={{ backgroundColor: color, backgroundImage: `url(${getBackgroundImage()})`, backgroundSize: '100%'}}>
                             {description}
                         </p>
                 

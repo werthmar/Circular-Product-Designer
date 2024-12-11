@@ -142,14 +142,55 @@ export default class CustomNavbar extends React.Component
         }
     }
 
+    MobileDescription() {
+
+        const {title} = this.state;
+
+        return(
+            <div>
+
+                {/* Title */}
+                <h1 className='text-3xl mt-3 text-center font-semibold'>
+                    { title != undefined ? title.toUpperCase() : "Loading ..." }
+                </h1>
+
+                {/* Description */}
+                <div className='p-4'>
+                    { this.decideDescription() }
+                </div>
+
+                {/* Help Text */}
+                <div>
+                    <p className='userHelp'>{ title == 'Circular Business Models' ? "Please select only one option to continue" : title == "Circular Design Principles" ? "" : "Please select at least one option to continue" }</p>
+                </div>
+
+                {/* Go On button */}
+                <div className='w-40 m-auto'>
+                    <Tooltip arrow title="Select items by clicking on the box underneath CHOOSE in the elements to the right">
+                        <div>
+                            {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
+                            <Button
+                                className={ this.state.nextPageButtonActive ? "nextPageButton " : "nextPageButton disabled" }
+                                style={{ borderColor: this.decideButtonColor() }}
+                                onClick={ () => this.props.nextPage() }>
+                                { title == 'Circular Design Principles' ? 'CONTINUE' : 'GO ON' }
+                            </Button>
+                        </div>
+                    </Tooltip>
+                </div>
+
+            </div>
+        );
+    }
+
     render()
     {
-        const { expanded, expandedButtons, title, mobileLayout } = this.state;
+        const { expanded, expandedButtons, title, mobileLayout, key } = this.state;
 
         if(mobileLayout)
         {
             return(
-                <div className='CustomNavbar pb-3'>
+                <div className='CustomNavbar pb-3 h-100%'>
 
                     {/* Navbar */}
                     <div className='flex pt-5 items-center justify-center'>
@@ -181,37 +222,10 @@ export default class CustomNavbar extends React.Component
                         </div>
                     </div>
 
-                    {/* Title */}
-                    <h1 className='text-3xl mt-3 text-center font-semibold'>
-                        { title != undefined ? title.toUpperCase() : "Loading ..." }
-                    </h1>
-
-                    {/* Description */}
-                    <div className='p-4'>
-                        { this.decideDescription() }
-                    </div>
-
-                    {/* Help Text */}
-                    <div>
-                        <p className='userHelp'>{ title == 'Circular Business Models' ? "Please select only one option to continue" : title == "Circular Design Principles" ? "" : "Please select at least one option to continue" }</p>
-                    </div>
-
-                    {/* Go On button */}
-                    <div className='w-40 m-auto'>
-                        <Tooltip arrow title="Select items by clicking on the box underneath CHOOSE in the elements to the right">
-                            <div>
-                                {/* The callback is the nextPage function from the advisor page which is passed into this class  */}
-                                <Button
-                                    className={ this.state.nextPageButtonActive ? "nextPageButton " : "nextPageButton disabled" }
-                                    style={{ borderColor: this.decideButtonColor() }}
-                                    onClick={ () => this.props.nextPage() }>
-                                    { title == 'Circular Design Principles' ? 'CONTINUE' : 'GO ON' }
-                                </Button>
-                            </div>
-                        </Tooltip>
-                    </div>
+                {expandedButtons ? this.MobileDescription() : '' }
 
                 </div>
+
             );
         }
         else

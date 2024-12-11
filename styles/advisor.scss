@@ -54,11 +54,11 @@ body{
         overflow-x: auto; //hidden
     }
 
-    .pieChartMobile{
+    .pieChartDescriptionMobile{
         background-color: rgb(94, 103, 110);
         border-radius: 35px;
         color: white;
-        padding: 50px 50px 25px 50px;
+        padding: 25px;
 
         h1{
             font-size: 30px;
@@ -70,6 +70,15 @@ body{
             font-size: 20px;
             color: white;
             font-family: "Lato-Light";
+        }
+    }
+
+    .pieChartColMobile{
+        background-color: $background-color;
+
+        .halfPieChart{
+            //position: absolute;
+            //z-index: 2;
         }
     }
 

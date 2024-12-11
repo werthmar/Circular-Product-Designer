@@ -490,8 +490,26 @@ export default function PieChart( props )
                 }
             ]
         };
-        
+
         const options2 = {
+            plugins: 
+            {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+                datalabels: {
+                },
+            },        
+            animation: false,
+            responsive:true,
+            maintainAspectRatio:false
+        };
+
+        const options2Mobile = {
+            rotation: 90, // Start at the top
             plugins: 
             {
                 legend: {
@@ -542,16 +560,24 @@ export default function PieChart( props )
                 <div>
 
                     { /** Text Display*/ }
-                    <div className="flex-auto w-full pieChartMobile">
+                    <div className="flex-auto pieChartDescriptionMobile relative z-10 mb-60 shadow">
                         <h1>{ title.toUpperCase() }</h1>
                         <p>{ text }</p>
-                    
                     
                         <Button onClick={ () => back() } className="backButton bg-transparent border-none pt-3">
                             <RiArrowGoBackLine size={45} color="white" />
                         </Button>
                     </div>
                     
+                    <div className="w-full h-[100vh] fixed bottom-[-50vh] left-0 z-0">
+                        {/** absolute bottom-0 w-full -mb-44 */}
+                        <Pie className="halfPieChart"
+                                data={data2}
+                                options={options2Mobile}
+                                ref={chartRef2}
+                                onClick={onClick2}/>
+                    </div>
+
 
 
                 </div>
