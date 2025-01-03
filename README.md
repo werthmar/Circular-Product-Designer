@@ -1,4 +1,4 @@
-# Circularity-Navigator
+# Circular Product Designer
 
 ## Overview
 This project is a [Next.js](https://nextjs.org/) application. It allows users to design a sustainable product within an interactive platform. User can learn about circular product design, create their own customized design, and export it with ease.
