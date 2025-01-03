@@ -1,7 +1,8 @@
 # Circularity-Navigator
 
 ## Overview
-This project is a [Next.js](https://nextjs.org/) application that provides a comprehensive web solution. It includes various features such as a dynamic header, responsive design, and integration with a MySQL database.
+This project is a [Next.js](https://nextjs.org/) application. It allows users to design a sustainable product within an interactive platform. User can learn about circular product design, create their own customized design, and export it with ease.
+
 
 ## Tech Stack
 - **Frontend:** React, Next.js, Tailwind CSS, Bootstrap CSS
