@@ -15,7 +15,7 @@ export default function IndexPage()
         <div className="indexPage">
 
             <div className="watermark">
-                <Watermark />
+                <Watermark visible={true} />
             </div>
 
             <div className="greyBox">

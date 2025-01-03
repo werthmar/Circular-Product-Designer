@@ -1,5 +1,17 @@
 @import 'theme';
 
+// Tailwind
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// Allow word breaks in text
+.hyphenated {
+    hyphens: auto;
+    word-break: break-word; /* Ensures words can break if necessary */
+    overflow-wrap: break-word; /* Provides additional break options for long words */
+}
+
 html,
 body {
   padding: 0;

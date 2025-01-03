@@ -99,6 +99,48 @@ export default function Impressum()
                     <br/><br/>
                     Das Layout der Homepage, die verwendeten Grafiken sowie die sonstigen Inhalte der Internetpräsenz des DFKI sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung und jedwede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der Zustimmung des DFKI (in Schriftform). Soweit die Inhalte auf dieser Seite nicht von DFKI erstellt wurden, werden die Urheberrechte Dritter beachtet. Sollten Sie dennoch auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen, wird DFKI derartige Inhalte umgehend entfernen.
                 </p>
+
+                <br/>
+                <h4>Datenschutz</h4>
+                <p>
+                    Das DFKI (Deutsches Forschungszentrum für Künstliche Intelligenz GmbH), die Hochschule Pforzheim und dessen Mitarbeiter/-innen setzen sich ziel- und risikoorientiert für die informationelle Selbstbestimmung und das Grundrecht auf Schutz personenbezogener Daten ein. In dieser Datenschutzerklärung informieren wir Sie über die Verarbeitung Ihrer personenbezogenen Daten bei Besuch und Benutzung unserer Webseite.
+                    <br/><br/>
+                    <ul title="Verantwortliche Stellen:">
+                        <li>Deutsches Forschungszentrum für Künstliche Intelligenz GmbH (DFKI)</li>
+                        <li>Tel.: +49 631 20575 0</li>
+                        <li>E-Mail:<a>info@dfki.deDatenschutzbeauftragter</a></li>
+                        <li>E-Mail:<a>datenschutz@dfki.de</a></li>
+                        <li>Zweck der Verarbeitung</li>
+                        <br/>
+                        <li>Hochschule Pforzheim</li>
+                        <li>Tel.: 07231/28-6001</li>
+                        <li>Kontakt: Tiefenbronner Straße 65, 75175</li>
+                        <li>Prof. Dr.-Ing. Frank Niemann</li>
+                        <li>E-Mail:<a>frank.niemann(at)hs-pforzheim(dot)de</a></li>
+                        <li>Bereitstellung des Informationsangebotes im Rahmen der Öffentlichkeitsarbeit des DFKI</li>
+                        <li>Kontaktaufnahme und Korrespondenz mit Besuchern und Benutzern</li>
+                        <li>Anonyme und geschützte Benutzung</li>
+                    </ul>
+                    <br/>
+                    Der Besuch und die Benutzung unserer Webseite sind anonym. Personenbezogene Daten werden auf unserer Webseite nur im technisch notwendigen Umfang erhoben. Die verarbeiteten personenbezogenen Daten werden außer aufgrund konkreter gesetzlicher Verpflichtungen nicht an Dritte übermittelt oder in anderer Weise offengelegt. Wir binden innerhalb unseres Informationsangebots keine Inhalts- oder Serviceangebote von Drittanbietern ein.
+                    <br/><br/>
+                    Bei der Benutzung unserer Webseite ist die Datenübertragung im Internet durch ein als sicher anerkanntes Verschlüsselungsverfahren gegen Kenntnisnahme Dritter geschützt und kann somit nicht auf einfache Weise beobachtet oder verfälscht werden kann. Zugriffsdaten
+                    <br/><br/>
+                    Die Verarbeitung der Zugriffsdaten ist rechtmäßig, weil sie zur Wahrung berechtigter Interessen des DFKI erforderlich ist. Die berechtigten Interessen des DFKI sind die Anpassung und Optimierung des Informationsangebots und die Ermittlung, Aufdeckung von Verfolgung von rechtswidrigen Handlungen im Zusammenhang mit der Benutzung der Webseite.
+                </p>
+
+                <br/>
+                <h4>Cookies</h4>
+                <p>
+                    Auf unserer Webseite verwenden wir sogenannte Cookies. Cookies sind kleine Dateien, die von Ihrem Webbrowser gespeichert werden. Die auf unserer Webseite verwendeten Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Schadsoftware. Sie ermöglichen eine benutzerfreundliche und effektive Nutzung unserer Webseite. Wir verwenden Cookies nicht für Werbezwecke.
+                    <br/><br/>
+                    Wir übertragen an Ihren Webbrowser temporäre Session Cookies. Sie sind nur für die Dauer Ihres Besuches auf unserer Webseite gültig und sie haben außerhalb unserer Webseite keine Bedeutung. Die temporären Cookies werden verwendet, um Ihre Sitzung während Ihres Besuches mit einer eindeutigen Nummer zu identifizieren und unsere Inhalte in der von Ihnen bevorzugten Sprache zu übertragen. Nach Ende Ihres Besuches können Sie die Session Cookies durch Beendigung Ihres Webbrowsers löschen.
+                    <br/><br/>
+                    Wir übertragen an Ihren Webbrowser auch permanente Cookies mit einer Gültigkeitsdauer von höchstens 365 Tagen. Wir verwenden diese Cookies ausschließlich dazu, bei Ihrem nächsten Besuch unserer Webseite Ihre Einstellungen für die Art der Darstellung (normal, invertiert) und für die Schriftgröße zu beachten. Weiterhin wird vermerkt, ob Sie die Information über die Verwendung von Cookies in Ihrem Webbrowser zur Kenntnis genommen haben.
+                    <br/><br/>
+                    Sie können Ihren Webbrowser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben bzw. die Annahme von Cookies für bestimmte Fälle oder generell ausschließen. Bereits gespeicherte Cookies können Sie in den Einstellungen Ihres Webbrowsers löschen. Sie können auch das automatische Löschen von Cookies beim Beenden Ihres Webbrowsers einstellen. Bei der Deaktivierung von Cookies kann die Funktionalität unserer Webseite eingeschränkt sein. In jedem Fall steht unser Informationsangebot in seinem vollen Umfang zur Verfügung.
+                </p>
+
             </div>
 
         </div>

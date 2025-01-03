@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, Image, Font, PDFDownloadLink } from '@react-pdf/renderer';
 import { Container } from "reactstrap";
 import { getCookie, hasCookie, getCookies, setCookie } from 'cookies-next';
 
@@ -108,8 +108,8 @@ export default function pdfDisplay() {
     },  
     page: {
       paddingLeft: 25,
-      color: "rgb(204,0,0)",
-        //backgroundColor: '#E4E4E4'
+      //color: "rgb(204,0,0)",
+      backgroundColor: 'rgb(230,230,230)',
     },
     column: {
       flexDirection: "column",
@@ -320,7 +320,12 @@ export default function pdfDisplay() {
 
   // Create Document Component
   const MyDocument = () => (
-    <Document title="List of Solutions" author="Universität Pforzheim" subject="List of Solutions">
+    <Document
+      title="List of Solutions"
+      author="Universität Pforzheim"
+      subject="List of Solutions"
+      //renderMode="svg" // required for pdf gen to work on iOS
+      >
       <Page size="A4" style={styles.page}>
 
         {/** --- Header --- */}
@@ -368,7 +373,7 @@ export default function pdfDisplay() {
           {/* Map over data and generate elements */}
           {areasOfAction.map(item => (
 
-            <View style={styles.column}>
+            <View wrap={false} style={styles.column}>
 
             {/** Areas of Action */}
             <View style={styles.areaOfActionCol}>
@@ -384,7 +389,7 @@ export default function pdfDisplay() {
                   <View style={ cdpIndex == 0 ? { flexDirection: "row", } : { flexDirection: "row", marginTop: 15 }}>
                     
                     {/** CDP Name */}
-                    <View wrap={false} style={styles.cdpCol}>
+                    <View style={styles.cdpCol}>
                       <Text style={styles.cdpText}>{cdp.cdp_title}</Text> 
                     </View>
               
@@ -440,11 +445,20 @@ export default function pdfDisplay() {
   else
   {
     return(    
+
+      <div style={{ margin: "auto", textAlign: "center", fontSize: "30px", marginTop: "20%", fontWeight: "bold" }}>
+        <PDFDownloadLink document={<MyDocument />} fileName="List of Solutions.pdf">
+          {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+        </PDFDownloadLink>
+      </div>
+
+      /*
       <div style={styles.pdfViewer}>
         <PDFViewer width="100%" height="100%" >
           <MyDocument />
         </PDFViewer>
       </div>
+      */
     );
   }
 

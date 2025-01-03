@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   
-  webpack: (config) => {
+  webpack: ( config, {dev} ) => {
     config.resolve.fallback = { fs: false };
+
+    if (dev) {
+        config.devtool = 'source-map';
+    }
 
     // Add file-loader to handle font files
     config.module.rules.push({

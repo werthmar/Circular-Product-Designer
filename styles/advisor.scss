@@ -54,12 +54,45 @@ body{
         overflow-x: auto; //hidden
     }
 
+    .pieChartDescriptionMobile{
+        background-color: rgb(94, 103, 110);
+        border-radius: 35px;
+        color: white;
+        padding: 25px;
+
+        h1{
+            font-size: 30px;
+            font-family: "Barlow-SemiBold";
+            padding-bottom: 15px;
+        }
+
+        p{
+            font-size: 20px;
+            color: white;
+            font-family: "Lato-Light";
+        }
+    }
+
+    .pieChartColMobile{
+        background-color: $background-color;
+
+        .halfPieChart{
+            //position: absolute;
+            //z-index: 2;
+        }
+    }
+
     .pieChartCol{
         background-color: $background-color;
         max-width: 100%;
         max-height: 100%;
         position: relative;
-        padding: 50px;
+        @media (min-width: $mobile-width) {
+            padding: 50px;
+        }
+        @media (max-width: $mobile-width) {
+            padding: 10px;
+        }
         overflow-x: hidden;
 
         .textDisplay{

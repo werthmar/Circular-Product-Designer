@@ -14,6 +14,40 @@
     margin: 0;
 }
 
+.rotated-text{
+    padding-top: 20px;
+    margin: auto;
+    writing-mode: vertical-lr; //works better than rotate
+    font-size: 30px;
+    font-family: 'Barlow-Light';
+    white-space: pre-wrap;
+    //margin-left: -50%;
+    //transform-origin: 0 0; /* #TODO: check how to properly asign origin */
+    line-height: 35px;
+}
+
+.mobile-totated-text{
+    padding-top: 0px;
+    font-family: 'Barlow-Bold' !important;
+    font-size: 20px !important;
+}
+
+.mobileDescription{
+    // Description text
+    h2{
+        font-size: 40px;
+        font-weight: 600;
+        padding-top: 30px;
+        padding-left: 10px;
+        font-family: "Barlow-SemiBold";
+    }
+
+    p{
+        font-size: 20px;
+        font-family: "Lato-Light";
+    }
+}
+
 .choosableElement{
     padding: 0;
     position: relative;
@@ -37,18 +71,6 @@
         @media ( max-width: 1700px ) {
             font-size: 25px;
         }
-    }
-
-    .rotated-text{
-        padding-top: 20px;
-        margin: auto;
-        writing-mode: vertical-lr; //works better than rotate
-        font-size: 30px;
-        font-family: 'Barlow-Light';
-        white-space: pre-wrap;
-        //margin-left: -50%;
-        //transform-origin: 0 0; /* #TODO: check how to properly asign origin */
-        line-height: 35px;
     }
 
     .description{

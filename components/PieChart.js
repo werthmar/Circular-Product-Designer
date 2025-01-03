@@ -1,4 +1,4 @@
-import { React, useRef, useState } from "react";
+import { React, useRef, useState, useEffect } from "react";
 import{
     Chart as ChartJS,
     ArcElement,
@@ -10,6 +10,7 @@ import { Button, Col, Nav, Navbar, Alert, Container, Row } from "reactstrap";
 import { RiArrowGoBackLine } from 'react-icons/ri';
 import { Pie, getElementAtEvent } from 'react-chartjs-2';
 import Router from "next/router";
+import { getCookie } from "cookies-next";
 
 ChartJS.register(
     ArcElement,
@@ -21,6 +22,31 @@ ChartJS.register(
 
 export default function PieChart( props )
 {
+    const [_data, setData] = useState();
+    var mobileLayout = props.mobileLayout;
+
+    // fetch data
+    useEffect(() => {
+
+        // Get selected item ids
+        var selectedItems = [];
+        var cookie = getCookie( 'selected' );
+        if( cookie )
+        {
+            cookie = JSON.parse(cookie);
+            cookie.forEach( item => {
+                selectedItems.push( item[0] );
+            });
+        }
+
+        fetch(`/api/cdp?items=${ '[' + selectedItems + ']' }`)
+        .then((res) => res.json())
+        .then((data) =>
+        {
+          setData(data);
+        });
+
+    }, []);
 
     var width = screen.width;
     var height = screen.height;
@@ -36,12 +62,12 @@ export default function PieChart( props )
 
 
     // Rearrange data from database
-    var _data = props.data.descriptions;
+    //var _data = props.data.descriptions;
     var outerChart = [];
     var outerChartHelp = [];
     var outerChartLength = [];
     var innerChart = ['DOWNLOAD LIST\n OF SOLUTIONS']
-    console.log(_data);
+    console.log("!cdps: " + _data);
 
     // Order data into Areas of Solution categories
     var functionality = [];
@@ -55,22 +81,22 @@ export default function PieChart( props )
     var transportability = [];
 
     // Save the items in the right categories for easy access
-    var lastItemName;
-    _data.forEach( (item, index) => {           
-        // Only show one item of each cdp, change bcs of only cdp display, not title of solution
-        if ( item.name != lastItemName ) {   
-            if (item.id >= 46 && item.id <= 58) functionality.push(item);
-            if (item.id >= 59 && item.id <= 76) materialSuitability.push(item);
-            if (item.id >= 77 && item.id <= 93) manufacturability.push(item);
-            if (item.id >= 94 && item.id <= 109) assemblabilityAndDisassemblability.push(item);
-            if (item.id >= 110 && item.id <= 121) userFriendliness.push(item);
-            if (item.id >= 122 && item.id <= 132) maintainability.push(item);
-            if (item.id >= 133 && item.id <= 145) recyclability.push(item);
-            if (item.id >= 146 && item.id <= 153) productLabeling.push(item);
-            if (item.id >= 154 && item.id <= 163) transportability.push(item);
-            lastItemName = item.name;
-        }
-    });
+    try{
+        _data.cdps.forEach( (item, index) => {           
+            // Only show one item of each cdp, change bcs of only cdp display, not title of solution
+            if (item.area_of_action === "Functionality") functionality.push(item);
+            if (item.area_of_action === "Material suitability") materialSuitability.push(item);
+            if (item.area_of_action === "Manufacturability") manufacturability.push(item);
+            if (item.area_of_action === "Assemblability and disassamblability") assemblabilityAndDisassemblability.push(item);
+            if (item.area_of_action === "User friendliness") userFriendliness.push(item);
+            if (item.area_of_action === "Maintanability") maintainability.push(item);
+            if (item.area_of_action === "Recyclability") recyclability.push(item);
+            if (item.area_of_action === "Product labeling") productLabeling.push(item);
+            if (item.area_of_action === "Transportability") transportability.push(item);
+        });
+    } catch( error ) {
+        console.log(`loading... ${error}`);
+    }
 
 
     // Only display the Solution categories which have apllieable sulotions for the user made selection
@@ -207,7 +233,7 @@ export default function PieChart( props )
     {
         var result = [''];
         category.forEach( (item, index ) => {
-            const name = item.name;
+            const name = item.cdp_title;
             let woerter = name.split(' ');
             let aufgeteilteTeile = [];
 
@@ -320,8 +346,8 @@ export default function PieChart( props )
             }   
 
             // Update Text and Title
-            setTitle( category[ element[0].index - 1 ].name );
-            setText( category[ element[0].index - 1 ].description );
+            setTitle( category[ element[0].index - 1 ].cdp_title );
+            setText( category[ element[0].index - 1 ].cdp_definition );
             setSubcategoryOpen(true);
     }
 
@@ -346,7 +372,7 @@ export default function PieChart( props )
     // TODO:
     function whiteElement(label)
     {
-        if (label == title.toUpperCase()) return "white";
+        //if (label == title.toUpperCase()) return "white";
         return "black";
     }
 
@@ -464,8 +490,26 @@ export default function PieChart( props )
                 }
             ]
         };
-        
+
         const options2 = {
+            plugins: 
+            {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+                datalabels: {
+                },
+            },        
+            animation: false,
+            responsive:true,
+            maintainAspectRatio:false
+        };
+
+        const options2Mobile = {
+            rotation: 90, // Start at the top
             plugins: 
             {
                 legend: {
@@ -510,36 +554,67 @@ export default function PieChart( props )
             }
         };
 
-        
-        return(
-            <Row style={{ width: '131%', height: '100%' }} >
-            
-                { /** Text Display*/ }
-                <Col xs="7">
-                    <div className={setBackgroundBasedOnH1(selectedCategory.toUpperCase())}>
-                        <container/>
+        if(mobileLayout)
+        {
+            return(
+                <div>
+
+                    { /** Text Display*/ }
+                    <div className="flex-auto pieChartDescriptionMobile relative z-10 mb-60 shadow">
                         <h1>{ title.toUpperCase() }</h1>
                         <p>{ text }</p>
-
-                        <Button onClick={ () => back() } className="backButton">
+                    
+                        <Button onClick={ () => back() } className="backButton bg-transparent border-none pt-3">
                             <RiArrowGoBackLine size={45} color="white" />
                         </Button>
-
                     </div>
-                </Col>
+                    
+                    <div className="w-full h-[100vh] fixed bottom-[-50vh] left-0 z-0">
+                        {/** absolute bottom-0 w-full -mb-44 */}
+                        <Pie className="halfPieChart"
+                                data={data2}
+                                options={options2Mobile}
+                                ref={chartRef2}
+                                onClick={onClick2}/>
+                    </div>
 
-                {/** Half pie chart */}
-                <Col xs="5">
 
-                 <Pie className="halfPieChart"
-                    data={data2}
-                    options={options2}
-                    ref={chartRef2}
-                    onClick={onClick2}/>
 
-                </Col>
-            </Row>
-        );
+                </div>
+            );
+        }
+        else
+        {
+            return(
+                <Row style={{ width: '131%', height: '100%' }} >
+                
+                    { /** Text Display*/ }
+                    <Col xs="7">
+                        <div className={setBackgroundBasedOnH1(selectedCategory.toUpperCase())}>
+                            <container/>
+                            <h1>{ title.toUpperCase() }</h1>
+                            <p>{ text }</p>
+
+                            <Button onClick={ () => back() } className="backButton">
+                                <RiArrowGoBackLine size={45} color="white" />
+                            </Button>
+
+                        </div>
+                    </Col>
+
+                    {/** Half pie chart */}
+                    <Col xs="5">
+
+                        <Pie className="halfPieChart"
+                            data={data2}
+                            options={options2}
+                            ref={chartRef2}
+                            onClick={onClick2}/>
+
+                    </Col>
+                </Row>
+            );
+        }
     }
     
 }
