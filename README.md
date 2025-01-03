@@ -1,4 +1,4 @@
-# Project Name
+# Circularity-Navigator
 
 ## Overview
 This project is a [Next.js](https://nextjs.org/) application that provides a comprehensive web solution. It includes various features such as a dynamic header, responsive design, and integration with a MySQL database.
